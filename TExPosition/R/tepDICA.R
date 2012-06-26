@@ -1,0 +1,37 @@
+tepDICA <-
+function(DATA,make_data_nominal=FALSE,DESIGN=NULL,make_design_nominal=TRUE,group.masses=NULL,ind.masses=NULL,weights=NULL,hellinger=FALSE,symmetric=TRUE,graphs=TRUE,k=0){
+	DESIGN <- texpoDesignCheck(DATA,DESIGN,make_design_nominal)	
+	main <- deparse(substitute(DATA))	
+	DATA <- as.matrix(DATA)
+	if(make_data_nominal){
+		DATA <- makeNominalData(DATA)
+	}
+	
+	#Make the group x variable contingency table
+	R <- t(DESIGN) %*% DATA
+	colnames(R) <- colnames(DATA)
+	rownames(R) <- colnames(DESIGN)	
+	Rdesign <- diag(nrow(R))
+	rownames(Rdesign) <- rownames(R)
+
+	#The results from the group x variable matrix
+	#res <- coreCA(R,masses=group.masses,weights=weights,hellinger=hellinger,symmetric=symmetric,k=k)
+	res <- epCA(R, DESIGN=Rdesign, make_design_nominal=FALSE, masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, graphs = FALSE,k=k)
+
+	supplementaryRes <- supplementaryRows(DATA,res)
+	res$fii <- supplementaryRes$fii
+	res$dii <- supplementaryRes$dii
+	res$rii <- supplementaryRes$rii		
+
+	assignments <- fii2fi(DESIGN,res$fii,res$fi)
+	assignments$r2 <- R2(res$M,res$di,ind.masses=NULL,res$dii)
+	class(assignments) <- c("tepAssign","list")
+	res$assign <- assignments
+		
+	#new res here
+	class(res) <- c("tepDICA","list")
+	if(graphs){
+		tepPlotInfo <- tepGraphHandler(res,DATA,DESIGN,main)
+	}
+	return(tepOutputHandler(res=res,tepPlotInfo=tepPlotInfo))
+}
