@@ -43,6 +43,7 @@ function(DATA,scaleFlag=TRUE,centerFlag=TRUE,DESIGN=NULL,make_design_nominal=TRU
 	res$assign <- assignments
 	
 	#new res here
+	tepPlotInfo <- NULL
 	class(res) <- c("tepBADA","list")	
 	if(graphs){
 		tepPlotInfo <- tepGraphHandler(res,DATA,DESIGN,main)
