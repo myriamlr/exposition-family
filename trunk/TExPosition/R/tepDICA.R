@@ -29,6 +29,7 @@ function(DATA,make_data_nominal=FALSE,DESIGN=NULL,make_design_nominal=TRUE,group
 	res$assign <- assignments
 		
 	#new res here
+	tepPlotInfo <- NULL
 	class(res) <- c("tepDICA","list")
 	if(graphs){
 		tepPlotInfo <- tepGraphHandler(res,DATA,DESIGN,main)
