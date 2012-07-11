@@ -56,10 +56,9 @@ function(res,tepPlotInfo=NULL,x_axis=1,y_axis=2,xlab=NULL,ylab=NULL,main=NULL,co
 		fii.plot.info <- prettyPlot(res$fii,x_axis=x_axis,y_axis=y_axis,col=fii.col,new_window=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=FALSE)
 		fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,new_window=FALSE,contributionCircles=TRUE,contributions=res$ci)
 		if(showHulls > 0 && showHulls <= 1){
-			colorDesign <- makeNominalData(fii.col)
 			for(i in 1:nrow(res$fi)){
-				peeledHull(res$fii[which(colorDesign[,i]==1),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col="black",lwd=3)
-				peeledHull(res$fii[which(colorDesign[,i]==1),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col=fi.col[i,],lwd=1)
+				peeledHull(res$fii[which(fii.col[,1]==fi.col[i,1]),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col="black",lwd=3)
+				peeledHull(res$fii[which(fii.col[,1]==fi.col[i,1]),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col=fi.col[i,],lwd=1)
 			}
 		}
 		if(biplots){
