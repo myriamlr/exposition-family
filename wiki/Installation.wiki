@@ -1,0 +1,16 @@
+#summary A reference page for how to install the packages.
+
+= Introduction =
+
+Be sure to have R. We recommend version 2.15, but an earlier version should work as well (you'll receive a warning message). To install each package separately:
+
+  * install.packages('prettyGraphs')
+  * install.packages('ExPosition')
+  * install.packages('TExPosition')
+  * install.packages('MExPosition')
+
+
+But you can use this shortcut:
+
+  * install.packages('TExPosition',dependencies=TRUE)
+  * install.packages('MExPosition')
