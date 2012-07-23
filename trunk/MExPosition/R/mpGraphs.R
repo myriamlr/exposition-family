@@ -58,7 +58,9 @@ mpGraphs <- function(res, mpPlotInfo=NULL, x_axis=1, y_axis =2, xlab = NULL, yla
 												main = paste("Compromise",main), contributionCircles=TRUE, contributions = res$Table$ci)
 																		
 		compromise.partial.plot.info <- prettyPlot(res$Table$partial.fi, x_axis=x_axis, y_axis=y_axis, col=rep(fi.col,res$Overview$num.groups), 
-												xlab=xlab.table, ylab=ylab.table, main = paste("Partial Scores",main), new_window=FALSE)															
+												xlab=xlab.table, ylab=ylab.table, main = paste("Partial Scores",main), new_window=FALSE)
+												
+		#compromise.fi.plot.info <-prettyPlot(book.sort$mexPosition.Data$Compromise$fi, contributionCircles=TRUE, contributions = book.sort$mexPosition.Data$Compromise$ci)																										
 	}
 		
 	mpPlotInfo <- list(fi.col = fi.col, fj.col = fj.col,table.col=table.col)
