@@ -17,6 +17,7 @@ function(DATA,make_data_nominal=FALSE,DESIGN=NULL,make_design_nominal=TRUE,group
 	#The results from the group x variable matrix
 	#res <- coreCA(R,masses=group.masses,weights=weights,hellinger=hellinger,symmetric=symmetric,k=k)
 	res <- epCA(R, DESIGN=Rdesign, make_design_nominal=FALSE, masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, graphs = FALSE,k=k)
+	res <- res$ExPosition.Data
 
 	supplementaryRes <- supplementaryRows(DATA,res)
 	res$fii <- supplementaryRes$fii
@@ -27,12 +28,9 @@ function(DATA,make_data_nominal=FALSE,DESIGN=NULL,make_design_nominal=TRUE,group
 	assignments$r2 <- R2(res$M,res$di,ind.masses=NULL,res$dii)
 	class(assignments) <- c("tepAssign","list")
 	res$assign <- assignments
-		
+
 	#new res here
-	tepPlotInfo <- NULL
-	class(res) <- c("tepDICA","list")
-	if(graphs){
-		tepPlotInfo <- tepGraphHandler(res,DATA,DESIGN,main)
-	}
+	class(res) <- c("tepDICA","list")	
+	tepPlotInfo <- tepGraphs(res=res,DESIGN=DESIGN,main=main,graphs=graphs)
 	return(tepOutputHandler(res=res,tepPlotInfo=tepPlotInfo))
 }

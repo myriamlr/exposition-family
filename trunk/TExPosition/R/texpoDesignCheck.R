@@ -1,6 +1,9 @@
 texpoDesignCheck <-
-function(DATA,DESIGN=NULL,make_design_nominal=TRUE){
-	DESIGN<-designCheck(DATA,DESIGN,make_design_nominal)
+function(DATA=NULL,DESIGN=NULL,make_design_nominal=TRUE){
+	if(!is.null(DATA)){ #this is a short cut and should almost never happen.
+		DESIGN<-designCheck(DATA,DESIGN,make_design_nominal)
+	}
+	
 	if(ncol(DESIGN) >= nrow(DESIGN)){
 		stop('You have too many groups, try a method in ExPosition.')
 	}
