@@ -1,5 +1,5 @@
 correlationPlotter <-
-function(data_matrix,factor_scores,x_axis=1,y_axis=2,col=NULL,xlab=NULL,ylab=NULL,main=""){
+function(data_matrix,factor_scores,x_axis=1,y_axis=2,col=NULL,xlab=NULL,ylab=NULL,main="",asp=1,dev.new=TRUE){
 	if(nrow(data_matrix)==nrow(factor_scores)){
 		loadings <- cor(data_matrix,factor_scores)
 	}
@@ -11,29 +11,28 @@ function(data_matrix,factor_scores,x_axis=1,y_axis=2,col=NULL,xlab=NULL,ylab=NUL
 	}
 	loadings <- replace(loadings,is.na(loadings),0)
 
-#	if(is.null(taus)){
-		#plotCircle(xl=paste("Component ",x_axis,sep=""),yl=paste("Component ",y_axis,sep=""),m=main)
-		if(!is.null(xlab) && !is.null(ylab)){
-			plotCircle(xlab=xlab,ylab=ylab,main=main)	
-		}else{
-			plotCircle(xlab=paste("Component ",x_axis,sep=""),ylab=paste("Component ",y_axis,sep=""),main=main)
-		}
-#	}else{
-#		plotCircle(xl=paste("Component ",x_axis," explained variance: ",round(taus[x_axis]),"%",sep=""),yl=paste("Component ",y_axis," explained variance: ",round(taus[y_axis]),"%",sep=""),m=main)
-#	}
+	if(dev.new){
+		dev.new()
+	}
+	
+	if(!is.null(xlab) && !is.null(ylab)){
+		plotCircle(xlab=xlab,ylab=ylab,main=main,asp=asp)	
+	}else{
+		plotCircle(xlab=paste("Component ",x_axis,sep=""),ylab=paste("Component ",y_axis,sep=""),main=main,asp=asp)
+	}
 	
 	if(is.null(col)){
 		col <- prettyGraphsColors()[colorVectorIsNull(loadings)$oc]
 	}
 
-#I can bring these back later.	
-#	if(arrows){
-		for(i in 1:dim(loadings)[1]){
-			points(c(0,loadings[i,x_axis]),c(0,loadings[i,y_axis]),col="black",type="l")
-		}
-#		prettyGraphs(loadings,col=col,display_names=TRUE,display_points=FALSE,x_axis=1,y_axis=2,new_window=FALSE)
-#	}else{
-		prettyPlot(loadings,col=col,display_names=TRUE,display_points=TRUE,x_axis=1,y_axis=2,new_window=FALSE)
+#I should make this an option; but at least I made this faster
+#	for(i in 1:dim(loadings)[1]){
+#		points(c(0,loadings[i,x_axis]),c(0,loadings[i,y_axis]),col="black",type="l")
 #	}
-	#prettyGraphs(loadings,col=col,display_names=FALSE,x_axis=x_axis,y_axis=y_axis,new_window=FALSE)
+	os <- cbind(rep(0,nrow(loadings)+1),rep(0,nrow(loadings)+1))
+	new.mat <- matrix(0,(nrow(loadings)*2)+1,2)
+	new.mat[seq(1,nrow(new.mat),2),] <- os
+	new.mat[seq(2,nrow(new.mat),2),] <- loadings[,c(x_axis,y_axis)]
+	points(new.mat,type="l",col="black")
+	prettyPlot(loadings,col=col,display_names=TRUE,display_points=TRUE,x_axis=x_axis,y_axis=y_axis,plot_axes=FALSE,dev.new=FALSE,clean_plot=FALSE)
 }
