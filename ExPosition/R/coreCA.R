@@ -1,8 +1,10 @@
 coreCA <-
-function(DATA,masses=NULL,weights=NULL,hellinger=FALSE,symmetric=TRUE,k=0){
+function(DATA,masses=NULL,weights=NULL,hellinger=FALSE,symmetric=TRUE,decomp.approach='svd',k=0){
 
 	DATA_dimensions = dim(DATA)
 	
+	
+	###PERHAPS ALL OF THIS SHOULD OCCUR IN THE CA FUNCTION?
 	mRP<-makeRowProfiles(DATA,weights=weights,masses=masses,hellinger=hellinger)
 	rowCenter <- mRP$rowCenter
 	rowProfiles <- mRP$rowProfiles
@@ -14,10 +16,20 @@ function(DATA,masses=NULL,weights=NULL,hellinger=FALSE,symmetric=TRUE,k=0){
 	#W <- mRP$weights
 	#W <- mRP$W	
 
-	X <- deviations
-		
-	pdq_results <- genPDQ(M=masses,deviations,W=weights,k=k)
-	taus = (pdq_results$Dv^2/sum(pdq_results$Dv^2))*100
+	#X <- deviations
+#	print(DATA)
+#	print(deviations)	
+#	pause()
+	pdq_results <- genPDQ(M=masses,deviations,W=weights,decomp.approach=decomp.approach,k=k)
+#	print(pdq_results)
+#	print(pdq_results$p)
+#	print(pdq_results$q)
+#	print(pdq_results$Dd)
+#	print(pdq_results$Dv)
+#	print(pdq_results$ng)
+#	print(pdq_results$tau)
+#	pause()
+	#taus <- (pdq_results$Dv^2/sum(pdq_results$Dv^2))*100
 	
 	#Rows, F
 	fi = pdq_results$p %*% pdq_results$Dd
@@ -54,5 +66,5 @@ function(DATA,masses=NULL,weights=NULL,hellinger=FALSE,symmetric=TRUE,k=0){
 	rj <- replace(rj,is.nan(rj),0)
 	dj <- as.matrix(dj)			
 	
-	return(list(fi=fi,di=di,ci=ci,ri=ri,fj=fj,cj=cj,rj=rj,dj=dj,t=taus,eigs=pdq_results$Dv^2,M=masses,W=weights,pdq=pdq_results,X=X,hellinger=hellinger))
+	return(list(fi=fi,di=di,ci=ci,ri=ri,fj=fj,cj=cj,rj=rj,dj=dj,t=pdq_results$tau,eigs=pdq_results$Dv^2,M=masses,W=weights,pdq=pdq_results,X=deviations,hellinger=hellinger))
 }
