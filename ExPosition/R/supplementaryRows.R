@@ -1,6 +1,6 @@
 #this function works as a shortcut for users. It's a "recognition engine" to auto perform 1) correct preprocessing and 2) supplemental projection.
 
-##RE: PCA -- supplementary measures should always be center/scaled by active variable constraints
+#RE: PCA -- supplementary measures should always be center/scaled by active variable constraints
 supplementaryRows <- function(SUP.DATA,res){
 	SUP.DATA <- as.matrix(SUP.DATA)
 	
