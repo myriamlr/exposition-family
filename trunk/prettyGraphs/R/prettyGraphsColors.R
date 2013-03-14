@@ -11,5 +11,6 @@ function(){
 	possibleColors = possibleColors[-grep("seashell",possibleColors)]
 	possibleColors = possibleColors[-grep("steel",possibleColors)]
 	possibleColors = possibleColors[-grep("light",possibleColors)]
+	possibleColors = possibleColors[which(colSums(col2rgb(possibleColors)) < 650)]
 	return(possibleColors)
 }

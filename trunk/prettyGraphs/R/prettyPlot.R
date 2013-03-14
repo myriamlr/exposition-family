@@ -5,7 +5,7 @@ function(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_
 	#I need a different type of checker here...
 	#Also, I need to use apply instead of my silly matrix nonsense below. See how FactoMineR does it.
 	if(is.null(col)){
-		col <- as.matrix(prettyGraphsColors()[colorVectorIsNull(data_matrix)$oc])
+		col <- colorVectorIsNull(data_matrix)$oc
 	}
 	#I only need constraints if I am making a new window.
 	check.constraints <- minmaxHelper(data_matrix,data_matrix,x_axis,y_axis,findBounds=findBounds)	

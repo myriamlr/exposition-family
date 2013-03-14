@@ -6,8 +6,6 @@ function(data_matrix){
 	design_matrix <- matrix(1,nrow(data_matrix),1)
 	#colnames(design_matrix) <- rownames(data_matrix)
 	rownames(design_matrix) <- rownames(data_matrix)
-	print(design_matrix)
-	pause()
 	color_vector <- createColorVectorsByDesign(design_matrix)
 	return(color_vector)
 }

@@ -1,5 +1,5 @@
 #http://stackoverflow.com/questions/3789968/generate-a-list-of-primes-in-r-up-to-a-certain-number
-prettyGraphsColorSelection <- function(n.colors=1,prime.offset=23,starting.color=184){
+prettyGraphsColorSelection <- function(n.colors=1,prime.offset=19,starting.color=163){
 	##stolen
 	primest <- function(n){
 	    p <- 2:n
