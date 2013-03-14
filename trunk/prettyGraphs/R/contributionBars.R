@@ -1,5 +1,5 @@
 contributionBars <-
-function(factor_scores,contributions,x_axis=1,y_axis=2,col=NULL,main="",upper='steelblue4',lower='firebrick2',threshold=0,sortContributions=TRUE,pretty=FALSE,show.bg.bars=FALSE){
+function(factor_scores,contributions,x_axis=1,y_axis=2,col=NULL,main=NULL,upper='steelblue4',lower='firebrick2',threshold=0,sortContributions=TRUE,pretty=FALSE,show.bg.bars=FALSE){
 
 	##run the checks.
 	factor_scores <- as.matrix(factor_scores)
@@ -72,7 +72,7 @@ function(factor_scores,contributions,x_axis=1,y_axis=2,col=NULL,main="",upper='s
 		#later!
 	}
 
-	if(main==""){		
+	if(is.null(main)){		
 		mtext("Contributions to variance",side=3,outer=TRUE,line=-3)
 	}else{
 		mtext(main,side=3,outer=TRUE,line=-3)
