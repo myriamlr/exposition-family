@@ -22,7 +22,7 @@ function(data_matrix,factor_scores,x_axis=1,y_axis=2,col=NULL,xlab=NULL,ylab=NUL
 	}
 	
 	if(is.null(col)){
-		col <- prettyGraphsColors()[colorVectorIsNull(loadings)$oc]
+		col <- colorVectorIsNull(loadings)$oc
 	}
 
 #I should make this an option; but at least I made this faster

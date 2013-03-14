@@ -52,8 +52,8 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,
 					#this will catch failures and stop.
 					DESIGN <- texpoDesignCheck(DATA=NULL,DESIGN=DESIGN,make_design_nominal=FALSE)
 					obs.cols <- createColorVectorsByDesign(DESIGN)
-					fii.col <- as.matrix(prettyGraphsColors()[obs.cols$oc])
-					fi.col <- as.matrix(prettyGraphsColors()[obs.cols$gc])
+					fii.col <- obs.cols$oc
+					fi.col <- obs.cols$gc
 				}
 			}else{
 				fii.col <- tepPlotInfo$fii.col
@@ -62,7 +62,7 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,
 		}
 		if(is.null(fj.col) || nrow(fj.col)!=nrow(res$fj)){
 			if(is.null(tepPlotInfo$fj.col)){
-				fj.col <- as.matrix(prettyGraphsColors()[createColorVectorsByDesign(matrix(1,nrow(res$fj),1))$oc])
+				fj.col <- createColorVectorsByDesign(matrix(1,nrow(res$fj),1),hsv=FALSE)$oc
 			}else{
 				fj.col <- tepPlotInfo$fj.col	
 			}
