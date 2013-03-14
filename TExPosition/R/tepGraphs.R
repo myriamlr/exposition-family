@@ -19,10 +19,10 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,
 	}else{
 		if(is.null(main)){
 			main <- deparse(substitute(res))
-			if(length(unlist(strsplit(main,"")))>40){
-				main <- "Results"
-			}
-		}		
+		}
+		if(length(unlist(strsplit(main,"")))>40){
+			main <- "Results"
+		}				
 		if(is.null(xlab)){
 			xlab <- paste("Component ",x_axis," variance: ", round(res$t[x_axis],3), "%",sep="")
 		}
@@ -82,8 +82,10 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,
 			if(showHulls > 0 && showHulls <= 1){
 				colorDesign <- makeNominalData(fii.col)
 				for(i in 1:nrow(res$fi)){
-					peeledHull(res$fii[which(colorDesign[,i]==1),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col="black",lwd=3)
-					peeledHull(res$fii[which(colorDesign[,i]==1),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col=fi.col[i,],lwd=1)
+					#peeledHull(res$fii[which(colorDesign[,i]==1),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col="black",lwd=3)
+					#peeledHull(res$fii[which(colorDesign[,i]==1),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col=fi.col[i,],lwd=1)
+					peeledHull(res$fii[which(fii.col[, 1] == fi.col[i,1]), ], x_axis = x_axis, y_axis = y_axis, percentage = showHulls, col = "black", lwd = 3)
+					peeledHull(res$fii[which(fii.col[, 1] == fi.col[i,1]), ], x_axis = x_axis, y_axis = y_axis, percentage = showHulls, col = fi.col[i, ], lwd = 1)					
 				}
 			}
 			if(biplots){

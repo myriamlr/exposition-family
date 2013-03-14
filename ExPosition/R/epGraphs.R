@@ -1,6 +1,7 @@
 epGraphs <-
 function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,biplots=FALSE,graphs=TRUE){
 	
+	
 	pca.types <- c('epPCA','epMDS','epGPCA')
 	ca.types <- c('epCA','epMCA')	
 	
@@ -20,9 +21,9 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,constraints=N
 		###Use this block to establish defaults.
 		if(is.null(main)){
 			main <- deparse(substitute(res))
-			if(length(unlist(strsplit(main,"")))>40){
-				main <- "Results"
-			}
+		}		
+		if(length(unlist(strsplit(main,"")))>40){
+			main <- "Results"
 		}		
 		if(is.null(xlab)){
 			xlab <- paste("Component ",x_axis," variance: ", round(res$t[x_axis],3), "%",sep="")
@@ -56,7 +57,7 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,constraints=N
 		if(is.null(fi.col) || nrow(fi.col)!=nrow(res$fi)){
 			if(is.null(epPlotInfo$fi.col)){
 				if(is.null(DESIGN)){
-					fi.col <- as.matrix(prettyGraphsColors()[createColorVectorsByDesign(matrix(1,nrow(res$fi),1))$oc])					
+					fi.col <- as.matrix(createColorVectorsByDesign(matrix(1,nrow(res$fi),1))$oc])					
 				}else{
 					fi.col <- as.matrix(prettyGraphsColors()[createColorVectorsByDesign(DESIGN)$oc])
 				}
