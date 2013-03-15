@@ -3,10 +3,10 @@
 \encoding{UTF-8}
 \title{mpSTATIS.tablePreproc: Table Preprocessing for STATIS}
 \description{Preprocessing of the tables for STATIS.}
-\usage{mpSTATIS.tablePreproc(data, groupMatrix, table.preprocess = 'None')}
+\usage{mpSTATIS.tablePreproc(data, column.design, table.preprocess = 'None')}
 \arguments{
   \item{data}{Data Matrix}
-  \item{groupMatrix}{Matrix which identifies the tables.}
+  \item{column.design}{Matrix which identifies the tables.}
   \item{table.preprocess}{String option with the following options: 'None' (Default), 'Num_Columns', 'Tucker','Sum_PCA', 'RV_Normalization' and 'MFA_Normalization'}
 }
 \details{

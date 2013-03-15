@@ -3,10 +3,9 @@
 \encoding{UTF-8}
 \title{mpSTATIS.columnPreproc: Column Preprocessing for STATIS}
 \description{Preprocessing of the columns of the table for STATIS.}
-\usage{mpSTATIS.columnPreproc(data, group.matrix, column.preprocess = 'None')}
+\usage{mpSTATIS.columnPreproc(data, column.preprocess = 'None')}
 \arguments{
   \item{data}{Data Matrix}
-  \item{group.matrix}{Design Matrix which identifies the different tables.}
   \item{column.preprocess}{String option with the following options: 'None' (default),'Center','1Norm', 'Center_1Norm' and 'Z_Score'}
 }
 \details{
@@ -29,8 +28,6 @@ Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and D
 # Center- type of column preprocessing chosen
 column.preprocess = 'Center'
 X <- matrix(1:10,2)
-Y<- c('g1','g1','g1','g2','g2')
-groupMatrix <- t(makeNominalData(as.matrix(Y)))
-preproc <- mpSTATIS.columnPreproc(X, groupMatrix, column.preprocess)
+preproc <- mpSTATIS.columnPreproc(X, column.preprocess)
 }
 \keyword{ multivariate }

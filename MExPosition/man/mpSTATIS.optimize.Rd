@@ -2,11 +2,11 @@
 \alias{mpSTATIS.optimize}
 \title{mpSTATIS.optimize: STATIS Optimization Options}
 \description{Provides various optimization options for STATIS.}
-\usage{mpSTATIS.optimize(X, num.obs, table, num.groups, optimization.option = 'STATIS')}
+\usage{mpSTATIS.optimize(data, num.obs, column.design = NULL, num.groups, optimization.option = 'STATIS')}
 \arguments{
-  \item{X}{Data Matrix}
+  \item{data}{Data Matrix}
   \item{num.obs}{Number of Observation}
-  \item{table}{Table which identifies the tables.}
+  \item{column.design}{Table which identifies the tables.}
   \item{num.groups}{Number of Tables}
   \item{optimization.option}{String option with the following options: 'None', 'STATIS' (default), 'RV_Matrix', 'STATIS_Power1', 'ANISOSTATIS_Type1', 'ANISOSTATIS_Type2'}
 }

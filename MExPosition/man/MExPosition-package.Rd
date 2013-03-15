@@ -5,14 +5,14 @@
 \docType{package}
 \title{\emph{M}ulti-table \emph{Ex}ploratory Analysis with the Singular Value Decom\emph{Position} with the STATIS family.}
 \description{
-MExPosition is multi-table \code{\link{ExPosition}} and includes the family of STATIS methods. The core of MExPosition is  \code{\link{ExPosition}} and the \code{\link{svd}}.
+MExPosition is multi-table \code{\link{ExPosition}} and includes the family of STATIS method, such as Plain STATIS, DISTATIS, Dual STATIS and ANISOSTATIS. The core of MExPosition is  \code{\link{ExPosition}} and the \code{\link{svd}}.
 }
 \details{
 \tabular{ll}{
 Package: \tab MExPosition\cr
 Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2012-06-30\cr
+Version: \tab 2.0\cr
+Date: \tab 2013-03-16\cr
 Depends: \tab R (>=2.15.0), prettyGraphs, ExPosition\cr
 License: \tab GPL-2\cr
 }
