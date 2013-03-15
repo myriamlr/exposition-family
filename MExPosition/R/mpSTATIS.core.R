@@ -1,4 +1,4 @@
-mpSTATIS.core <- function (X, num.obs, table, num.groups, optimization.option = 'STATIS')
+mpSTATIS.core <- function (data, num.obs, column.design, num.groups, optimization.option = 'STATIS')
 { 	
 ##########################################
 # Inner Product
@@ -8,31 +8,19 @@ mpSTATIS.core <- function (X, num.obs, table, num.groups, optimization.option = 
    scalarProductMatrices = array(0,dim=c(num.obs,num.obs,num.groups))
    from = 1
    for(i in 1:num.groups)
-   
-   {   from = sum(table[i-1,])+from
-       to = from + sum(table[i,])-1
-       scalarProductMatrices[,,i] = X[,from:to] %*% t(X[,from:to])	
+   {   from = sum(column.design[i-1,])+from
+       to = from + sum(column.design[i,])-1
+       scalarProductMatrices[,,i] = data[,from:to] %*% t(data[,from:to])	
    }
 
-# RV Matrix 	
-   rvMatrix = diag(1,num.groups)	
-   for(i in 1:(num.groups))
-   {   for(j in i:num.groups)
-       {   rv = rvCoeff(scalarProductMatrices[,,i],scalarProductMatrices[,,j],type=0)
-           rvMatrix[i,j] = rv
-           rvMatrix[j,i] = rv
-       }
-    }
-	
-# C Matrix	
-   CMatrix = diag(1,num.groups)	
-   for(i in 1:(num.groups))
-   {   for(j in i:num.groups)
-       {   c = matrixTrace((scalarProductMatrices[,,i]) %*% t(scalarProductMatrices[,,j]))
-           CMatrix[i,j] = c
-           CMatrix[j,i] = c
-	}
-   }
+   scalarProductMatrices2 <- array(scalarProductMatrices, dim=c(num.obs*num.obs,num.groups))
+
+#C Matrix
+   CMatrix = t(scalarProductMatrices2) %*% scalarProductMatrices2
+
+# RV Matrix
+   Norm = sqrt(apply(scalarProductMatrices2^2,2,sum))
+   rvMatrix = CMatrix/(t(t(Norm)) %*% Norm)
 
 # eigen decomposition
    C.decomp = corePCA(CMatrix)
@@ -41,13 +29,14 @@ mpSTATIS.core <- function (X, num.obs, table, num.groups, optimization.option = 
 # contribution
    ci = C.decomp$ci
    #rownames(ci)=paste('assessor',1:num.groups)
-   	if(is.null(rownames(table))){
-	   rownames(ci) <- paste("Table", 1:dim(table)[1], sep = "")
+   if(is.null(rownames(column.design)))
+   {  rownames(ci) <- paste("Table", 1:dim(column.design)[1], sep = "")
 	   table.names <- rownames(ci)
-	}else{
-	  	rownames(ci) <- rownames(table)
+	 }
+   else
+   {  rownames(ci) <- rownames(column.design)
 	  	table.names <- rownames(ci)
-	}
+	 }
 
 # contribution
 	cj = C.decomp$cj
@@ -65,7 +54,7 @@ mpSTATIS.core <- function (X, num.obs, table, num.groups, optimization.option = 
    rownames(G) <- rownames(P)
 
 # percent of variance explained
-   taus <- D/sum(D) * 100
+   tau <- D/sum(D) * 100
 	
 # Alpha Weights
    if (optimization.option == "None")
@@ -89,27 +78,57 @@ mpSTATIS.core <- function (X, num.obs, table, num.groups, optimization.option = 
    }
 
 ##########################################
+# Compromise
+##########################################
+
+#compromise (S+)
+compromiseMatrix = apply(apply(scalarProductMatrices,c(1,2), '*',t(alphaWeights)),c(2,3),sum)
+
+#analyze compromise
+PCA.compromise <- corePCA(compromiseMatrix)
+compromise.PCA <- PCA.compromise$pdq
+
+#contribution
+compromise.ci <- PCA.compromise$ci
+rownames(compromise.ci) = rownames(data)
+
+compromise.cj <- PCA.compromise$cj
+rownames(compromise.cj) = rownames(data)
+
+#eigen vectors
+compromise.P = compromise.PCA$p
+rownames(compromise.P) = rownames(data)
+
+#eigen values
+compromise.dd = compromise.PCA$Dv
+
+#factor scores
+compromise.G = compromise.PCA$p %*% diag(sqrt(compromise.PCA$Dv))
+rownames(compromise.G) = rownames(data)
+
+# % of variance explained
+compromise.tau <- compromise.PCA$Dv/sum(compromise.PCA$Dv) * 100
+
+##########################################
 # Tables: Generalized PCA of X
 ##########################################	
 
 # column names	
-   table.colnames <- colnames(table)
-
-# alpha weights
-   table.alphaWeights <- alphaWeights
+  table.colnames <- colnames(column.design)
 
 # weights and masses
-   M = diag(1/(dim(X)[1]),dim(X)[1],dim(X)[1])
+ # M = diag(1/(dim(data)[1]),dim(data)[1],dim(data)[1])
+  M = rep(1/(dim(data)[1]),dim(data)[1])
 	
-   w = c()
-   for(i in 1:length(rowSums(table)))
-   { w = c(w, rep(alphaWeights[i],rowSums(table)[i]))
-   }
+  w = c()
+  for(i in 1:length(rowSums(column.design)))
+  { w = c(w, rep(alphaWeights[i],rowSums(column.design)[i]))
+  }
     
-   W =diag(w)  
+  W =diag(w)  
 
 #general PDQ
-	pdq.general = corePCA(X,M=M,W=W)
+	pdq.general = corePCA(data,M=M,W=w)
 	general.pdq = pdq.general$pdq
 
 # contribution
@@ -120,41 +139,35 @@ mpSTATIS.core <- function (X, num.obs, table, num.groups, optimization.option = 
    
 # Eigen vectors of the tables
    gpdq.vectors = general.pdq$p
+   rownames(gpdq.vectors)=rownames(data)
 
 # Eigen values of the tables 
-   gpdq.eigenvalues = (general.pdq$Dd)^2
+   gpdq.eigenvalues = (general.pdq$Dv)
 	
 # Inertia
    gpdq.inertia = ((general.pdq$Dv) / sum(general.pdq$Dv))*100
 
-# Cumulative Inertia
-   gpdq.cum.inertia = cumsum(gpdq.inertia)
-
 # Loadings of the tables
    gpdq.loadings = general.pdq$q
-   rownames(gpdq.loadings) = colnames(X)
-   
-
-# Squared loadings of the tables
-   gpdq.loadingsSquared= gpdq.loadings^2
+   rownames(gpdq.loadings) = colnames(data)
 
 # Factor scores of the tables
    gpdq.factorscores =  general.pdq$p %*%  (general.pdq$Dd)
-   rownames(gpdq.factorscores)=rownames(X)
+   rownames(gpdq.factorscores)=rownames(data)
    
 # Partial Factor Scores
-   gpdq.partial = array(0,dim=c(dim(X)[1],dim(gpdq.loadings)[2],num.groups))
+   gpdq.partial = array(0,dim=c(dim(data)[1],dim(gpdq.loadings)[2],num.groups))
    to_partial = 0
    from_partial = 1
-   for(i in 1:dim(table)[1])
-   {   from = sum(table[i-1,]) + from_partial
-       to = sum(table[i,]) + to_partial
+   for(i in 1:dim(column.design)[1])
+   {   from = sum(column.design[i-1,]) + from_partial
+       to = sum(column.design[i,]) + to_partial
        to_partial = to
        from_partial = from
-       gpdq.partial[,,i] = X[,from:to] %*% gpdq.loadings[from:to,]
+       gpdq.partial[,,i] = data[,from:to] %*% gpdq.loadings[from:to,]
    }
    
-   gpdq.partialFS <- matrix(0,dim(X)[1]*num.groups,dim(gpdq.loadings)[2])
+   gpdq.partialFS <- matrix(0,dim(data)[1]*num.groups,dim(gpdq.loadings)[2])
    to.total = 0
    for(i in 1:num.groups)
    {	from = to.total + 1
@@ -162,37 +175,24 @@ mpSTATIS.core <- function (X, num.obs, table, num.groups, optimization.option = 
    		to.total = to
    		gpdq.partialFS[from:to,]= gpdq.partial[,,i]
    	}
-   	rownames(gpdq.partialFS) = paste(rep(table.names,each=dim(X)[1]),rep(rownames(X)))
-
-# contribution of variable to dimension
-   contribution.variable <- matrix(0,dim(table)[1], 2)
-   load.to = 0
-   load.from = 1
-   for(j in 1:dim(contribution.variable)[2])
-   {	for(i in 1:dim(table)[1])
-	{   from = sum(table[i-1,]) + load.from
-            to = sum(table[i,]) + load.to
-            load.to = to
-            load.from = from
-            contribution.variable[i,j]= (sum(alphaWeights[i] * gpdq.loadingsSquared[from:to,j]))
-	}
-        load.to = 0
-	load.from = 1
-    }
+   	rownames(gpdq.partialFS) = paste(rep(table.names,each=dim(data)[1]),rep(rownames(data)))
 
 ##########################################
 # Results
 ##########################################	
 
-res.statis.core <- list(S=scalarProductMatrices, RVMatrix = rvMatrix, C = CMatrix, ci = ci, cj = cj, EigenVector = P, eigenValue = D, factorScores = G,  
-			alphaWeights = alphaWeights, percentVar = taus,
-			
-			table.col.names = table.colnames, weights = W, masses = M, table.partialFactorScores.array = gpdq.partial,table.cj = table.cj, table.ci = table.ci, 
-			table.EigenValues = gpdq.eigenvalues, table.inertia = gpdq.inertia,table.EigenVectors = gpdq.vectors, 
-			table.loadings = gpdq.loadings, table.SqLoadings = gpdq.loadingsSquared, table.FactorScores = gpdq.factorscores, table.partialFactorScores = gpdq.partialFS,
-			table.contribution.variable = contribution.variable
-			
-			)
+res.statis.core <- list(S=scalarProductMatrices, RVMatrix = rvMatrix, C = CMatrix, ci = ci, cj = cj, eigs.vector = P, eigs = D, 
+                        fi = G, alphaWeights = alphaWeights, tau = tau,
+          
+                        compromise = compromiseMatrix, compromise.ci = compromise.ci, compromise.cj = compromise.cj, 
+                        compromise.eigs.vector = compromise.P, compromise.eigs = compromise.dd, compromise.fi = compromise.G, 
+                        compromise.tau = compromise.tau,
+      
+                        weights = alphaWeights, masses = M, 
+                        table.partial.fi.array = gpdq.partial,table.cj = table.cj, table.ci = table.ci, 
+                        table.eigs = gpdq.eigenvalues, table.tau = gpdq.inertia, table.eigs.vector = gpdq.vectors, 
+                        table.loadings = gpdq.loadings,  table.fi = gpdq.factorscores,  
+                        table.partial.fi = gpdq.partialFS)
     
 return (res.statis.core)
 }
