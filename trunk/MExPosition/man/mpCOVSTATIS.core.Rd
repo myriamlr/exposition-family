@@ -1,23 +1,27 @@
-\name{mpANISOSTATIS.core}
-\alias{mpANISOSTATIS.core}
+\name{mpCOVSTATIS.core}
+\alias{mpCOVSTATIS.core}
 \encoding{UTF-8}
-\title{mpANISOSTATIS.core: Core Function for ANISOSTATIS via MExPosition}
-\description{Performs the core of ANISOSTATIS on the data}
-\usage{mpANISOSTATIS.core(data, num.obs, column.design, num.groups, optimization.option='ANISOSTATIS_Type1')}
+\title{mpCOVSTATIS.core: Core Function for COVSTATIS via MExPosition}
+\description{Performs the core of CANOSTATIS on the given dataset}
+\usage{mpCOVSTATIS.core(data, normalization = 'None', masses = NULL, table = NULL, make.table.nominal = TRUE)}
 \arguments{
   \item{data}{Matrix of preprocessed data}
-  \item{num.obs}{Number of observations}
-  \item{column.design}{Table Matrix- used to identifty the tables of the data matrix}
-  \item{num.groups}{Number of groups}
-  \item{optimization.option}{String option of either 'ANISOSTATIS_Type1' (DEFAULT), \emph{or} 'ANISOSTATIS_Type2'}
+  \item{normalization}{String option of either 'None', 'MFA' (DEFAULT), \emph{or} 'Sum_PCA'}
+  \item{masses}{Masses}
+  \item{table}{Design Matrix - used to identifty the tables of the data matrix}
+  \item{make.table.nominal}{a boolean. If TRUE (default), table is a vector that indicates tables (and will be dummy-coded). If FALSE, table is a dummy-coded matrix.}
+
 }
 \details{
-Computation of Anisotropic STATIS (ANISOSTATIS), where the one weight is assigned per variable.
+COVSTATIS is used to analysis covariance matrices. It is an extension of three-way multidimensional scaling.
 }
 
 \value{
+  \item{data}{Data matrix}
+  \item{normalization}{Inner Product: Normalization option selected}
+  \item{table}{Design matrix used to identifty the tables of the data matrix}
   \item{S}{Inner Product: Scalar Product Matrices}
-  \item{RVMatrix}{Inner Product: RV Matrix}
+  \item{rvMatrix}{Inner Product: RV Matrix}
   \item{C}{Inner Product: C Matrix}
   \item{ci}{Inner Product: Contribution of the rows of C}
   \item{cj}{Inner Product: Contribuition of the columns of C}
@@ -39,7 +43,7 @@ Computation of Anisotropic STATIS (ANISOSTATIS), where the one weight is assigne
   \item{masses}{Table: masses}
   \item{table.eigs}{Table: Eigen Values}
   \item{table.eigs.vector}{Table: Eigen Vectors}
-  \item{table.loadings}{Table: Loadings}
+  \item{table.Q}{Table: Loadings}
   \item{table.fi}{Table: Factor Scores}
   \item{table.partial.fi}{Table: Partial Factor Scores}
   \item{table.partial.fi.array}{Table: Array of Partial Factor Scores}
@@ -52,6 +56,6 @@ Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and D
 \author{Cherise R. Chin Fatt and Hervé Abdi.
 }
 \seealso{
-  \code{\link{mpDISTATIS}}, \code{\link{mpSTATIS}}, \code{\link{mpANISOSTATIS}}
+  \code{\link{mpCANOSTATIS}}
 }
 \keyword{ multivariate}

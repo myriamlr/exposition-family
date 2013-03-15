@@ -1,23 +1,29 @@
-\name{mpANISOSTATIS.core}
-\alias{mpANISOSTATIS.core}
+\name{mpCANOSTATIS.core}
+\alias{mpCANOSTATIS.core}
 \encoding{UTF-8}
-\title{mpANISOSTATIS.core: Core Function for ANISOSTATIS via MExPosition}
-\description{Performs the core of ANISOSTATIS on the data}
-\usage{mpANISOSTATIS.core(data, num.obs, column.design, num.groups, optimization.option='ANISOSTATIS_Type1')}
+\title{mpCANOSTATIS.core: Core Function for Canonical STATIS (CANOSTATIS) via MExPosition}
+\description{Performs the core of CANOSTATIS on the given dataset}
+\usage{mpCANOSTATIS.core(data, num.obs = num.obs, column.design, row.design, num.groups = num.groups, normalization = 'MFA', masses = NULL)}
 \arguments{
   \item{data}{Matrix of preprocessed data}
   \item{num.obs}{Number of observations}
-  \item{column.design}{Table Matrix- used to identifty the tables of the data matrix}
+  \item{column.design}{Column Design- used to identifty the tables of the data matrix}
+  \item{row.design}{Row Design - used to identify the groups of the data matrix}
   \item{num.groups}{Number of groups}
-  \item{optimization.option}{String option of either 'ANISOSTATIS_Type1' (DEFAULT), \emph{or} 'ANISOSTATIS_Type2'}
+  \item{normalization}{String option of either 'None', 'MFA' (DEFAULT), \emph{or} 'Sum_PCA'}
+  \item{masses}{Masses}
 }
 \details{
-Computation of Anisotropic STATIS (ANISOSTATIS), where the one weight is assigned per variable.
+Computation of Canonical STATIS (CANOSTATIS), where the observations come from predefined groups and tables.
 }
 
 \value{
+  \item{mahalanobis}{Mahalanobis distance matrices}
+  \item{normalization}{Inner Product: Normalization option selected}
+  \item{column.design}{Column Design- used to identifty the tables of the data matrix}
+  \item{row.design}{Row Design - used to identify the groups of the data matrix}
   \item{S}{Inner Product: Scalar Product Matrices}
-  \item{RVMatrix}{Inner Product: RV Matrix}
+  \item{rvMatrix}{Inner Product: RV Matrix}
   \item{C}{Inner Product: C Matrix}
   \item{ci}{Inner Product: Contribution of the rows of C}
   \item{cj}{Inner Product: Contribuition of the columns of C}
@@ -39,7 +45,7 @@ Computation of Anisotropic STATIS (ANISOSTATIS), where the one weight is assigne
   \item{masses}{Table: masses}
   \item{table.eigs}{Table: Eigen Values}
   \item{table.eigs.vector}{Table: Eigen Vectors}
-  \item{table.loadings}{Table: Loadings}
+  \item{table.Q}{Table: Loadings}
   \item{table.fi}{Table: Factor Scores}
   \item{table.partial.fi}{Table: Partial Factor Scores}
   \item{table.partial.fi.array}{Table: Array of Partial Factor Scores}
@@ -52,6 +58,6 @@ Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and D
 \author{Cherise R. Chin Fatt and Hervé Abdi.
 }
 \seealso{
-  \code{\link{mpDISTATIS}}, \code{\link{mpSTATIS}}, \code{\link{mpANISOSTATIS}}
+  \code{\link{mpDISTATIS}}, \code{\link{mpSTATIS}}, \code{\link{mpCANOSTATIS}}
 }
 \keyword{ multivariate}

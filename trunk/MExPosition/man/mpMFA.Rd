@@ -3,14 +3,14 @@
 \encoding{UTF-8}
 \title{mpMFA: Multiple Factor Analysis via MExPosition}
 \description{Multiple Factor Analysis via MExPosition}
-\usage{mpMFA(data, table, make_table_nominal = TRUE, DESIGN = NULL, make_design_nominal = TRUE, graphs = TRUE)}
+\usage{mpMFA(data, column.design, make.columndesign.nominal = TRUE, DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
 \arguments{
   \item{data}{Matrix of raw data}
-  \item{table}{Table which identifies the different tables.}
-  \item{make_table_nominal}{a boolean. If TRUE (default), table is a vector that indicates groups (and will be dummy-coded). If FALSE, table is a dummy-coded matrix.}
+  \item{column.design}{Matrix which identifies the different tables.}
+  \item{make.columndesign.nominal}{a boolean. If TRUE (default), table is a vector that indicates groups (and will be dummy-coded). If FALSE, table is a dummy-coded matrix.}
   \item{graphs}{a boolean. If TRUE (default), graphs are displayed}
   \item{DESIGN}{a design matrix to indicate if rows belong to groups.}
-  \item{make_design_nominal}{a boolean. If TRUE (default), DESIGN is a vector that indicates groups (and will be dummy-coded). If FALSE, design is a dummy-coded matrix.}
+  \item{make.design.nominal}{a boolean. If TRUE (default), DESIGN is a vector that indicates groups (and will be dummy-coded). If FALSE, design is a dummy-coded matrix.}
 }
 \details{
  \code{mpMFA} performs multiple factor analysis on a set of data matrices. 
@@ -36,15 +36,18 @@ The results for InnerProduct are bundled inside of $InnerProduct
   \item{$InnerProduct$eigs.vector}{Inner Product: Eigen Vectors}
   \item{$InnerProduct$eigs}{Inner Product: Eigen Values}
   \item{$InnerProduct$fi}{Inner Product: Factor Scores}
-  \item{$InnerProduct$t}{Inner Product: Percent Variance Explained (tau)}
-  \item{$InnerProduct$a}{Alpha Weights (alpha)}
+  \item{$InnerProduct$tau}{Inner Product: Percent Variance Explained (tau)}
+  \item{$InnerProduct$alphaWeights}{Alpha Weights (alpha)}
 The results for the Tables are bundled inside of $Table.
   \item{$Table$eigs}{Table: Eigen Values}
   \item{$Table$eigs.vector}{Table: Eigen Vectors}
   \item{$Table$Q}{Table: Loadings}
   \item{$Table$fi}{Table: Factor Scores}
   \item{$Table$partial.fi}{Table: Partial Factor Scores}
-  \item{$Table$cj}{Table: Contribution}
+  \item{$Table$partial.fi.array}{Table: Array of Partial Factor Scores}
+  \item{$Table$ci}{Table: Contribution of the rows}
+  \item{$Tabl$cj}{Table: Contribution of the columns}
+  \item{$Table$tau}{Table: Percent of variance explained}
 }
 \references{
 Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and DISTATIS: Optimum multi-table principal component analysis and three way metric multidimensional scaling. \emph{Wiley Interdisciplinary Reviews: Computational Statistics}, 4. \cr \cr
@@ -55,4 +58,10 @@ Abdi, H., & Valentin, D. (2007). Multiple factor analysis. In N.J. Salkind (Ed.)
 \seealso{
   \code{\link{mpDISTATIS}}
 }
+\examples{
+  # MFA
+  data('wines2007')
+  demo.mfa.2007 <- mpMFA(wines2007$data, wines2007$table)
+}
+
 \keyword{ multivariate }

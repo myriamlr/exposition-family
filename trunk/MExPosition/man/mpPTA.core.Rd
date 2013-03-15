@@ -1,23 +1,23 @@
-\name{mpANISOSTATIS.core}
-\alias{mpANISOSTATIS.core}
+\name{mpPTA.core}
+\alias{mpPTA.core}
 \encoding{UTF-8}
-\title{mpANISOSTATIS.core: Core Function for ANISOSTATIS via MExPosition}
-\description{Performs the core of ANISOSTATIS on the data}
-\usage{mpANISOSTATIS.core(data, num.obs, column.design, num.groups, optimization.option='ANISOSTATIS_Type1')}
+\title{mpPTA.core: Core Function for Partial Triadic Analysis (PTA) via MExPosition}
+\description{Performs the core of PTA}
+\usage{mpPTA.core(data, num.obs, column.design, num.groups, optimization.option = 'STATIS')}
 \arguments{
-  \item{data}{Matrix of preprocessed data}
-  \item{num.obs}{Number of observations}
-  \item{column.design}{Table Matrix- used to identifty the tables of the data matrix}
-  \item{num.groups}{Number of groups}
-  \item{optimization.option}{String option of either 'ANISOSTATIS_Type1' (DEFAULT), \emph{or} 'ANISOSTATIS_Type2'}
+  \item{data}{Matrix of dataset}
+  \item{num.obs}{Number of observations in dataset}
+  \item{column.design}{Column Design for dataset}
+  \item{num.groups}{Number of groups in dataset}
+  \item{optimization.option}{String option of either 'None', 'Multiable', 'RV_Matrix', 'STATIS' (DEFAULT), \emph{or} 'STATIS_Power1'}
 }
 \details{
-Computation of Anisotropic STATIS (ANISOSTATIS), where the one weight is assigned per variable.
+Computation of Partial Triadic Analyis (PTA). This function should not be used independently. It should be used with \code{\link{mpPTA}}.
 }
 
 \value{
   \item{S}{Inner Product: Scalar Product Matrices}
-  \item{RVMatrix}{Inner Product: RV Matrix}
+  \item{RVMatrix}{Inner Product:RV Matrix}
   \item{C}{Inner Product: C Matrix}
   \item{ci}{Inner Product: Contribution of the rows of C}
   \item{cj}{Inner Product: Contribuition of the columns of C}
@@ -52,6 +52,6 @@ Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and D
 \author{Cherise R. Chin Fatt and Hervé Abdi.
 }
 \seealso{
-  \code{\link{mpDISTATIS}}, \code{\link{mpSTATIS}}, \code{\link{mpANISOSTATIS}}
+  \code{\link{mpPTA}}
 }
 \keyword{ multivariate}

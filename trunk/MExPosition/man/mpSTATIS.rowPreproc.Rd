@@ -3,10 +3,9 @@
 \encoding{UTF-8}
 \title{mpSTATIS.rowPreproc: Row Preprocessing for STATIS}
 \description{Preprocessesing of the rows of the matrix for STATIS.}
-\usage{mpSTATIS.rowPreproc(data, groupMatrix, row.preprocess = 'None')}
+\usage{mpSTATIS.rowPreproc(data, row.preprocess = 'None')}
 \arguments{
   \item{data}{Data Matrix}
-  \item{groupMatrix}{Matrix which identifies the tables.}
   \item{row.preprocess}{String option with the following options: 'None'(Default), 'Profile', 'Hellinger','Center', and 'Center_Hellinger'}
 }
 \details{
@@ -29,8 +28,6 @@ Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and D
 # Center - type of row preprocessing choosen
 row.preprocess ='Center'
 X <- matrix(1:10,2)
-Y<- c('g1','g1','g1','g2','g2')
-groupMatrix <- t(makeNominalData(as.matrix(Y)))
-preproc <- mpSTATIS.rowPreproc(X, groupMatrix, row.preprocess)
+preproc <- mpSTATIS.rowPreproc(X, row.preprocess)
 }
 \keyword{ multivariate}
