@@ -26,11 +26,12 @@ mpDISTATIS.core <- function(data, table, sorting = 'No', normalization = 'None',
   if(sorting == 'Yes')
   { print('Sorting Task')
   	table <- t(makeNominalData(table))
+    colnames(table) = paste(rep(paste('Assessor',1:dim(data)[2],sep="."),each=dim(data)[1]),rep(rownames(data),dim(data)[1]))
     n.groups = dim(data)[2]
     L = array(0,dim=c(n.rows,n.unique,n.cols))
     for (i in 1:n.cols)
     {	   L[,1:length(unique(as.vector(data[,i]))),i] = makeNominalData(as.matrix(data[,i]))
-    }	
+    }
 
     R=array(0,dim=c(n.rows,n.rows,n.cols))
     for (i in 1:n.cols)
@@ -94,13 +95,14 @@ mpDISTATIS.core <- function(data, table, sorting = 'No', normalization = 'None',
          CMatrix[j,i] = rv
       }
    }
- 		
+
 # eigen decomposition
    C.decomp = corePCA(CMatrix)
    decomp.C = C.decomp$pdq
  
 # contribution
    ci = C.decomp$ci
+
    	if(is.null(rownames(table))){
 	   rownames(ci) <- paste("Table", 1:dim(table)[1], sep = "")
 	   table.names <- rownames(ci)
@@ -204,7 +206,7 @@ mpDISTATIS.core <- function(data, table, sorting = 'No', normalization = 'None',
 
 # Loadings of the tables
    gpdq.loadings = general.pdq$q
-   rownames(gpdq.loadings) = colnames(data)
+   rownames(gpdq.loadings) = colnames(table)
 
 # Factor scores of the tables
    gpdq.factorscores =  general.pdq$p %*%  (general.pdq$Dd)
@@ -230,6 +232,7 @@ mpDISTATIS.core <- function(data, table, sorting = 'No', normalization = 'None',
    		to.total = to
    		gpdq.partialFS[from:to,]= gpdq.partial[,,i]
    	}
+
     rownames(gpdq.partialFS) = paste(rep(table.names,each=dim(data)[1]),rep(rownames(data)))
 
 ######################################
