@@ -3,36 +3,17 @@ function(DATA,DATA_is_dist=TRUE,method="euclidean",DESIGN=NULL,make_design_nomin
 	main <- deparse(substitute(DATA))	
 	DESIGN<-designCheck(DATA,DESIGN,make_design_nominal)
 	DATA <- as.matrix(DATA)
-	DATA_dimensions = dim(DATA)
 		
 	if(DATA_is_dist && (nrow(DATA)==ncol(DATA))){
 		D <- DATA
 		MW <- computeMW(D,masses=masses)
 	}else{
 		#print('Creating distance matrix from DATA.')
-		if(method=="chi2"){
-			chi2res <- chi2Dist(DATA)
-			D <- chi2res$D
-			MW <- list(M=chi2res$M)
-		}else{
-			D <- as.matrix(dist(DATA,method=method,diag=TRUE,upper=TRUE))
-			MW <- computeMW(D,masses=masses)		
-		}
+		D.MW <- makeDistancesAndWeights(DATA,method=method)
+		D <- D.MW$D
+		MW <- D.MW$MW		
 	}
-	
-	#do this every time.
-	Mrepmat <- matrix(MW$M,nrow=nrow(D),ncol=ncol(D))
-	if(is.null(dim(MW$M))){ # it is a vector; with new way, it is always a vector
-		BigXi <- diag(DATA_dimensions[1]) - (matrix(1,DATA_dimensions[1],1) %*% MW$M)
-	}else{#ths forces a matrix to be a vector this needs to be better.
-		#BigXi <- diag(DATA_dimensions[1]) - (matrix(1,DATA_dimensions[1],1) %*% diag(masses))
-		BigXi <- diag(DATA_dimensions[1]) - (matrix(1,DATA_dimensions[1],1) %*% diag(MW$M))
-	}
-#	S <- (-(0.5) * BigXi %*% D %*% t(BigXi))
-	S <- -.5 * sqrt(Mrepmat) * BigXi %*% D %*% t(BigXi) * sqrt(t(Mrepmat))
-
-	rownames(S) <- rownames(D)
-	colnames(S) <- colnames(D)	
+	S <- mdsTransform(D,MW)
 	
 	res <- coreMDS(S,MW$M,k=k)
 
@@ -42,5 +23,4 @@ function(DATA,DATA_is_dist=TRUE,method="euclidean",DESIGN=NULL,make_design_nomin
 
 	epPlotInfo <- epGraphs(res=res,DESIGN=DESIGN,main=main,graphs=graphs)
 	return(epOutputHandler(res=res,epPlotInfo=epPlotInfo))
-#	return(res)
 }
