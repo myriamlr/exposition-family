@@ -1,10 +1,10 @@
-print.statis.innerproduct <- function(x,...){
+print.covstatis.innerproduct <- function(x,...){
 	
-	res.statis.innerproduct <- x
-	if (!inherits(res.statis.innerproduct, "statis.innerproduct")) stop ("no convenient data")
-  cat("**Results from the analysis of the between table structure via STATIS **\n")
-  cat("*The results are available for the following objects:\n\n")
-  res <- array("", c(10, 2), list(1:10, c("Name", "Description")))
+	res.covstatis.innerproduct <- x
+	if (!inherits(res.covstatis.innerproduct, "covstatis.innerproduct")) stop ("no convenient data")
+    cat("**Results from the analysis of the between table structure via COVSTATIS **\n")
+    cat("*The results are available for the following objects:\n\n")
+    res <- array("", c(10, 2), list(1:10, c("Name", "Description")))
 	
 	res[1,] <- c("$S", "i X i X j array of S Matrices")
 	res[2,] <- c("$C","k X k, C Matrix")
@@ -16,6 +16,6 @@ print.statis.innerproduct <- function(x,...){
 	res[8,] <- c("$cj","Contributions of the Columns of C")
 	res[9,] <- c("$t","% Variance Explained of C (tau)")
 	res[10,] <- c("$alphaWeights","Alpha Weights")
-
+	
 	print(res)
 }
