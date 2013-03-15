@@ -10,26 +10,10 @@ function(DATA,masses=NULL,weights=NULL,hellinger=FALSE,symmetric=TRUE,decomp.app
 	rowProfiles <- mRP$rowProfiles
 	deviations <- mRP$deviations
 	masses <- mRP$masses
-	#M <- mRP$masses
-	#M <- diag(masses)
 	weights <- mRP$weights
-	#W <- mRP$weights
-	#W <- mRP$W	
 
-	#X <- deviations
-#	print(DATA)
-#	print(deviations)	
-#	pause()
 	pdq_results <- genPDQ(M=masses,deviations,W=weights,decomp.approach=decomp.approach,k=k)
-#	print(pdq_results)
-#	print(pdq_results$p)
-#	print(pdq_results$q)
-#	print(pdq_results$Dd)
-#	print(pdq_results$Dv)
-#	print(pdq_results$ng)
-#	print(pdq_results$tau)
-#	pause()
-	#taus <- (pdq_results$Dv^2/sum(pdq_results$Dv^2))*100
+
 	
 	#Rows, F
 	fi = pdq_results$p %*% pdq_results$Dd

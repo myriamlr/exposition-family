@@ -8,11 +8,12 @@ function(DATA,m=NULL,decomp.approach='svd',k=0){
 		m <- rep(1/DATA_dims[1],DATA_dims[1])
 	}
 	
-	X <- DATA
+	pdq_results <- basePDQ(DATA,is.mds=TRUE,decomp.approach=decomp.approach,k=k)
 	
-	pdq_results <- basePDQ(X,is.mds=TRUE,decomp.approach=decomp.approach,k=k)
-	
-	fi <- matrix(1/sqrt(m),nrow=length(m),ncol=length(pdq_results$Dv)) * (pdq_results$p %*% diag(sqrt(pdq_results$Dv)))
+	if((!is.null(dim(m))) && (length(m) == (nrow(m) * ncol(m)))){
+		m <- diag(m)
+	}
+	fi <- matrix(1/sqrt(m),nrow=length(m),ncol=length(pdq_results$Dv)) * (pdq_results$p %*% diag(sqrt(pdq_results$Dv)))	
 	rownames(fi) <- rownames(DATA)		
 	di <- rowSums(fi^2)
 	ri <- repmat((1/di),1,pdq_results$ng) * (fi^2)
@@ -21,5 +22,5 @@ function(DATA,m=NULL,decomp.approach='svd',k=0){
 	di <- as.matrix(di)		
 
 	#I can append the masses & weights if necessary in the appropriate functions
-	res <- list(fi=fi,di=di,ci=ci,ri=ri,t=pdq_results$tau,eigs=pdq_results$Dv,pdq=pdq_results,X=X)
+	res <- list(fi=fi,di=di,ci=ci,ri=ri,t=pdq_results$tau,eigs=pdq_results$Dv,pdq=pdq_results,X=DATA)
 }
