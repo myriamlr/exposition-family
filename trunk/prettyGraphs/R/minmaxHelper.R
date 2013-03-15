@@ -2,7 +2,7 @@ minmaxHelper <-
 function(mat1,mat2=NULL,axis1=1,axis2=2,findBounds=TRUE){
 
 	if(!is.matrix(mat1) && !is.data.frame(mat1)){
-		print("mat1 was not a matrix or a data frame.")
+		warning(paste("mat1 was not a matrix or a data frame. mat1 class is: ",class(mat1),sep=""))
 		return(0)
 	}
 	if(is.null(mat2)){
