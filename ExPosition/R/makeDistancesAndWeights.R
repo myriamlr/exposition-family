@@ -1,4 +1,4 @@
-makeDistancesAndWeights <- function(DATA,method="euclidean"){
+makeDistancesAndWeights <- function(DATA,method="euclidean",masses=NULL){
 	if(method=="chi2"){
 		chi2res <- chi2Dist(DATA)
 		D <- chi2res$D

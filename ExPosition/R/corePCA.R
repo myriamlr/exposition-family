@@ -10,13 +10,19 @@ function(DATA,M=NULL,W=NULL,decomp.approach='svd',k=0){
 		genFlag <- TRUE
 	}
 	
-	X <- DATA
-	
 	if(genFlag){
 		pdq_results <- genPDQ(M=M,datain=DATA,W=W,decomp.approach=decomp.approach,k=k)
 	}else{
 		pdq_results <-    PDQ(DATA,decomp.approach=decomp.approach,k=k)
 	}
+
+	#vectorize internally to this function.
+	if((!is.null(dim(M))) && (length(M) == (nrow(M) * ncol(M)))){
+		M <- diag(M)
+	}
+	if((!is.null(dim(W))) && (length(W) == (nrow(W) * ncol(W)))){
+		W <- diag(W)
+	}	
 
 	#rows
 	fi <- pdq_results$p %*% pdq_results$Dd
@@ -53,5 +59,5 @@ function(DATA,M=NULL,W=NULL,decomp.approach='svd',k=0){
 	dj <- as.matrix(dj)	
 
 	#I can append the masses & weights if necessary in the appropriate functions
-	res <- list(fi=fi,di=di,ci=ci,ri=ri,fj=fj,cj=cj,rj=rj,dj=dj,t=pdq_results$tau,eigs=pdq_results$Dv^2,pdq=pdq_results,X=X)
+	res <- list(fi=fi,di=di,ci=ci,ri=ri,fj=fj,cj=cj,rj=rj,dj=dj,t=pdq_results$tau,eigs=pdq_results$Dv^2,pdq=pdq_results,X=DATA)
 }

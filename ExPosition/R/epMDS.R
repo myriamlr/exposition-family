@@ -9,7 +9,7 @@ function(DATA,DATA_is_dist=TRUE,method="euclidean",DESIGN=NULL,make_design_nomin
 		MW <- computeMW(D,masses=masses)
 	}else{
 		#print('Creating distance matrix from DATA.')
-		D.MW <- makeDistancesAndWeights(DATA,method=method)
+		D.MW <- makeDistancesAndWeights(DATA,method=method,masses=masses)
 		D <- D.MW$D
 		MW <- D.MW$MW		
 	}
