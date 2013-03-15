@@ -1,17 +1,14 @@
-mpMFA <- function(data, table, make_table_nominal = TRUE, DESIGN=NULL, make_design_nominal = TRUE, graphs = TRUE)
+## Multiple Factor Analysis
+mpMFA <- function(data, column.design, make.columndesign.nominal = TRUE, DESIGN=NULL, make.design.nominal = TRUE, graphs = TRUE)
 {
 	main <- deparse(substitute(data))	
-	DESIGN <- designCheck(data, DESIGN, make_design_nominal)
+	DESIGN <- designCheck(data, DESIGN, make.design.nominal)
 	
-	res <- mpSTATIS(data, table, make_table_nominal = make_table_nominal, statis.prepro.option = 'MFA', graphs=FALSE)
+	res <- mpSTATIS(data, column.design, make.columndesign.nominal = make.columndesign.nominal, statis.prepro.option = 'MFA', graphs=FALSE)
 	
-	class(res) <- c("mpMFA", "list")
-	
-	mpPlotInfo = NULL
-	if(graphs==TRUE)
-	{
-		mpPlotInfo <- mpGraphHandler(res,data,DESIGN,res$Overview$groupmatrix, main)
-	}
+	class(res) <- c("mpSTATIS", "list")
 
-	return (mpOutputHandler(res=res,mpPlotInfo=mpPlotInfo))
+	mpPlotInfo <- mpGraphs(res = res$mexPosition.Data, table = res$mexPosition.Data$Overview$groupmatrix, DESIGN = DESIGN, main = main, graphs = graphs)
+
+	return (mpOutputHandler(res=res$mexPosition.Data,mpPlotInfo=mpPlotInfo))
 }

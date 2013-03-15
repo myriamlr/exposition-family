@@ -2,63 +2,62 @@
 ## DISTATIS processing
 #####################################################
 
-mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses = NULL, 
-							table = NULL, make_table_nominal=TRUE)	
-{ print('Preparing data')
-  X = as.matrix(data)
-  n.rows = dim(X)[1]
-  n.cols = dim(X)[2]
-  n.unique = length(unique(as.vector(X)))
+mpDISTATIS.core <- function(data, table, sorting = 'No', normalization = 'None', masses = NULL, make.table.nominal=TRUE)	
+{ 
+  print('Preparing data')
+  data = as.matrix(data)
+  n.rows = dim(data)[1]
+  n.cols = dim(data)[2]
+  n.unique = length(unique(as.vector(data)))
 
   #Sorting Task?
   if(sorting == 'No')
-  { table <- mpTableCheck(data,table,make_table_nominal=TRUE)
-    data= as.matrix(X)
-    n.groups = dim(X)[2]/dim(X)[1]
+  { table <- mpTableCheck(data,table,make_table_nominal=make.table.nominal)
+    n.groups = dim(data)[2]/dim(data)[1]
     D = array(0,dim=c(rowSums(table)[1],rowSums(table)[1],dim(table)[1]))
   
     for(i in 1:n.groups)
-    { 	 to = i * n.rows
-  	 from = to - (n.rows-1)
-  	 D[,,i] <- data[,from:to]
+    {   to = i * n.rows
+  	    from = to - (n.rows-1)
+  	    D[,,i] <- data[,from:to]
     }
   }
  
   if(sorting == 'Yes')
   { print('Sorting Task')
   	table <- t(makeNominalData(table))
-     n.groups = dim(X)[2]
-     L = array(0,dim=c(n.rows,n.unique,n.cols))
-     for (i in 1:n.cols)
-     {	   L[,1:length(unique(as.vector(X[,i]))),i] = makeNominalData(as.matrix(X[,i]))
-     }	
+    n.groups = dim(data)[2]
+    L = array(0,dim=c(n.rows,n.unique,n.cols))
+    for (i in 1:n.cols)
+    {	   L[,1:length(unique(as.vector(data[,i]))),i] = makeNominalData(as.matrix(data[,i]))
+    }	
 
-      R=array(0,dim=c(n.rows,n.rows,n.cols))
-      for (i in 1:n.cols)
-      {	   R[,,i] = L[,,i] %*% t(L[,,i])
-      }
+    R=array(0,dim=c(n.rows,n.rows,n.cols))
+    for (i in 1:n.cols)
+    {	   R[,,i] = L[,,i] %*% t(L[,,i])
+    }
       
-      D=array(0,dim=c(n.rows,n.rows,n.cols))
+    D=array(0,dim=c(n.rows,n.rows,n.cols))
 
-     for(i in 1:n.cols)
-      {	  D[,,i]=matrix(1,n.rows,n.rows)-R[,,i]
-      }	
-    }	 
-     
+    for(i in 1:n.cols)
+    { D[,,i]=matrix(1,n.rows,n.rows)-R[,,i]
+    }	
+  }	 
+
   D.mat = c()
   for(i in 1:dim(D)[3])
   {   D.mat <- matrix(c(D.mat,D[,,i]),n.rows) 
   }
-  
-# masses
+
+  # masses
   if(is.null(masses)== TRUE)
-   {   masses = diag(dim(D)[1])*(1/(dim(D)[1]));
+   {  masses = diag(dim(D)[1])*(1/(dim(D)[1]));
    }
 		
   if(is.null(masses)==FALSE)
-  {    masses = diag(dim(D)[1]) * masses;
-  }
-  
+   {  masses = diag(dim(D)[1]) * masses;
+   }
+ 
 # scalar product matrices
   scalarProductMatrices = array(0,dim=c(n.rows,n.rows,n.groups))
   phi = array(0,dim=c(n.rows,n.rows,n.groups))
@@ -70,7 +69,7 @@ mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses
 # normalization
   norm = array(0,dim=c(n.rows,n.rows,n.groups))
   for(i in 1:n.groups)
-  {  if(normalization != 'None' && normalization != 'MFA' && normalization != 'SumPCA' && normalization != '1Norm')
+  {  if(normalization != 'None' && normalization != 'MFA' && normalization != 'SumPCA')
       {	  print(paste('WARNING: Normaliztion option not recognized. MFA was set as default'))
           norm[,,i]=scalarProductMatrices[,,i]/corePCA(scalarProductMatrices[,,i])$pdq$Dv[1]
       }
@@ -84,7 +83,7 @@ mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses
       if(normalization == 'SumPCA')
       {	  norm[,,i]=scalarProductMatrices[,,i]/(sqrt(sum(scalarProductMatrices[,,i]*scalarProductMatrices[,,i])))
       }
-    }
+  }
 	
   # CMatrix
   CMatrix = diag(1,n.groups)
@@ -108,7 +107,7 @@ mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses
 	}else{
 	  	rownames(ci) <- rownames(table)
 	  	table.names <- rownames(ci)
-	}
+	}  
 
 # contribution
 	cj = C.decomp$cj
@@ -120,9 +119,6 @@ mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses
 
 # eigen values
    D= (decomp.C$Dv)^2
-	
-# cumulative eigen values
-   D.cum = cumsum(D)
 
 # factor scores
    G = decomp.C$p %*%  sqrt(decomp.C$Dd)
@@ -131,17 +127,12 @@ mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses
 # percent of variance explained
    taus <- decomp.C$Dv/sum(decomp.C$Dv) * 100
 
-# cumulative percent of variance explained
-   taus.percent <-cumsum(taus)
-
 # Alpha Weights
   alphaWeights = P[,1] / sum(P[,1])
 
 ##########################################
 # Compromise
 ##########################################
-
-
 	
 # Compromise
   compromiseMatrix = matrix(0,n.rows, n.rows)
@@ -155,38 +146,29 @@ mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses
 
 # contribution
 	compromise.ci <- PCA.compromise$ci
-	rownames(compromise.ci)=rownames(X)
+	rownames(compromise.ci)=rownames(data)
 
 # contribution
 	compromise.cj <- PCA.compromise$cj
-	rownames(compromise.ci)=rownames(X)
+	rownames(compromise.ci)=rownames(data)
 
 # eigen vectors
    compromise.P = compromise.PCA$p
-   rownames(compromise.P)=rownames(X)
+   rownames(compromise.P)=rownames(data)
 
 # eigen values
    compromise.dd = (compromise.PCA$Dv)^2
 
-# cumulative eigen values
-   compromise.cum.D = cumsum(compromise.PCA$Dv)
-
 # factor scores
    compromise.G = compromise.PCA$p %*% (compromise.PCA$Dd)
-   rownames(compromise.G)=rownames(X)
+   rownames(compromise.G)=rownames(data)
 
 # % of variance explained
-   compromise.taus <- compromise.PCA$Dv/sum(compromise.PCA$Dv) * 100
-
-# cumulative % of variance explained
-   compromise.taus.percent <-cumsum(taus)	
+   compromise.tau <- compromise.PCA$Dv/sum(compromise.PCA$Dv) * 100
 
 ##########################################
 # Tables: Generalized PCA of X
 ##########################################	
-
-# column names	
-   table.colnames <- colnames(table)
 
 # alpha weights
    table.alphaWeights <- alphaWeights
@@ -216,22 +198,20 @@ mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses
 
 # Eigen values of the tables 
    gpdq.eigenvalues = (general.pdq$Dd)^2
-	
+
 # Inertia
    gpdq.inertia = ((general.pdq$Dv) / sum(general.pdq$Dv))*100
 
-# Cumulative Inertia
-   gpdq.cum.inertia = cumsum(gpdq.inertia)
-
 # Loadings of the tables
    gpdq.loadings = general.pdq$q
+   rownames(gpdq.loadings) = colnames(data)
 
 # Factor scores of the tables
    gpdq.factorscores =  general.pdq$p %*%  (general.pdq$Dd)
-   rownames(gpdq.factorscores)=rownames(X)
+   rownames(gpdq.factorscores)=rownames(data)
    
 # Partial Factor Scores
-   gpdq.partial = array(0,dim=c(dim(X)[1],dim(gpdq.loadings)[2],dim(table)[1]))
+   gpdq.partial = array(0,dim=c(dim(data)[1],dim(gpdq.loadings)[2],dim(table)[1]))
    to_partial = 0
    from_partial = 1
    for(i in 1:dim(table)[1])
@@ -242,7 +222,7 @@ mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses
        gpdq.partial[,,i] = D.mat[,from:to] %*% gpdq.loadings[from:to,]
    }
    
-   gpdq.partialFS <- matrix(0,dim(X)[1]*dim(table)[1],dim(gpdq.loadings)[2])
+   gpdq.partialFS <- matrix(0,dim(data)[1]*dim(table)[1],dim(gpdq.loadings)[2])
    to.total = 0
    for(i in 1:dim(table)[1])
    {	from = to.total + 1
@@ -250,20 +230,21 @@ mpDISTATIS.core <- function(data, sorting = 'No', normalization = 'None', masses
    		to.total = to
    		gpdq.partialFS[from:to,]= gpdq.partial[,,i]
    	}
-   	rownames(gpdq.partialFS) = paste(rep(table.names,each=dim(X)[1]),rep(rownames(X)))
-
+    rownames(gpdq.partialFS) = paste(rep(table.names,each=dim(data)[1]),rep(rownames(data)))
 
 ######################################
 # Results
 ######################################
 
-res.distatis <- list(data = X, normalization= normalization, sorting = sorting, table = table, S=scalarProductMatrices, C = CMatrix, ci = ci, cj = cj, 
+res.distatis <- list(data = data, normalization= normalization, sorting = sorting, table = table, S=scalarProductMatrices, C = CMatrix, ci = ci, cj = cj, 
+                eigs.vector = P, eigs = D, fi = G, tau = taus,  
 
-			EigenVector = P, eigenValue = D, cum.eigenValue = D.cum, factorScores = G, percentVar = taus, cumPercentVar = taus.percent,  
+                compromise = compromiseMatrix, compromise.ci = compromise.ci, compromise.cj = compromise.cj, compromise.eigs.vector = compromise.P, 
+                compromise.eigs = compromise.dd, compromise.fi = compromise.G, compromise.tau = compromise.tau,
 			
-			weights = W, masses = M, table.partialFactorScores.array = gpdq.partial, table.cj = compromise.cj, table.ci = compromise.ci, 
-			table.EigenValues = compromise.dd, table.inertia = compromise.taus,table.EigenVectors = compromise.P, 
-			 table.FactorScores = compromise.G, table.partialFactorScores = gpdq.partialFS)
+			         alphaWeights = alphaWeights, masses = M, table.partial.fi.array = gpdq.partial , table.ci = compromise.ci, 
+               table.cj = table.cj, table.eigs = compromise.dd, table.tau = compromise.tau, table.eigs.vector = compromise.P, table.Q = gpdq.loadings,
+			         table.fi = compromise.G, table.partial.fi = gpdq.partialFS)
 
 return (res.distatis)
 }
