@@ -1,10 +1,10 @@
 createColorVectorsByDesign <-
-function(design_matrix,hsv=TRUE){
+function(design_matrix,hsv=TRUE,offset=NULL){
 
 	if(hsv){
-		group_colors <- prettyGraphsHSVColorSelection(n.colors=ncol(design_matrix))
+		group_colors <- prettyGraphsHSVColorSelection(n.colors=ncol(design_matrix),offset=offset)
 	}else{
-		group_colors <- prettyGraphsColorSelection(n.colors=ncol(design_matrix))	
+		group_colors <- prettyGraphsColorSelection(n.colors=ncol(design_matrix),offset=offset)	
 	}
 	rownames(group_colors)<-colnames(design_matrix)
 

@@ -1,5 +1,5 @@
 epGraphs <-
-function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,biplots=FALSE,graphs=TRUE){
+function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,biplots=FALSE,graphs=TRUE){
 	
 	
 	pca.types <- c('epPCA','epMDS','epGPCA')
@@ -57,9 +57,9 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,constraints=N
 		if(is.null(fi.col) || nrow(fi.col)!=nrow(res$fi)){
 			if(is.null(epPlotInfo$fi.col)){
 				if(is.null(DESIGN)){
-					fi.col <- createColorVectorsByDesign(matrix(1,nrow(res$fi),1))$oc
+					fi.col <- createColorVectorsByDesign(matrix(1,nrow(res$fi),1),offset=col.offset)$oc
 				}else{
-					fi.col <- createColorVectorsByDesign(DESIGN)$oc
+					fi.col <- createColorVectorsByDesign(DESIGN,offset=col.offset)$oc
 				}
 			}else{
 				fi.col <- epPlotInfo$fi.col
@@ -68,7 +68,7 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,constraints=N
 		if(class(res)[1]!='epMDS'){
 			if(is.null(fj.col) || nrow(fj.col)!=nrow(res$fj)){
 				if(is.null(epPlotInfo$fj.col)){
-					fj.col <- createColorVectorsByDesign(matrix(1,nrow(res$fj),1),hsv=FALSE)$oc
+					fj.col <- createColorVectorsByDesign(matrix(1,nrow(res$fj),1),hsv=FALSE,offset=col.offset)$oc
 				}else{
 					fj.col <- epPlotInfo$fj.col	
 				}

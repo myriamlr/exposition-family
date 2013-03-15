@@ -1,5 +1,5 @@
 tepGraphs <-
-function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=1,biplots=FALSE,graphs=TRUE){
+function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=1,biplots=FALSE,graphs=TRUE){
 
 	pca.types <- c('tepBADA')
 	ca.types <- c('tepDICA')
@@ -51,7 +51,7 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,
 				}else{
 					#this will catch failures and stop.
 					DESIGN <- texpoDesignCheck(DATA=NULL,DESIGN=DESIGN,make_design_nominal=FALSE)
-					obs.cols <- createColorVectorsByDesign(DESIGN)
+					obs.cols <- createColorVectorsByDesign(DESIGN,offset=col.offset)
 					fii.col <- obs.cols$oc
 					fi.col <- obs.cols$gc
 				}
@@ -62,7 +62,7 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,
 		}
 		if(is.null(fj.col) || nrow(fj.col)!=nrow(res$fj)){
 			if(is.null(tepPlotInfo$fj.col)){
-				fj.col <- createColorVectorsByDesign(matrix(1,nrow(res$fj),1),hsv=FALSE)$oc
+				fj.col <- createColorVectorsByDesign(matrix(1,nrow(res$fj),1),hsv=FALSE,offset=col.offset)$oc
 			}else{
 				fj.col <- tepPlotInfo$fj.col	
 			}
