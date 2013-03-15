@@ -1,5 +1,4 @@
-print.mexPosition.Output <-
-function (x ,...) {
+print.mexPosition.Output <- function (x ,...) {
 
   res.mexPosition.Output <- x
   if (!inherits(res.mexPosition.Output, "mexPosition.Output")) stop ("no convenient data")
