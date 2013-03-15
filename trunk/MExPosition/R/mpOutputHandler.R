@@ -1,14 +1,12 @@
-mpOutputHandler <-
-function(res=NULL,mpPlotInfo=NULL){
-
-	if(!is.null(res) && !is.null(mpPlotInfo)){
-		final.output <- list(mexPosition.Data=res,Plotting.Data=mpPlotInfo)
-		class(final.output) <- c("mexPosition.Output","list")	
+mpOutputHandler <- function(res=NULL,mpPlotInfo=NULL)
+{	
+	if(!is.null(res) && !is.null(mpPlotInfo))
+	{	final.output <- list(mexPosition.Data=res,Plotting.Data=mpPlotInfo)
+		class(final.output) <- c("mexpoOutput","list")	
 		return(final.output)
-	}else if(!is.null(res) && is.null(mpPlotInfo)){
-		return(res)
-	}else{
-		print("Unknown inputs. mpOutputHandler must exit.")	
+	}
+	else
+	{	print("Unknown inputs. mpOutputHandler must exit.")	
 		return(0)
 	}
 	

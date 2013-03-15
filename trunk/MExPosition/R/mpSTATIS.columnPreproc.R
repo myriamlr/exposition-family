@@ -1,5 +1,4 @@
-mpSTATIS.columnPreproc <-
-function(data, group.matrix, column.preprocess = 'None') 
+mpSTATIS.columnPreproc <- function(data, column.preprocess = 'None') 
 {
   column.processed <- matrix(0,dim(data)[1],dim(data)[2])
   processing <- column.processed

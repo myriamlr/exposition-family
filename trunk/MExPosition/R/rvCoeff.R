@@ -1,5 +1,4 @@
-rvCoeff <-
-function(S,T,type=-1){
+rvCoeff <- function(S,T,type=-1){
 	rv = 0
 	if(sum(dim(S) == dim(T)) != 2){
 		print('Dimensions do not match')

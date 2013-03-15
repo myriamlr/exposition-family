@@ -1,4 +1,4 @@
-mpSTATIS.rowPreproc <-function(data, groupMatrix, row.preprocess = 'None') 
+mpSTATIS.rowPreproc <-function(data, row.preprocess = 'None') 
 
 {
     row.processed <- matrix(0,dim(data)[1],dim(data)[2])
