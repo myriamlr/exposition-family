@@ -152,7 +152,7 @@ scalarProductMatrices2 <- array(scalarProductMatrices, dim=c(num.obs*num.obs,num
    gpdq.vectors = general.pdq$p
 
 # Eigen values of the tables 
-   gpdq.eigenvalues = general.pdq$Dd
+   gpdq.eigenvalues = (general.pdq$Dd)^2
 	
 # Inertia
    gpdq.inertia = ((general.pdq$Dv) / sum(general.pdq$Dv))*100

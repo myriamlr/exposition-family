@@ -37,8 +37,16 @@ The results for InnerProduct are bundled inside of $InnerProduct
   \item{$InnerProduct$eigs.vector}{Inner Product: Eigen Vectors}
   \item{$InnerProduct$eigs}{Inner Product: Eigen Values}
   \item{$InnerProduct$fi}{Inner Product: Factor Scores}
-  \item{$InnerProduct$tau}{Inner Product: Percent Variance Explained (tau)}
+  \item{$InnerProduct$t}{Inner Product: Percent Variance Explained (tau)}
   \item{$InnerProduct$alphaWeights}{Alpha Weights}
+The results for the Compromise are bundled inside of $Compromise
+  \item{$Compromise$compromise}{Compromise Matrix}
+  \item{$Compromise$compromise.eigs}{Compromise: Eigen Values}
+  \item{$Compromise$compromise.eigs.vector}{Compromise: Eigen Vector}
+  \item{$Compromise$compromise.fi}{Compromise: Factor Scores}
+  \item{$Compromise$compromise.t}{Compromise: Percent Variance Explained}
+  \item{$Compromise$compromise.ci}{Compromise: Contributions of the rows}
+  \item{$Compromise$compromise.cj}{Compromise: Contributions of the Columns} 
 The results for the Tables are bundled inside of $Table.
   \item{$Table$m}{Table: Masses}
   \item{$Table$eigs}{Table: Eigen Values}
@@ -49,6 +57,7 @@ The results for the Tables are bundled inside of $Table.
   \item{$Table$partial.fi.array}{Table: Array of Partial Factor Scores}
   \item{$Table$cj}{Table:Contribution for the rows}
   \item{$Table$cj}{Table: Contribution for the columns}
+  \item{$Table$t}{Table:Percent Variance Explained}
 }
 \references{
 Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and DISTATIS: Optimum multi-table principal component analysis and three way metric multidimensional scaling. \emph{Wiley Interdisciplinary Reviews: Computational Statistics}, 4, 124-167. \cr \cr

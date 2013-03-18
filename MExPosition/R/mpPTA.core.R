@@ -139,7 +139,7 @@ mpPTA.core <- function(data, num.obs, column.design, num.groups, optimization.op
    }
 
    #general PDQ
-	pdq.general = epGPCA(data,scale = FALSE, center = FALSE, masses=M,weights=w, graphs = FALSE)
+	pdq.general = corePCA(data,M=M,W=w)
 	general.pdq = pdq.general$pdq
 
    # contribution
@@ -152,7 +152,7 @@ mpPTA.core <- function(data, num.obs, column.design, num.groups, optimization.op
    gpdq.vectors = general.pdq$p
 
    # Eigen values of the tables 
-   gpdq.eigenvalues = general.pdq$Dd
+   gpdq.eigenvalues = (general.pdq$Dd)^2
 	
    # Inertia
    gpdq.inertia = ((general.pdq$Dv) / sum(general.pdq$Dv))*100

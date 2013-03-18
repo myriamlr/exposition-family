@@ -46,14 +46,14 @@ The results for Overview are bundled inside of $Overview.
   \item{$InnerProduct$eigs.vector}{Inner Product: Eigen Vectors of C*}
   \item{$InnerProduct$eigs}{Inner Product: Eigen Value of C*}
   \item{$InnerProduct$fi}{Inner Product: Factor Scores of C*}
-  \item{$InnerProduct$tau}{Inner Product: Percent Variance Explained of C*}
+  \item{$InnerProduct$t}{Inner Product: Percent Variance Explained of C*}
   \item{$InnerProduct$alphaWeights}{Inner Product: Alpha Weights *}
 The results for the Compromise are bundled inside of $Compromise
   \item{$Compromise$compromise}{Compromise Matrix}
   \item{$Compromise$compromise.eigs}{Compromise: Eigen Values}
   \item{$Compromise$compromise.eigs.vector}{Compromise: Eigen Vector}
   \item{$Compromise$compromise.fi}{Compromise: Factor Scores}
-  \item{$Compromise$compromise.tau}{Compromise: Percent Variance Explained}
+  \item{$Compromise$compromise.t}{Compromise: Percent Variance Explained}
   \item{$Compromise$compromise.ci}{Compromise: Contributions of the rows}
   \item{$Compromise$compromise.cj}{Compromise: Contributions of the Columns} 
 The results for the Tables are bundled inside of $Table.
@@ -66,7 +66,7 @@ The results for the Tables are bundled inside of $Table.
   \item{$Table$partial.fi.array}{Table: Arrray of Partial Factor Scores}
   \item{$Table$ci}{Table: Contribition of the Rows}
   \item{$Table$cj}{Table: Contribution of the Columns}
-  \item{$Table$tau}{Table: Percent Variance Explained}
+  \item{$Table$t}{Table: Percent Variance Explained}
 }
   
 \references{

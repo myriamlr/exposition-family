@@ -36,7 +36,7 @@ The results for InnerProduct are bundled inside of $InnerProduct
   \item{$InnerProduct$eigs.vector}{Inner Product: Eigen Vectors}
   \item{$InnerProduct$eigs}{Inner Product: Eigen Values}
   \item{$InnerProduct$fi}{Inner Product: Factor Scores}
-  \item{$InnerProduct$tau}{Inner Product: Percent Variance Explained}
+  \item{$InnerProduct$t}{Inner Product: Percent Variance Explained}
   \item{$InnerProduct$ci}{Inner Product: Contribution of the Rows}
   \item{$InnerProduct$cj}{Inner Product: Contribution of the Columns}
   \item{$InnerProduct$alphaWeights}{Alpha Weights}  
@@ -45,7 +45,7 @@ The results for the Compromise are bundled inside of $Compromise
   \item{compromise.eigs}{Compromise: Eigen Values}
   \item{compromise.eigs.vector}{Compromise: Eigen Vector}
   \item{compromise.fi}{Compromise: Factor Scores}
-  \item{Compromise.tau}{Compromise: Percent Variance Explained}
+  \item{Compromise.t}{Compromise: Percent Variance Explained}
   \item{compromise.ci}{Compromise: Contributions of the rows}
   \item{compromise.cj}{Compromise: Contributions of the Columns}  
 The results for the Tables are bundled inside of $Table.
@@ -58,7 +58,7 @@ The results for the Tables are bundled inside of $Table.
   \item{$Table$partial.fi.array}{Table: Arrray of Partial Factor Scores}
   \item{Table$ci}{Table: Contribition of the Rows}
   \item{$Table$cj}{Table: Contribution of the Columns}
-  \item{$Table$tau}{Table: Percent Variance Explained} 
+  \item{$Table$t}{Table: Percent Variance Explained} 
   }
   
 \references{

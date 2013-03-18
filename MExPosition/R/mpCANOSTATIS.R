@@ -18,16 +18,16 @@ mpCANOSTATIS <- function(data, column.design, row.design, normalization = 'MFA',
 						row.preprocess = res.preproc$row.preprocess, column.preprocess = res.preproc$column.preprocess, table.preprocess = res.preproc$table.preprocess)
 
 	canostatis.innerproduct <- list(mahalanobis = res.proc$mahalanobis, S=res.proc$scalarProductMatrices, C = res.proc$C, RVMatrix = res.proc$rvMatrix, 
-						ci = res.proc$ci, cj = res.proc$cj, eigs.vector = res.proc$eigs.vector, eigs = res.proc$eigs, fi = res.proc$fi, tau = res.proc$tau, 
+						ci = res.proc$ci, cj = res.proc$cj, eigs.vector = res.proc$eigs.vector, eigs = res.proc$eigs, fi = res.proc$fi, t = res.proc$tau, 
 						alphaWeights = res.proc$alphaWeights)
 
 	canostatis.compromise <- list(compromise = res.proc$compromise, compromise.ci = res.proc$compromise.ci, compromise.cj = res.proc$compromise.cj, 
 						compromise.eigs.vector = res.proc$compromise.eigs.vector, compromise.eigs = res.proc$eigs, compromise.fi = res.proc$compromise.fi,
-						compromise.tau = res.proc$compromise.tau)
+						compromise.t = res.proc$compromise.tau)
 
 	canostatis.table <- list(m = res.proc$masses, eigs = res.proc$table.eigs, eigs.vector = res.proc$table.eigs.vector, 
             			Q = res.proc$table.Q, fi = res.proc$table.fi, partial.fi = res.proc$table.partial.fi,
-         		    	cj = res.proc$table.cj, ci = res.proc$table.ci, tau =res.proc$table.tau, partial.fi.array = res.proc$table.partial.fi.array)  
+         		    	cj = res.proc$table.cj, ci = res.proc$table.ci, t =res.proc$table.tau, partial.fi.array = res.proc$table.partial.fi.array)  
 
 	class(canostatis.overview) <- c("canostatis.overview","list")
 	class(canostatis.innerproduct) <- c("canostatis.innerproduct","list")

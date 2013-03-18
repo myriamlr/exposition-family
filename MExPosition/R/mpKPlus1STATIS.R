@@ -48,15 +48,15 @@ KPlus1.statis.overview <- list(data = res.preproc$data.processed, plus1data = pl
 						table.preprocess = res.preproc$table.preprocess, num.groups = res.preproc$num.groups)
 
 KPlus1.statis.innerproduct <- list(S=res.proc$S, S.star=res.proc$S.star, C = res.proc$C, rvMatrix = res.proc$rvMatrix, ci = res.proc$ci, cj = res.proc$cj, 
-						eigs.vector = res.proc$eigs.vector, eigs = res.proc$eigs, fi = res.proc$fi, tau= res.proc$tau.star, 
+						eigs.vector = res.proc$eigs.vector, eigs = res.proc$eigs, fi = res.proc$fi, t = res.proc$tau.star, 
             alphaWeights = res.proc$alphaWeights.star)
 
 KPlus1.statis.compromise <- list(compromise = res.proc$compromise, compromise.ci = res.proc$compromise.ci, compromise.cj= res.proc$compromise.cj, 
 						compromise.P = res.proc$compromise.P, compromise.eigs = res.proc$compromise.eigs.value, compromise.eigs.vector = res.proc$compromise.eigs.vector,
-            compromise.fi = res.proc$compromise.fi, compromise.tau= res.proc$compromise.tau)
+            compromise.fi = res.proc$compromise.fi, compromise.t = res.proc$compromise.tau)
 
 KPlus1.statis.table <- list(m = res.proc$masses, partial.fi.array = res.proc$table.partial.fi.array, cj = res.proc$table.cj, ci = res.proc$table.ci, 
-                        eigs = res.proc$table.eigs,  tau = res.proc$table.tau, eigs.vector = res.proc$table.eigs.vector, 
+                        eigs = res.proc$table.eigs,  t = res.proc$table.tau, eigs.vector = res.proc$table.eigs.vector, 
                         Q = res.proc$table.loadings,  fi = res.proc$table.fi,
                         partial.fi = res.proc$table.partial.fi)
       
