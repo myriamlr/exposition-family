@@ -37,14 +37,14 @@ covstatis.overview <- list(data = res.proc$data, normalization = res.proc$normal
 					           num.groups=dim(res.proc$table.partial.fi.array)[3])
 
 covstatis.innerproduct <- list(S = res.proc$S, C=res.proc$C, rvMatrix = res.proc$rvMatrix, ci = res.proc$ci, cj = res.proc$cj, eigs.vector= res.proc$eigs.vector, 
-                     eigs = res.proc$eigs, fi = res.proc$fi, tau = res.proc$tau, alphaWeights = res.proc$alphaWeights)
+                     eigs = res.proc$eigs, fi = res.proc$fi, t = res.proc$tau, alphaWeights = res.proc$alphaWeights)
 
 covstatis.compromise <- list(compromise = res.proc$compromise, compromise.ci = res.proc$compromise.ci, compromise.cj=res.proc$compromise.cj, 
                       compromise.eigs.vector = res.proc$compromise.eigs.vector, compromise.eigs = res.proc$compromise.eigs, compromise.fi = res.proc$compromise.fi,
-                      compromise.tau = res.proc$compromise.tau)
+                      compromise.t = res.proc$compromise.tau)
 
 covstatis.table <- list(m = res.proc$masses, eigs = res.proc$table.eigs, eigs.vector = res.proc$table.eigs.vector, 
-                      fi = res.proc$table.fi, partial.fi = res.proc$table.partial.fi, ci = res.proc$table.ci, tau =res.proc$table.tau, 
+                      fi = res.proc$table.fi, partial.fi = res.proc$table.partial.fi, ci = res.proc$table.ci, t =res.proc$table.tau, 
                       partial.fi.array = res.proc$table.partial.fi.array, Q = res.proc$table.Q, cj = res.proc$table.cj)   					
 
 class(covstatis.overview) <- c("covstatis.overview","list")

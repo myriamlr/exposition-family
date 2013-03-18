@@ -47,21 +47,21 @@ doact.statis.overview <- list(data1 = res.preproc.data.1$data, data2 = res.prepr
 						num.groups.2 = res.preproc.data.2$num.groups)
 
 doact.statis.innerproduct <- list(S.1=res.proc$S.1, S.2=res.proc$S.2, C = res.proc$C, RVMatrix = res.proc$RVMatrix, ci = res.proc$ci, cj = res.proc$cj, 
-						eigs.vector = res.proc$eigs.vector, eigs = res.proc$eigs, fi = res.proc$fi, tau = res.proc$tau, alphaWeights = res.proc$alphaWeights,
+						eigs.vector = res.proc$eigs.vector, eigs = res.proc$eigs, fi = res.proc$fi, t = res.proc$tau, alphaWeights = res.proc$alphaWeights,
 						betaWeights = res.proc$betaWeights)
 
 doact.statis.compromise <- list(compromiseMatrix.1 = res.proc$compromiseMatrix.1, compromise.ci.1 = res.proc$compromise.ci.1, compromise.cj.1 = res.proc$compromise.cj.1, 
 						compromise.eigs.vector.1 = res.proc$compromise.P.1, compromise.eigs.value.1 = res.proc$compromise.eigs.value.1, compromise.fi.1 = res.proc$compromise.fi.1, 
-						compromise.tau.1 = res.proc$compromise.tau.1, compromiseMatrix.2 = res.proc$compromiseMatrix.2, compromise.ci.2 = res.proc$compromise.ci.2, 
+						compromise.t.1 = res.proc$compromise.tau.1, compromiseMatrix.2 = res.proc$compromiseMatrix.2, compromise.ci.2 = res.proc$compromise.ci.2, 
 						compromise.cj.2 = res.proc$compromise.cj.2, compromise.eigs.vector.2 = res.proc$compromise.P.2,  compromise.eigs.value.2 = res.proc$compromise.dd.2, 
-						compromise.fi.2 = res.proc$compromise.fi.2, compromise.tau.2 = res.proc$compromise.tau.2)
+						compromise.fi.2 = res.proc$compromise.fi.2, compromise.t.2 = res.proc$compromise.tau.2)
 
 doact.statis.table <- list(m.1 = res.proc$masses.1, partial.fi.array.1 = res.proc$table.partial.fi.array.1, cj.1 = res.proc$table.cj.1, ci.1 = res.proc$table.ci.1, 
-                        eigs.1 = res.proc$table.eigs.1,  tau.1 = res.proc$table.tau.1, eigs.vector.1 = res.proc$table.eigs.vector.1, 
+                        eigs.1 = res.proc$table.eigs.1,  t.1 = res.proc$table.tau.1, eigs.vector.1 = res.proc$table.eigs.vector.1, 
                         Q.1 = res.proc$table.loadings.1,  fi.1 = res.proc$table.fi.1, partial.fi.1 = res.proc$table.partial.fi.1, tau.1 = res.proc$table.tau.1, 
 
                         m.2 = res.proc$masses.2, partial.fi.array.2 = res.proc$table.partial.fi.array.2, cj.2 = res.proc$table.cj.2, ci.2 = res.proc$table.ci.2, 
-                        eigs.2 = res.proc$table.eigs.2,  tau.2 = res.proc$table.tau.2, eigs.vector.2 = res.proc$table.eigs.vector.2, 
+                        eigs.2 = res.proc$table.eigs.2,  t.2 = res.proc$table.tau.2, eigs.vector.2 = res.proc$table.eigs.vector.2, 
                         Q.2 = res.proc$table.loadings.2,  table.fi.1 = res.proc$table.fi.1, partial.fi.2 = res.proc$table.partial.fi.2) 
 
       

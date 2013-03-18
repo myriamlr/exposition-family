@@ -167,8 +167,8 @@ Weight2 = diag(w.2)
    gpdq.vectors.2 = general.pdq.2$p
 
 # Eigen values of the tables 
-   gpdq.eigenvalues.1 = (general.pdq.1$Dd)
-   gpdq.eigenvalues.2 = (general.pdq.2$Dd)
+   gpdq.eigenvalues.1 = (general.pdq.1$Dd)^2
+   gpdq.eigenvalues.2 = (general.pdq.2$Dd)^2
 	
 # Inertia
    gpdq.inertia.1 = ((general.pdq.1$Dv) / sum(general.pdq.1$Dv))*100

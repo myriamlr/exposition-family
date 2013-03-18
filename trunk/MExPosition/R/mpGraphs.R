@@ -22,24 +22,24 @@ mpGraphs <- function(res, table, DESIGN = NULL, x_axis=1, y_axis=2, fi.col=NULL,
 
 	if(!(class(res)[1] %in% c('mpDOACT.STATIS')))
 	{	if(is.null(xlab))
-		{	xlab.innerproduct <- paste("Component ",x_axis, " variance:", round(res$InnerProduct$tau[x_axis],3),"%",sep="")
-			xlab.table <- paste("Component ",x_axis, " variance:", round(res$Table$tau[x_axis],3),"%",sep="")
+		{	xlab.innerproduct <- paste("Component ",x_axis, " variance:", round(res$InnerProduct$t[x_axis],3),"%",sep="")
+			xlab.table <- paste("Component ",x_axis, " variance:", round(res$Table$t[x_axis],3),"%",sep="")
 		}
 		if(is.null(ylab))
 		{	ylab.innerproduct <- paste("Component ",y_axis, " variance:", round(res$InnerProduct$t[y_axis],3),"%",sep="")
-		ylab.table <- paste("Component ",y_axis, " variance:", round(res$Table$tau[y_axis],3),"%",sep="")
+		ylab.table <- paste("Component ",y_axis, " variance:", round(res$Table$t[y_axis],3),"%",sep="")
 		}
 	}
 	if((class(res)[1] %in% c('mpDOACT.STATIS')))
 	{	if(is.null(xlab))
 		{	xlab.innerproduct <- paste("Component ",x_axis, " variance:", round(res$InnerProduct$t[x_axis],3),"%",sep="")
-			xlab.table.1 <- paste("Component ",x_axis, " variance:", round(res$Table$tau.1[x_axis],3),"%",sep="")
-			xlab.table.2 <- paste("Component ",x_axis, " variance:", round(res$Table$tau.2[x_axis],3),"%",sep="")
+			xlab.table.1 <- paste("Component ",x_axis, " variance:", round(res$Table$t.1[x_axis],3),"%",sep="")
+			xlab.table.2 <- paste("Component ",x_axis, " variance:", round(res$Table$t.2[x_axis],3),"%",sep="")
 		}
 		if(is.null(ylab))
 		{	ylab.innerproduct <- paste("Component ",y_axis, " variance:", round(res$InnerProduct$t[y_axis],3),"%",sep="")
-			ylab.table.1 <- paste("Component ",y_axis, " variance:", round(res$Table$tau.1[y_axis],3),"%",sep="")
-			ylab.table.2 <- paste("Component ",y_axis, " variance:", round(res$Table$tau.2[y_axis],3),"%",sep="")
+			ylab.table.1 <- paste("Component ",y_axis, " variance:", round(res$Table$t.1[y_axis],3),"%",sep="")
+			ylab.table.2 <- paste("Component ",y_axis, " variance:", round(res$Table$t.2[y_axis],3),"%",sep="")
 		}
 	}
 

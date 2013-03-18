@@ -52,7 +52,7 @@ The results for InnerProduct are bundled inside of $InnerProduct
   \item{$InnerProduct$eigs.vector}{Inner Product: Eigen Vectors}
   \item{$InnerProduct$eigs}{Inner Product: Eigen Values}
   \item{$InnerProduct$fi}{Inner Product: Factor Scores}
-  \item{$InnerProduct$tau}{Inner Product: Percent Variance Explained}
+  \item{$InnerProduct$t}{Inner Product: Percent Variance Explained}
   \item{$InnerProduct$ci}{Inner Product: Contribution of the Rows}
   \item{$InnerProduct$cj}{Inner Product: Contribution of the Columns}
   \item{$InnerProduct$alphaWeights}{Inner Product: Alpha Weights}
@@ -62,14 +62,14 @@ The results for the Compromise are bundled inside of $Compromise
   \item{$Compromise$compromise.eigs.1}{Compromise: Eigen Values for dataset 1}
   \item{$Compromise$compromise.eigs.vector.1}{Compromise: Eigen Vector for dataset 1}
   \item{$Compromise$compromise.fi.1}{Compromise: Factor Scores for dataset 1}
-  \item{$Compromise$compromise.tau.1}{Compromise: Percent Variance Explained for dataset 1}
+  \item{$Compromise$compromise.t.1}{Compromise: Percent Variance Explained for dataset 1}
   \item{$Compromise$compromise.ci.1}{Compromise: Contributions of the rows for dataset 1}
   \item{$Compromise$compromise.cj.1}{Compromise: Contributions of the Columns for dataset 1}
   \item{$Compromise$compromiseMatrix.2}{Compromise Matrix for dataset 2}
   \item{$Compromise$compromise.eigs.2}{Compromise: Eigen Values for dataset 2}
   \item{$Compromise$compromise.eigs.vector.2}{Compromise: Eigen Vector for dataset 2}
   \item{$Compromise$compromise.fi.2}{Compromise: Factor Scores for dataset 2}
-  \item{$Compromise$compromise.tau.2}{Compromise: Percent Variance Explained for dataset 2}
+  \item{$Compromise$compromise.t.2}{Compromise: Percent Variance Explained for dataset 2}
   \item{$Compromise$compromise.ci.2}{Compromise: Contributions of the rows for dataset 2}
   \item{$Compromise$compromise.cj.2}{Compromise: Contributions of the Columns for dataset 2}
 The results for the Tables are bundled inside of $Table.
@@ -82,7 +82,7 @@ The results for the Tables are bundled inside of $Table.
   \item{$Table$partial.fi.array.1}{Table: Arrray of Partial Factor Scores for dataset 1}
   \item{$Table$ci.1}{Table: Contribition of the Rows for dataset 1}
   \item{$Table$cj.1}{Table: Contribution of the Columns for dataset 1}
-  \item{$Table$tau.1}{Table: Percent Variance Explained for dataset 1}  
+  \item{$Table$t.1}{Table: Percent Variance Explained for dataset 1}  
    \item{$Table$m.2}{Table: masses for dataset 2}
   \item{$Table$eigs.2}{Table: Eigen Values for dataset 2}
   \item{$Table$eigs.vector.2}{Table: Eigen Vectors for dataset 2}
@@ -92,7 +92,7 @@ The results for the Tables are bundled inside of $Table.
   \item{$Table$partial.fi.array.2}{Table: Arrray of Partial Factor Scores for dataset 2}
   \item{$Table$ci.2}{Table: Contribition of the Rows for dataset 2}
   \item{$Table$cj.2}{Table: Contribution of the Columns for dataset 2}
-  \item{$Table$tau.2}{Table: Percent Variance Explained for dataset 2}
+  \item{$Table$t.2}{Table: Percent Variance Explained for dataset 2}
   }
   
 \references{

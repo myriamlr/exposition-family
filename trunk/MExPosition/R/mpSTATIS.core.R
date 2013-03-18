@@ -142,7 +142,7 @@ compromise.tau <- compromise.PCA$Dv/sum(compromise.PCA$Dv) * 100
    rownames(gpdq.vectors)=rownames(data)
 
 # Eigen values of the tables 
-   gpdq.eigenvalues = (general.pdq$Dv)
+   gpdq.eigenvalues = (general.pdq$Dv)^2
 	
 # Inertia
    gpdq.inertia = ((general.pdq$Dv) / sum(general.pdq$Dv))*100
