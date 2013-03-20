@@ -23,7 +23,7 @@ detach(package:scatterplot3d)
 
 #beer.taste.res.style <- epPCA(DATA = BEER, scale = FALSE, DESIGN = STYLES, make_design_nominal = FALSE)
 
-
+data(beer.tasting.notes)
 these.rows <- which(rowSums(beer.tasting.notes$region.design[,-5])==1) 
 BEER <- beer.tasting.notes$data[these.rows,] 
 STYLES<-beer.tasting.notes$style.design[these.rows,] 
@@ -51,4 +51,4 @@ phys<-epMDS(DATA=phys.dist, DESIGN= STYLES,make_design_nominal =FALSE)
 
 ##
 table <- c(rep("flavors",ncol(BEER.DIST)),rep("meters",ncol(phys.dist))) 
-demo.distatis <- mpDISTATIS(cbind(BEER.DIST,phys.dist), sorting='No', normalization='MFA',table=table)
+demo.distatis <- mpDISTATIS(cbind(BEER.DIST,phys.dist), DESIGN=STYLES, sorting='No', normalization='MFA',table=table)
