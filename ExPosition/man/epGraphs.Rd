@@ -42,12 +42,12 @@ Derek Beaton
 }
 \examples{
 	#this is for ExPosition's iris data
-	data(ep.iris)
-	pca.iris.res <- epPCA(ep.iris$data)
+	#data(ep.iris)
+	#pca.iris.res <- epPCA(ep.iris$data)
 	#this will put plotting data into a new variable.
-	pca.iris.plotting.data.2.and.3 <- epGraphs(pca.iris.res$ExPosition.Data,x_axis=2,y_axis=3)
+	#pca.iris.plotting.data.2.and.3 <- epGraphs(pca.iris.res$ExPosition.Data,x_axis=2,y_axis=3)
 	#this will overwrite the data in pca.iris.res$Plotting.Data. Warnings will be provided as to what is overwritten.
-	pca.iris.res$Plotting.Data <- epGraphs(pca.iris.res$ExPosition.Data,epPlotInfo=pca.iris.res$Plotting.Data,x_axis=2,y_axis=3)	
+	#pca.iris.res$Plotting.Data <- epGraphs(pca.iris.res$ExPosition.Data,epPlotInfo=pca.iris.res$Plotting.Data,x_axis=2,y_axis=3)	
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
