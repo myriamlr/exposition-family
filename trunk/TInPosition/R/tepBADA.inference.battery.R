@@ -1,20 +1,41 @@
 tepBADA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2){
 	
+	############################
+	###private functions for now
+	loo.test <- function(DATA,DESIGN,scale=TRUE,center=TRUE,i){
+		Xminus1 <- DATA[-i,]
+		Yminus1 <- DESIGN[-i,]
+		BADAminus1 <- tepBADA(DATA=Xminus1,DESIGN=Yminus1, make_design_nominal=FALSE,center=center, scale=scale,graphs=FALSE)
+		supX <- supplementaryRows(SUP.DATA=t(DATA[i,]), res=BADAminus1)
+		assignSup <- fii2fi(DESIGN=t(DESIGN[i,]), fii=supX$fii, fi=BADAminus1$TExPosition.Data$fi)
+		return(list(assignSup=assignSup,supX=supX))
+	}
+	##private functions for now	
+	permute.tests <- function(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, k = 0){
+		
+		PermDATA <- DATA[sample(nrow(DATA),nrow(DATA),FALSE),]
+		perm.res <- tepBADA(DATA=PermDATA, scale, center, DESIGN, make_design_nominal, group.masses, ind.masses, weights, graphs = FALSE, k)
+		perm.eigs <- perm.res$TExPosition.Data$eigs
+		perm.r2 <- perm.res$TExPosition.Data$assign$r2
+		perm.inertia <- sum(perm.eigs)
+		return(list(perm.r2=perm.r2,perm.eigs=perm.eigs,perm.inertia=perm.inertia))	
+	}	
+	############################	
+	
 	DATA <- as.matrix(DATA)
 	DESIGN <- as.matrix(DESIGN)
 	if(make_design_nominal){
 		DESIGN <- makeNominalData(DESIGN)
 	}
 	
-	res <- tepBADA(DATA = DATA, scale = scale, center = center, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, graphs = FALSE, k = k)
+	fixed.res <- tepBADA(DATA = DATA, scale = scale, center = center, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, graphs = FALSE, k = k)
 	
 	
-	FBY <- array(0,dim=c(nrow(res$TExPosition.Data$X),res$TExPosition.Data$pdq$ng,test.iters))
-	FBFUCK <- array(0,dim=c(nrow(res$TExPosition.Data$X),res$TExPosition.Data$pdq$ng,test.iters))	
-	FBX <- array(0,dim=c(ncol(res$TExPosition.Data$X),res$TExPosition.Data$pdq$ng,test.iters))
-	eigs.perm.matrix <- matrix(0,test.iters,res$TExPosition.Data$pdq$ng)
+	FBY <- array(0,dim=c(nrow(fixed.res$TExPosition.Data$X),fixed.res$TExPosition.Data$pdq$ng,test.iters))
+	FBX <- array(0,dim=c(ncol(fixed.res$TExPosition.Data$X),fixed.res$TExPosition.Data$pdq$ng,test.iters))
+	eigs.perm.matrix <- matrix(0,test.iters,fixed.res$TExPosition.Data$pdq$ng)
 	r2.perm <- inertia.perm <- matrix(0,test.iters,1)
-	ncomps <- res$TExPosition.Data$pdq$ng
+	ncomps <- fixed.res$TExPosition.Data$pdq$ng
 	
 	
 	loo.assign <- matrix(0,nrow(DESIGN),ncol(DESIGN))
@@ -27,48 +48,59 @@ tepBADA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN 
 		loo.fii[i,] <- loo.test.res$supX$fii
 		setTxtProgressBar(pb,i)			
 	}
-
 	
 	#boot & perm test next
 	pb <- txtProgressBar(1,test.iters,1,style=1)
 	for(i in 1:test.iters){
-		boot.res <- boot.compute.cubes(DATA,DESIGN,res)
+		boot.res <- boot.compute.fi.fj(DATA,DESIGN,fixed.res)
 
 		FBX[,,i] <- boot.res$FBX
 		FBY[,,i] <- boot.res$FBY
-		FBFUCK[,,i] <- boot.res$FBtY
 		permute.res <- permute.tests(DATA = DATA, scale = scale, center = center, DESIGN = DESIGN, make_design_nominal = make_design_nominal, group.masses = group.masses, ind.masses = ind.masses, weights = weights, k = k)
 		eigs.perm.matrix[i,] <- permute.res$perm.eigs
 		r2.perm[i,] <- permute.res$perm.r2
 		inertia.perm[i,] <- permute.res$perm.inertia
 		setTxtProgressBar(pb,i)		
-	}		
-	boot.tests.x <- boot.ratio.test(FBX,critical.value)
-	boot.tests.y <- boot.ratio.test(FBY,critical.value)
+	}
+	rownames(FBX) <- colnames(DATA)
+	rownames(FBY) <- colnames(DESIGN)		
+	fj.boot.data <- list(fj.tests=boot.ratio.test(FBX,critical.value),fj.boots=FBX)
+	fi.boot.data <- list(fi.tests=boot.ratio.test(FBY,critical.value),fi.boots=FBY)
+	boot.data <- list(fj.boot.data=fj.boot.data,fi.boot.data=fi.boot.data)
 	
-	return(list(FBFUCK=FBFUCK,FbootX.array=FBX,FbootY.array=FBY,BootTests.X=boot.tests.x,BootTests.Y=boot.tests.y,fixed=res,r2.perm=r2.perm,inertia.perm=inertia.perm,eigs.perm=eigs.perm.matrix,loo.assign=loo.assign,loo.fii=loo.fii))	
-
-}
-
-
-loo.test <- function(DATA,DESIGN,scale=TRUE,center=TRUE,i){
-	Xminus1 <- DATA[-i,]
-	Yminus1 <- DESIGN[-i,]
-	BADAminus1 <- tepBADA(DATA=Xminus1,DESIGN=Yminus1, make_design_nominal=FALSE,center=center, scale=scale,graphs=FALSE)
-	supX <- supplementaryRows(SUP.DATA=t(DATA[i,]), res=BADAminus1)
-	assignSup <- fii2fi(DESIGN=t(DESIGN[i,]), fii=supX$fii, fi=BADAminus1$TExPosition.Data$fi)
-	return(list(assignSup=assignSup,supX=supX))
-}
-
-permute.tests <- function(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, k = 0){
+	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$TExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
+	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
+	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix)
 	
-	PermDATA <- DATA[sample(nrow(DATA),nrow(DATA),FALSE),]
-	perm.res <- tepBADA(DATA=PermDATA, scale, center, DESIGN, make_design_nominal, group.masses, ind.masses, weights, graphs = FALSE, k)
-	perm.eigs <- perm.res$TExPosition.Data$eigs
-	perm.r2 <- perm.res$TExPosition.Data$assign$r2
-	perm.inertia <- sum(perm.eigs)
-	return(list(perm.r2=perm.r2,perm.eigs=perm.eigs,perm.inertia=perm.inertia))	
+	omni.p <- max(1-(sum(inertia.perm < sum(fixed.res$TExPosition.Data$eigs))/test.iters),1/test.iters)
+	omni.data <- list(p.val=omni.p,inertia.perm=inertia.perm)
+	
+ 	Inference.Data <- list(omni=omni.data,components=components.data,boot.data=boot.data)
+ 	class(Inference.Data) <- c("tepBADA.inference.battery","list")
+ 	
+ 	ret.data <- list(Fixed.Data=fixed.res,Inference.Data=Inference.Data)
+ 	class(ret.data) <- c("tinpoOutput","list")
+ 	
+	if(graphs){
+		tinGraphs(ret.data)
+	}
+	
+ 	return(ret.data)
+	
+	#return(list(FbootX.array=FBX,FbootY.array=FBY,BootTests.X=boot.tests.x,BootTests.Y=boot.tests.y,fixed=res,r2.perm=r2.perm,inertia.perm=inertia.perm,eigs.perm=eigs.perm.matrix,loo.assign=loo.assign,loo.fii=loo.fii))	
+
 }
+
+
+# permute.tests <- function(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, k = 0){
+	
+	# PermDATA <- DATA[sample(nrow(DATA),nrow(DATA),FALSE),]
+	# perm.res <- tepBADA(DATA=PermDATA, scale, center, DESIGN, make_design_nominal, group.masses, ind.masses, weights, graphs = FALSE, k)
+	# perm.eigs <- perm.fixed.res$TExPosition.Data$eigs
+	# perm.r2 <- perm.fixed.res$TExPosition.Data$assign$r2
+	# perm.inertia <- sum(perm.eigs)
+	# return(list(perm.r2=perm.r2,perm.eigs=perm.eigs,perm.inertia=perm.inertia))	
+# }
 
 # boot.compute.cubes <- function(DATA,DESIGN,res,scaleVals=TRUE,centerVals=TRUE){
 	# massedDESIGN <- t(t(DESIGN) * (1/(colSums(DESIGN))))
@@ -76,16 +108,16 @@ permute.tests <- function(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make
 	# BootX <- DATA[boot.sample.vector,]
 	# Rboot <- scale(t(massedDESIGN) %*% BootX,scale=scaleVals,center=centerVals)
 	
-	# if(is.null(dim(res$W))){
-		# Fboot_ctr_Y <- Rboot %*% (matrix(res$W,length(res$W),length(res$pdq$Dv)) * (res$fj %*% diag(res$pdq$Dv^-1)))
+	# if(is.null(dim(fixed.res$W))){
+		# Fboot_ctr_Y <- Rboot %*% (matrix(fixed.res$W,length(fixed.res$W),length(fixed.res$pdq$Dv)) * (fixed.res$fj %*% diag(fixed.res$pdq$Dv^-1)))
 	# }else{
-		# Fboot_ctr_Y <- Rboot %*% res$W %*% res$pdq$q
+		# Fboot_ctr_Y <- Rboot %*% fixed.res$W %*% fixed.res$pdq$q
 	# }
 	
-	# if(is.null(dim(res$M))){
-		# Fboot_ctr_X <- t(Rboot) %*% (matrix(res$W,length(res$M),length(res$pdq$Dv)) * (res$fi %*% diag(res$pdq$Dv^-1)))
+	# if(is.null(dim(fixed.res$M))){
+		# Fboot_ctr_X <- t(Rboot) %*% (matrix(fixed.res$W,length(fixed.res$M),length(fixed.res$pdq$Dv)) * (fixed.res$fi %*% diag(fixed.res$pdq$Dv^-1)))
 	# }else{
-		# Fboot_ctr_X <- t(Rboot) %*% res$M %*% res$pdq$p
+		# Fboot_ctr_X <- t(Rboot) %*% fixed.res$M %*% fixed.res$pdq$p
 	# }
 	# Fboot_ctr_Y <- replace(Fboot_ctr_Y,is.nan(Fboot_ctr_Y),0)
 	# Fboot_ctr_X <- replace(Fboot_ctr_X,is.nan(Fboot_ctr_X),0)			
