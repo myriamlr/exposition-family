@@ -42,6 +42,6 @@ Derek Beaton
 	#by default, components 1 and 2 will be plotted.
 	mds.res.images <- epMDS(jocn.2005.fmri$images$data)
 	#now a look at components 2 and 3.
-	mds.res.images$Plotting.Data <- epGraphs(mds.res.images$ExPosition.Data,epPlotInfo=mds.res.images$Plotting.Data,x_axis=2,y_axis=3)
+	#mds.res.images$Plotting.Data <- epGraphs(mds.res.images$ExPosition.Data,epPlotInfo=mds.res.images$Plotting.Data,x_axis=2,y_axis=3)
 }
 \keyword{ multivariate }

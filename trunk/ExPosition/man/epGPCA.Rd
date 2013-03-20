@@ -44,6 +44,6 @@ Derek Beaton
 	data(ep.iris)
 	gpca.iris.res <- epGPCA(ep.iris$data,DESIGN=ep.iris$design,make_design_nominal=FALSE)
 	#this will overwrite the data in gpca.iris.res$Plotting.Data
-	gpca.iris.res$Plotting.Data <- epGraphs(gpca.iris.res$ExPosition.Data,epPlotInfo=gpca.iris.res$Plotting.Data,x_axis=2,y_axis=3)	
+	#gpca.iris.res$Plotting.Data <- epGraphs(gpca.iris.res$ExPosition.Data,epPlotInfo=gpca.iris.res$Plotting.Data,x_axis=2,y_axis=3)	
 }
 \keyword{ multivariate }

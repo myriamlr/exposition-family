@@ -1,1 +1,1 @@
-export(fastEucCalc,fii2fi,print.tepAssign,print.tepBADA,print.tepDICA,print.tepGraphs,print.texpoOutput,R2,supplementaryRows,tepBADA,tepDICA,tepGraphs,texpoDesignCheck)
+export(fastEucCalc,fii2fi,print.tepAssign,print.tepBADA,print.tepDICA,print.tepGraphs,print.texpoOutput,R2,tepBADA,tepDICA,tepGraphs,texpoDesignCheck)

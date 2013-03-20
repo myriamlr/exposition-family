@@ -7,7 +7,7 @@
 Barycentric Discriminant Analysis (BADA) via TExPosition.
 }
 \usage{
-tepBADA(DATA, scaleFlag = TRUE, centerFlag = TRUE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0)
+tepBADA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0)
 }
 \arguments{
     \item{DATA}{original data to perform a PCA on.}
@@ -45,6 +45,6 @@ Derek Beaton
 }
 \examples{
 data(bada.wine)
-bada.res <- tepBADA(bada.wine$data,scaleFlag=FALSE,DESIGN=bada.wine$design,make_design_nominal=FALSE)
+bada.res <- tepBADA(bada.wine$data,scale=FALSE,DESIGN=bada.wine$design,make_design_nominal=FALSE)
 }
 \keyword{ multivariate }

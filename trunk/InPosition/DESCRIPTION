@@ -1,11 +1,11 @@
 Package: InPosition
 Type: Package
 Title: Inference Tests for ExPosition
-Version: 1.0
-Date: 2013-03-09
+Version: 0.99
+Date: 2013-03-19
 Author: Derek Beaton, Cherise R. Chin Fatt, Herve Abdi
 Maintainer: Derek Beaton <exposition.software@gmail.com>
 Description: Non-parametric resampling-based inference tests for ExPosition.
 License: GPL-2
 Depends: prettyGraphs, ExPosition
-Packaged: 2012-03-09; dbeaton
+Packaged: 2013-03-19; dbeaton

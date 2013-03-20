@@ -28,10 +28,10 @@ A list of values containing:\cr
 Derek Beaton
 }
 \examples{
-	data(jocn.2005.fmri)
-	mds.res <- epMDS(jocn.2005.fmri$scans$data)
-	sup.info <- supplementaryRows(jocn.2005.fmri$images$data,mds.res$ExPosition.Data)
-	prettyPlot(sup.info$fii)
-	prettyPlot(mds.res$ExPosition.Data$fi,new_window=FALSE,col=mds.res$Plotting.Data$fi.col,contributionCircles=TRUE,contributions=mds.res$ExPosition.Data$ci)
+#	data(jocn.2005.fmri)
+#	mds.res <- epMDS(jocn.2005.fmri$scans$data)
+#	sup.info <- supplementaryRows(jocn.2005.fmri$images$data,mds.res$ExPosition.Data)
+#	prettyPlot(sup.info$fii)
+#	prettyPlot(mds.res$ExPosition.Data$fi,new_window=FALSE,col=mds.res$Plotting.Data$fi.col,contributionCircles=TRUE,contributions=mds.res$ExPosition.Data$ci)
 }
 \keyword{ misc }
