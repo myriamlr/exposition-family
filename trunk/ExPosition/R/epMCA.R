@@ -5,7 +5,8 @@ function(DATA,make_data_nominal=TRUE,DESIGN=NULL,make_design_nominal=TRUE,masses
 	if(make_data_nominal){
 		nominalData <- makeNominalData(DATA)
 	}else{
-		nominalData <- DATA
+		
+		nominalData <- nominalCheck(DATA)
 	}
 	
 	DESIGN<-designCheck(DATA,DESIGN,make_design_nominal)
