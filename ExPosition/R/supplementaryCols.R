@@ -11,7 +11,7 @@ supplementaryCols <- function(SUP.DATA,res,center=TRUE,scale=TRUE){
 	ca.types <- c('epCA','epMCA','tepDICA')	
 		
 	if(class(res)[1] %in% output.types){
-		indicator <- which(class(res)[1] %in% output.types)
+		indicator <- which(output.types %in% class(res)[1])
 		if(names(res) %in% data.types && length(names(res))==2){
 			if(output.types[indicator]=="expoOutput"){
 				res <- res$ExPosition.Data
@@ -44,6 +44,6 @@ supplementaryCols <- function(SUP.DATA,res,center=TRUE,scale=TRUE){
 	fjj <- sup.proj$f.out
 	djj <- sup.proj$d.out	
 	rjj <- sup.proj$r.out
-	rownames(fjj) <- rownames(djj) <- rownames(rjj) <- rownames(SUP.DATA)
+	rownames(fjj) <- rownames(djj) <- rownames(rjj) <- colnames(SUP.DATA)
 	return(list(fjj=fjj,djj=djj,rjj=rjj))
 }

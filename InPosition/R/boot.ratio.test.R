@@ -7,5 +7,5 @@ boot.ratio.test <- function(boot.cube,critical.value=2){
 	significant.boot.ratios <- (abs(boot.ratios) > critical.value)
 	rownames(boot.ratios) <- rownames(boot.cube)
 	rownames(significant.boot.ratios) <- rownames(boot.cube)	
-	return(list(sig.boot.ratios=significant.boot.ratios,boot.ratios=boot.ratios))
+	return(list(sig.boot.ratios=significant.boot.ratios,boot.ratios=boot.ratios,critical.value=critical.value))
 }

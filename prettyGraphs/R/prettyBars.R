@@ -1,4 +1,4 @@
-prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show.bg.bars=FALSE,bg.border="white",bg.col=NULL,bg.lims=NULL,horiz=TRUE,dev.new=TRUE){
+prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show.bg.bars=FALSE,main="",bg.border="white",bg.col=NULL,bg.lims=NULL,horiz=TRUE,dev.new=TRUE){
 	
 	#I want data to be a matrix, for now.
 	data <- as.matrix(data)
@@ -46,9 +46,9 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 		rownames(barplot.values) <- NULL	
 		colnames(barplot.values) <- NULL
 		if(horiz){		
-			bp.bg <- barplot(barplot.values,beside=FALSE,horiz=horiz,xlim=axis.lims,axes=FALSE,border=bg.border,col=bg.col)
+			bp.bg <- barplot(barplot.values,beside=FALSE,horiz=horiz,xlim=axis.lims,axes=FALSE,border=bg.border,col=bg.col,main=main)
 		}else{
-			bp.bg <- barplot(barplot.values,beside=FALSE,horiz=horiz,ylim=axis.lims,axes=FALSE,border=bg.border,col=bg.col)			
+			bp.bg <- barplot(barplot.values,beside=FALSE,horiz=horiz,ylim=axis.lims,axes=FALSE,border=bg.border,col=bg.col,main=main)
 		}
 #		if(dev.new){
 #			par(new=TRUE)		
@@ -60,21 +60,21 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 	colnames(data.copy) <- NULL
 	if(horiz){
 		bp.cols <- barplot(data.copy[,axis],col=fg.col,horiz=horiz,xlim=axis.lims,axes=FALSE,border=fg.col,add=show.bg.bars)			
-		abline(v=0,lty=3,lwd=2)
+		abline(v=0,lty=3,lwd=2,main=main)
 		if(poss){
-			text(data[which(sign.values >= 0),axis], bp.cols[which(sign.values >= 0)], rownames(data)[which(sign.values >= 0)],cex=cex.names,adj=-0.1)
+			text(data[which(sign.values >= 0),axis], bp.cols[which(sign.values >= 0)], rownames(data)[which(sign.values >= 0)],cex=cex.names,adj=-0.1,col=fg.col[which(sign.values >= 0),])
 		}
 		if(negs){
-			text(data[which(sign.values ==-1),axis], bp.cols[which(sign.values ==-1)], rownames(data)[which(sign.values ==-1)],cex=cex.names,adj=1.1)
+			text(data[which(sign.values ==-1),axis], bp.cols[which(sign.values ==-1)], rownames(data)[which(sign.values ==-1)],cex=cex.names,adj=1.1,col=fg.col[which(sign.values == -1),])
 		}
 	}else{
 		bp.cols <- barplot(data.copy[,axis],col=fg.col,horiz=horiz,ylim=axis.lims,axes=FALSE,border=fg.col,add=show.bg.bars)		
-		abline(h=0,lty=3,lwd=2)		
+		abline(h=0,lty=3,lwd=2,main=main)		
 		if(poss){
-			text(bp.cols[which(sign.values >= 0)], data[which(sign.values >= 0),axis],  rownames(data)[which(sign.values >= 0)],cex=cex.names,adj=-0.1,srt=90)
+			text(bp.cols[which(sign.values >= 0)], data[which(sign.values >= 0),axis],  rownames(data)[which(sign.values >= 0)],cex=cex.names,adj=-0.1,srt=90,col=fg.col[which(sign.values >= 0),])
 		}
 		if(negs){
-			text(bp.cols[which(sign.values ==-1)], data[which(sign.values ==-1),axis], rownames(data)[which(sign.values ==-1)],cex=cex.names,adj=1.1,srt=90)		
+			text(bp.cols[which(sign.values ==-1)], data[which(sign.values ==-1),axis], rownames(data)[which(sign.values ==-1)],cex=cex.names,adj=1.1,srt=90,col=fg.col[which(sign.values == -1),])		
 		}
 	}
 	return(bp.cols)
