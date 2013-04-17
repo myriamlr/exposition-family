@@ -31,8 +31,13 @@ boot.compute.fj <- function(DATA,res,DESIGN=NULL,constrained=FALSE){
 		}
 	}
 
-	boot.sup.data <- DATA[boot.index,]
-
+	###some recognition needs to happen here...
+	if((class(res)[1] %in% "epCA") && !constrained){		
+		boot.sup.data <- contingency.data.break(DATA,boot=TRUE)
+	}
+	else{	
+		boot.sup.data <- DATA[boot.index,]
+	}
 	#this should catch that things are NULL and skip them.
 	if((class(res)[1] %in% c(pca.types))){
 		fjj <- supplementaryCols(boot.sup.data,res,center=res$center,scale=res$scale)$fjj

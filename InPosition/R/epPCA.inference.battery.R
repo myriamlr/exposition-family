@@ -1,9 +1,9 @@
 epPCA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, graphs = TRUE, k = 0, test.iters=1000, constrained=FALSE,critical.value=2){
 
 ###some private functions
-permute.components.pca <- function(DATA,scale,center){
+permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
 	perm.DATA <- apply(DATA,2,sample)
-	return(epPCA(perm.DATA,graphs=FALSE,scale=scale,center=center)$ExPosition.Data$eigs)
+	return(epPCA(perm.DATA,graphs=FALSE,scale=scale,center=center,k=k)$ExPosition.Data$eigs)
 }
 ###end private functions
     	
@@ -15,9 +15,22 @@ permute.components.pca <- function(DATA,scale,center){
 		
 	pb <- txtProgressBar(1,test.iters,1,style=1)
 	for(i in 1:test.iters){
+		if(i==1){
+			start.time <- proc.time()
+		}
+				
 		fj.boot.array[,,i] <- boot.compute.fj(DATA,res=fixed.res,DESIGN=DESIGN,constrained=constrained)
-		perm.eigs <- permute.components.pca(DATA,scale,center)
+		perm.eigs <- permute.components.pca(DATA,scale,center,k=k)
 		eigs.perm.matrix[i,] <- perm.eigs[1:(min(length(perm.eigs),ncomps))]
+		
+		if(i==1){
+			cycle.time <- (proc.time() - start.time) #this is in seconds...
+			if(!continueResampling(cycle.time,test.iters)){
+				##exit strategy.
+				return(fixed.res)
+			}
+		}
+				
 		setTxtProgressBar(pb,i)		
 	}		
 

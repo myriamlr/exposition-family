@@ -1,4 +1,4 @@
-prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show.bg.bars=FALSE,main="",bg.border="white",bg.col=NULL,bg.lims=NULL,horiz=TRUE,dev.new=TRUE){
+prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show.bg.bars=FALSE,threshold.line=FALSE,main="",bg.border="white",bg.col=NULL,bg.lims=NULL,horiz=TRUE,dev.new=TRUE){
 	
 	#I want data to be a matrix, for now.
 	data <- as.matrix(data)
@@ -23,17 +23,15 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 	if(is.null(fg.col)){
 		#create colors
 		fg.col <- matrix("orchid4",nrow(data),1)
-		#fg.col[which(sign.values==1),1] <- "orchid4"
-		fg.col[which(sign.values==-1),1] <- "mediumseagreen"		
+		fg.col[which(sign.values==-1),1] <- "olivedrab3"		
 	}
-	
 	if(dev.new){
 		dev.new()
 	}
+	if(is.null(bg.col)){
+		bg.col <- c("gray","gray")
+	}	
 	if(show.bg.bars){
-		if(is.null(bg.col)){
-			bg.col <- c("gray","gray")
-		}
 		sign.values.mat <- rbind(sign.values, sign.values)
 		#update this to allow for a sum all inputted values. or at least some update of it
 		if(is.null(bg.lims) || length(bg.lims) != 2){
@@ -50,9 +48,6 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 		}else{
 			bp.bg <- barplot(barplot.values,beside=FALSE,horiz=horiz,ylim=axis.lims,axes=FALSE,border=bg.border,col=bg.col,main=main)
 		}
-#		if(dev.new){
-#			par(new=TRUE)		
-#		}
 	}
 
 	data.copy <- data
@@ -60,7 +55,10 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 	colnames(data.copy) <- NULL
 	if(horiz){
 		bp.cols <- barplot(data.copy[,axis],col=fg.col,horiz=horiz,xlim=axis.lims,axes=FALSE,border=fg.col,add=show.bg.bars)			
-		abline(v=0,lty=3,lwd=2,main=main)
+		abline(v=0,lty=5,lwd=2,main=main)
+		if(threshold.line && (!is.null(bg.lims) && length(bg.lims)==2)){
+			abline(v=bg.lims,lwd=2,col=bg.col,lty=4)
+		}
 		if(poss){
 			text(data[which(sign.values >= 0),axis], bp.cols[which(sign.values >= 0)], rownames(data)[which(sign.values >= 0)],cex=cex.names,adj=-0.1,col=fg.col[which(sign.values >= 0),])
 		}
@@ -69,7 +67,10 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 		}
 	}else{
 		bp.cols <- barplot(data.copy[,axis],col=fg.col,horiz=horiz,ylim=axis.lims,axes=FALSE,border=fg.col,add=show.bg.bars)		
-		abline(h=0,lty=3,lwd=2,main=main)		
+		abline(h=0,lty=5,lwd=2,main=main)		
+		if(threshold.line && (!is.null(bg.lims) && length(bg.lims)==2)){
+			abline(h=bg.lims,lwd=2,col=bg.col,lty=4)
+		}		
 		if(poss){
 			text(bp.cols[which(sign.values >= 0)], data[which(sign.values >= 0),axis],  rownames(data)[which(sign.values >= 0)],cex=cex.names,adj=-0.1,srt=90,col=fg.col[which(sign.values >= 0),])
 		}
@@ -77,5 +78,6 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 			text(bp.cols[which(sign.values ==-1)], data[which(sign.values ==-1),axis], rownames(data)[which(sign.values ==-1)],cex=cex.names,adj=1.1,srt=90,col=fg.col[which(sign.values == -1),])		
 		}
 	}
+	
 	return(bp.cols)
 }
