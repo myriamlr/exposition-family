@@ -1,4 +1,4 @@
-tinGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL,color.by.boots=TRUE,boot.cols=c('orchid4','mediumseagreen','firebrick2'),fi.col=NULL,fii.col=NULL,fj.col=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=0.95,biplots=FALSE){
+tinGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL,color.by.boots=TRUE,boot.cols=c('orchid4','olivedrab3','firebrick2'),fi.col=NULL,fii.col=NULL,fj.col=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=0.95,biplots=FALSE){
 		
 	pca.types <- c('tepBADA')
 	ca.types <- c('tepDICA')
@@ -126,7 +126,7 @@ if(is.null(xlab)){
 		#everything here. -- DO I REALLY NEED ALL THESE?
 		if(color.by.boots){
 			if(is.null(boot.cols) || length(boot.cols) != 3){
-				boot.cols <- c('orchid4','mediumseagreen','firebrick2')
+				boot.cols <- c('orchid4','olivedrab3','firebrick2')
 			}				
 			if(length(fj.x.boot.axis)!=0){
 				fj.col[fj.x.boot.axis,1]  <- boot.cols[1]
@@ -193,14 +193,14 @@ if(is.null(xlab)){
 		if(contributionPlots){
 			# contributionBars(res$fi,res$ci,x_axis=x_axis,y_axis=y_axis,main=main,col=fi.plot.info$col)
 			# contributionBars(res$fj,res$cj,x_axis=x_axis,y_axis=y_axis,main=main,col=fj.plot.info$col)
-			prettyBars(inference.info$boot.data$fi.boot.data$fi.tests$boot.ratios,axis=x_axis,fg.col=fi.col.x,dev.new=TRUE,show.bg.bars=TRUE,bg.col=c('black','black'),main=paste("Bootstrap Ratios Component: ",x_axis,sep=""),bg.lims=c(-inference.info$boot.data$fi.boot.data$fi.tests$critical.value,inference.info$boot.data$fi.boot.data$fi.tests$critical.value))
+			prettyBars(inference.info$boot.data$fi.boot.data$fi.tests$boot.ratios,axis=x_axis,fg.col=fi.col.x,dev.new=TRUE,threshold.line=TRUE,main=paste("Bootstrap Ratios Component: ",x_axis,sep=""),bg.lims=c(-inference.info$boot.data$fi.boot.data$fi.tests$critical.value,inference.info$boot.data$fi.boot.data$fi.tests$critical.value))
 				
-			prettyBars(inference.info$boot.data$fi.boot.data$fi.tests$boot.ratios,axis=y_axis,fg.col=fi.col.y,dev.new=TRUE,horiz=FALSE,show.bg.bars=TRUE,bg.col=c('black','black'),main=paste("Bootstrap Ratios Component: ",y_axis,sep=""),bg.lims=c(-inference.info$boot.data$fi.boot.data$fi.tests$critical.value,inference.info$boot.data$fi.boot.data$fi.tests$critical.value))
+			prettyBars(inference.info$boot.data$fi.boot.data$fi.tests$boot.ratios,axis=y_axis,fg.col=fi.col.y,dev.new=TRUE,horiz=FALSE,threshold.line=TRUE,main=paste("Bootstrap Ratios Component: ",y_axis,sep=""),bg.lims=c(-inference.info$boot.data$fi.boot.data$fi.tests$critical.value,inference.info$boot.data$fi.boot.data$fi.tests$critical.value))
 			
 			
-			prettyBars(inference.info$boot.data$fj.boot.data$fj.tests$boot.ratios,axis=x_axis,fg.col=fj.col.x,dev.new=TRUE,show.bg.bars=TRUE,bg.col=c('black','black'),main=paste("Bootstrap Ratios Component: ",x_axis,sep=""),bg.lims=c(-inference.info$boot.data$fj.boot.data$fj.tests$critical.value,inference.info$boot.data$fj.boot.data$fj.tests$critical.value))
+			prettyBars(inference.info$boot.data$fj.boot.data$fj.tests$boot.ratios,axis=x_axis,fg.col=fj.col.x,dev.new=TRUE,threshold.line=TRUE,main=paste("Bootstrap Ratios Component: ",x_axis,sep=""),bg.lims=c(-inference.info$boot.data$fj.boot.data$fj.tests$critical.value,inference.info$boot.data$fj.boot.data$fj.tests$critical.value))
 				
-			prettyBars(inference.info$boot.data$fj.boot.data$fj.tests$boot.ratios,axis=y_axis,fg.col=fj.col.y,dev.new=TRUE,horiz=FALSE,show.bg.bars=TRUE,bg.col=c('black','black'),main=paste("Bootstrap Ratios Component: ",y_axis,sep=""),bg.lims=c(-inference.info$boot.data$fj.boot.data$fj.tests$critical.value,inference.info$boot.data$fj.boot.data$fj.tests$critical.value))					
+			prettyBars(inference.info$boot.data$fj.boot.data$fj.tests$boot.ratios,axis=y_axis,fg.col=fj.col.y,dev.new=TRUE,horiz=FALSE,threshold.line=TRUE,main=paste("Bootstrap Ratios Component: ",y_axis,sep=""),bg.lims=c(-inference.info$boot.data$fj.boot.data$fj.tests$critical.value,inference.info$boot.data$fj.boot.data$fj.tests$critical.value))					
 			
 		}		
 		if(correlationPlotter && class(res)[1]%in%pca.types){

@@ -1,5 +1,28 @@
 tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2){
 	
+	############################	
+	###private functions for now
+	loo.test <- function(DATA, DESIGN, group.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE,k = k, i){
+		Xminus1 <- DATA[-i,]
+		Yminus1 <- DESIGN[-i,]
+		DICAminus1 <- tepDICA(Xminus1,DESIGN=Yminus1,make_design_nominal=FALSE,make_data_nominal=FALSE,hellinger=hellinger,symmetric=symmetric,weights=weights,group.masses=group.masses,graphs=FALSE,k=k)
+		supX <- supplementaryRows(SUP.DATA=t(DATA[i,]), res=DICAminus1)
+		assignSup <- fii2fi(DESIGN=t(DESIGN[i,]), fii=supX$fii, fi=DICAminus1$TExPosition.Data$fi)
+		return(list(assignSup=assignSup,supX=supX))
+	}
+	
+	permute.tests <- function(DATA, DESIGN = NULL, group.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, k = 0){
+		
+		PermDATA <- DATA[sample(nrow(DATA),nrow(DATA),FALSE),]
+		res.perm <- tepDICA(PermDATA,DESIGN=DESIGN,make_design_nominal=FALSE,make_data_nominal=FALSE,hellinger=hellinger,symmetric=symmetric,weights=weights,group.masses=group.masses,graphs=FALSE,k=k)
+		
+		perm.r2 <- res.perm$TExPosition.Data$assign$r2
+		perm.eigs <- res.perm$TExPosition.Data$eigs	
+		perm.inertia <- sum(perm.eigs)
+		return(list(perm.r2=perm.r2,perm.eigs=perm.eigs,perm.inertia=perm.inertia))
+	}
+	############################
+	
 	DATA <- as.matrix(DATA)
 	if(make_data_nominal){
 		DATA <- makeNominalData(DATA)
@@ -10,73 +33,77 @@ tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = 
 		DESIGN <- makeNominalData(DESIGN)
 	}
 	
-	res <- tepDICA(DATA=DATA, make_data_nominal = FALSE, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, graphs = FALSE, k = k)
+	fixed.res <- tepDICA(DATA=DATA, make_data_nominal = FALSE, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, graphs = FALSE, k = k)
 
-	FBY <- array(0,dim=c(nrow(res$TExPosition.Data$X),res$TExPosition.Data$pdq$ng,test.iters))
-	FBX <- array(0,dim=c(ncol(res$TExPosition.Data$X),res$TExPosition.Data$pdq$ng,test.iters))
-	eigs.perm.matrix <- matrix(0,test.iters,res$TExPosition.Data$pdq$ng)
+	FBY <- array(0,dim=c(nrow(fixed.res$TExPosition.Data$X), fixed.res$TExPosition.Data$pdq$ng,test.iters))
+	FBX <- array(0,dim=c(ncol(fixed.res$TExPosition.Data$X), fixed.res$TExPosition.Data$pdq$ng,test.iters))
+	eigs.perm.matrix <- matrix(0,test.iters, fixed.res$TExPosition.Data$pdq$ng)
 	r2.perm <- inertia.perm <- matrix(0,test.iters,1)
-	ncomps <- res$TExPosition.Data$pdq$ng
+	ncomps <- fixed.res$TExPosition.Data$pdq$ng
+	
+	#boot & perm test next
+	pb <- txtProgressBar(1,test.iters,1,style=1)
+	for(i in 1:test.iters){
+		if(i==1){
+			start.time <- proc.time()
+		}
+				
+		boot.res <- boot.compute.fi.fj(DATA,DESIGN,fixed.res)
+		FBX[,,i] <- boot.res$FBX
+		FBY[,,i] <- boot.res$FBY
+		permute.res <- permute.tests(DATA=DATA, DESIGN = DESIGN, group.masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric,k = k)
+		eigs.perm.matrix[i,] <- permute.res$perm.eigs
+		r2.perm[i,] <- permute.res$perm.r2
+		inertia.perm[i,] <- permute.res$perm.inertia
+		
+		if(i==1){
+			cycle.time <- (proc.time() - start.time) #this is in seconds...
+			if(!continueResampling(cycle.time,test.iters+nrow(DESIGN))){
+				##exit strategy.
+				return(fixed.res)
+			}
+		}
+		
+		setTxtProgressBar(pb,i)		
+	}
+	
 	loo.assign <- matrix(0,nrow(DESIGN),ncol(DESIGN))
 	loo.fii <- matrix(0,nrow(DESIGN),ncomps)
-
 	##loo test first
 	pb <- txtProgressBar(1,test.iters,1,style=1)
 	for(i in 1:nrow(DATA)){
-		loo.test.res <- loo.test(DATA=DATA, make_data_nominal = FALSE, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, k = k, i)
+		loo.test.res <- loo.test(DATA=DATA, DESIGN = DESIGN, group.masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, k = k, i)
 		loo.assign[i,] <- loo.test.res$assignSup$assignments
 		loo.fii[i,] <- loo.test.res$supX$fii
 		setTxtProgressBar(pb,i)			
 	}
-
-	#boot & perm test next
-	pb <- txtProgressBar(1,test.iters,1,style=1)
-	for(i in 1:test.iters){
-#		if(graphs){ ##this is stupid and I need to change this.
-			boot.res <- boot.compute.cubes.ca(DATA,DESIGN,res)
-#		}else{
-#			boot.res <- boot.compute.cubes(DATA,DESIGN,res)
-#		}
-		FBX[,,i] <- boot.res$FBX
-		FBY[,,i] <- boot.res$FBY
-		permute.res <- permute.tests(DATA=DATA, make_data_nominal = FALSE, DESIGN = DESIGN, make_design_nominal = make_design_nominal, group.masses = group.masses, ind.masses = ind.masses, weights = weights, hellinger = hellinger, symmetric = symmetric,k = k)
-		eigs.perm.matrix[i,] <- permute.res$perm.eigs
-		r2.perm[i,] <- permute.res$perm.r2
-		inertia.perm[i,] <- permute.res$perm.inertia
-		setTxtProgressBar(pb,i)		
-	}		
-	boot.tests.x <- boot.ratio.test(FBX,critical.value)
-	boot.tests.y <- boot.ratio.test(FBY,critical.value)
-
-	return(list(FbootX.array=FBX,FbootY.array=FBY,BootTests.X=boot.tests.x,BootTests.Y=boot.tests.y,fixed=res,r2.perm=r2.perm,inertia.perm=inertia.perm,eigs.perm=eigs.perm.matrix,loo.assign=loo.assign,loo.fii=loo.fii))	
+		
+	rownames(FBX) <- colnames(DATA)
+	rownames(FBY) <- colnames(DESIGN)		
+	fj.boot.data <- list(fj.tests=boot.ratio.test(FBX,critical.value),fj.boots=FBX)
+	fi.boot.data <- list(fi.tests=boot.ratio.test(FBY,critical.value),fi.boots=FBY)
+	boot.data <- list(fj.boot.data=fj.boot.data,fi.boot.data=fi.boot.data)
+#	return(boot.data)
+	
+	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$TExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
+	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
+	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix)
+	
+	omni.p <- max(1-(sum(inertia.perm < sum(fixed.res$TExPosition.Data$eigs))/test.iters),1/test.iters)
+	omni.data <- list(p.val=omni.p,inertia.perm=inertia.perm)
+	
+	r2.p <- max(1-(sum(r2.perm < sum(fixed.res$TExPosition.Data$assign$r2))/test.iters),1/test.iters)
+	r2.data <- list(p.val=r2.p,r2.perm=r2.perm)
+	
+ 	Inference.Data <- list(omni=omni.data,r2=r2.data,components=components.data,boot.data=boot.data)
+ 	class(Inference.Data) <- c("tepDICA.inference.battery","list")
+ 	
+ 	ret.data <- list(Fixed.Data=fixed.res,Inference.Data=Inference.Data)
+ 	class(ret.data) <- c("tinpoOutput","list")
+ 	
+	if(graphs){
+		tinGraphs(ret.data)
+	}
+	
+ 	return(ret.data)
 }
-
-
-# ###something needs to be done about these...
-# loo.test <- function(DATA,make_data_nominal = FALSE,DESIGN,make_design_nominal = TRUE,group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE,k = k, i){
-	# DICAminus1 <- tepDICA(DATA[-i,],DESIGN=DESIGN[-i,],make_design_nominal=make_design_nominal,make_data_nominal=make_data_nominal,hellinger=hellinger,symmetric=symmetric,weights=weights,ind.masses=ind.masses,group.masses=group.masses,graphs=FALSE,k=k)
-	
-	# supX <- supplementaryRows(SUP.DATA=t(DATA[i,]), res=DICAminus1)
-	# assignSup <- fii2fi(DESIGN=t(DESIGN[i,]), fii=supX$fii, fi=DICAminus1$TExPosition.Data$fi)
-	# return(list(supX=supX,assignSup=assignSup))
-# }
-
-# permute.tests <- function(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, k = 0){
-	
-	# perm.samps <- sample(nrow(DESIGN),nrow(DESIGN),FALSE)
-	# res.perm <- tepDICA(DATA,DESIGN=DESIGN[perm.samps,],make_design_nominal=make_design_nominal,make_data_nominal=make_data_nominal,hellinger=hellinger,symmetric=symmetric,weights=weights,ind.masses=ind.masses,group.masses=group.masses,graphs=FALSE)
-	# perm.r2 <- res.perm$TExPosition.Data$assign$r2
-	# perm.eigs <- res.perm$TExPosition.Data$eigs	
-	# perm.inertia <- sum(perm.eigs)
-	# return(list(perm.r2=perm.r2,perm.eigs=perm.eigs,perm.inertia=perm.inertia))
-# }
-
-# boot.compute.cubes <- function(DATA,DESIGN,res){
-	# boot.sample.vector <- boot.samples(DATA,DESIGN)
-	# R <- t(DESIGN) %*% DATA[boot.sample.vector,]
-	# Fboot_ctr_Y <- supplementaryRows(R,res)$fii
-	# Fboot_ctr_X <- (t(R)/((rowSums(t(R))) %*% matrix(1, 1, ncol(t(R))))) %*% res$fi %*% diag(res$pdq$Dv^-1)	
-	# Fboot_ctr_Y <- replace(Fboot_ctr_Y,is.nan(Fboot_ctr_Y),0)
-	# Fboot_ctr_X <- replace(Fboot_ctr_X,is.nan(Fboot_ctr_X),0)	
-	# return(list(FBX=Fboot_ctr_X,FBY=Fboot_ctr_Y))
-# }
