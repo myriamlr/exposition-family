@@ -9,9 +9,9 @@ permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
     	
 	fixed.res <- epPCA(DATA, scale, center, DESIGN, make_design_nominal, graphs=FALSE, k)
 
-	fj.boot.array <- array(0,dim=c(ncol(DATA),fixed.res$ExPosition.Data$pdq$ng,test.iters))
-	eigs.perm.matrix <- matrix(0,test.iters,fixed.res$ExPosition.Data$pdq$ng)
 	ncomps <- fixed.res$ExPosition.Data$pdq$ng
+	fj.boot.array <- array(0,dim=c(ncol(DATA),ncomps,test.iters))
+	eigs.perm.matrix <- matrix(0,test.iters,min(dim(DATA)))
 		
 	pb <- txtProgressBar(1,test.iters,1,style=1)
 	for(i in 1:test.iters){
@@ -21,7 +21,7 @@ permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
 				
 		fj.boot.array[,,i] <- boot.compute.fj(DATA,res=fixed.res,DESIGN=DESIGN,constrained=constrained)
 		perm.eigs <- permute.components.pca(DATA,scale,center,k=k)
-		eigs.perm.matrix[i,] <- perm.eigs[1:(min(length(perm.eigs),ncomps))]
+		eigs.perm.matrix[i,1:length(perm.eigs)] <- perm.eigs
 		
 		if(i==1){
 			cycle.time <- (proc.time() - start.time) #this is in seconds...
@@ -30,7 +30,6 @@ permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
 				return(fixed.res)
 			}
 		}
-				
 		setTxtProgressBar(pb,i)		
 	}		
 
@@ -38,6 +37,7 @@ permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
 	rownames(fj.boot.array) <- colnames(DATA)
 	fj.boot.data <- boot.ratio.test(fj.boot.array,critical.value=critical.value)
 	
+	eigs.perm.matrix <- eigs.perm.matrix[,1:ncomps]
 	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$ExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
 	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
 	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix)

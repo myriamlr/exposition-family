@@ -3,6 +3,7 @@ function(DATA,mca.results,make_data_nominal=TRUE,numVariables=NULL,correction=c(
 #can I make this more efficient?
 #with large data, especially with MCA, this stuff will get very large very fast.			
 	if('b' %in% correction){
+		#print('Benzecri correction selected')		
 		orig.pdq_results <- mca.results$pdq
 		new.pdq_results <- mca.results$pdq	
 
@@ -15,7 +16,6 @@ function(DATA,mca.results,make_data_nominal=TRUE,numVariables=NULL,correction=c(
 		}
 		rowCenter <- colSums(DATA)/sum(DATA)
 	
-		print('Benzecri correction selected')
 		if(is.null(numVariables)){
 				numVariables <- sum(DATA[1,]>=1)
 		}
@@ -28,7 +28,7 @@ function(DATA,mca.results,make_data_nominal=TRUE,numVariables=NULL,correction=c(
 		new.pdq_results$q <- new.pdq_results$q[,1:new.pdq_results$ng]
 			
 		if('g' %in% correction){
-			print('Greenacre adjustment selected.')
+			#print('Greenacre adjustment selected.')
 			taus <- greenacre.tau.adjust.benzecri(orig.pdq_results$Dv^2,numVariables,new.pdq_results$Dv^2,nrow(mca.results$fj))
 		}else{
 			taus <- (new.pdq_results$Dv^2/sum(new.pdq_results$Dv^2))*100
@@ -67,7 +67,7 @@ function(DATA,mca.results,make_data_nominal=TRUE,numVariables=NULL,correction=c(
 	#	taus <- greenacre.tau.adjust.benzecri(orig.pdq_results$Dv^2,numVariables,nrow(mca.results$fj))
 	#}
 	else{
-		print('No Correction Selected. Results unchanged.')
+		#print('No Correction Selected. Results unchanged.')
 		return(mca.results)
 	}
 	

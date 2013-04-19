@@ -34,12 +34,11 @@ tepBADA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN 
 	
 	fixed.res <- tepBADA(DATA = DATA, scale = scale, center = center, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, graphs = FALSE, k = k)
 	
-	
-	FBY <- array(0,dim=c(nrow(fixed.res$TExPosition.Data$X),fixed.res$TExPosition.Data$pdq$ng,test.iters))
-	FBX <- array(0,dim=c(ncol(fixed.res$TExPosition.Data$X),fixed.res$TExPosition.Data$pdq$ng,test.iters))
-	eigs.perm.matrix <- matrix(0,test.iters,fixed.res$TExPosition.Data$pdq$ng)
-	r2.perm <- inertia.perm <- matrix(0,test.iters,1)
 	ncomps <- fixed.res$TExPosition.Data$pdq$ng
+	FBY <- array(0,dim=c(nrow(fixed.res$TExPosition.Data$X),ncomps,test.iters))
+	FBX <- array(0,dim=c(ncol(fixed.res$TExPosition.Data$X),ncomps,test.iters))
+	eigs.perm.matrix <- matrix(0,test.iters,ncomps)
+	r2.perm <- inertia.perm <- matrix(0,test.iters,1)
 	
 	#boot & perm test next
 	pb <- txtProgressBar(1,test.iters,1,style=1)
