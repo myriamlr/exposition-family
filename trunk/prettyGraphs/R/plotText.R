@@ -1,5 +1,5 @@
 plotText <-
-function(data_matrix,col,x_axis=1,y_axis=2,pos=3,textSizes=0.8,contributionCircles=FALSE,contributions=NULL){
+function(data_matrix,col,x_axis=1,y_axis=2,pos=3,text.cex=0.8,contributionCircles=FALSE,contributions=NULL){
 	thesecontributions <- 0
 	if(contributionCircles){
 		if(!is.null(contributions)){
@@ -9,8 +9,8 @@ function(data_matrix,col,x_axis=1,y_axis=2,pos=3,textSizes=0.8,contributionCircl
 		}
 	}
 	if(pos < 1 || pos > 4){
-		text(data_matrix[,x_axis],data_matrix[,y_axis],col=col,labels=rownames(data_matrix),cex=textSizes+thesecontributions,pos=3)
+		text(data_matrix[,x_axis],data_matrix[,y_axis],col=col,labels=rownames(data_matrix),cex=text.cex+thesecontributions,pos=3)
 	}else{
-		text(data_matrix[,x_axis],data_matrix[,y_axis],col=col,labels=rownames(data_matrix),cex=textSizes+thesecontributions,pos=pos)
+		text(data_matrix[,x_axis],data_matrix[,y_axis],col=col,labels=rownames(data_matrix),cex=text.cex+thesecontributions,pos=pos)
 	}
 }
