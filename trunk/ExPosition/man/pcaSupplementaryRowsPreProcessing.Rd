@@ -1,36 +1,27 @@
 \name{pcaSupplementaryRowsPreProcessing}
 \alias{pcaSupplementaryRowsPreProcessing}
 \title{
-Preprocessing for rows in PCA.
+Preprocessing for supplemental rows in PCA.
 }
 \description{
-Preprocessing for rows in PCA.
+Preprocessing for supplemental rows in PCA.
 }
 \usage{
 pcaSupplementaryRowsPreProcessing(SUP.DATA = NULL, center = TRUE, scale = TRUE, W = NULL)
 }
 \arguments{
-  \item{SUP.DATA}{}
-  \item{center}{}
-  \item{scale}{}
-  \item{W}{}
+  \item{SUP.DATA}{A supplemental matrix that has the same number of columns as an active data set.}
+  \item{center}{The center from the active data. NULL will center \code{SUP.DATA} to itself.}
+  \item{scale}{The scale factor from the active data. NULL will scale (z-score) \code{SUP.DATA} to itself.}
+  \item{W}{Weights from the active data. Used in \code{\link{epGPCA}}.}
 }
 \details{
 }
 \value{
-}
-\references{
-
+	a matrix that has been preprocessed to project supplementary rows for PCA methods.
 }
 \author{
 Derek Beaton
 }
-\note{
-}
-
-\seealso{
-
-}
-\examples{
-}
 \keyword{ misc }
+\keyword{ multivariate }

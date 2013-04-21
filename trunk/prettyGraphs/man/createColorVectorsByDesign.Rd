@@ -7,11 +7,17 @@ createColorVectorsByDesign
 Produces a color vector for items by using a design matrix.
 }
 \usage{
-createColorVectorsByDesign(design_matrix)
+createColorVectorsByDesign(design_matrix,hsv = TRUE, offset = NULL)
 }
 \arguments{
   \item{design_matrix}{
 A dummy coded design matrix.
+}
+  \item{hsv}{
+a boolean. If TRUE, use \code{\link{prettyGraphsHSVColorSelection}}. If FALSE, use \code{\link{prettyGraphsColorSelection}}.
+}
+  \item{offset}{
+numeric. An offset value to be passed to \code{\link{prettyGraphsHSVColorSelection}} or \code{\link{prettyGraphsColorSelection}}.
 }
 }
 \value{

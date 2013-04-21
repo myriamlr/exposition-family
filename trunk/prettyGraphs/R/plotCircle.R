@@ -10,7 +10,7 @@ function(xlab="",ylab="",main="",axis_line_width=3,asp=1){
 	#
 	#makeNewPlotWindow(axis_list,constraints,xlab,ylab,main,axis_line_width,asp=asp)
 	plot(c(0,0),c(0,0),type="n",col="white",axes=FALSE,xlab=xlab,ylab=ylab,ylim=c(constraints$miny,constraints$maxy),xlim=c(constraints$minx,constraints$maxx),main=main,asp=asp)	
-	makeNewPlotWindow(axis_list,axis_line_width)	
+	makeAxes(axis_list,axis_line_width)	
 	points(coords,col="black",type='l')
 	points(0,0,col="black",pch=20)
 }

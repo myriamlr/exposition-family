@@ -10,27 +10,15 @@ Preprocessing of supplemental data for MDS analyses.
 mdsSupplementalElementsPreProcessing(SUP.DATA = NULL, D = NULL, M = NULL)
 }
 \arguments{
-  \item{SUP.DATA}{}
-  \item{D}{}
-  \item{M}{}
-}
-\details{
+  \item{SUP.DATA}{A supplementary data matrix.}
+  \item{D}{The original (active) distance matrix that \code{SUP.DATA} is supplementary to.}
+  \item{M}{masses from the original (active) analysis for \code{D}.}
 }
 \value{
-}
-\references{
-
+	a matrix that is preprocessed for supplementary projection in MDS.
 }
 \author{
 Derek Beaton
 }
-\note{
-}
-
-\seealso{
-
-}
-\examples{
-
-}
 \keyword{ misc }
+\keyword{ multivariate }

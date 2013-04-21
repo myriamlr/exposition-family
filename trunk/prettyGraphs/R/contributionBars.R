@@ -52,7 +52,7 @@ function(factor_scores,contributions,x_axis=1,y_axis=2,col=NULL,main=NULL,upper=
 				barplot(ordered,col=ordered_colors,ylim=c(-1.1,1.1),axes=TRUE,horiz=flipFlag,sub=paste("Component ",axes[i],sep=""))
 				abline(h=0,col="black")				
 			}else{
-				prettyBars(ordered,fg.col=ordered_colors,axis.lims=c(-1.1,1.1),horiz=flipFlag,dev.new=FALSE,bg.lim=c(-1,1),show.bg.bars=show.bg.bars)
+				prettyBars(ordered,fg.col=ordered_colors,axis.lims=c(-1.1,1.1),horiz=flipFlag,dev.new=FALSE,bg.lims=c(-1,1),show.bg.bars=show.bg.bars)
 			}
 			abline(h=threshold,col=upper,lty=2)
 			abline(h=-threshold,col=lower,lty=2)
@@ -62,7 +62,7 @@ function(factor_scores,contributions,x_axis=1,y_axis=2,col=NULL,main=NULL,upper=
 				barplot(ordered,col=ordered_colors,xlim=c(-1.1,1.1),axes=TRUE,horiz=flipFlag,sub=paste("Component ",axes[i],sep=""))
 				abline(v=0,col="black")								
 			}else{
-				prettyBars(ordered,fg.col=ordered_colors,axis.lims=c(-1.1,1.1),horiz=flipFlag,dev.new=FALSE,bg.lim=c(-1,1),show.bg.bars=show.bg.bars)				
+				prettyBars(ordered,fg.col=ordered_colors,axis.lims=c(-1.1,1.1),horiz=flipFlag,dev.new=FALSE,bg.lims=c(-1,1),show.bg.bars=show.bg.bars)				
 			}
 			abline(v=threshold,col=upper,lty=2)
 			abline(v=-threshold,col=lower,lty=2)			

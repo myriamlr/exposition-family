@@ -10,22 +10,14 @@ Transform data for MDS analysis.
 mdsTransform(D, MW)
 }
 \arguments{
-  \item{D}{}
-  \item{MW}{}
-}
-\details{
+  \item{D}{A distance matrix}
+  \item{MW}{A masses and weights list (see \code{computeMW}).}
 }
 \value{
-}
-\references{
+	\item{S}{a preprocessed matrix that can be decomposed.}
 }
 \author{
 Derek Beaton
 }
-\note{
-}
-\seealso{
-}
-\examples{
-}
 \keyword{ misc }
+\keyword{ multivariate }
