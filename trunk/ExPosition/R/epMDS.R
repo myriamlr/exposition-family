@@ -18,7 +18,7 @@ function(DATA,DATA_is_dist=TRUE,method="euclidean",DESIGN=NULL,make_design_nomin
 	res <- coreMDS(S,MW$M,k=k)
 
 	#overwrite res with half of res because it's MDS and we don't care
-	res <- list(fi=res$fi,di=res$di,ci=res$ci,ri=res$ri,t=res$t,eigs=res$eigs,pdq=res$pdq,M=MW$M,X=res$X,D=D)
+	res <- list(fi=res$fi,di=res$di,ci=res$ci,ri=res$ri,t=res$t,eigs=res$eigs,pdq=res$pdq,M=res$masses,X=res$X,D=D)
 	class(res) <- c("epMDS","list")
 
 	epPlotInfo <- epGraphs(res=res,DESIGN=DESIGN,main=main,graphs=graphs)
