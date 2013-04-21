@@ -1,7 +1,7 @@
 Package: prettyGraphs
 Type: Package
 Title: publication-quality graphics.
-Version: 1.999
+Version: 2.0.0
 Date: 2013-04-21
 Author: Derek Beaton
 Maintainer: Derek Beaton <exposition.software@gmail.com>

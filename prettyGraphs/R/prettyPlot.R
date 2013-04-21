@@ -1,5 +1,5 @@
 prettyPlot <-
-function(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_names=TRUE,display_points=TRUE,plot_axes=TRUE,constraints=NULL,axis_line_width=3,pos=3,pch=21,cex=1,textSizes=0.8,contributionCircles=FALSE,contributions=NULL,flip=FALSE,asp=1,findBounds=TRUE,dev.new=TRUE,clean_plot=TRUE){
+function(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_names=TRUE,display_points=TRUE,axes=TRUE,constraints=NULL,axis_line_width=3,pos=3,pch=NULL,cex=1,text.cex=0.8,contributionCircles=FALSE,contributions=NULL,flip=FALSE,asp=1,findBounds=TRUE,dev.new=TRUE,new.plot=TRUE){
 	
 	#I want to always send back colors and constraints.
 	#I need a different type of checker here...
@@ -7,6 +7,10 @@ function(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_
 	if(is.null(col)){
 		col <- colorVectorIsNull(data_matrix)$oc
 	}
+	if(is.null(pch)){
+		pch <- as.matrix(rep(21,nrow(data_matrix)))
+	}
+	
 	#I only need constraints if I am making a new window.
 	check.constraints <- minmaxHelper(data_matrix,data_matrix,x_axis,y_axis,findBounds=findBounds)	
 	if(!is.null(constraints)){
@@ -30,16 +34,16 @@ function(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_
 		dev.new()	
 	}
 	
-	if(clean_plot){
+	if(new.plot){
 		plot(c(0,0),c(0,0),type="n",col="white",axes=FALSE,xlab=xlab,ylab=ylab,ylim=c(constraints$miny,constraints$maxy),xlim=c(constraints$minx,constraints$maxx),main=main,asp=asp)
 	}
 			
 	#make a new plot on a device.
-	if(plot_axes){		
+	if(axes){		
 		#determine axis points
 		axis_list <- determineAxesPosition(constraints)		
 		#plot the axes
-		makeNewPlotWindow(axis_list,axis_line_width)
+		makeAxes(axis_list,axis_line_width)
 	}	
 	#am I displaying points?
 	if(display_points){
@@ -47,8 +51,8 @@ function(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_
 	}
 	#am I displaying names?
 	if(display_names){
-		plotText(data_matrix,col,x_axis,y_axis,pos=pos,textSizes=textSizes,contributionCircles=contributionCircles,contributions=contributions)
+		plotText(data_matrix,col,x_axis,y_axis,pos=pos,text.cex=text.cex,contributionCircles=contributionCircles,contributions=contributions)
 	}		
 	
-	return(list(col=col,constraints=constraints))
+	return(list(col=col,pch=pch,constraints=constraints))
 }
