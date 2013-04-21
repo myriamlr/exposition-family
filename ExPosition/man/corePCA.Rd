@@ -14,6 +14,7 @@ corePCA(DATA, M = NULL, W = NULL, k = 0)
   \item{DATA}{original data to decompose and analyze via the singular value decomposition.}
   \item{M}{a vector or diagonal matrix with masses for the rows (observations). If NULL, one is created or the plain SVD is used.}
   \item{W}{a vector or diagonal matrix with weights for the columns (measures). If NULL, one is created or the plain SVD is used.}
+  \item{decomp.approach}{string. A switch for different decompositions (typically for speed). See \code{\link{pickSVD}}.}  
   \item{k}{number of components to return (this is not a rotation, just an \emph{a priori} selection of how much data should be returned).}
 }
 \details{

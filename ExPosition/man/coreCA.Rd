@@ -16,6 +16,7 @@ coreCA(DATA, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE,
   \item{weights}{a vector or diagonal matrix with weights for the columns (measures). If NULL, one is created or the plain SVD is used.}
   \item{hellinger}{a boolean. If FALSE (default), Chi-square distance will be used. If TRUE, Hellinger distance will be used.}
   \item{symmetric}{a boolean. If TRUE (default) symmetric factor scores for rows and columns are computed. If FALSE, the simplex (column-based) will be returned.}
+  \item{decomp.approach}{string. A switch for different decompositions (typically for speed). See \code{\link{pickSVD}}.}  
   \item{k}{number of components to return (this is not a rotation, just an \emph{a priori} selection of how much data should be returned).}  
 }
 \details{

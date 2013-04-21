@@ -1,31 +1,33 @@
-\name{supplementaryRows}
-\alias{supplementaryRows}
+\name{supplementaryCols}
+\alias{supplementaryCols}
 \title{
-Supplementary rows
+Supplementary columns
 }
 \description{
-Computes factor scores for supplementary observations (rows).
+Computes factor scores for supplementary measures (columns).
 }
 \usage{
-supplementaryRows(SUP.DATA, res)
+supplementaryCols(SUP.DATA, res, center = TRUE, scale = TRUE)
 }
+%- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{SUP.DATA}{a data matrix of supplementary observations (must have the same measures [columns] as active data)}
 \item{res}{ExPosition or TExPosition results}
+  \item{center}{a boolean, string, or numeric. See \code{\link{expo.scale}}}
+  \item{scale}{a boolean, string, or numeric. See \code{\link{expo.scale}}}
 }
 \details{
 This function recognizes the class types of: \code{\link{epPCA}}, \code{\link{epGPCA}}, \code{\link{tepBADA}}, \code{\link{epMDS}}, \code{\link{epCA}}, \code{\link{epMCA}}, and \code{\link{tepDICA}}. Further, the function recognizes if Hellinger (as opposed to row profiles; in CA, MCA and DICA) were used. 
 }
 \value{
 A list of values containing:\cr
-\item{fii}{factor scores computed for supplemental observations}
-\item{dii}{squared distances for supplemental observations}
-\item{rii}{cosines for supplemental observations}
+\item{fjj}{factor scores computed for supplemental columns}
+\item{djj}{squared distances for supplemental columns}
+\item{rjj}{cosines for supplemental columns}
 }
 \author{
 Derek Beaton
 }
 \examples{
-
 }
 \keyword{ misc }
