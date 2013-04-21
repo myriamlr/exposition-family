@@ -8,7 +8,7 @@ contributionBars
 Produces bar charts for multivariate analyses. Plots the contribution to the variance from each data point for upwards of two axes (components).
 }
 \usage{
-contributionBars(factor_scores, contributions, x_axis = 1, y_axis = 2, col = NULL, main = "", upper = "blue", lower = "red", important = NULL, threshold = 0, sortContributions = TRUE)
+contributionBars(factor_scores, contributions, x_axis = 1, y_axis = 2, col = NULL, main = NULL, upper = 'steelblue4', lower = 'firebrick2', threshold = 0, sortContributions = TRUE, pretty = FALSE, show.bg.bars = FALSE)
 }
 \arguments{
   \item{factor_scores}{
@@ -35,14 +35,17 @@ The color used to identify the upper bound items that contribute above average v
   \item{lower}{
 The color used to identify the lower bound items that contribute above average variance.
 }
-  \item{important}{
-NOT CURRENTLY USED. A place holder for future versions.
-}
   \item{threshold}{
 A threshold (between 0-1) to draw upper and lower bounds for important items. Default is 1/number of items.
 }
   \item{sortContributions}{
 boolean, if TRUE, items will be sorted by contribution. if FALSE, items will appear in their row order.
+}
+  \item{pretty}{
+a boolean. If FALSE, use the current version. If TRUE, make the bars with \code{\link{prettyBars}}.
+}
+  \item{show.bg.bars}{
+a boolean. Only used if \code{pretty} is TRUE. If TRUE, background bars are plotted for a fill effect.
 }
 }
 

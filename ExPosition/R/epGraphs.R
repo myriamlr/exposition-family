@@ -84,12 +84,12 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,col.offset=NU
 		#by the time I get here, I should be guaranteed to have a fi.col, fj.col, and constraints.
 			
 		if(graphs){
-			fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$ci,dev.new=TRUE)
+			fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$ci,dev.new=TRUE)
 			if(!(class(res)[1]=='epMDS')){
 				if(biplots){
-					fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,plot_axes=FALSE,contributionCircles=TRUE,contributions=res$cj,dev.new=FALSE,clean_plot=FALSE)
+					fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=FALSE,contributionCircles=TRUE,contributions=res$cj,dev.new=FALSE,new.plot=FALSE)
 				}else{
-					fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$cj,dev.new=TRUE)		
+					fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$cj,dev.new=TRUE)		
 				}
 			}
 			if(contributionPlots){

@@ -34,5 +34,5 @@ function(data_matrix,factor_scores,x_axis=1,y_axis=2,col=NULL,xlab=NULL,ylab=NUL
 	new.mat[seq(1,nrow(new.mat),2),] <- os
 	new.mat[seq(2,nrow(new.mat),2),] <- loadings[,c(x_axis,y_axis)]
 	points(new.mat,type="l",col="black")
-	prettyPlot(loadings,col=col,display_names=TRUE,display_points=TRUE,x_axis=x_axis,y_axis=y_axis,plot_axes=FALSE,dev.new=FALSE,clean_plot=FALSE)
+	prettyPlot(loadings,col=col,display_names=TRUE,display_points=TRUE,x_axis=x_axis,y_axis=y_axis,axes=FALSE,dev.new=FALSE,new.plot=FALSE)
 }

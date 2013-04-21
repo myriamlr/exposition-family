@@ -7,7 +7,7 @@ prettyPlot
 prettyPlot creates simple, crisp, publication-style quality graphics for multivariate analyses. 
 }
 \usage{
-prettyPlot(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_names=TRUE,display_points=TRUE,axes=TRUE,constraints=NULL,axis_line_width=3,pos=3,pch=21,cex=1,text.cex=0.8,contributionCircles=FALSE,contributions=NULL,flip=FALSE,asp=1,findBounds=TRUE,dev.new=TRUE,new.plot=TRUE)
+prettyPlot(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_names=TRUE,display_points=TRUE,axes=TRUE,constraints=NULL,axis_line_width=3,pos=3,pch=NULL,cex=1,text.cex=0.8,contributionCircles=FALSE,contributions=NULL,flip=FALSE,asp=1,findBounds=TRUE,dev.new=TRUE,new.plot=TRUE)
 }
 \arguments{
   \item{data_matrix}{
@@ -37,10 +37,9 @@ boolean. If TRUE, the names of the points will be displayed on the plot.
   \item{display_points}{
 boolean. If TRUE, the points will be displayed on the plot.
 }
-	\item{axes}{boolean. If TRUE, a new set of axes are plotted.}
-  \item{new_window}{
-boolean. If TRUE, a new graphics device is created. If FALSE, plotting will occur on current graphics device.
-}
+
+\item{axes}{boolean. If TRUE, a new set of axes are plotted.}
+
   \item{constraints}{
 A list that contains the plot constraints. Default is NULL (constraints are computed each time).
 }
@@ -51,11 +50,10 @@ integer. Determines thickness of axis lines.
 integer between 1-4. Determines position of text for points. See \code{\link{par}}.
 }
   \item{pch}{
-an integer. Indicates which point style to use. See \code{\link{par}}.
-}
-  \item{cex}{
-a continuous value. Indicates the size of the points. See \code{\link{par}. Used multiplicatively for points and additively for text with \code{contributions}.}.
-}
+A single-column matrix of pch for each data point. Indicates which point style to use for each item. See \code{\link{par}}.}
+
+  \item{cex}{a continuous value. Indicates the size of the points. See \code{\link{par}}. Used multiplicatively for points and additively for text with \code{contributions}.}
+  
   \item{text.cex}{
 A replacement for the cex parameter in text() (to avoid collisions with cex). See \code{\link{par}} and \code{\link{text}}.
 }
@@ -75,10 +73,10 @@ numeric. Aspect ratio, see \code{\link{par}}.
 boolean. If TRUE, finds the min and max of each plotted axes. If FALSE, the largest value is used for all constraints.
 }
   \item{dev.new}{
-boolean. If TRUE, \code{\link{dev.new()}} is called internally to create new device. If FALSE, a device must already be open.
+boolean. If TRUE, \code{\link{dev.new}} is called internally to create new device. If FALSE, a device must already be open.
 }
   \item{new.plot}{
-boolean. If TRUE, \code{\link{plot()}} is called for a new plot on the current device. If FALSE, items will be overlayed much like \code{\link{points}}.
+boolean. If TRUE, \code{\link{plot}} is called for a new plot on the current device. If FALSE, items will be overlayed much like \code{\link{points}}.
 }
 
 }

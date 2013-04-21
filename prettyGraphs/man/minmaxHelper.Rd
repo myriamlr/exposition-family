@@ -7,7 +7,7 @@ minmaxHelper
 Computes the x- and y- axis constraints for all prettyGraphs functions.
 }
 \usage{
-minmaxHelper(mat1, mat2 = NULL, axis1 = 1, axis2 = 2)
+minmaxHelper(mat1, mat2 = NULL, axis1 = 1, axis2 = 2, findBounds = TRUE)
 }
 \arguments{
   \item{mat1}{
@@ -21,6 +21,9 @@ Which column of the matrix will be the x-axis? Default = 1.
 }
   \item{axis2}{
 Which column of the matrix will be the y-axis? Default = 2.
+}
+  \item{findBounds}{
+a boolean. If TRUE, min and max values are found for positive and negative on \code{axis1} and \code{axis2}. If FALSE, one value is used for all constraints.
 }
 }
 \value{

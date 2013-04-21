@@ -1,5 +1,6 @@
 \name{chi2Dist}
 \alias{chi2Dist}
+\encoding{UTF-8}
 \title{
 Chi-square Distance computation
 }
@@ -10,24 +11,14 @@ Performs a chi-square distance. Primarily used for \code{\link{epMDS}}.
 chi2Dist(X)
 }
 \arguments{
-  \item{X}{}
-}
-\details{
+  \item{X}{Compute chi-square distances between row items.}
 }
 \value{
-
-}
-\references{
-
+\item{D}{Distance matrix for \code{\link{epMDS}} analysis.}
+\item{MW}{a list of masses and weights. Weights not used in MDS.}
 }
 \author{
 Hervé Abdi
 }
-\note{
-}
-\seealso{
-}
-\examples{
-}
-
 \keyword{ misc }
+\keyword{ multivariate }

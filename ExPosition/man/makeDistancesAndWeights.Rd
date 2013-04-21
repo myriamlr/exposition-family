@@ -10,25 +10,19 @@ Makes distances and weights for MDS analyses (see \code{\link{epMDS}}).
 makeDistancesAndWeights(DATA, method = "euclidean", masses = NULL)
 }
 \arguments{
-  \item{DATA}{}
-  \item{method}{}
-  \item{masses}{}
-}
-\details{
+  \item{DATA}{A data matrix to compute distances between row items.}
+  \item{method}{which distance metric should be used. \code{method} matches \code{\link{dist}}; "chi2" also available (\code{\link{chi2Dist}}). Default is "euclidean".}
+  \item{masses}{a diagonal matrix (or vector) that contains the masses (for the row items).}
 }
 \value{
-}
-\references{
+	\item{D}{Distance matrix for analysis}
+	\item{MW}{a list item with masses and weights. Weights are not used in \code{\link{epMDS}}.}	
 }
 \author{
 Derek Beaton
 }
-\note{
-}
-
 \seealso{
-
-}
-\examples{
+	\code{link{computeMW}},	\code{link{epMDS}},	\code{link{coreMDS}}
 }
 \keyword{ misc }
+\keyword{ multivariate }

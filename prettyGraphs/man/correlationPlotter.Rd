@@ -8,7 +8,7 @@ correlationPlotter
 Computes and plots a correlation circle (used in multivariate analyses). Correlation is computed between measured items and components (factors, dimensions, principal axes, etc...). 
 }
 \usage{
-correlationPlotter(data_matrix, factor_scores, x_axis = 1, y_axis = 2, col = NULL, xlab = "", ylab = "", main = "")
+correlationPlotter(data_matrix, factor_scores, x_axis = 1, y_axis = 2, col = NULL, xlab = NULL, ylab = NULL, main = "", asp = 1, dev.new = TRUE)
 }
 \arguments{
   \item{data_matrix}{
@@ -35,7 +35,12 @@ A label to be placed along the y-axis.
   \item{main}{
 A title to be placed at the top of the graph.
 }
-
+  \item{asp}{
+numeric. Aspect ratio (see \code{asp} in \code{\link{par}}).
+}
+  \item{dev.new}{
+boolean. If TRUE, \code{\link{dev.new}} is called internally to create new device. If FALSE, a device must already be open.
+}
  
 }
 
