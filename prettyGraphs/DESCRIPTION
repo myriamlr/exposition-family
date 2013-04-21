@@ -1,10 +1,10 @@
 Package: prettyGraphs
 Type: Package
 Title: publication-quality graphics.
-Version: 1.99
-Date: 2013-03-19
+Version: 1.999
+Date: 2013-04-21
 Author: Derek Beaton
 Maintainer: Derek Beaton <exposition.software@gmail.com>
 Description: prettyGraphs contains simple, crisp graphics. Graphics produced by prettyGraphs are publication-quality.
 License: GPL-2
-Packaged: 2013-03-19; dbeaton
+Packaged: 2013-04-21; dbeaton
