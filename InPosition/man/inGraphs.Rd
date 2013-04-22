@@ -1,0 +1,45 @@
+\name{inGraphs}
+\alias{inGraphs}
+\title{
+inGraphs: InPosition plotting function
+}
+\description{
+	InPosition plotting function which is an interface to \code{\link{prettyGraphs}}.
+}
+\usage{
+inGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, color.by.boots = TRUE, boot.cols = c("orchid4", "olivedrab3", "firebrick2"), fi.col = NULL, fj.col = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE)
+}
+\arguments{
+  \item{res}{results from InPosition or ExPosition. If results are from ExPosition, \code{inference.info} must be included.}
+  \item{DESIGN}{A design matrix to apply colors (by pallete selection) to row items}
+  \item{x_axis}{which component should be on the x axis?}
+  \item{y_axis}{which component should be on the y axis?}  
+  \item{inference.info}{Inference data as output by InPosition (of class inpoOutput).}
+  \item{color.by.boots}{a boolean. If TRUE, items are colored by bootstrap ratio test. Items larger than \code{critical.value} are colored orchid4 on the horizontal component, olivedrab3 on the vertical componeont, or firebrick2 if the item is significant on both components (to be visualized). If FALSE, the color of the items will be used.}
+  \item{boot.cols}{vector of colors: \code{c(horizontal component color, vertical component color, color when item is significant on both)}.}
+  \item{fi.col}{A matrix of colors for the row items. If NULL, colors will be selected.}
+  \item{fj.col}{A matrix of colors for the column items. If NULL, colors will be selected.}
+  \item{col.offset}{A numeric offset value. Is passed to \code{\link{createColorVectorsByDesign}}.}
+  \item{constraints}{Plot constraints as returned from \code{\link{prettyPlot}}. If NULL, constraints are selected.}      
+  \item{xlab}{x axis label}
+  \item{ylab}{y axis label}
+  \item{main}{main label for the graph window}
+  \item{contributionPlots}{a boolean. If TRUE (default), contribution bar plots will be created.}
+  \item{correlationPlotter}{a boolean. If TRUE (default), a correlation circle plot will be created. Applies to PCA family of methods (CA is excluded for now).}
+  \item{biplots}{a boolean. If FALSE (default), separate plots are made for row items ($fi) and column items ($fj). If TRUE, row ($fi) and column ($fj) items will be on the same plot.}
+}
+
+\value{
+Currently, nothing is returned. This function, for now, works as a visualizer for inference tests. Colors and constraints come from the descriptive (fixed effects) analysis.
+}
+\author{
+Derek Beaton
+}
+\seealso{
+\code{\link{epGraphs}}
+}
+\keyword{misc}
+\keyword{multivariate}
+\keyword{permutation}
+\keyword{bootstrap}
+\keyword{ graphs }
