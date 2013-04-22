@@ -15,20 +15,18 @@ pickSVD(datain, is.mds = FALSE, decomp.approach = "svd", k = 0)
   \item{decomp.approach}{a string. 'svd' for singular value decomposition, 'eigen' for an eigendecomposition. All approaches provide identical output. Some approaches are (in some cases) faster than others.}
   \item{k}{numeric. The number of components to return.}
 }
-\details{
-}
 \value{
-}
-\references{
+	A list with the following items:\cr
+	\item{u}{Left singular vectors (rows)}
+	\item{v}{Right singular vectors (columns)}	
+	\item{d}{Singular values}	
+	\item{tau}{Explained variance per component}	
 }
 \author{
 Derek Beaton
-}
-\note{
-}
-\seealso{
 }
 \examples{
 
 }
 \keyword{ misc }
+\keyword{ multivariate }

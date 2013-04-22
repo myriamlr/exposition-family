@@ -1,5 +1,5 @@
 epGraphs <-
-function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,biplots=FALSE,graphs=TRUE){
+function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fi.pch=NULL,fj.col=NULL,fj.pch=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,biplots=FALSE,graphs=TRUE){
 	
 	
 	pca.types <- c('epPCA','epMDS','epGPCA')
@@ -65,6 +65,15 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,col.offset=NU
 				fi.col <- epPlotInfo$fi.col
 			}
 		}
+		
+		if(is.null(fi.pch) || nrow(fi.pch)!=nrow(res$fi)){
+			if(is.null(epPlotInfo$fi.pch)){
+				fi.pch <- fi.pch <- as.matrix(rep(21,nrow(res$fi)))
+			}else{
+				fi.pch <- epPlotInfo$fi.pch
+			}
+		}
+			
 		if(class(res)[1]!='epMDS'){
 			if(is.null(fj.col) || nrow(fj.col)!=nrow(res$fj)){
 				if(is.null(epPlotInfo$fj.col)){
@@ -73,7 +82,16 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,col.offset=NU
 					fj.col <- epPlotInfo$fj.col	
 				}
 			}
+			
+			if(is.null(fj.pch) || nrow(fj.pch)!=nrow(res$fj)){
+				if(is.null(epPlotInfo$fi.pch)){
+					fj.pch <- fj.pch <- as.matrix(rep(21,nrow(res$fj)))
+				}else{
+					fj.pch <- epPlotInfo$fj.pch
+				}
+			}			
 		}
+		
 		if(is.null(constraints)){
 			if(!is.null(epPlotInfo$constraints)){
 				constraints <- epPlotInfo$constraints
@@ -91,6 +109,8 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,col.offset=NU
 				}else{
 					fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$cj,dev.new=TRUE)		
 				}
+				fi.pch <- fi.plot.info$pch
+				fj.pch <- fj.plot.info$pch			
 			}
 			if(contributionPlots){
 				contributionBars(res$fi,res$ci,x_axis=x_axis,y_axis=y_axis,main=main,col=fi.plot.info$col)
@@ -105,14 +125,14 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fj.col=NULL,col.offset=NU
 					correlationPlotter(res$X,res$fi,col=fj.plot.info$col,x_axis=x_axis,y_axis=y_axis,xlab=xlab,ylab=ylab,main=main) 
 				}
 			}
-		}									
+		}								
 	}
 	
 	#this happens whether I graph, or not. 
 	if(class(res)[1]=='epMDS'){
-		epPlotInfo <- list(fi.col=fi.col,fj.col=fi.col,constraints=constraints)	
+		epPlotInfo <- list(fi.col=fi.col,fi.pch=fi.pch,fj.col=fi.col,fj.pch=fi.pch,constraints=constraints)	
 	}else{
-		epPlotInfo <- list(fi.col=fi.col,fj.col=fj.col,constraints=constraints)
+		epPlotInfo <- list(fi.col=fi.col,fi.pch=fi.pch,fj.col=fj.col,fj.pch=fj.pch,constraints=constraints)
 	}
 
 	class(epPlotInfo) <- c("epGraphs", "list")

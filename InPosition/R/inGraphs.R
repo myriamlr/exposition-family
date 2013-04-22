@@ -146,13 +146,13 @@ inGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL
 			fj.col.x[y.boot.axis,1] <- 'gray'			
 		}
 		
-		fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$ci,dev.new=TRUE)
+		fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$ci,dev.new=TRUE)
 		
 		if(!(class(res)[1]=='epMDS')){
 			if(biplots){
-				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,plot_axes=FALSE,contributionCircles=TRUE,contributions=abs(inference.info$fj.boots$boot.ratios),dev.new=FALSE,clean_plot=FALSE)
+				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=FALSE,contributionCircles=TRUE,contributions=abs(inference.info$fj.boots$boot.ratios),dev.new=FALSE,new.plot=FALSE)
 			}else{
-				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=abs(inference.info$fj.boots$boot.ratios),dev.new=TRUE)		
+				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=abs(inference.info$fj.boots$boot.ratios),dev.new=TRUE)		
 			}
 		}
 		if(contributionPlots){
@@ -172,11 +172,7 @@ inGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL
 				correlationPlotter(res$X,res$fi,col=fj.plot.info$col,x_axis=x_axis,y_axis=y_axis,xlab=xlab,ylab=ylab,main=main) 
 			}
 		}
-		
-		
-		
-		
+				
 	}
-
 	
 }

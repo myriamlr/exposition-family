@@ -9,7 +9,6 @@ Computes factor scores for supplementary measures (columns).
 \usage{
 supplementaryCols(SUP.DATA, res, center = TRUE, scale = TRUE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
 \item{SUP.DATA}{a data matrix of supplementary observations (must have the same measures [columns] as active data)}
 \item{res}{ExPosition or TExPosition results}
@@ -17,7 +16,7 @@ supplementaryCols(SUP.DATA, res, center = TRUE, scale = TRUE)
   \item{scale}{a boolean, string, or numeric. See \code{\link{expo.scale}}}
 }
 \details{
-This function recognizes the class types of: \code{\link{epPCA}}, \code{\link{epGPCA}}, \code{\link{tepBADA}}, \code{\link{epMDS}}, \code{\link{epCA}}, \code{\link{epMCA}}, and \code{\link{tepDICA}}. Further, the function recognizes if Hellinger (as opposed to row profiles; in CA, MCA and DICA) were used. 
+This function recognizes the class types of: \code{\link{epPCA}}, \code{\link{epGPCA}}, \code{\link{epMDS}}, \code{\link{epCA}}, \code{\link{epMCA}}, and \code{TExPosition} methods. Further, the function recognizes if Hellinger (as opposed to row profiles; in CA, MCA and DICA) were used. 
 }
 \value{
 A list of values containing:\cr
@@ -31,3 +30,4 @@ Derek Beaton
 \examples{
 }
 \keyword{ misc }
+\keyword{ multivariate }
