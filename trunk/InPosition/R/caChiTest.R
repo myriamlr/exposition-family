@@ -23,8 +23,8 @@ caChiTest <- function(DATA,res,critical.value=2){
 	##omni
 	omni.val <- sum(res$ExPosition.Data$eigs * sum(DATA))
 	omni.df <- (nrow(DATA)-1) * (ncol(DATA)-1)
-	omni.p <- 1-pchisq(omni.chi2,omni.df)
+	omni.p <- 1-pchisq(omni.val,omni.df)
 	
-	return(list(j.sig.vals=j.significant.vals, j.signed.vals=j.signed.vals,i.sig.vals=i.significant.vals, i.signed.vals=i.signed.vals, omni.val=omni.val,omni.p=omni.p))
+	return(list(j.sig.vals=j.significant.vals, j.signed.vals=j.signed.vals, j.p.vals=j.p.vals, i.sig.vals=i.significant.vals, i.signed.vals=i.signed.vals, i.p.vals=i.p.vals, omni.val=omni.val,omni.p=omni.p))
 	
 }

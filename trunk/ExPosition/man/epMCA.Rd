@@ -49,7 +49,5 @@ Derek Beaton
 \examples{
 	data(mca.wine)
 	mca.wine.res <- epMCA(mca.wine$data)
-	#this will put new plotting data into a variable.
-	#mca.wine.plotting.data.2.and.3 <- epGraphs(mca.wine.res$ExPosition.Data,epPlotInfo=mca.wine.res$Plotting.Data,x_axis=2,y_axis=3)
 }
 \keyword{ multivariate }

@@ -8,7 +8,7 @@ corePCA
 corePCA performs the core of principal components analysis (PCA), generalized PCA (GPCA), multidimensionsal scaling (MDS), and related techniques.
 }
 \usage{
-corePCA(DATA, M = NULL, W = NULL, k = 0)
+corePCA(DATA, M = NULL, W = NULL, decomp.approach = 'svd', k = 0)
 }
 \arguments{
   \item{DATA}{original data to decompose and analyze via the singular value decomposition.}

@@ -1,5 +1,6 @@
 \name{epPCA.inference.battery}
 \alias{epPCA.inference.battery}
+\encoding{UTF-8}
 \title{
 epPCA.inference.battery: Inference tests for Principal Component Analysis (PCA) via InPosition.
 }
@@ -35,7 +36,7 @@ $Inference.Data returns:
 
 }
 \author{
-Derek Beaton
+Derek Beaton and Hervé Abdi.
 }
 
 \seealso{

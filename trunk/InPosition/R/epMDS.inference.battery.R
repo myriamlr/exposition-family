@@ -24,7 +24,7 @@ permute.components.mds <- function(DATA,method="euclidean",masses=NULL,k=0){
 		}
 				
 		#fj.boot.array[,,i] <- boot.compute.fj(DATA,res=fixed.res,DESIGN=DESIGN,constrained=constrained)
-		perm.eigs <- permute.components.mds(DATA,scale,center,k=k)
+		perm.eigs <- permute.components.mds(DATA,method=methods,masses=masses,k=k)
 		eigs.perm.matrix[i,1:length(perm.eigs)] <- perm.eigs
 		
 		if(i==1){

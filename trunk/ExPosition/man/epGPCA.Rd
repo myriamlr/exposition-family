@@ -7,7 +7,7 @@ epGPCA: Generalized Principal Components Analysis (GPCA) via ExPosition.
 Generalized Principal Components Analysis (GPCA) via ExPosition.
 }
 \usage{
-epGPCA(DATA, scaleFlag = TRUE, centerFlag = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, graphs = TRUE, k = 0)
+epGPCA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, graphs = TRUE, k = 0)
 }
 \arguments{
   \item{DATA}{original data to perform a PCA on.}
