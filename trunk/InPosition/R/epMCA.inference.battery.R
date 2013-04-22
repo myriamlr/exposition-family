@@ -56,7 +56,7 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
 	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix)
 	
- 	Inference.Data <- list(components=components.data,fj.boots=fj.boot.data)
+ 	Inference.Data <- list(components=components.data,fj.boots=fj.boot.data,omni=omni.data)
 	class(Inference.Data) <- c("epMCA.inference.battery","list")
 
 	ret.data <- list(Fixed.Data=fixed.res,Inference.Data=Inference.Data)
