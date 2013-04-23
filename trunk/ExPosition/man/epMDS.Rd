@@ -24,7 +24,7 @@ epMDS(DATA, DATA_is_dist = TRUE, method="euclidean", DESIGN = NULL, make_design_
 }
 \value{
 	See \code{\link{corePCA}} for details on what is returned. epMDS only returns values related to row items (e.g., fi, ci); no column data is returned.
-	\item{D}{the distance matrix that was decomposed.}
+	\item{D}{the distance matrix that was decomposed. In most cases, it is returned as a squared distance.}
 }
 \references{
 Abdi, H. (2007). Metric multidimensional scaling. In N.J. Salkind (Ed.): \emph{Encyclopedia of Measurement and Statistics.} Thousand Oaks (CA): Sage. pp. 598-605. \cr

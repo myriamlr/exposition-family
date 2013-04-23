@@ -1,4 +1,4 @@
-tinGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL,color.by.boots=TRUE,boot.cols=c('orchid4','olivedrab3','firebrick2'),fi.col=NULL,fii.col=NULL,fj.col=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=0.95,biplots=FALSE){
+tinGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL,color.by.boots=TRUE,boot.cols=c('orchid4','olivedrab3','firebrick2'),fi.col=NULL, fi.pch=NULL,fii.col=NULL,fii.pch=NULL,fj.col=NULL,fj.pch=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=0.95,biplots=FALSE){
 		
 	pca.types <- c('tepBADA')
 	ca.types <- c('tepDICA')
@@ -93,6 +93,31 @@ if(is.null(xlab)){
 				fj.col <- tepPlotInfo$fj.col	
 			}
 		}
+		
+		if(is.null(fi.pch) || nrow(fi.pch)!=nrow(res$fi)){
+			if(is.null(tepPlotInfo$fi.pch)){
+				fi.pch <- as.matrix(rep(21,nrow(res$fi)))
+			}else{
+				fi.pch <- tepPlotInfo$fi.pch
+			}
+		}
+		
+		if(is.null(fii.pch) || nrow(fii.pch)!=nrow(res$fii)){
+			if(is.null(tepPlotInfo$fii.pch)){
+				fii.pch <- as.matrix(rep(21,nrow(res$fii)))
+			}else{
+				fii.pch <- tepPlotInfo$fii.pch
+			}
+		}
+				
+		if(is.null(fj.pch) || nrow(fj.pch)!=nrow(res$fj)){
+			if(is.null(tepPlotInfo$fj.pch)){
+				fj.pch <- as.matrix(rep(21,nrow(res$fj)))
+			}else{
+				fj.pch <- tepPlotInfo$fj.pch
+			}
+		}		
+		
 		if(is.null(constraints)){
 			if(!is.null(tepPlotInfo$constraints)){
 				constraints <- tepPlotInfo$constraints
@@ -162,8 +187,8 @@ if(is.null(xlab)){
 		
 		#OK SO WHAT IS NEXT?
 		##a bit of fixed...
-		fii.plot.info <- prettyPlot(res$fii,x_axis=x_axis,y_axis=y_axis,col=fii.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=FALSE,dev.new=TRUE)
-		fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col= orig.fi.col,plot_axes=FALSE,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fi.boot.data$fi.tests$boot.ratios),dev.new=FALSE,clean_plot=FALSE)
+		fii.plot.info <- prettyPlot(res$fii,x_axis=x_axis,y_axis=y_axis,col=fii.col,pch=fii.pch,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=FALSE,dev.new=TRUE)
+		fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col= orig.fi.col,pch=fi.pch,axes=FALSE,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fi.boot.data$fi.tests$boot.ratios),dev.new=FALSE,new.plot=FALSE)
 		if(showHulls > 0 && showHulls <= 1){
 			colorDesign <- makeNominalData(fii.col)
 			for(i in 1:nrow(res$fi)){
@@ -173,8 +198,8 @@ if(is.null(xlab)){
 		}
 		
 		
-		#fii.plot.info <- prettyPlot(res$fii,x_axis=x_axis,y_axis=y_axis,col=fii.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=FALSE,dev.new=TRUE)
-		fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fi.boot.data$fi.tests$boot.ratios),dev.new=TRUE)
+		#fii.plot.info <- prettyPlot(res$fii,x_axis=x_axis,y_axis=y_axis,col=fii.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=FALSE,dev.new=TRUE)
+		fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,pch=fi.pch,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fi.boot.data$fi.tests$boot.ratios),dev.new=TRUE)
 		if(showHulls > 0 && showHulls <= 1){
 			colorDesign <- makeNominalData(fii.col)
 			for(i in 1:nrow(res$fi)){
@@ -184,9 +209,9 @@ if(is.null(xlab)){
 			}
 		}
 		if(biplots){
-			fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,plot_axes=FALSE,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fj.boot.data$fj.tests$boot.ratios),dev.new=FALSE)
+			fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,pch=fj.pch,axes=FALSE,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fj.boot.data$fj.tests$boot.ratios),dev.new=FALSE)
 		}else{
-			fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fj.boot.data$fj.tests$boot.ratios),dev.new=TRUE)	
+			fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,pch=fj.pch,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fj.boot.data$fj.tests$boot.ratios),dev.new=TRUE)	
 		}
 		
 			
@@ -204,7 +229,7 @@ if(is.null(xlab)){
 			
 		}		
 		if(correlationPlotter && class(res)[1]%in%pca.types){
-			correlationPlotter(res$X,res$fi,col=fj.plot.info$col,x_axis=1,y_axis=2,xlab=xlab,ylab=ylab,main=main) 
+			correlationPlotter(res$X,res$fi,col=fj.col,x_axis=1,y_axis=2,xlab=xlab,ylab=ylab,main=main) 
 		}											
 		
 	}	
