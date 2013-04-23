@@ -40,7 +40,7 @@ supplementaryCols <- function(SUP.DATA,res,center=TRUE,scale=TRUE){
 		}
 	}else if((class(res)[1] %in% c(mds.types))){ #this is the same as rows. 
 		sup.transform <- mdsSupplementalElementsPreProcessing(SUP.DATA,res$D,res$M)
-		sup.proj <- supplementalProjection(sup.transform,res$fi,res$pdq$Dv,indices=indices)
+		sup.proj <- supplementalProjection(sup.transform,res$fi,res$pdq$Dv)
 	}else{
 		stop("Unknown class type. Supplementary projection computation must stop.")	
 	}

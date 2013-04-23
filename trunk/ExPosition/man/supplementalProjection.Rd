@@ -7,12 +7,13 @@ Supplemental projections.
 Performs a supplementary projection across ExPosition (and related) techniques.
 }
 \usage{
-supplementalProjection(sup.transform = NULL, f.scores = NULL, Dv = NULL)
+supplementalProjection(sup.transform = NULL, f.scores = NULL, Dv = NULL, scale.factor = NULL)
 }
 \arguments{
   \item{sup.transform}{Data already transformed for supplementary projection. That is, the output from: \code{\link{caSupplementalElementsPreProcessing}}, \code{\link{mdsSupplementalElementsPreProcessing}}, \code{\link{pcaSupplementaryColsPreProcessing}}, or \code{\link{pcaSupplementaryRowsPreProcessing}}.}
   \item{f.scores}{Active factor scores, e.g., res$ExPosition.Data$fi}
   \item{Dv}{Active singular values, e.g., res$ExPosition.Data$pdq$Dv}
+  \item{scale.factor}{allows for a scaling factor of supplementary projections. Primarily used for MCA supplemental projections to a correction (e.g., Benzecri).}  
 }
 \value{
 	A list with: \cr
