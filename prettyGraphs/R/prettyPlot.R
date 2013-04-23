@@ -1,15 +1,18 @@
 prettyPlot <-
-function(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_names=TRUE,display_points=TRUE,axes=TRUE,constraints=NULL,axis_line_width=3,pos=3,pch=NULL,cex=1,text.cex=0.8,contributionCircles=FALSE,contributions=NULL,flip=FALSE,asp=1,findBounds=TRUE,dev.new=TRUE,new.plot=TRUE){
+function(data_matrix,x_axis=1,y_axis=2,col=NULL,xlab="",ylab="",main="",display_names=TRUE,display_points=TRUE,axes=TRUE,constraints=NULL,axis_line_width=3,pos=3,pch=NULL,cex=NULL,text.cex=0.8,contributionCircles=FALSE,contributions=NULL,flip=FALSE,asp=1,findBounds=TRUE,dev.new=TRUE,new.plot=TRUE){
 	
 	#I want to always send back colors and constraints.
 	#I need a different type of checker here...
 	#Also, I need to use apply instead of my silly matrix nonsense below. See how FactoMineR does it.
-	if(is.null(col)){
+	if(is.null(col) || nrow(col)!=nrow(data_matrix)){
 		col <- colorVectorIsNull(data_matrix)$oc
 	}
-	if(is.null(pch)){
+	if(is.null(pch) || nrow(pch)!=nrow(data_matrix)){
 		pch <- as.matrix(rep(21,nrow(data_matrix)))
 	}
+	if(is.null(cex) || nrow(cex)!=nrow(data_matrix)){
+		cex <- as.matrix(rep(1,nrow(data_matrix)))
+	}	
 	
 	#I only need constraints if I am making a new window.
 	check.constraints <- minmaxHelper(data_matrix,data_matrix,x_axis,y_axis,findBounds=findBounds)	

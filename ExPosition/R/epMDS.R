@@ -5,12 +5,12 @@ function(DATA,DATA_is_dist=TRUE,method="euclidean",DESIGN=NULL,make_design_nomin
 	DATA <- as.matrix(DATA)
 		
 	if(DATA_is_dist && (nrow(DATA)==ncol(DATA))){
-		D <- DATA
+		D <- DATA^2
 		MW <- computeMW(D,masses=masses)
 	}else{
 		#print('Creating distance matrix from DATA.')
 		D.MW <- makeDistancesAndWeights(DATA,method=method,masses=masses)
-		D <- D.MW$D
+		D <- D.MW$D #already squared from the above function.
 		MW <- D.MW$MW		
 	}
 	S <- mdsTransform(D,MW)

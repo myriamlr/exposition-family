@@ -5,6 +5,7 @@ makeDistancesAndWeights <- function(DATA,method="euclidean",masses=NULL){
 		MW <- list(M=chi2res$M)
 	}else{
 		D <- as.matrix(dist(DATA,method=method,diag=TRUE,upper=TRUE))
+		D <- D^2
 		MW <- computeMW(D,masses=masses)		
 	}
 	return(list(D=D,MW=MW))

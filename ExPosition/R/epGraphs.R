@@ -102,15 +102,13 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fi.pch=NULL,fj.col=NULL,f
 		#by the time I get here, I should be guaranteed to have a fi.col, fj.col, and constraints.
 			
 		if(graphs){
-			fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$ci,dev.new=TRUE)
+			fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,pch=fi.pch,contributionCircles=TRUE,contributions=res$ci,dev.new=TRUE)
 			if(!(class(res)[1]=='epMDS')){
 				if(biplots){
-					fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=FALSE,contributionCircles=TRUE,contributions=res$cj,dev.new=FALSE,new.plot=FALSE)
+					fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=FALSE,contributionCircles=TRUE,contributions=res$cj,pch=fj.pch,dev.new=FALSE,new.plot=FALSE)
 				}else{
-					fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$cj,dev.new=TRUE)		
-				}
-				fi.pch <- fi.plot.info$pch
-				fj.pch <- fj.plot.info$pch			
+					fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,pch=fj.pch,contributionCircles=TRUE,contributions=res$cj,dev.new=TRUE)		
+				}	
 			}
 			if(contributionPlots){
 				contributionBars(res$fi,res$ci,x_axis=x_axis,y_axis=y_axis,main=main,col=fi.plot.info$col)
@@ -120,9 +118,9 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fi.pch=NULL,fj.col=NULL,f
 			}		
 			if(correlationPlotter && class(res)[1]%in%pca.types){
 				if(class(res)[1]=='epMDS'){
-					correlationPlotter(res$X,res$fi,col=fi.plot.info$col,x_axis=x_axis,y_axis=y_axis,xlab=xlab,ylab=ylab,main=main) 
+					correlationPlotter(res$X,res$fi,col=fi.col,pch=fi.pch,x_axis=x_axis,y_axis=y_axis,xlab=xlab,ylab=ylab,main=main) 
 				}else{
-					correlationPlotter(res$X,res$fi,col=fj.plot.info$col,x_axis=x_axis,y_axis=y_axis,xlab=xlab,ylab=ylab,main=main) 
+					correlationPlotter(res$X,res$fi,col=fj.col,pch=fj.pch,x_axis=x_axis,y_axis=y_axis,xlab=xlab,ylab=ylab,main=main) 
 				}
 			}
 		}								

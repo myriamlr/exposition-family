@@ -48,9 +48,7 @@ permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
 	ret.data <- list(Fixed.Data=fixed.res,Inference.Data=Inference.Data)
 	class(ret.data) <- c("inpoOutput","list")	
 
-	#graphing needs to happen here.
 	if(graphs){
-		#epGraphs(fixed.res,graphs=graphs)
 		inGraphs(ret.data)
 	}
 

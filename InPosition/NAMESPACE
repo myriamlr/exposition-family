@@ -1,1 +1,1 @@
-export(caChiTest, epCA.inference.battery, epGPCA.inference.battery, epMCA.inference.battery, epMDS.inference.battery, epPCA.inference.battery, inGraphs, boot.compute.fj, boot.ratio.test, boot.samples)
+export(caChiTest, epCA.inference.battery, epGPCA.inference.battery, epMCA.inference.battery, epMDS.inference.battery, epPCA.inference.battery, inGraphs, boot.compute.fj, boot.ratio.test, boot.samples, continueResampling)

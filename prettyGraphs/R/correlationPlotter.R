@@ -1,5 +1,5 @@
 correlationPlotter <-
-function(data_matrix,factor_scores,x_axis=1,y_axis=2,col=NULL,xlab=NULL,ylab=NULL,main="",asp=1,dev.new=TRUE){
+function(data_matrix,factor_scores,x_axis=1,y_axis=2,col=NULL,pch=NULL,xlab=NULL,ylab=NULL,main="",asp=1,dev.new=TRUE){
 	if(nrow(data_matrix)==nrow(factor_scores)){
 		loadings <- cor(data_matrix,factor_scores)
 	}
@@ -24,15 +24,16 @@ function(data_matrix,factor_scores,x_axis=1,y_axis=2,col=NULL,xlab=NULL,ylab=NUL
 	if(is.null(col)){
 		col <- colorVectorIsNull(loadings)$oc
 	}
+	if(is.null(pch)){
+		pch <- as.matrix(rep(21,nrow(loadings)))
+	}	
 
-#I should make this an option; but at least I made this faster
-#	for(i in 1:dim(loadings)[1]){
-#		points(c(0,loadings[i,x_axis]),c(0,loadings[i,y_axis]),col="black",type="l")
-#	}
+
 	os <- cbind(rep(0,nrow(loadings)+1),rep(0,nrow(loadings)+1))
 	new.mat <- matrix(0,(nrow(loadings)*2)+1,2)
 	new.mat[seq(1,nrow(new.mat),2),] <- os
 	new.mat[seq(2,nrow(new.mat),2),] <- loadings[,c(x_axis,y_axis)]
 	points(new.mat,type="l",col="black")
-	prettyPlot(loadings,col=col,display_names=TRUE,display_points=TRUE,x_axis=x_axis,y_axis=y_axis,axes=FALSE,dev.new=FALSE,new.plot=FALSE)
+	
+	prettyPlot(loadings,col=col,display_names=TRUE,display_points=TRUE,pch=pch,x_axis=x_axis,y_axis=y_axis,axes=FALSE,dev.new=FALSE,new.plot=FALSE)
 }

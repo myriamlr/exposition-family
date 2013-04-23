@@ -1,5 +1,5 @@
 tepGraphs <-
-function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=1,biplots=FALSE,graphs=TRUE){
+function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NULL, fii.pch = NULL, fj.col=NULL, fj.pch = NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=1,biplots=FALSE,graphs=TRUE){
 
 	pca.types <- c('tepBADA')
 	ca.types <- c('tepDICA')
@@ -67,6 +67,31 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,
 				fj.col <- tepPlotInfo$fj.col	
 			}
 		}
+
+		if(is.null(fi.pch) || nrow(fi.pch)!=nrow(res$fi)){
+			if(is.null(tepPlotInfo$fi.pch)){
+				fi.pch <- as.matrix(rep(21,nrow(res$fi)))
+			}else{
+				fi.pch <- tepPlotInfo$fi.pch
+			}
+		}
+		
+		if(is.null(fii.pch) || nrow(fii.pch)!=nrow(res$fii)){
+			if(is.null(tepPlotInfo$fii.pch)){
+				fii.pch <- as.matrix(rep(21,nrow(res$fii)))
+			}else{
+				fii.pch <- tepPlotInfo$fii.pch
+			}
+		}
+				
+		if(is.null(fj.pch) || nrow(fj.pch)!=nrow(res$fj)){
+			if(is.null(tepPlotInfo$fj.pch)){
+				fj.pch <- as.matrix(rep(21,nrow(res$fj)))
+			}else{
+				fj.pch <- tepPlotInfo$fj.pch
+			}
+		}
+		
 		if(is.null(constraints)){
 			if(!is.null(tepPlotInfo$constraints)){
 				constraints <- tepPlotInfo$constraints
@@ -77,32 +102,30 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fii.col=NULL,fj.col=NULL,
 		#by the time I get here, I should be guaranteed to have a fii.col, fi.col, fj.col, and constraints.		
 		
 		if(graphs){
-			fii.plot.info <- prettyPlot(res$fii,x_axis=x_axis,y_axis=y_axis,col=fii.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=FALSE,dev.new=TRUE)
-			fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,plot_axes=FALSE,contributionCircles=TRUE,contributions=res$ci,dev.new=FALSE,clean_plot=FALSE)
+			fii.plot.info <- prettyPlot(res$fii,x_axis=x_axis,y_axis=y_axis,col=fii.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,pch=fii.pch,contributionCircles=FALSE,dev.new=TRUE)
+			fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,axes=FALSE,contributionCircles=TRUE,contributions=res$ci,pch=fi.pch,dev.new=FALSE,new.plot=FALSE)
 			if(showHulls > 0 && showHulls <= 1){
 				colorDesign <- makeNominalData(fii.col)
 				for(i in 1:nrow(res$fi)){
-					#peeledHull(res$fii[which(colorDesign[,i]==1),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col="black",lwd=3)
-					#peeledHull(res$fii[which(colorDesign[,i]==1),],x_axis=x_axis,y_axis=y_axis,percentage=showHulls,col=fi.col[i,],lwd=1)
 					peeledHull(res$fii[which(fii.col[, 1] == fi.col[i,1]), ], x_axis = x_axis, y_axis = y_axis, percentage = showHulls, col = "black", lwd = 3)
 					peeledHull(res$fii[which(fii.col[, 1] == fi.col[i,1]), ], x_axis = x_axis, y_axis = y_axis, percentage = showHulls, col = fi.col[i, ], lwd = 1)					
 				}
 			}
 			if(biplots){
-				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,plot_axes=FALSE,contributionCircles=TRUE,contributions=res$cj,dev.new=FALSE)
+				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=FALSE,contributionCircles=TRUE,contributions=res$cj,pch=fj.pch,dev.new=FALSE)
 			}else{
-				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,plot_axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=res$cj,dev.new=TRUE)	
+				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,pch=fj.pch,contributionCircles=TRUE,contributions=res$cj,dev.new=TRUE)	
 			}	
 			if(contributionPlots){
 				contributionBars(res$fi,res$ci,x_axis=x_axis,y_axis=y_axis,main=main,col=fi.plot.info$col)
 				contributionBars(res$fj,res$cj,x_axis=x_axis,y_axis=y_axis,main=main,col=fj.plot.info$col)			
 			}		
 			if(correlationPlotter && class(res)[1]%in%pca.types){
-				correlationPlotter(res$X,res$fi,col=fj.plot.info$col,x_axis=1,y_axis=2,xlab=xlab,ylab=ylab,main=main) 
+				correlationPlotter(res$X,res$fi,col=fj.col,pch=fj.pch,x_axis=1,y_axis=2,xlab=xlab,ylab=ylab,main=main) 
 			}									
 		}
 	}
-	tepPlotInfo <- list(fii.col=fii.col,fi.col=fi.col,fj.col=fj.col,constraints=constraints)
+	tepPlotInfo <- list(fii.col=fii.col, fii.pch=fii.pch,fi.col=fi.col, fi.pch=fi.pch,fj.col=fj.col,fj.pch=fj.pch,constraints=constraints)
 	class(tepPlotInfo) <- c("tepGraphs", "list")
 	return(tepPlotInfo)	
 }

@@ -83,7 +83,6 @@ tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = 
 	fj.boot.data <- list(fj.tests=boot.ratio.test(FBX,critical.value),fj.boots=FBX)
 	fi.boot.data <- list(fi.tests=boot.ratio.test(FBY,critical.value),fi.boots=FBY)
 	boot.data <- list(fj.boot.data=fj.boot.data,fi.boot.data=fi.boot.data)
-#	return(boot.data)
 	
 	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$TExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
 	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
@@ -95,7 +94,9 @@ tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = 
 	r2.p <- max(1-(sum(r2.perm < sum(fixed.res$TExPosition.Data$assign$r2))/test.iters),1/test.iters)
 	r2.data <- list(p.val=r2.p,r2.perm=r2.perm)
 	
- 	Inference.Data <- list(omni=omni.data,r2=r2.data,components=components.data,boot.data=boot.data)
+	loo.data <- list(loo.assign=loo.assign, loo.fii=loo.fii, loo.confuse=t(DESIGN) %*% loo.assign)
+	
+ 	Inference.Data <- list(omni=omni.data,r2=r2.data,components=components.data,boot.data=boot.data,loo.data=loo.data)
  	class(Inference.Data) <- c("tepDICA.inference.battery","list")
  	
  	ret.data <- list(Fixed.Data=fixed.res,Inference.Data=Inference.Data)
