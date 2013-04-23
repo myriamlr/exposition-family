@@ -20,8 +20,6 @@ function(DATA,make_data_nominal=TRUE,DESIGN=NULL,make_design_nominal=TRUE,masses
 	if( weCanCorrect && (numUniqueRows==1) ){
 		res <- mca.eigen.fix(nominalData,res, make_data_nominal=FALSE,correction=correction,symmetric=symmetric)
 	}else{
-		#basically nothing
-		#print('No corrections available.')
 		res$pdq.uncor <- res$pdq
 	}
 	class(res) <- c("epMCA","list")	
