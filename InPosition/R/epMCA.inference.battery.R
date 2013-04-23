@@ -1,5 +1,5 @@
 ###function to handle fixed & random (bootstrap) effects for epMCA	
-epMCA.inference.battery <- function(DATA, make_data_nominal = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, correction = c("b"), graphs = TRUE, k = 0, test.iters=100, constrained=FALSE, critical.value=2){
+epMCA.inference.battery <- function(DATA, make_data_nominal = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, correction = c("b"), graphs = TRUE, k = 0, test.iters=1000, constrained=FALSE, critical.value=2){
 
 ####private functions
 permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,symmetric=TRUE,masses=NULL,weights=NULL,correction=c("b"),k=0){
@@ -23,7 +23,7 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 			
 	ncomps <- fixed.res$ExPosition.Data$pdq$ng		
 	fj.boot.array <- array(0,dim=c(ncol(nom.DATA),ncomps,test.iters))
-	eigs.perm.matrix <- matrix(0,test.iters,min(dim(DATA)))
+	eigs.perm.matrix <- matrix(0,test.iters,min(dim(nom.DATA)))
 
 	pb <- txtProgressBar(1,test.iters,1,style=1)
 	for(i in 1:test.iters){
@@ -31,7 +31,7 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 			start.time <- proc.time()
 		}
 		
-		fj.boot.array[,,i] <- boot.compute.fj(nom.DATA,fixed.res$ExPosition.Data,DESIGN,constrained)
+		fj.boot.array[,,i] <- boot.compute.fj(nom.DATA,fixed.res,DESIGN,constrained)
 		perm.eigs <- permute.components.mca(DATA,make_data_nominal=make_data_nominal,hellinger=hellinger,symmetric=symmetric,masses=masses,weights=weights,correction=correction,k=k)
 		eigs.perm.matrix[i,1:length(perm.eigs)] <- perm.eigs
 		if(i==1){
@@ -47,8 +47,9 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 	rownames(fj.boot.array) <- colnames(nom.DATA)
 	fj.boot.data <- boot.ratio.test(fj.boot.array,critical.value=critical.value)
 	
+	round(eigs.perm.matrix,digits=15)
 	inertia.perm <- rowSums(eigs.perm.matrix)
-	omni.p <- max(1-(sum(inertia.perm < sum(fixed.res$ExPosition.Data$eigs))/test.iters),1/test.iters)
+	omni.p <- max(1-(sum(inertia.perm < sum(round(fixed.res$ExPosition.Data$eigs,digits=15)))/test.iters),1/test.iters)
 	omni.data <- list(p.val=omni.p,inertia.perm=inertia.perm)
 	
 	eigs.perm.matrix <- eigs.perm.matrix[,1:ncomps]

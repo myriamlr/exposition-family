@@ -33,10 +33,14 @@ supplementaryCols <- function(SUP.DATA,res,center=TRUE,scale=TRUE){
 		sup.proj <- supplementalProjection(sup.transform,res$fi,res$pdq$Dv)
 	}else if((class(res)[1] %in% c(ca.types))){
 		sup.transform <- caSupplementalElementsPreProcessing(t(SUP.DATA),hellinger=res$hellinger)
-		sup.proj <- supplementalProjection(sup.transform,res$fi,res$pdq$Dv)
+		if((class(res)[1] %in% c('epMCA'))){ ##stupid corrections.
+			sup.proj <- supplementalProjection(sup.transform,res$fi,res$pdq$Dv,scale.factor=res$pdq$Dv/res$pdq.uncor$Dv[1:length(res$pdq$Dv)])
+		}else{
+			sup.proj <- supplementalProjection(sup.transform,res$fi,res$pdq$Dv)
+		}
 	}else if((class(res)[1] %in% c(mds.types))){ #this is the same as rows. 
 		sup.transform <- mdsSupplementalElementsPreProcessing(SUP.DATA,res$D,res$M)
-		sup.proj <- supplementalProjection(sup.transform,res$fi,res$pdq$Dv)
+		sup.proj <- supplementalProjection(sup.transform,res$fi,res$pdq$Dv,indices=indices)
 	}else{
 		stop("Unknown class type. Supplementary projection computation must stop.")	
 	}

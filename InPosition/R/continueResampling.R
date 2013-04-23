@@ -1,7 +1,7 @@
 continueResampling <- function(cycle.time,test.iters){
 	iter.time <- (cycle.time[1] * test.iters)/60 #seconds for iters into minutes.	
 	print(paste("It is estimated that your iterations will take",round(iter.time,digits=2),"minutes.",sep=" "))
-	valueCaptured <- NULL
+	valueCaptured <- ""
 	if(iter.time > 1){ #greater than 1 minute.
 		while(tolower(valueCaptured) != "n" && tolower(valueCaptured) != "y"){
 			print("Do you want to proceed: Y/N")

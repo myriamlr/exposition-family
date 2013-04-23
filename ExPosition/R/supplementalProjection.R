@@ -1,4 +1,4 @@
-supplementalProjection <- function(sup.transform=NULL,f.scores=NULL,Dv=NULL){
+supplementalProjection <- function(sup.transform=NULL,f.scores=NULL,Dv=NULL, scale.factor = NULL){
 	if(is.null(sup.transform) || is.null(f.scores) || is.null(Dv)){
 		stop('No inputs can be NULL.')
 	}
@@ -10,6 +10,9 @@ supplementalProjection <- function(sup.transform=NULL,f.scores=NULL,Dv=NULL){
 	}
 
 	f.out <- sup.transform %*% f.scores * matrix(Dv^-1,nrow(sup.transform),ncol(f.scores),byrow=TRUE)
+	if(!is.null(scale.factor)){		
+		f.out <- f.out * matrix(scale.factor,nrow(f.out),ncol(f.scores),byrow=TRUE)
+	}
 	d.out <- rowSums(f.out^2)
 	r.out <- repmat((1/d.out),1,length(Dv)) * (f.out^2)
 	r.out <- replace(r.out,is.nan(r.out),0)

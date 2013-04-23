@@ -20,7 +20,7 @@ permute.components.ca <- function(DATA,hellinger=FALSE,symmetric=TRUE,masses=NUL
 			start.time <- proc.time()
 		}
 		
-		fj.boot.array[,,i] <- boot.compute.fj(DATA,fixed.res$ExPosition.Data,DESIGN,constrained)
+		fj.boot.array[,,i] <- boot.compute.fj(DATA,fixed.res,DESIGN,constrained)
 		perm.eigs <- permute.components.ca(DATA,hellinger=hellinger,symmetric=symmetric,masses=masses,weights=weights,k=k)
 		eigs.perm.matrix[i,1:length(perm.eigs)] <- perm.eigs
 		
