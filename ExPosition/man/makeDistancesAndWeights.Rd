@@ -11,7 +11,7 @@ makeDistancesAndWeights(DATA, method = "euclidean", masses = NULL)
 }
 \arguments{
   \item{DATA}{A data matrix to compute distances between row items.}
-  \item{method}{which distance metric should be used. \code{method} matches \code{\link{dist}}; "chi2" also available (\code{\link{chi2Dist}}). Default is "euclidean".}
+  \item{method}{which distance metric should be used. \code{method} matches \code{\link{dist}}; Two additional distances are avaialble: "correlation" and "chi2". For "chi2" see \code{\link{chi2Dist}}. Default is "euclidean".}
   \item{masses}{a diagonal matrix (or vector) that contains the masses (for the row items).}
 }
 \value{

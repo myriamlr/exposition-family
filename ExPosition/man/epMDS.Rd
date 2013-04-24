@@ -12,7 +12,7 @@ epMDS(DATA, DATA_is_dist = TRUE, method="euclidean", DESIGN = NULL, make_design_
 \arguments{
   \item{DATA}{original data to perform a MDS on.}
   \item{DATA_is_dist}{a boolean. If TRUE (default) the DATA matrix should be a symmetric distance matrix. If FALSE, a Euclidean distance of row items will be computed and used.}
-  \item{method}{which distance metric should be used. \code{method} matches \code{\link{dist}}; "chi2" also available (\code{\link{chi2Dist}}). Default is "euclidean".}
+  \item{method}{which distance metric should be used. \code{method} matches \code{\link{dist}}; Two additional distances are avaialble: "correlation" and "chi2". For "chi2" see \code{\link{chi2Dist}}. Default is "euclidean".}
   \item{DESIGN}{a design matrix to indicate if rows belong to groups.}
   \item{make_design_nominal}{a boolean. If TRUE (default), DESIGN is a vector that indicates groups (and will be dummy-coded). If FALSE, DESIGN is a dummy-coded matrix.}
   \item{masses}{a diagonal matrix (or vector) that contains the masses (for the row items).}

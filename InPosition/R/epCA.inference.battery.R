@@ -1,5 +1,5 @@
 ###function to handle fixed & random (bootstrap) effects for epCA	
-epCA.inference.battery <- function(DATA, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0, test.iters=100, constrained=FALSE, critical.value=2){
+epCA.inference.battery <- function(DATA, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0, test.iters=100, critical.value=2){
 
 ####private functions
 permute.components.ca <- function(DATA,hellinger=FALSE,symmetric=TRUE,masses=NULL,weights=NULL,k=0){
@@ -20,7 +20,7 @@ permute.components.ca <- function(DATA,hellinger=FALSE,symmetric=TRUE,masses=NUL
 			start.time <- proc.time()
 		}
 		
-		fj.boot.array[,,i] <- boot.compute.fj(DATA,fixed.res,DESIGN,constrained)
+		fj.boot.array[,,i] <- boot.compute.fj(DATA,fixed.res,DESIGN)
 		perm.eigs <- permute.components.ca(DATA,hellinger=hellinger,symmetric=symmetric,masses=masses,weights=weights,k=k)
 		eigs.perm.matrix[i,1:length(perm.eigs)] <- perm.eigs
 		
