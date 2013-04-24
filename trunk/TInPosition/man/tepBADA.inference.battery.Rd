@@ -1,5 +1,6 @@
 \name{tepBADA.inference.battery}
 \alias{tepBADA.inference.battery}
+\encoding{UTF-8}
 \title{
 	Barycentric Discriminant Analysis Inference Battery
 }
@@ -9,7 +10,6 @@ Barycentric Discriminant Analysis (BADA) Inference Battery via TInPosition.
 \usage{
 tepBADA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
     \item{DATA}{original data to perform a PCA on.}
   \item{scale}{a boolean, vector, or string. See \code{\link{expo.scale}} for details.}
@@ -34,7 +34,7 @@ tepBADA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make
 
 }
 \author{
-Derek Beaton
+Derek Beaton, Jenny Rieck, Hervé Abdi
 }
 \note{
 

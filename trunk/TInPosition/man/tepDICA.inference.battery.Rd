@@ -34,7 +34,7 @@ tepDICA.inference.battery(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_d
 \references{
 }
 \author{
-Derek Beaton, Hervé Abdi
+Derek Beaton, Jenny Rieck, Hervé Abdi
 }
 \seealso{
 

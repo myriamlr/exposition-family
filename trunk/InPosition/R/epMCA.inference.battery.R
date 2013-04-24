@@ -5,7 +5,7 @@ epMCA.inference.battery <- function(DATA, make_data_nominal = TRUE, DESIGN = NUL
 permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,symmetric=TRUE,masses=NULL,weights=NULL,correction=c("b"),k=0){
  	if(!make_data_nominal){
 		DATA <- rebuildMCAtable(DATA)
-		make_data_nominal <- !make_data_nominal
+		#make_data_nominal <- !make_data_nominal #does not matter; I am forcing TRUE
 	}
 	perm.DATA <- apply(DATA,2,sample)
 	return(epMCA(perm.DATA,make_data_nominal=TRUE,hellinger=hellinger,symmetric=symmetric,graphs=FALSE,k=k,masses=masses,weights=weights,correction=correction)$ExPosition.Data$eigs)

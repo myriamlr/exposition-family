@@ -94,7 +94,13 @@ tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = 
 	r2.p <- max(1-(sum(r2.perm < sum(fixed.res$TExPosition.Data$assign$r2))/test.iters),1/test.iters)
 	r2.data <- list(p.val=r2.p,r2.perm=r2.perm)
 	
-	loo.data <- list(loo.assign=loo.assign, loo.fii=loo.fii, loo.confuse=t(DESIGN) %*% loo.assign)
+	loo.confuse <- t(loo.assign) %*% DESIGN
+	rownames(loo.confuse) <- paste(colnames(DESIGN),"predicted",sep=".") 
+	colnames(loo.confuse) <- paste(colnames(DESIGN),"actual",sep=".")
+	fixed.confuse <- fixed.res$TExPosition.Data$assign$confusion
+	loo.acc <- sum(diag(loo.confuse))/sum(loo.confuse)
+	fixed.acc <- sum(diag(fixed.confuse))/sum(fixed.confuse)	
+	loo.data <- list(loo.assign=loo.assign, loo.fii=loo.fii, loo.confuse=loo.confuse, fixed.confuse=fixed.confuse, loo.acc=loo.acc, fixed.acc=fixed.acc)
 	
  	Inference.Data <- list(omni=omni.data,r2=r2.data,components=components.data,boot.data=boot.data,loo.data=loo.data)
  	class(Inference.Data) <- c("tepDICA.inference.battery","list")
