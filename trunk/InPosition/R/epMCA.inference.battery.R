@@ -45,7 +45,7 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 	}
 	
 	rownames(fj.boot.array) <- colnames(nom.DATA)
-	fj.boot.data <- boot.ratio.test(fj.boot.array,critical.value=critical.value)
+	fj.boot.data <- list(fj.tests=boot.ratio.test(fj.boot.array,critical.value=critical.value),fj.boots=fj.boot.array)
 	
 	round(eigs.perm.matrix,digits=15)
 	inertia.perm <- rowSums(eigs.perm.matrix)

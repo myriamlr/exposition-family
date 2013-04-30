@@ -35,7 +35,7 @@ permute.components.ca <- function(DATA,hellinger=FALSE,symmetric=TRUE,masses=NUL
 	}
 	
 	rownames(fj.boot.array) <- colnames(DATA)
-	fj.boot.data <- boot.ratio.test(fj.boot.array,critical.value=critical.value)
+	fj.boot.data <- list(fj.tests=boot.ratio.test(fj.boot.array,critical.value=critical.value),fj.boots=fj.boot.array)
 		
 	inertia.perm <- rowSums(eigs.perm.matrix)
 	omni.p <- max(1-(sum(inertia.perm < sum(fixed.res$ExPosition.Data$eigs))/test.iters),1/test.iters)

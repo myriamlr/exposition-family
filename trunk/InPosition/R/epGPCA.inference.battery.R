@@ -35,7 +35,7 @@ permute.components.pca <- function(DATA,scale=TRUE,center=TRUE, masses=NULL, wei
 
 	#fj.boot.array <- replace(fj.boot.array,is.nan(fj.boot.array),0)
 	rownames(fj.boot.array) <- colnames(DATA)
-	fj.boot.data <- boot.ratio.test(fj.boot.array,critical.value=critical.value)
+	fj.boot.data <- list(fj.tests=boot.ratio.test(fj.boot.array,critical.value=critical.value),fj.boots=fj.boot.array)
 	
 	eigs.perm.matrix <- eigs.perm.matrix[,1:ncomps]
 	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$ExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
