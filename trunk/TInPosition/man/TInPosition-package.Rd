@@ -22,7 +22,7 @@ URL: \tab http://www.utdallas.edu/~derekbeaton/software/ExPosition\cr
 }
 \author{
 Questions, comments, compliments, and complaints go to Derek Beaton \email{exposition.software@gmail.com}. Also see the bug-tracking and live update website for ExPosition: http://code.google.com/p/exposition-family/\cr\cr 
-Primary authors and contributors are: Derek Beaton, Jenny Rieck, Joseph Dunlop, and Hervé Abdi
+Primary authors and contributors are: Derek Beaton, Jenny Rieck, and Hervé Abdi
 }
 \references{
 	Permutation:\cr
