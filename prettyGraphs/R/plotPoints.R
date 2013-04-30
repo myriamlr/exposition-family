@@ -1,5 +1,5 @@
 plotPoints <-
-function(data_matrix,col,x_axis=1,y_axis=2,cex=NULL,pch=NULL,contributionCircles=FALSE,contributions=NULL,flip=FALSE){
+function(data_matrix,col,x_axis=1,y_axis=2,cex=1,pch=21,contributionCircles=FALSE,contributions=NULL,flip=FALSE){
 		
 	##the pch checks may not be necessary or may need to move up to prettyPlot.
 	# if(is.null(pch)){

@@ -26,7 +26,6 @@ Primary authors and contributors are: Derek Beaton, Joseph Dunlop, and Hervé Ab
 }
 \references{
 	Berry, K. J., Johnston, J. E., & Mielke, P. W. (2011). Permutation methods. \emph{Wiley Interdisciplinary Reviews: Computational Statistics},\emph{3}, 527–542. \cr
-
 	Peres-Neto, P. R., Jackson, D. A., & Somers, K. M. (2005). How many principal components? Stopping rules for determining the number of non-trivial axes revisited. \emph{Computational Statistics & Data Analysis}, \emph{49}(4), 974-997.	\cr
 	Chernick, M. R. (2008). \emph{Bootstrap methods: A guide for practitioners and researchers} (Vol. 619). Wiley-Interscience.\cr
 	Hesterberg, T. (2011). Bootstrap. \emph{Wiley Interdisciplinary Reviews: Computational Statistics}, \emph{3}, 497–526. \cr
@@ -35,7 +34,7 @@ Primary authors and contributors are: Derek Beaton, Joseph Dunlop, and Hervé Ab
 \keyword{ package }
 \keyword{ multivariate }
 \seealso{
-\code{\link{epPCA.inference.battery}}, \code{\link{epGPCA.inference.battery}}, \code{\link{epCA.inference.battery}}, \code{\link{epMCA.inference.battery}}, \code{\link{epMDS.inference.battery}} (though, we recommend PCA for inference instead of MDS).\cr\cr
+\code{\link{epPCA.inference.battery}}, \code{\link{epGPCA.inference.battery}}, \code{\link{epCA.inference.battery}}, \code{\link{epMCA.inference.battery}}. There are no inference tests for MDS at this time. We recommend PCA for inference instead of MDS (some MDS inference tests require the rectangluar table, not the distances, so it is easier to just use PCA).\cr\cr
 
 See also \code{\link{inGraphs}} for graphing and \code{\link{caChiTest}} for an alternate to resampling methods for Correspondence Analysis.
 }

@@ -39,9 +39,7 @@ Primary authors and contributors are: Derek Beaton, Jenny Rieck, and Hervé Abdi
 \keyword{ package }
 \keyword{ multivariate }
 \seealso{
-\code{\link{epPCA.inference.battery}}, \code{\link{epGPCA.inference.battery}}, \code{\link{epCA.inference.battery}}, \code{\link{epMCA.inference.battery}}, \code{\link{epMDS.inference.battery}} (though, we recommend PCA for inference instead of MDS).\cr\cr
-
-See also \code{\link{inGraphs}} for graphing and \code{\link{caChiTest}} for an alternate to resampling methods for Correspondence Analysis.
+\code{\link{tepBADA.inference.battery}}, \code{\link{tepDICA.inference.battery}}\cr\cr
 }
 \examples{
 #For more examples, see each individual function (as noted above).
