@@ -25,11 +25,13 @@ Questions, comments, compliments, and complaints go to Derek Beaton \email{expos
 Primary authors and contributors are: Derek Beaton, Joseph Dunlop, and Hervé Abdi
 }
 \references{
+	Permutation:\cr
 	Berry, K. J., Johnston, J. E., & Mielke, P. W. (2011). Permutation methods. \emph{Wiley Interdisciplinary Reviews: Computational Statistics},\emph{3}, 527–542. \cr
 	Peres-Neto, P. R., Jackson, D. A., & Somers, K. M. (2005). How many principal components? Stopping rules for determining the number of non-trivial axes revisited. \emph{Computational Statistics & Data Analysis}, \emph{49}(4), 974-997.	\cr
+	\cr
+	Bootstrap:\cr
 	Chernick, M. R. (2008). \emph{Bootstrap methods: A guide for practitioners and researchers} (Vol. 619). Wiley-Interscience.\cr
 	Hesterberg, T. (2011). Bootstrap. \emph{Wiley Interdisciplinary Reviews: Computational Statistics}, \emph{3}, 497–526. \cr
-		
 }
 \keyword{ package }
 \keyword{ multivariate }

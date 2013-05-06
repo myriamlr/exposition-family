@@ -7,23 +7,16 @@ tinGraphs: TInPosition plotting function
 	TInPosition plotting function which is an interface to \code{\link{prettyGraphs}}.
 }
 \usage{
-tinGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, color.by.boots = TRUE, boot.cols = c("orchid4", "olivedrab3", "firebrick2"), fi.col = NULL, fi.pch = NULL, fii.col = NULL, fii.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, showHulls = 0.95, biplots = FALSE)
+tinGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, color.by.boots = TRUE, boot.cols = c("plum4", "darkseagreen", "firebrick3"), fi.col = NULL, fi.pch = NULL, fii.col = NULL, fii.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, showHulls = 0.95, biplots = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{res}{results from TExPosition}
   \item{DESIGN}{A design matrix to apply colors (by pallete selection) to row items}
   \item{x_axis}{which component should be on the x axis?}
   \item{y_axis}{which component should be on the y axis?}
-  \item{inference.info}{
-%%     ~~Describe \code{inference.info} here~~
-}
-  \item{color.by.boots}{
-%%     ~~Describe \code{color.by.boots} here~~
-}
-  \item{boot.cols}{
-%%     ~~Describe \code{boot.cols} here~~
-}
+  \item{inference.info}{Inference data as output by TInPosition (of class tinpoOutput).}
+  \item{color.by.boots}{a boolean. If TRUE, items are colored by bootstrap ratio test. Items larger than \code{critical.value} are colored 'plum4' on the horizontal component, 'darkseagreen' on the vertical component, or 'firebrick3' if the item is significant on both components (to be visualized). If FALSE, the color of the items will be used.}
+  \item{boot.cols}{vector of colors: \code{c(horizontal component color, vertical component color, color when item is significant on both)}.}
   \item{fi.col}{A matrix of colors for the group items. If NULL, colors will be selected.}
   \item{fi.pch}{A matrix of pch values for the group items. If NULL, pch values are all 21.}    
   \item{fii.col}{A matrix of colors for the row items (observations). If NULL, colors will be selected.}

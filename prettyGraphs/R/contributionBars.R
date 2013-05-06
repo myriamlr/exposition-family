@@ -34,8 +34,8 @@ function(factor_scores,contributions,x_axis=1,y_axis=2,col=NULL,main=NULL,upper=
 	for(i in 1:length(axes)){
 		if(resetCols){
 			col <- matrix("gray",nrow(contributions_with_signs),1)
-			col[which(contributions_with_signs[,i] <= -threshold),1] <- "mediumseagreen"
-			col[which(contributions_with_signs[,i] >= threshold),1] <- "orchid4"
+			col[which(contributions_with_signs[,i] <= -threshold),1] <- "darkseagreen"
+			col[which(contributions_with_signs[,i] >= threshold),1] <- "plum4"
 		}		
 		if(sortContributions){
 			ordered_inds <- order(contributions_with_signs[,axes[i]],decreasing=FALSE)

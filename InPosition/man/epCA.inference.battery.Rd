@@ -25,7 +25,8 @@ epCA.inference.battery(DATA, DESIGN = NULL, make_design_nominal = TRUE, masses =
   \item{critical.value}{numeric. A value, analogous to a z- or t-score to be used to determine significance (via bootstrap ratio).}      
 }
 \details{
-	\code{epCA.inference.battery} performs correspondence analysis and inference tests on a data matrix. 
+	\code{epCA.inference.battery} performs correspondence analysis and inference tests on a data matrix. \cr\cr
+	If the expected time to compute the results (based on \code{test.iters}) exceeds 1 minute, you will be asked (via command line) if you want to continue. 
 }
 \value{
 Returns two lists ($Fixed.Data and $Inference.Data). For $Fixed.Data, see \code{\link{epCA}}, \code{\link{coreCA}} for details on the descriptive (fixed-effects) results.
@@ -35,8 +36,7 @@ $Inference.Data returns:
 \item{fj.boots}{Bootstrap tests of measures (columns). See \code{\link{boot.ratio.test}} output details.}
 \item{omni}{Permutation tests of components. p-values ($p.vals) and distributions of total inertia ($inertia.perm)}
 }
-\references{
-}
+
 \author{
 Derek Beaton, Joseph Dunlop, and Hervé Abdi.
 }

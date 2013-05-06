@@ -1,4 +1,4 @@
-epPCA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, graphs = TRUE, k = 0, test.iters=1000, constrained=FALSE,critical.value=2){
+epPCA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, graphs = TRUE, k = 0, test.iters=100, constrained=FALSE,critical.value=2){
 
 ###some private functions
 permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
@@ -35,7 +35,10 @@ permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
 
 	#fj.boot.array <- replace(fj.boot.array,is.nan(fj.boot.array),0)
 	rownames(fj.boot.array) <- colnames(DATA)
-	fj.boot.data <- list(fj.tests=boot.ratio.test(fj.boot.array,critical.value=critical.value),fj.boots=fj.boot.array)
+	boot.ratio.test.data <- boot.ratio.test(fj.boot.array,critical.value=critical.value)
+	class(boot.ratio.test.data) <- c("inpoBootTests","list")
+	fj.boot.data <- list(tests=boot.ratio.test.data,boots=fj.boot.array)
+	class(fj.boot.data) <- c("inpoBoot", "list")
 	
 	eigs.perm.matrix <- eigs.perm.matrix[,1:ncomps]
 	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$ExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)

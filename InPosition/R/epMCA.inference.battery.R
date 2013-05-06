@@ -1,5 +1,5 @@
 ###function to handle fixed & random (bootstrap) effects for epMCA	
-epMCA.inference.battery <- function(DATA, make_data_nominal = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, correction = c("b"), graphs = TRUE, k = 0, test.iters=1000, constrained=FALSE, critical.value=2){
+epMCA.inference.battery <- function(DATA, make_data_nominal = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, correction = c("b"), graphs = TRUE, k = 0, test.iters=100, constrained=FALSE, critical.value=2){
 
 ####private functions
 permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,symmetric=TRUE,masses=NULL,weights=NULL,correction=c("b"),k=0){
@@ -44,10 +44,17 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 		setTxtProgressBar(pb,i)		
 	}
 	
+	#rownames(fj.boot.array) <- colnames(nom.DATA)
+	#fj.boot.data <- list(fj.tests=boot.ratio.test(fj.boot.array,critical.value=critical.value),fj.boots=fj.boot.array)
+	#class(fj.boot.data) <- c("inpoBootstrap", "list")
 	rownames(fj.boot.array) <- colnames(nom.DATA)
-	fj.boot.data <- list(fj.tests=boot.ratio.test(fj.boot.array,critical.value=critical.value),fj.boots=fj.boot.array)
+	boot.ratio.test.data <- boot.ratio.test(fj.boot.array,critical.value=critical.value)
+	class(boot.ratio.test.data) <- c("inpoBootTests","list")
+	fj.boot.data <- list(tests=boot.ratio.test.data,boots=fj.boot.array)
+	class(fj.boot.data) <- c("inpoBoot", "list")	
 	
-	round(eigs.perm.matrix,digits=15)
+	##do I still need this rounding?
+	eigs.perm.matrix <- round(eigs.perm.matrix,digits=15)
 	inertia.perm <- rowSums(eigs.perm.matrix)
 	omni.p <- max(1-(sum(inertia.perm < sum(round(fixed.res$ExPosition.Data$eigs,digits=15)))/test.iters),1/test.iters)
 	omni.data <- list(p.val=omni.p,inertia.perm=inertia.perm)

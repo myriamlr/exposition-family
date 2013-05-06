@@ -1,4 +1,4 @@
-inGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL,color.by.boots=TRUE,boot.cols=c('orchid4','olivedrab3','firebrick2'), fi.col=NULL,fi.pch=NULL,fj.col=NULL,fj.pch=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,biplots=FALSE){
+inGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL,color.by.boots=TRUE,boot.cols=c('plum4','darkseagreen','firebrick3'), fi.col=NULL,fi.pch=NULL,fj.col=NULL,fj.pch=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,biplots=FALSE){
 
 ##update this to get the pchs.
 
@@ -132,13 +132,13 @@ inGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL
 		
 		
 		#fj.boot.cols <- fj.col
-		boot.tests <- rowSums(inference.info$fj.boots$sig.boot.ratios[,c(x_axis,y_axis)])
+		boot.tests <- rowSums(inference.info$fj.boots$tests$sig.boot.ratios[,c(x_axis,y_axis)])
 		no.boot.axes <- which(boot.tests == 0)
 		both.boot.axes <- which(boot.tests == 2)
 		#x.boot.axis <- which(inference.info$fj.boots$sig.boot.ratios[,c(x_axis)]==1)
-		x.boot.axis <- which((inference.info$fj.boots$sig.boot.ratios[,c(x_axis)] - inference.info$fj.boots$sig.boot.ratios[,c(y_axis)])==1)
+		x.boot.axis <- which((inference.info$fj.boots$tests$sig.boot.ratios[,c(x_axis)] - inference.info$fj.boots$tests$sig.boot.ratios[,c(y_axis)])==1)
 		#y.boot.axis <- which(inference.info$fj.boots$sig.boot.ratios[,c(y_axis)]==1)
-		y.boot.axis <- which((inference.info$fj.boots$sig.boot.ratios[,c(y_axis)] - inference.info$fj.boots$sig.boot.ratios[,c(x_axis)])==1)
+		y.boot.axis <- which((inference.info$fj.boots$tests$sig.boot.ratios[,c(y_axis)] - inference.info$fj.boots$tests$sig.boot.ratios[,c(x_axis)])==1)
 	
 		#always do this -- user has no choice here.
 		if(length(no.boot.axes) != 0){
@@ -147,7 +147,7 @@ inGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL
 		#everything here.
 		if(color.by.boots){
 			if(is.null(boot.cols) || length(boot.cols) != 3){
-				boot.cols <- c('orchid4','olivedrab3','firebrick2')
+				boot.cols <- c('plum4','darkseagreen','firebrick3')
 			}				
 			if(length(x.boot.axis)!=0){
 				fj.col[x.boot.axis,1]  <- boot.cols[1]
@@ -167,16 +167,16 @@ inGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL
 		
 		if(!(class(res)[1]=='epMDS')){
 			if(biplots){
-				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=FALSE,pch=fj.pch,contributionCircles=TRUE,contributions=abs(inference.info$fj.boots$boot.ratios),dev.new=FALSE,new.plot=FALSE)
+				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=FALSE,pch=fj.pch,contributionCircles=TRUE,contributions=abs(inference.info$fj.boots$tests$boot.ratios),dev.new=FALSE,new.plot=FALSE)
 			}else{
-				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,pch=fj.pch,contributionCircles=TRUE,contributions=abs(inference.info$fj.boots$boot.ratios),dev.new=TRUE)		
+				fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,pch=fj.pch,contributionCircles=TRUE,contributions=abs(inference.info$fj.boots$tests$boot.ratios),dev.new=TRUE)		
 			}
 		}
 		if(contributionPlots){
 			if(!(class(res)[1]=='epMDS')){
-				prettyBars(inference.info$fj.boots$boot.ratios,axis=x_axis,fg.col=fj.col.x,dev.new=TRUE,threshold.line=TRUE,main=paste("Bootstrap Ratios Component: ",x_axis,sep=""),bg.lims=c(-inference.info$fj.boots$critical.value,inference.info$fj.boots$critical.value))
+				prettyBars(inference.info$fj.boots$tests$boot.ratios,axis=x_axis,fg.col=fj.col.x,dev.new=TRUE,threshold.line=TRUE,main=paste("Bootstrap Ratios Component: ",x_axis,sep=""),bg.lims=c(-inference.info$fj.boots$tests$critical.value,inference.info$fj.boots$tests$critical.value))
 				
-				prettyBars(inference.info$fj.boots$boot.ratios,axis=y_axis,fg.col=fj.col.y,dev.new=TRUE,horiz=FALSE,threshold.line=TRUE,main=paste("Bootstrap Ratios Component: ",y_axis,sep=""),bg.lims=c(-inference.info$fj.boots$critical.value,inference.info$fj.boots$critical.value))
+				prettyBars(inference.info$fj.boots$tests$boot.ratios,axis=y_axis,fg.col=fj.col.y,dev.new=TRUE,horiz=FALSE,threshold.line=TRUE,main=paste("Bootstrap Ratios Component: ",y_axis,sep=""),bg.lims=c(-inference.info$fj.boots$tests$critical.value,inference.info$fj.boots$tests$critical.value))
 				
 			}
 		}		

@@ -34,9 +34,17 @@ permute.components.ca <- function(DATA,hellinger=FALSE,symmetric=TRUE,masses=NUL
 		setTxtProgressBar(pb,i)
 	}
 	
+#	rownames(fj.boot.array) <- colnames(DATA)
+#	fj.boot.data <- list(fj.tests=boot.ratio.test(fj.boot.array,critical.value=critical.value),fj.boots=fj.boot.array)
+#	class(fj.boot.data) <- c("inpoBootstrap", "list")
 	rownames(fj.boot.array) <- colnames(DATA)
-	fj.boot.data <- list(fj.tests=boot.ratio.test(fj.boot.array,critical.value=critical.value),fj.boots=fj.boot.array)
-		
+	boot.ratio.test.data <- boot.ratio.test(fj.boot.array,critical.value=critical.value)
+	class(boot.ratio.test.data) <- c("inpoBootTests","list")
+	fj.boot.data <- list(tests=boot.ratio.test.data,boots=fj.boot.array)
+	class(fj.boot.data) <- c("inpoBoot", "list")
+	
+	##do I still need this rounding?
+	eigs.perm.matrix <- round(eigs.perm.matrix,digits=15)	
 	inertia.perm <- rowSums(eigs.perm.matrix)
 	omni.p <- max(1-(sum(inertia.perm < sum(fixed.res$ExPosition.Data$eigs))/test.iters),1/test.iters)
 	omni.data <- list(p.val=omni.p,inertia.perm=inertia.perm)
