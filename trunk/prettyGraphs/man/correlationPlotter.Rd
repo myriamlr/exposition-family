@@ -26,6 +26,9 @@ Which axis is the y-axis? Default is 2.
   \item{col}{
 A single-column matrix of colors for each data point.
 }
+  \item{pch}{
+A single-column matrix of pch for each data point. Indicates which point style to use for each item. See \code{\link{par}}.
+}
   \item{xlab}{
 A label to be placed along the x-axis.
 }

@@ -27,7 +27,8 @@ epMCA.inference.battery(DATA, make_data_nominal = TRUE, DESIGN = NULL, make_desi
   \item{critical.value}{numeric. A value, analogous to a z- or t-score to be used to determine significance (via bootstrap ratio).}
 }
 \details{
-	\code{epMCA.inference.battery} performs multiple correspondence analysis and inference tests on a data matrix. 
+	\code{epMCA.inference.battery} performs multiple correspondence analysis and inference tests on a data matrix. \cr\cr
+	If the expected time to compute the results (based on \code{test.iters}) exceeds 1 minute, you will be asked (via command line) if you want to continue. 
 }
 \value{
 Returns two lists ($Fixed.Data and $Inference.Data). For $Fixed.Data, see \code{\link{epMCA}}, \code{\link{coreCA}} for details on the descriptive (fixed-effects) results.

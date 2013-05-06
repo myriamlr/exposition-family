@@ -7,7 +7,7 @@ inGraphs: InPosition plotting function
 	InPosition plotting function which is an interface to \code{\link{prettyGraphs}}.
 }
 \usage{
-inGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, color.by.boots = TRUE, boot.cols = c("orchid4", "olivedrab3", "firebrick2"), fi.col = NULL, fi.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE)
+inGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, color.by.boots = TRUE, boot.cols = c("plum4", "darkseagreen", "firebrick3"), fi.col = NULL, fi.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE)
 }
 \arguments{
   \item{res}{results from InPosition or ExPosition. If results are from ExPosition, \code{inference.info} must be included.}
@@ -15,7 +15,7 @@ inGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL
   \item{x_axis}{which component should be on the x axis?}
   \item{y_axis}{which component should be on the y axis?}  
   \item{inference.info}{Inference data as output by InPosition (of class inpoOutput).}
-  \item{color.by.boots}{a boolean. If TRUE, items are colored by bootstrap ratio test. Items larger than \code{critical.value} are colored orchid4 on the horizontal component, olivedrab3 on the vertical componeont, or firebrick2 if the item is significant on both components (to be visualized). If FALSE, the color of the items will be used.}
+  \item{color.by.boots}{a boolean. If TRUE, items are colored by bootstrap ratio test. Items larger than \code{critical.value} are colored 'plum4' on the horizontal component, 'darkseagreen' on the vertical component, or 'firebrick3' if the item is significant on both components (to be visualized). If FALSE, the color of the items will be used.}
   \item{boot.cols}{vector of colors: \code{c(horizontal component color, vertical component color, color when item is significant on both)}.}
   \item{fi.col}{A matrix of colors for the row items. If NULL, colors will be selected.}
   \item{fi.pch}{A matrix of pch values for the row items. If NULL, pch values are all 21.}    

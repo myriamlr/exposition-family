@@ -1,4 +1,4 @@
-prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show.bg.bars=FALSE,threshold.line=FALSE,main="",bg.border="white",bg.col=NULL,bg.lims=NULL,horiz=TRUE,dev.new=TRUE){
+prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show.bg.bars=FALSE,threshold.line=FALSE,main="",bg.border="white",bg.col=NULL,bg.lims=NULL,sort.data=TRUE,horiz=TRUE,dev.new=TRUE){
 	
 	#I want data to be a matrix, for now.
 	data <- as.matrix(data)
@@ -18,13 +18,24 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 	
 	sign.values <- sign(data[,axis])
 	poss <- sum(which(sign.values>= 0))
-	negs <- sum(which(sign.values==-1))	
-	
+	negs <- sum(which(sign.values==-1))
+		
 	if(is.null(fg.col)){
 		#create colors
-		fg.col <- matrix("orchid4",nrow(data),1)
-		fg.col[which(sign.values==-1),1] <- "olivedrab3"		
+		fg.col <- matrix("plum4",nrow(data),1)
+		fg.col[which(sign.values==-1),1] <- "darkseagreen"		
 	}
+	
+	if(sort.data){
+		order.inds <- order(data[,axis])
+		data <- data[order.inds,]
+		fg.col <- as.matrix(fg.col[order.inds,])
+		##there should be a faster way...	
+		sign.values <- sign(data[,axis])
+		poss <- sum(which(sign.values>= 0))
+		negs <- sum(which(sign.values==-1))		
+	}
+	
 	if(dev.new){
 		dev.new()
 	}
@@ -54,8 +65,8 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 	rownames(data.copy) <- NULL
 	colnames(data.copy) <- NULL
 	if(horiz){
-		bp.cols <- barplot(data.copy[,axis],col=fg.col,horiz=horiz,xlim=axis.lims,axes=FALSE,border=fg.col,add=show.bg.bars)			
-		abline(v=0,lty=5,lwd=2,main=main)
+		bp.cols <- barplot(data.copy[,axis],col=fg.col,horiz=horiz,xlim=axis.lims,axes=FALSE,border=fg.col,add=show.bg.bars,main=main)
+		abline(v=0,lty=5,lwd=2)
 		if(threshold.line && (!is.null(bg.lims) && length(bg.lims)==2)){
 			abline(v=bg.lims,lwd=2,col=bg.col,lty=4)
 		}
@@ -66,8 +77,8 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 			text(data[which(sign.values ==-1),axis], bp.cols[which(sign.values ==-1)], rownames(data)[which(sign.values ==-1)],cex=cex.names,adj=1.1,col=fg.col[which(sign.values == -1),])
 		}
 	}else{
-		bp.cols <- barplot(data.copy[,axis],col=fg.col,horiz=horiz,ylim=axis.lims,axes=FALSE,border=fg.col,add=show.bg.bars)		
-		abline(h=0,lty=5,lwd=2,main=main)		
+		bp.cols <- barplot(data.copy[,axis],col=fg.col,horiz=horiz,ylim=axis.lims,axes=FALSE,border=fg.col,add=show.bg.bars,main=main)
+		abline(h=0,lty=5,lwd=2)
 		if(threshold.line && (!is.null(bg.lims) && length(bg.lims)==2)){
 			abline(h=bg.lims,lwd=2,col=bg.col,lty=4)
 		}		

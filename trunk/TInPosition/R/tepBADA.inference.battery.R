@@ -75,11 +75,19 @@ tepBADA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN 
 	}
 	
 	rownames(FBX) <- colnames(DATA)
-	rownames(FBY) <- colnames(DESIGN)		
-	fj.boot.data <- list(fj.tests=boot.ratio.test(FBX,critical.value),fj.boots=FBX)
-	fi.boot.data <- list(fi.tests=boot.ratio.test(FBY,critical.value),fi.boots=FBY)
+	rownames(FBY) <- colnames(DESIGN)
+	x.boot.tests <- boot.ratio.test(FBX,critical.value)
+	class(x.boot.tests) <- c("tinpoBootTests","list")
+	fj.boot.data <- list(tests=x.boot.tests,boots=FBX)
+	class(fj.boot.data) <- c("tinpoBoot","list")	
+	y.boot.tests <- boot.ratio.test(FBY,critical.value)
+	class(y.boot.tests) <- c("tinpoBootTests","list")	
+	fi.boot.data <- list(tests=y.boot.tests,boots=FBY)
+	class(fi.boot.data) <- c("tinpoBoot","list")
 	boot.data <- list(fj.boot.data=fj.boot.data,fi.boot.data=fi.boot.data)
+	class(boot.data) <- c("tinpoAllBoots","list")
 	
+	eigs.perm.matrix <- round(eigs.perm.matrix,digits=15)	
 	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$TExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
 	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
 	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix)
@@ -98,6 +106,7 @@ tepBADA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN 
 	fixed.acc <- sum(diag(fixed.confuse))/sum(fixed.confuse)	
 	loo.data <- list(loo.assign=loo.assign, loo.fii=loo.fii, loo.confuse=loo.confuse, fixed.confuse=fixed.confuse, loo.acc=loo.acc, fixed.acc=fixed.acc)
 	#loo.data <- list(loo.assign=loo.assign, loo.fii=loo.fii, loo.confuse=t(DESIGN) %*% loo.assign)
+	class(loo.data) <- c("tinpoLOO","list")
 	
  	Inference.Data <- list(omni=omni.data,r2=r2.data,components=components.data,boot.data=boot.data,loo.data=loo.data)
  	class(Inference.Data) <- c("tepBADA.inference.battery","list")

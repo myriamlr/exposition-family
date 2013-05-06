@@ -3,29 +3,45 @@ function(data_matrix,x_axis=1,y_axis=2,col=NULL,pch=NULL,cex=NULL,text.cex=NULL,
 	
 	#I want to always send back colors and constraints.
 	#I need a different type of checker here...
+	if(is.null(col)){
+		col <- colorVectorIsNull(data_matrix)$oc
+	}
+	col <- as.matrix(col)
 	if(length(col)==1){
 		col <- as.matrix(rep(col,nrow(data_matrix)))
-	}else if(is.null(col) || nrow(col)!=nrow(data_matrix)){
+	}else if(nrow(col)!=nrow(data_matrix)){
 		col <- colorVectorIsNull(data_matrix)$oc
 	}
 	
+	if(is.null(pch)){
+		pch <- as.matrix(rep(21,nrow(data_matrix)))
+	}
+	pch <- as.matrix(pch)
 	if(length(pch)==1){
 		pch <- as.matrix(rep(pch,nrow(data_matrix)))
-	}else if(is.null(pch) || nrow(pch)!=nrow(data_matrix)){
+	}else if(nrow(pch)!=nrow(data_matrix)){
 		pch <- as.matrix(rep(21,nrow(data_matrix)))
 	}
 	
+	if(is.null(cex)){
+		cex <- as.matrix(rep(1,nrow(data_matrix)))
+	}
+	cex <- as.matrix(cex)
 	if(length(cex)==1){
 		cex <- as.matrix(rep(cex,nrow(data_matrix)))
-	}else if(is.null(cex) || nrow(cex)!=nrow(data_matrix)){
+	}else if(nrow(cex)!=nrow(data_matrix)){
 		cex <- as.matrix(rep(1,nrow(data_matrix)))
 	}
 	
+	if(is.null(text.cex)){
+		text.cex <- as.matrix(rep(0.8,nrow(data_matrix)))
+	}
+	text.cex <- as.matrix(cex)
 	if(length(text.cex)==1){
 		text.cex <- as.matrix(rep(text.cex,nrow(data_matrix)))
-	}else if(is.null(cex) || nrow(cex)!=nrow(data_matrix)){
+	}else if(nrow(text.cex)!=nrow(data_matrix)){
 		text.cex <- as.matrix(rep(0.8,nrow(data_matrix)))
-	}	
+	}
 	
 	#I only need constraints if I am making a new window.
 	check.constraints <- minmaxHelper(data_matrix,data_matrix,x_axis,y_axis,findBounds=findBounds)	

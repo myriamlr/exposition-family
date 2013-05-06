@@ -8,7 +8,7 @@ epGPCA.inference.battery: Inference tests for Generalized Principal Component An
 Generalized Principal Component Analysis (PCA) and a battery of inference tests via InPosition. The battery includes permutation and bootstrap tests.
 }
 \usage{
-epGPCA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, graphs = TRUE, k = 0, test.iters = 1000, constrained = FALSE, critical.value = 2)
+epGPCA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, graphs = TRUE, k = 0, test.iters = 100, constrained = FALSE, critical.value = 2)
 }
 \arguments{
   \item{DATA}{original data to perform a PCA on.}
@@ -25,7 +25,8 @@ epGPCA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_
   \item{critical.value}{numeric. A value, analogous to a z- or t-score to be used to determine significance (via bootstrap ratio).}
 }
 \details{
-	\code{epGPCA.inference.battery} performs generalized principal components analysis and inference tests on a data matrix. 
+	\code{epGPCA.inference.battery} performs generalized principal components analysis and inference tests on a data matrix. \cr\cr
+	If the expected time to compute the results (based on \code{test.iters}) exceeds 1 minute, you will be asked (via command line) if you want to continue. 
 }
 \value{
 Returns two lists ($Fixed.Data and $Inference.Data). For $Fixed.Data, see \code{\link{epGPCA}}, \code{\link{corePCA}} for details on the descriptive (fixed-effects) results.
@@ -33,8 +34,6 @@ Returns two lists ($Fixed.Data and $Inference.Data). For $Fixed.Data, see \code{
 $Inference.Data returns:
 \item{components}{Permutation tests of components. p-values ($p.vals) and distributions of eigenvalues ($eigs.perm) for each component}
 \item{fj.boots}{Bootstrap tests of measures (columns). See \code{\link{boot.ratio.test}} output details.}
-}
-\references{
 }
 \author{
 Derek Beaton and Hervé Abdi.
