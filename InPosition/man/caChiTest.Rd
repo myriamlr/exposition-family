@@ -25,15 +25,11 @@ a list with the following values:\cr
 \item{omni.val}{chi-square value associated to the table.}
 \item{omni.p}{p value associated to a chi-square tests of the table.}
 }
-\references{
-}
 \author{
 Derek Beaton
 }
 \seealso{
 	\code{\link{epCA.inference.battery}}
-}
-\examples{
 }
 \keyword{ inference }
 \keyword{ correspondence analysis }

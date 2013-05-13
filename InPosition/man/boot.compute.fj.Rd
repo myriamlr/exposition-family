@@ -1,5 +1,6 @@
 \name{boot.compute.fj}
 \alias{boot.compute.fj}
+\encoding{UTF-8}
 \title{
 Compute bootstrap resampled \code{fj} as supplemental elements.
 }

@@ -8,7 +8,9 @@ epGraphs: ExPosition plotting function
 }
 
 \usage{
-epGraphs(res, DESIGN=NULL, x_axis = 1, y_axis = 2, fi.col = NULL, fi.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE, graphs = TRUE)
+epGraphs(res, DESIGN=NULL, x_axis = 1, y_axis = 2, fi.col = NULL, fi.pch = NULL, fj.col = NULL, fj.pch = NULL,
+	col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, 
+	contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE, graphs = TRUE)
 }
 
 \arguments{

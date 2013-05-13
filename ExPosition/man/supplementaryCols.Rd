@@ -27,7 +27,5 @@ A list of values containing:\cr
 \author{
 Derek Beaton
 }
-\examples{
-}
 \keyword{ misc }
 \keyword{ multivariate }

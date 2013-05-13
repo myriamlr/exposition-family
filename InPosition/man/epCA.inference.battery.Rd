@@ -8,7 +8,8 @@ epCA.inference.battery: Inference tests for Correspondence Analysis (CA) via InP
 Correspondence Analysis (CA) and a battery of inference tests via InPosition. The battery includes permutation and bootstrap tests.
 }
 \usage{
-epCA.inference.battery(DATA, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0, test.iters = 100, constrained = FALSE, critical.value = 2)
+epCA.inference.battery(DATA, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, 
+	hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2)
 }
 \arguments{
   \item{DATA}{original data to perform a CA on.}
@@ -21,7 +22,6 @@ epCA.inference.battery(DATA, DESIGN = NULL, make_design_nominal = TRUE, masses =
   \item{graphs}{a boolean. If TRUE (default), graphs and plots are provided (via \code{\link{epGraphs}})}
   \item{k}{number of components to return.}
   \item{test.iters}{number of iterations}
-  \item{constrained}{a boolean. If a DESIGN matrix is used, this will constrain bootstrap resampling to be within groups.}
   \item{critical.value}{numeric. A value, analogous to a z- or t-score to be used to determine significance (via bootstrap ratio).}      
 }
 \details{

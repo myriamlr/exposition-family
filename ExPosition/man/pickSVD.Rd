@@ -25,8 +25,5 @@ pickSVD(datain, is.mds = FALSE, decomp.approach = "svd", k = 0)
 \author{
 Derek Beaton
 }
-\examples{
-
-}
 \keyword{ misc }
 \keyword{ multivariate }

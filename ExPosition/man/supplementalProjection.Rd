@@ -24,8 +24,5 @@ supplementalProjection(sup.transform = NULL, f.scores = NULL, Dv = NULL, scale.f
 \author{
 Derek Beaton
 }
-\examples{
-
-}
 \keyword{ misc }
 \keyword{ multivariate }

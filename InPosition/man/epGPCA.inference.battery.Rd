@@ -8,7 +8,8 @@ epGPCA.inference.battery: Inference tests for Generalized Principal Component An
 Generalized Principal Component Analysis (PCA) and a battery of inference tests via InPosition. The battery includes permutation and bootstrap tests.
 }
 \usage{
-epGPCA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, graphs = TRUE, k = 0, test.iters = 100, constrained = FALSE, critical.value = 2)
+epGPCA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL,
+	graphs = TRUE, k = 0, test.iters = 100, constrained = FALSE, critical.value = 2)
 }
 \arguments{
   \item{DATA}{original data to perform a PCA on.}

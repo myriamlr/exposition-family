@@ -23,6 +23,4 @@ expo.scale(DATA, center = TRUE, scale = TRUE)
 \author{
 Derek Beaton
 }
-\examples{
-}
 \keyword{ misc }

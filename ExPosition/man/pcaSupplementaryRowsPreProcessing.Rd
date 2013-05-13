@@ -15,8 +15,6 @@ pcaSupplementaryRowsPreProcessing(SUP.DATA = NULL, center = TRUE, scale = TRUE, 
   \item{scale}{The scale factor from the active data. NULL will scale (z-score) \code{SUP.DATA} to itself.}
   \item{W}{Weights from the active data. Used in \code{\link{epGPCA}}.}
 }
-\details{
-}
 \value{
 	a matrix that has been preprocessed to project supplementary rows for PCA methods.
 }

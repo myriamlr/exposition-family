@@ -7,7 +7,8 @@
 Barycentric Discriminant Analysis (BADA) via TExPosition.
 }
 \usage{
-tepBADA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0)
+tepBADA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, 
+	group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0)
 }
 \arguments{
     \item{DATA}{original data to perform a PCA on.}

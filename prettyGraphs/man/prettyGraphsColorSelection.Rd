@@ -31,6 +31,4 @@ http://stackoverflow.com/questions/3789968/generate-a-list-of-primes-in-r-up-to-
 \seealso{
 	\code{\link{prettyGraphsColors}}, 	\code{\link{prettyGraphsHSVColorSelection}}
 }
-\examples{
-}
 \keyword{ graphs }
