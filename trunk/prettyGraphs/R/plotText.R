@@ -1,5 +1,5 @@
 plotText <-
-function(data_matrix,col,x_axis=1,y_axis=2,pos=3,text.cex=0.7,contributionCircles=FALSE,contributions=NULL){
+function(data_matrix,col,x_axis=1,y_axis=2,pos=3,text.cex=0.8,contributionCircles=FALSE,contributions=NULL){
 #	thesecontributions <- 0
 	if(contributionCircles){
 #		if(!is.null(contributions)){
