@@ -8,7 +8,8 @@ Discriminant Correspondence Analysis
 Discriminant Correspondence Analysis (DICA) via TExPosition.
 }
 \usage{
-tepDICA(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0)
+tepDICA(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE,
+	group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0)
 }
 \arguments{
 \item{DATA}{original data to perform a MCA on. This data can be in original formatting (qualitative levels) or in dummy-coded variables.}

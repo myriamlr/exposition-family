@@ -8,7 +8,9 @@ Discriminant Correspondence Analysis Inference Battery
 Discriminant Correspondence Analysis (DICA) Inference Battery via TInPosition
 }
 \usage{
-tepDICA.inference.battery(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2)
+tepDICA.inference.battery(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE,
+	group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0,
+	test.iters = 100, critical.value = 2)
 }
 \arguments{
 \item{DATA}{original data to perform a MCA on. This data can be in original formatting (qualitative levels) or in dummy-coded variables.}
@@ -25,19 +27,12 @@ tepDICA.inference.battery(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_d
   \item{test.iters}{number of iterations}
   \item{critical.value}{numeric. A value, analogous to a z- or t-score to be used to determine significance (via bootstrap ratio).}
 }
-\details{
-
-}
 \value{
 	See \code{\link{tepDICA}} (and also \code{\link{coreCA}}) for details on what is returned. In addition to the values returned:\cr
 }
-\references{
-}
+
 \author{
 Derek Beaton, Jenny Rieck, Hervé Abdi
-}
-\seealso{
-
 }
 \examples{
 data(dica.wine)

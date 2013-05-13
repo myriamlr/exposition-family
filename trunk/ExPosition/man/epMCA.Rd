@@ -8,7 +8,8 @@ epMCA: Multiple Correspondence Analysis (MCA) via ExPosition.
 Multiple Correspondence Analysis (MCA) via ExPosition.
 }
 \usage{
-epMCA(DATA, make_data_nominal = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, correction = c("b"), graphs = TRUE, k = 0)
+epMCA(DATA, make_data_nominal = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL,
+	hellinger = FALSE, symmetric = TRUE, correction = c("b"), graphs = TRUE, k = 0)
 }
 \arguments{
 	\item{DATA}{original data to perform a MCA on. This data can be in original formatting (qualitative levels) or in dummy-coded variables.}

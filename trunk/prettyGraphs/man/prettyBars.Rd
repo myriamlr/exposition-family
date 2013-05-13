@@ -7,7 +7,8 @@ prettyBars
 prettyBars creates simple, crisp, publication-style quality bar graphs. 
 }
 \usage{
-prettyBars(data, axis = 1, cex.names = 0.5, fg.col = NULL, axis.lims = NULL, show.bg.bars = FALSE, threshold.line = FALSE, main = "", bg.border = "white", bg.col = NULL, bg.lims = NULL, horiz = TRUE, dev.new = TRUE)
+prettyBars(data, axis = 1, cex.names = 0.5, fg.col = NULL, axis.lims = NULL, show.bg.bars = FALSE, threshold.line = FALSE, main = "",
+	bg.border = "white", bg.col = NULL, bg.lims = NULL, sort.data = TRUE, horiz = TRUE, dev.new = TRUE)
 }
 \arguments{
   \item{data}{A set of data you would like to plot with bars for 1 dimension. Can be original data or factor scores or anything with at least 1 column.}
@@ -21,10 +22,9 @@ prettyBars(data, axis = 1, cex.names = 0.5, fg.col = NULL, axis.lims = NULL, sho
   \item{bg.border}{color for \code{show.bg.bars} borders (see \code{border} in \code{link{barplot}})}
   \item{bg.col}{a matrix (single column) of colors for background bars to be plotted under \code{fg.col}.}
   \item{bg.lims}{two values in the form of \code{c(min,max)} for where to plot background bars or threshold line.}
+  \item{sort.data}{a boolean. Will sort the bars by descending values.}
   \item{horiz}{see \code{horiz} in \code{link{barplot}}.}
   \item{dev.new}{boolean. If TRUE, \code{\link{dev.new}} is called internally to create new device. If FALSE, a device must already be open.}
-}
-\details{
 }
 \value{
 	\item{bp.cols}{locations of bars (as would be returned by \code{\link{barplot}}).}

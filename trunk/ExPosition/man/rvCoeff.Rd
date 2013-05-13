@@ -23,8 +23,5 @@ rvCoeff(S, T, type = -1)
 \author{
 Derek Beaton
 }
-\examples{
-
-}
 \keyword{ misc }
 \keyword{ multivariate }

@@ -7,7 +7,9 @@ inGraphs: InPosition plotting function
 	InPosition plotting function which is an interface to \code{\link{prettyGraphs}}.
 }
 \usage{
-inGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, color.by.boots = TRUE, boot.cols = c("plum4", "darkseagreen", "firebrick3"), fi.col = NULL, fi.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE)
+inGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, color.by.boots = TRUE, boot.cols = c("plum4", "darkseagreen", "firebrick3"), 
+	fi.col = NULL, fi.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL,
+	constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE)
 }
 \arguments{
   \item{res}{results from InPosition or ExPosition. If results are from ExPosition, \code{inference.info} must be included.}

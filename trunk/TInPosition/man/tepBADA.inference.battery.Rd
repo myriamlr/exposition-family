@@ -8,7 +8,8 @@
 Barycentric Discriminant Analysis (BADA) Inference Battery via TInPosition.
 }
 \usage{
-tepBADA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2)
+tepBADA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, 
+	group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2)
 }
 \arguments{
     \item{DATA}{original data to perform a PCA on.}
@@ -24,24 +25,11 @@ tepBADA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make
   \item{test.iters}{number of iterations}
   \item{critical.value}{numeric. A value, analogous to a z- or t-score to be used to determine significance (via bootstrap ratio).}
 }
-\details{
-
-}
 \value{
 	See \code{\link{tepBADA}} (and also \code{\link{corePCA}}) for details on what is returned. In addition to the values returned:\cr
 }
-\references{
-
-}
 \author{
 Derek Beaton, Jenny Rieck, Hervé Abdi
-}
-\note{
-
-}
-
-\seealso{
-
 }
 \examples{
 data(bada.wine)

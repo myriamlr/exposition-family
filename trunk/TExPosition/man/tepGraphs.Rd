@@ -8,7 +8,9 @@ tepGraphs: TExPosition plotting function
 }
 
 \usage{
-tepGraphs(res, DESIGN = NULL, x_axis = 1, y_axis = 2, fi.col = NULL, fi.pch = NULL, fii.col = NULL, fii.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, showHulls = 1, biplots = FALSE, graphs = TRUE)
+tepGraphs(res, DESIGN = NULL, x_axis = 1, y_axis = 2, fi.col = NULL, fi.pch = NULL, fii.col = NULL, fii.pch = NULL, fj.col = NULL,
+ 	fj.pch = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE,
+ 	correlationPlotter = TRUE, showHulls = 1, biplots = FALSE, graphs = TRUE)
 
 #(fi.col=NULL, fi.pch=NULL, fii.col=NULL, fii.pch = NULL, fj.col=NULL, fj.pch = NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=1,biplots=FALSE,graphs=TRUE)
 }

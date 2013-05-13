@@ -8,7 +8,8 @@ epPCA.inference.battery: Inference tests for Principal Component Analysis (PCA) 
 Principal Component Analysis (PCA) and a battery of inference tests via InPosition. The battery includes permutation and bootstrap tests.
 }
 \usage{
-epPCA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, graphs = TRUE, k = 0, test.iters = 100, constrained = FALSE, critical.value = 2)
+epPCA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, graphs = TRUE, k = 0,
+	test.iters = 100, constrained = FALSE, critical.value = 2)
 }
 \arguments{
   \item{DATA}{original data to perform a PCA on.}

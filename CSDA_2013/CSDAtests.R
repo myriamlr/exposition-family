@@ -1,3 +1,4 @@
+library(TInPosition)
 ###CSDA Tests
 
 #for ade4 

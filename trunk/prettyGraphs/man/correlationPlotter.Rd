@@ -8,7 +8,8 @@ correlationPlotter
 Computes and plots a correlation circle (used in multivariate analyses). Correlation is computed between measured items and components (factors, dimensions, principal axes, etc...). 
 }
 \usage{
-correlationPlotter(data_matrix, factor_scores, x_axis = 1, y_axis = 2, col = NULL, pch = NULL, xlab = NULL, ylab = NULL, main = "", asp = 1, dev.new = TRUE)
+correlationPlotter(data_matrix, factor_scores, x_axis = 1, y_axis = 2, col = NULL, pch = NULL, xlab = NULL, ylab = NULL, main = "",
+	asp = 1, dev.new = TRUE)
 }
 \arguments{
   \item{data_matrix}{

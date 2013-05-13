@@ -1,14 +1,14 @@
-\name{print.tepDICA}
-\alias{print.tepDICA}
-\title{Print tepDICA results}
+\name{print.tepDICA.inference.battery}
+\alias{print.tepDICA.inference.battery}
+\title{Print tepDICA.inference.battery results}
 \description{
-	Print tepDICA results.
+	Print tepDICA Inference results.
 }
 \usage{
-	\method{print}{tepDICA}(x,\dots)
+	\method{print}{tepDICA.inference.battery}(x,\dots)
 }
 \arguments{
-  \item{x}{an list that contains items to make into the tepDICA class.}
+  \item{x}{an list that contains items to make into the tepDICA.inference.battery class.}
   \item{\dots}{inherited/passed arguments for S3 print method(s).}  
  }
 \author{Derek Beaton, Cherise Chin-Fatt}

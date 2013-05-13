@@ -7,7 +7,10 @@ prettyPlot
 prettyPlot creates simple, crisp, publication-style quality graphics for multivariate analyses. 
 }
 \usage{
-prettyPlot(data_matrix,x_axis=1,y_axis=2,col=NULL,pch=NULL,cex=NULL,text.cex=NULL,pos=3,xlab="",ylab="",main="",display_names=TRUE,display_points=TRUE,constraints=NULL,contributionCircles=FALSE,contributions=NULL,axes=TRUE,fg.line.width=3,fg.type="l",fg.col="black",bg.line.width=1.5,bg.lty=3,bg.col = "black",flip=FALSE,asp=1,findBounds=TRUE,dev.new=TRUE,new.plot=TRUE)
+prettyPlot(data_matrix,x_axis=1,y_axis=2,col=NULL,pch=NULL,cex=NULL,text.cex=NULL,pos=3,xlab="",ylab="",main="",
+	display_names=TRUE,display_points=TRUE,constraints=NULL,contributionCircles=FALSE,contributions=NULL,axes=TRUE,
+	fg.line.width=3,fg.type="l",fg.col="black",bg.line.width=1.5,bg.lty=3,bg.col="black",
+	flip=FALSE,asp=1,findBounds=TRUE,dev.new=TRUE,new.plot=TRUE)
 }
 \arguments{
   \item{data_matrix}{
