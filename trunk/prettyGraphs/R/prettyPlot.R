@@ -36,7 +36,8 @@ function(data_matrix,x_axis=1,y_axis=2,col=NULL,pch=NULL,cex=NULL,text.cex=NULL,
 	if(is.null(text.cex)){
 		text.cex <- as.matrix(rep(0.8,nrow(data_matrix)))
 	}
-	text.cex <- as.matrix(cex)
+	
+	text.cex <- as.matrix(text.cex)	
 	if(length(text.cex)==1){
 		text.cex <- as.matrix(rep(text.cex,nrow(data_matrix)))
 	}else if(nrow(text.cex)!=nrow(data_matrix)){
