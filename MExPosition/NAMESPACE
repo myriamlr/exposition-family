@@ -1,5 +1,4 @@
 export(
-matrixTrace, 
 mpANISOSTATIS.core,
 mpANISOSTATIS,
 mpCANOSTATIS.core,

@@ -1,6 +1,5 @@
 mpGraphs <- function(res, table, DESIGN = NULL, x_axis=1, y_axis=2, fi.col=NULL, fj.col=NULL, table.col = NULL, col.offset = NULL, constraints=NULL, xlab = NULL, ylab = NULL, main = NULL, graphs=TRUE) 
-{
-	mpPlotInfo <- NULL
+{	mpPlotInfo <- NULL
 	if(class(res)[1] == "mexpoOutput")
 	{	if(length(res) == 2)
 		{	mpPlotInfo <- res$Plotting.Data
@@ -71,11 +70,13 @@ mpGraphs <- function(res, table, DESIGN = NULL, x_axis=1, y_axis=2, fi.col=NULL,
 				table.col <- createColorVectorsByDesign(t(table), offset=col.offset)$gc
 			}
 		} 
+	
 		else
 		{	fi.col <- mpPlotInfo$fi.col
 			fj.col <- mpPlotInfo$fj.col
 			table.col <- mpPlotInfo$table.col
 		}
+	
 	}
 
 	if(is.null(constraints))
@@ -93,10 +94,10 @@ mpGraphs <- function(res, table, DESIGN = NULL, x_axis=1, y_axis=2, fi.col=NULL,
 			compromise.fi.plot.info <- prettyPlot(res$Compromise$compromise.fi, x_axis=x_axis, y_axis=y_axis, col=fi.col, xlab=xlab.table, ylab=ylab.table, 
 												main = paste("Compromise",main), contributionCircles=TRUE, contributions = res$Compromise$compromise.ci,dev.new=TRUE)
 		
-			partial.plot.info <- prettyPlot(res$Table$partial.fi, x_axis=x_axis, y_axis=y_axis, col=rep(fi.col,res$Overview$num.groups), 
+			partial.plot.info <- prettyPlot(res$Table$partial.fi, x_axis=x_axis, y_axis=y_axis, col=as.matrix(rep(fi.col,res$Overview$num.groups)), 
 												xlab=xlab.table, ylab=ylab.table, main = paste("Partial Scores",main),dev.new=TRUE)	
 
-			fi.plot.info <- prettyPlot(res$Compromise$compromise.fi, x_axis=x_axis, y_axis=y_axis, col=fi.col,contributionCircles=TRUE, contributions = res$Compromise$compromise.ci, dev.new=FALSE, clean_plot=FALSE)												
+			fi.plot.info <- prettyPlot(res$Compromise$compromise.fi, x_axis=x_axis, y_axis=y_axis, col=fi.col,contributionCircles=TRUE, contributions = res$Compromise$compromise.ci, dev.new=FALSE, new.plot=FALSE)												
 																	
 			loading.plot.info <- prettyPlot(res$Table$Q, x_axis=x_axis, y_axis=y_axis, col=fj.col, xlab=xlab.table, ylab=ylab.table, 
 												main = paste("Loadings",main),contributions = res$Table$cj, contributionCircles=TRUE, dev.new=TRUE)
@@ -108,11 +109,12 @@ mpGraphs <- function(res, table, DESIGN = NULL, x_axis=1, y_axis=2, fi.col=NULL,
 		
 			compromise.fi.plot.info <- prettyPlot(res$Compromise$compromise.fi, x_axis=x_axis, y_axis=y_axis, col=fi.col, xlab=xlab.table, ylab=ylab.table, 
 												main = paste("Compromise",main), contributionCircles=TRUE, contributions = res$Compromise$compromise.ci, dev.new=TRUE)
-																		
-			partial.plot.info <- prettyPlot(res$Table$partial.fi, x_axis=x_axis, y_axis=y_axis, col=rep(fi.col,res$Overview$num.groups), 
+				
+												
+			partial.plot.info <- prettyPlot(res$Table$partial.fi, x_axis=x_axis, y_axis=y_axis, col=as.matrix(rep(fi.col,res$Overview$num.groups)), 
 			 									xlab=xlab.table, ylab=ylab.table, main = paste("Partial Scores",main), dev.new=TRUE)
 
-			fi.plot.info <- prettyPlot(res$Compromise$compromise.fi, x_axis=x_axis, y_axis=y_axis, col=fi.col, contributionCircles=TRUE, contributions = res$Compromise$compromise.ci, dev.new=FALSE, clean_plot=FALSE)
+			fi.plot.info <- prettyPlot(res$Compromise$compromise.fi, x_axis=x_axis, y_axis=y_axis, col=fi.col, contributionCircles=TRUE, contributions = res$Compromise$compromise.ci, dev.new=FALSE, new.plot=FALSE)
 		
 			loading.plot.info <- prettyPlot(res$Table$Q, x_axis=x_axis, y_axis=y_axis, col=fj.col, xlab=xlab.table, ylab=ylab.table, main = paste("Loadings",main),contributions = res$Table$cj, contributionCircles=TRUE, dev.new=TRUE)
 		}
@@ -127,15 +129,15 @@ mpGraphs <- function(res, table, DESIGN = NULL, x_axis=1, y_axis=2, fi.col=NULL,
 			compromise.fi.2.plot.info <- prettyPlot(res$Compromise$compromise.fi.2, x_axis=x_axis, y_axis=y_axis, col=fi.col, xlab=xlab.table.2, ylab=ylab.table.2, 
 												main = paste("Compromise (Dataset 2)",main), contributionCircles=TRUE, contributions = res$Compromise$compromise.ci.2, dev.new=TRUE)
 		
-			partial.1.plot.info <- prettyPlot(res$Table$partial.fi.1, x_axis=x_axis, y_axis=y_axis, col=rep(fi.col,res$Overview$num.groups.1), 
+			partial.1.plot.info <- prettyPlot(res$Table$partial.fi.1, x_axis=x_axis, y_axis=y_axis, col=as.matrix(rep(fi.col,res$Overview$num.groups.1)), 
 												xlab=xlab.table.1, ylab=ylab.table.1, main = paste("Partial Scores (Dataset 1)",main), dev.new=TRUE)	
 
-			fi.1.plot.info <- prettyPlot(res$Compromise$compromise.fi.1, x_axis=x_axis, y_axis=y_axis, col=fi.col,contributionCircles=TRUE, contributions = res$Compromise$compromise.ci.1, dev.new=FALSE, clean_plot=FALSE)												
+			fi.1.plot.info <- prettyPlot(res$Compromise$compromise.fi.1, x_axis=x_axis, y_axis=y_axis, col=fi.col,contributionCircles=TRUE, contributions = res$Compromise$compromise.ci.1, dev.new=FALSE, new.plot=FALSE)												
 			
-			partial.2.plot.info <- prettyPlot(res$Table$partial.fi.2, x_axis=x_axis, y_axis=y_axis, col=rep(fi.col,res$Overview$num.groups.2), 
+			partial.2.plot.info <- prettyPlot(res$Table$partial.fi.2, x_axis=x_axis, y_axis=y_axis, col=as.matrix(rep(fi.col,res$Overview$num.groups.2)), 
 												xlab=xlab.table.2, ylab=ylab.table.2, main = paste("Partial Scores (Dataset 2)",main), dev.new=TRUE)	
 
-			fi.1.plot.info <- prettyPlot(res$Compromise$compromise.fi.2, x_axis=x_axis, y_axis=y_axis, col=fi.col,contributionCircles=TRUE, contributions = res$Compromise$compromise.ci.2, dev.new=FALSE, clean_plot=FALSE)												
+			fi.1.plot.info <- prettyPlot(res$Compromise$compromise.fi.2, x_axis=x_axis, y_axis=y_axis, col=fi.col,contributionCircles=TRUE, contributions = res$Compromise$compromise.ci.2, dev.new=FALSE, new.plot=FALSE)												
 			
 			loading.1.plot.info <- prettyPlot(res$Table$Q.1, x_axis=x_axis, y_axis=y_axis, col=fj.col, xlab=xlab.table.1, ylab=ylab.table.1, 
 												main = paste("Loadings (Dataset 1)",main),contributions = res$Table$cj.1, contributionCircles=TRUE, dev.new=TRUE)
