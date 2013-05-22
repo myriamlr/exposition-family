@@ -34,7 +34,7 @@ Returns two lists ($Fixed.Data and $Inference.Data). For $Fixed.Data, see \code{
 $Inference.Data returns:
 \item{components}{Permutation tests of components. p-values ($p.vals) and distributions of eigenvalues ($eigs.perm) for each component}
 \item{fj.boots}{Bootstrap tests of measures (columns). See \code{\link{boot.ratio.test}} output details.}
-\item{omni}{Permutation tests of components. p-values ($p.vals) and distributions of total inertia ($inertia.perm)}
+\item{omni}{Permutation tests of components. p-values ($p.val) and distributions of total inertia ($inertia.perm)}
 }
 
 \author{

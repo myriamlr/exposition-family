@@ -23,7 +23,7 @@ epMDS(DATA, DATA_is_dist = TRUE, method="euclidean", DESIGN = NULL, make_design_
 	\code{epMDS} performs metric multi-dimensional scaling. Essentially, a PCA for a symmetric distance matrix. 
 }
 \value{
-	See \code{\link{corePCA}} for details on what is returned. epMDS only returns values related to row items (e.g., fi, ci); no column data is returned.
+	See \code{\link{coreMDS}} for details on what is returned. epMDS only returns values related to row items (e.g., fi, ci); no column data is returned.
 	\item{D}{the distance matrix that was decomposed. In most cases, it is returned as a squared distance.}
 }
 \references{

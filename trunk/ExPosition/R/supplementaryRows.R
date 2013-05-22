@@ -36,9 +36,9 @@ supplementaryRows <- function(SUP.DATA,res){
 	}else if((class(res)[1] %in% c(ca.types))){
 		sup.transform <- caSupplementalElementsPreProcessing(SUP.DATA,hellinger=res$hellinger)
 		if((class(res)[1] %in% c('epMCA'))){ ##stupid corrections.
-			sup.proj <- supplementalProjection(sup.transform,res$fj,res$pdq$Dv,scale.factor=res$pdq$Dv/res$pdq.uncor$Dv[1:length(res$pdq$Dv)])
+			sup.proj <- supplementalProjection(sup.transform,res$fj,res$pdq$Dv,scale.factor=res$pdq$Dv/res$pdq.uncor$Dv[1:length(res$pdq$Dv)],symmetric=res$symmetric)
 		}else{
-			sup.proj <- supplementalProjection(sup.transform,res$fj,res$pdq$Dv)
+			sup.proj <- supplementalProjection(sup.transform,res$fj,res$pdq$Dv,symmetric=res$symmetric)
 		}
 	}else if((class(res)[1] %in% c(mds.types))){
 		sup.transform <- mdsSupplementalElementsPreProcessing(SUP.DATA,res$D,res$M)

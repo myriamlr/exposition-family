@@ -12,9 +12,9 @@ tepDICA(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TR
 	group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0)
 }
 \arguments{
-\item{DATA}{original data to perform a MCA on. This data can be in original formatting (qualitative levels) or in dummy-coded variables.}
+\item{DATA}{original data to perform a DICA on. Data can be contingency (like CA) or categorical (like MCA).}
   \item{make_data_nominal}{a boolean. If TRUE (default), DATA is recoded as a dummy-coded matrix. If FALSE, DATA is a dummy-coded matrix.}
-  \item{DESIGN}{a design matrix to indicate if rows belong to groups.}
+  \item{DESIGN}{a design matrix to indicate if rows belong to groups. Required for DICA.}
   \item{make_design_nominal}{a boolean. If TRUE (default), DESIGN is a vector that indicates groups (and will be dummy-coded). If FALSE, DESIGN is a dummy-coded matrix.}
   \item{group.masses}{a diagonal matrix or column-vector of masses for the groups.}
   \item{ind.masses}{a diagonal matrix or column-vector of masses for the individuals (rows).}

@@ -9,7 +9,7 @@ function (x,...) {
   cat ("The analysis was performed on ", nrow(res.tepDICA$fi),
        "individuals, described by", nrow(res.tepDICA$fj), "variables\n")
   cat("*The results are available in the following objects:\n\n")
-  res <- array("", c(19, 2), list(1:19, c("name", "description")))
+  res <- array("", c(20, 2), list(1:20, c("name", "description")))
   
   res[1,] <- c("$fi","Factor scores of the groups")
   res[2,] <- c("$di","Squared distances of the groups")
@@ -26,10 +26,11 @@ function (x,...) {
   res[13,] <- c("$pdq","GSVD data")    
   res[14,] <- c("$X","X matrix to decompose")    
   res[15,] <- c("$hellinger","a boolean. TRUE if Hellinger distance was used")        
-  res[16,] <- c("$fii","Factor scores of the individuals")
-  res[17,] <- c("$dii","Squared distances of the individuals")
-  res[18,] <- c("$rii", "Cosines of the individuals")
-  res[19,] <- c("$assign","Information for assignment of individuals to groups")
+  res[16,] <- c("$symmetric","a boolean. TRUE if symmetric scores used for biplot.")
+  res[17,] <- c("$fii","Factor scores of the individuals")
+  res[18,] <- c("$dii","Squared distances of the individuals")
+  res[19,] <- c("$rii", "Cosines of the individuals")
+  res[20,] <- c("$assign","Information for assignment of individuals to groups")
 
   
   

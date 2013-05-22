@@ -38,7 +38,7 @@ Returns two lists ($Fixed.Data and $Inference.Data). For $Fixed.Data, see \code{
 $Inference.Data returns:
 \item{components}{Permutation tests of components. p-values ($p.vals) and distributions of eigenvalues ($eigs.perm) for each component}
 \item{fj.boots}{Bootstrap tests of measures (columns). See \code{\link{boot.ratio.test}} output details.}
-\item{omni}{Permutation tests of components. p-values ($p.vals) and distributions of total inertia ($inertia.perm). This is only useful if \code{correction}s are performed. Total inertia is constant for permutation with no corrections in MCA.}
+\item{omni}{Permutation tests of components. p-values ($p.val) and distributions of total inertia ($inertia.perm). This is only useful if \code{correction}s are performed. Total inertia is constant for permutation with no corrections in MCA.}
 }
 \author{
 Derek Beaton, Joseph Dunlop, and Hervé Abdi.

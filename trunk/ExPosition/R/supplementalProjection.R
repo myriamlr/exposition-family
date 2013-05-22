@@ -1,4 +1,4 @@
-supplementalProjection <- function(sup.transform=NULL,f.scores=NULL,Dv=NULL, scale.factor = NULL){
+supplementalProjection <- function(sup.transform=NULL,f.scores=NULL,Dv=NULL,scale.factor=NULL,symmetric=TRUE){
 	if(is.null(sup.transform) || is.null(f.scores) || is.null(Dv)){
 		stop('No inputs can be NULL.')
 	}
@@ -9,7 +9,11 @@ supplementalProjection <- function(sup.transform=NULL,f.scores=NULL,Dv=NULL, sca
 		stop('Column dim of f.scores does not match length of Dv')
 	}
 
-	f.out <- sup.transform %*% f.scores * matrix(Dv^-1,nrow(sup.transform),ncol(f.scores),byrow=TRUE)
+	if(!symmetric){
+		f.out <- sup.transform %*% f.scores	
+	}else{
+		f.out <- sup.transform %*% f.scores * matrix(Dv^-1,nrow(sup.transform),ncol(f.scores),byrow=TRUE)
+	}
 	if(!is.null(scale.factor)){		
 		f.out <- f.out * matrix(scale.factor,nrow(f.out),ncol(f.scores),byrow=TRUE)
 	}

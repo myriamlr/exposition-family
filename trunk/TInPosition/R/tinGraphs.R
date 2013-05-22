@@ -1,4 +1,4 @@
-tinGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL,color.by.boots=TRUE,boot.cols=c('plum4','darkseagreen','firebrick3'),fi.col=NULL, fi.pch=NULL,fii.col=NULL,fii.pch=NULL,fj.col=NULL,fj.pch=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=0.95,biplots=FALSE){
+tinGraphs <- function(res,DESIGN=NULL,x_axis=NULL,y_axis=NULL,inference.info=NULL,color.by.boots=TRUE,boot.cols=c('plum4','darkseagreen','firebrick3'),fi.col=NULL, fi.pch=NULL,fii.col=NULL,fii.pch=NULL,fj.col=NULL,fj.pch=NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,bootstrapBars=TRUE,correlationPlotter=TRUE,showHulls=0.95,biplots=FALSE){
 		
 	pca.types <- c('tepBADA')
 	ca.types <- c('tepDICA')
@@ -215,7 +215,7 @@ if(is.null(xlab)){
 		}
 		
 			
-		if(contributionPlots){
+		if(bootstrapBars){
 			# contributionBars(res$fi,res$ci,x_axis=x_axis,y_axis=y_axis,main=main,col=fi.plot.info$col)
 			# contributionBars(res$fj,res$cj,x_axis=x_axis,y_axis=y_axis,main=main,col=fj.plot.info$col)
 			prettyBars(inference.info$boot.data$fi.boot.data$tests$boot.ratios,axis=x_axis,fg.col=fi.col.x,dev.new=TRUE,threshold.line=TRUE,main=paste("Bootstrap Ratios Component: ",x_axis,sep=""),bg.lims=c(-inference.info$boot.data$fi.boot.data$tests$critical.value,inference.info$boot.data$fi.boot.data$tests$critical.value))

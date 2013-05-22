@@ -3,7 +3,8 @@ prettyBars <- function(data,axis=1,cex.names=0.5,fg.col=NULL,axis.lims=NULL,show
 	#I want data to be a matrix, for now.
 	data <- as.matrix(data)
 	
-	max.value <- max(abs(data[,axis]))
+	#small fix... 
+	max.value <- max(abs(data))
 	if(is.null(axis.lims)){
 		axis.lims <- c(-max.value * 1.2,max.value * 1.2)		
 		if(!is.null(bg.lims) && length(bg.lims)==2){
