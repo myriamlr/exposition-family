@@ -19,11 +19,11 @@ prettyBars(data, axis = 1, cex.names = 0.5, fg.col = NULL, axis.lims = NULL, sho
   \item{show.bg.bars}{a set of bars to be plotted under the bars in \code{data}. Used for a fill effect.}
   \item{threshold.line}{boolean. If TRUE, a line perpendicular to the bars is plotted. The lines appear at \code{bg.lims}.}
   \item{main}{A title to be placed at the top of the graph.}
-  \item{bg.border}{color for \code{show.bg.bars} borders (see \code{border} in \code{link{barplot}})}
+  \item{bg.border}{color for \code{show.bg.bars} borders (see \code{border} in \code{\link{barplot}})}
   \item{bg.col}{a matrix (single column) of colors for background bars to be plotted under \code{fg.col}.}
   \item{bg.lims}{two values in the form of \code{c(min,max)} for where to plot background bars or threshold line.}
   \item{sort.data}{a boolean. Will sort the bars by descending values.}
-  \item{horiz}{see \code{horiz} in \code{link{barplot}}.}
+  \item{horiz}{see \code{horiz} in \code{\link{barplot}}.}
   \item{dev.new}{boolean. If TRUE, \code{\link{dev.new}} is called internally to create new device. If FALSE, a device must already be open.}
 }
 \value{
@@ -33,7 +33,7 @@ prettyBars(data, axis = 1, cex.names = 0.5, fg.col = NULL, axis.lims = NULL, sho
 Derek Beaton
 }
 \seealso{
-	\code{link{barplot}}, \code{\link{prettyPlot}}
+	\code{\link{barplot}}, \code{\link{prettyPlot}}
 }
 \examples{
 	##stolen from ?barplot

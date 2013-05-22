@@ -58,7 +58,7 @@ function(DATA,mca.results,make_data_nominal=TRUE,numVariables=NULL,correction=c(
 		dj <- as.matrix(dj)				
 
 		#res <- list(fi=fi,di=di,ci=ci,ri=ri,fj=fj,cj=cj,rj=rj,dj=dj,t=taus,eigs=new.pdq_results$Dv^2,M=M,W=W,pdq=new.pdq_results,pdq.uncor= orig.pdq_results,X=mca.results$X,hellinger=mca.results$hellinger)
-		res <- list(fi=fi,di=di,ci=ci,ri=ri,fj=fj,cj=cj,rj=rj,dj=dj,t=taus,eigs=new.pdq_results$Dv^2,M=masses,W=weights,pdq=new.pdq_results,pdq.uncor= orig.pdq_results,X=mca.results$X,hellinger=mca.results$hellinger)
+		res <- list(fi=fi,di=di,ci=ci,ri=ri,fj=fj,cj=cj,rj=rj,dj=dj,t=taus,eigs=new.pdq_results$Dv^2,M=masses,W=weights,pdq=new.pdq_results,pdq.uncor= orig.pdq_results,X=mca.results$X,hellinger=mca.results$hellinger,symmetric=mca.results$symmetric)
 		class(res) <- c("epMCA","list")
 		return(res)
 	}

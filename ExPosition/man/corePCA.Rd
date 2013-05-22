@@ -18,10 +18,10 @@ corePCA(DATA, M = NULL, W = NULL, decomp.approach = 'svd', k = 0)
   \item{k}{number of components to return (this is not a rotation, just an \emph{a priori} selection of how much data should be returned).}
 }
 \details{
-This function should not be used directly. Please use \code{\link{epPCA}}, \code{\link{epGPCA}} or \code{\link{epMDS}} unless you plan on writing extensions to ExPosition. Any extensions wherein PCA is the primary analysis should use \code{corePCA}.
+This function should not be used directly. Please use \code{\link{epPCA}} or \code{\link{epGPCA}} unless you plan on writing extensions to ExPosition.
 }
 \value{
-Returns a large list of items which are also returned in \code{\link{epPCA}}, \code{\link{epGPCA}} and \code{\link{epMDS}} (the help files for those functions will refer to this as well).\cr
+Returns a large list of items which are also returned in \code{\link{epPCA}} and \code{\link{epGPCA}} (the help files for those functions will refer to this as well).\cr
 All items with a letter followed by an \emph{i} are for the \emph{I} rows of a DATA matrix. All items with a letter followed by an \emph{j} are for the \emph{J} rows of a DATA matrix.\cr\cr
 \item{fi}{factor scores for the row items.}
 \item{di}{square distances of the row items.}
@@ -44,7 +44,7 @@ Abdi, H. (2007). Singular Value Decomposition (SVD) and Generalized Singular Val
 Derek Beaton and Hervé Abdi.
 }
 \seealso{
-	\code{\link{epPCA}}, \code{\link{epGPCA}}, \code{\link{epMDS}}
+	\code{\link{epPCA}}, \code{\link{epGPCA}}
 }
 \keyword{ misc }
 \keyword{ multivariate }

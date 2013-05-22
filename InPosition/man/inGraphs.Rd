@@ -9,7 +9,7 @@ inGraphs: InPosition plotting function
 \usage{
 inGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, color.by.boots = TRUE, boot.cols = c("plum4", "darkseagreen", "firebrick3"), 
 	fi.col = NULL, fi.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL,
-	constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE)
+	constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, bootstrapBars = TRUE, correlationPlotter = TRUE, biplots = FALSE)
 }
 \arguments{
   \item{res}{results from InPosition or ExPosition. If results are from ExPosition, \code{inference.info} must be included.}
@@ -28,7 +28,7 @@ inGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL
   \item{xlab}{x axis label}
   \item{ylab}{y axis label}
   \item{main}{main label for the graph window}
-  \item{contributionPlots}{a boolean. If TRUE (default), contribution bar plots will be created.}
+  \item{bootstrapBars}{a boolean. If TRUE (default), bootstrap ratio bar plots will be created.}
   \item{correlationPlotter}{a boolean. If TRUE (default), a correlation circle plot will be created. Applies to PCA family of methods (CA is excluded for now).}
   \item{biplots}{a boolean. If FALSE (default), separate plots are made for row items ($fi) and column items ($fj). If TRUE, row ($fi) and column ($fj) items will be on the same plot.}
 }

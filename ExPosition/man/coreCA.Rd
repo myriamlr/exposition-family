@@ -40,6 +40,7 @@ All items with a letter followed by an \emph{i} are for the \emph{I} rows of a D
 \item{W}{a column-vector or diagonal matrix of weights (for the columns)}
 \item{X}{the final matrix that was decomposed (includes scaling, centering, masses, etc...).}
 \item{hellinger}{a boolean. TRUE if Hellinger distance was used.}
+\item{symmetric}{a boolean. FALSE if asymmetric factor scores should be computed.}
 }
 \references{
 Abdi, H., and Williams, L.J. (2010). Principal component analysis. \emph{Wiley Interdisciplinary Reviews: Computational Statistics}, 2, 433-459.\cr
