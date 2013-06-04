@@ -8,8 +8,9 @@ epCA.inference.battery: Inference tests for Correspondence Analysis (CA) via InP
 Correspondence Analysis (CA) and a battery of inference tests via InPosition. The battery includes permutation and bootstrap tests.
 }
 \usage{
-epCA.inference.battery(DATA, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL, 
-	hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2)
+epCA.inference.battery(DATA, DESIGN = NULL, make_design_nominal = TRUE, 
+	masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, 
+	graphs = TRUE, k = 0, test.iters = 100, critical.value = 2)
 }
 \arguments{
   \item{DATA}{original data to perform a CA on.}

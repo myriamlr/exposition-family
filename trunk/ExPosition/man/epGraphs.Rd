@@ -8,9 +8,11 @@ epGraphs: ExPosition plotting function
 }
 
 \usage{
-epGraphs(res, DESIGN=NULL, x_axis = 1, y_axis = 2, fi.col = NULL, fi.pch = NULL, fj.col = NULL, fj.pch = NULL,
-	col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, 
-	contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE, graphs = TRUE)
+epGraphs(res, DESIGN=NULL, x_axis = 1, y_axis = 2, fi.col = NULL, fi.pch = NULL, 
+	fj.col = NULL, fj.pch = NULL, col.offset = NULL, constraints = NULL, 
+	xlab = NULL, ylab = NULL, main = NULL, 
+	contributionPlots = TRUE, correlationPlotter = TRUE, biplots = FALSE, 
+	graphs = TRUE)
 }
 
 \arguments{
@@ -52,12 +54,10 @@ Derek Beaton
 }
 \examples{
 	#this is for ExPosition's iris data
-	#data(ep.iris)
-	#pca.iris.res <- epPCA(ep.iris$data)
+	data(ep.iris)
+	pca.iris.res <- epPCA(ep.iris$data)
 	#this will put plotting data into a new variable.
-	#pca.iris.plotting.data.2.and.3 <- epGraphs(pca.iris.res$ExPosition.Data,x_axis=2,y_axis=3)
-	#this will overwrite the data in pca.iris.res$Plotting.Data. Warnings will be provided as to what is overwritten.
-	#pca.iris.res$Plotting.Data <- epGraphs(pca.iris.res$ExPosition.Data,epPlotInfo=pca.iris.res$Plotting.Data,x_axis=2,y_axis=3)	
+	epGraphs.2.and.3 <- epGraphs(pca.iris.res,x_axis=2,y_axis=3)
 }
 \keyword{ multivariate }
 \keyword{ graphs }

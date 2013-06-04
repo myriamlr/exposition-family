@@ -8,7 +8,8 @@ coreCA
 coreCA performs the core of correspondence analysis (CA), multiple correspondence analysis (MCA) and related techniques.
 }
 \usage{
-coreCA(DATA, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, decomp.approach = 'svd', k = 0)
+coreCA(DATA, masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, 
+decomp.approach = 'svd', k = 0)
 }
 \arguments{
   \item{DATA}{original data to decompose and analyze via the singular value decomposition.}

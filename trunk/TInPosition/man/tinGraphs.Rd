@@ -7,9 +7,13 @@ tinGraphs: TInPosition plotting function
 	TInPosition plotting function which is an interface to \code{\link{prettyGraphs}}.
 }
 \usage{
-tinGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, color.by.boots = TRUE, boot.cols = c("plum4", "darkseagreen", "firebrick3"), 
-	fi.col = NULL, fi.pch = NULL, fii.col = NULL, fii.pch = NULL, fj.col = NULL, fj.pch = NULL, col.offset = NULL, 
-	constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, bootstrapBars = TRUE, correlationPlotter = TRUE, showHulls = 0.95, biplots = FALSE)
+tinGraphs(res, DESIGN = NULL, x_axis = NULL, y_axis = NULL, inference.info = NULL, 
+	color.by.boots = TRUE, boot.cols = c("plum4", "darkseagreen", "firebrick3"), 
+	fi.col = NULL, fi.pch = NULL, fii.col = NULL, fii.pch = NULL, 
+	fj.col = NULL, fj.pch = NULL, col.offset = NULL, 
+	constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, 
+	bootstrapBars = TRUE, correlationPlotter = TRUE, 
+	showHulls = 0.95, biplots = FALSE)
 }
 \arguments{
   \item{res}{results from TExPosition}
@@ -47,9 +51,13 @@ Derek Beaton
 \examples{
 	#this is for TExPosition's iris data
 	data(ep.iris)
-	bada.iris <- tepBADA.inference.battery(ep.iris$data,DESIGN=ep.iris$design,make_design_nominal=FALSE)
-	#there are only 2 components, not 3.		
-	bada.iris.plotting.data.biplot <- tinGraphs(bada.iris,x_axis=1,y_axis=2,biplots=TRUE)
+	data <- ep.iris$data
+	design <- ep.iris$design
+	bada.iris <- 
+		tepBADA.inference.battery(
+		data,DESIGN=design,
+		make_design_nominal=FALSE,test.iters=50)		
+	tinGraphs(bada.iris,x_axis=1,y_axis=2,biplots=TRUE)
 }
 \keyword{ multivariate }
 \keyword{ graphs }

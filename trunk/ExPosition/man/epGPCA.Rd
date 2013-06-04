@@ -7,8 +7,8 @@ epGPCA: Generalized Principal Components Analysis (GPCA) via ExPosition.
 Generalized Principal Components Analysis (GPCA) via ExPosition.
 }
 \usage{
-epGPCA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL,
-	graphs = TRUE, k = 0)
+epGPCA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, 
+	masses = NULL, weights = NULL, graphs = TRUE, k = 0)
 }
 \arguments{
   \item{DATA}{original data to perform a PCA on.}
@@ -44,7 +44,5 @@ Derek Beaton
 	#this is for ExPosition's iris data
 	data(ep.iris)
 	gpca.iris.res <- epGPCA(ep.iris$data,DESIGN=ep.iris$design,make_design_nominal=FALSE)
-	#this will overwrite the data in gpca.iris.res$Plotting.Data
-	#gpca.iris.res$Plotting.Data <- epGraphs(gpca.iris.res$ExPosition.Data,epPlotInfo=gpca.iris.res$Plotting.Data,x_axis=2,y_axis=3)	
 }
 \keyword{ multivariate }

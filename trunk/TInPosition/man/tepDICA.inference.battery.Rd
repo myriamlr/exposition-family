@@ -8,8 +8,11 @@ Discriminant Correspondence Analysis Inference Battery
 Discriminant Correspondence Analysis (DICA) Inference Battery via TInPosition
 }
 \usage{
-tepDICA.inference.battery(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE,
-	group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0,
+tepDICA.inference.battery(DATA, make_data_nominal = FALSE, DESIGN = NULL, 
+	make_design_nominal = TRUE,	
+	group.masses = NULL, ind.masses = NULL, weights = NULL, 
+	hellinger = FALSE, symmetric = TRUE, 
+	graphs = TRUE, k = 0,
 	test.iters = 100, critical.value = 2)
 }
 \arguments{
@@ -47,7 +50,11 @@ $Inference.Data returns:
 Derek Beaton, Jenny Rieck, Hervé Abdi
 }
 \examples{
-data(dica.wine)
-dica.res <- tepDICA.inference.battery(dica.wine$data,DESIGN=dica.wine$design,make_design_nominal=FALSE)
+	data(dica.wine)
+	data<-dica.wine$data
+	design<-dica.wine$design
+	dica.res <- 
+		tepDICA.inference.battery(data,DESIGN=design,
+		make_design_nominal=FALSE,test.iters=50)
 }
 \keyword{ multivariate }

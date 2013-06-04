@@ -8,8 +8,10 @@ epGPCA.inference.battery: Inference tests for Generalized Principal Component An
 Generalized Principal Component Analysis (PCA) and a battery of inference tests via InPosition. The battery includes permutation and bootstrap tests.
 }
 \usage{
-epGPCA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL,
-	graphs = TRUE, k = 0, test.iters = 100, constrained = FALSE, critical.value = 2)
+epGPCA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, 
+	make_design_nominal = TRUE, masses = NULL, weights = NULL, 
+	graphs = TRUE, k = 0, 
+	test.iters = 100, constrained = FALSE, critical.value = 2)
 }
 \arguments{
   \item{DATA}{original data to perform a PCA on.}
@@ -47,7 +49,9 @@ Derek Beaton and Hervé Abdi.
 \examples{
 	#this is for ExPosition's iris data
 	data(ep.iris)
-	gpca.iris.res <- epGPCA.inference.battery(ep.iris$data,DESIGN=ep.iris$design,make_design_nominal=FALSE)
+	data<-ep.iris$data
+	design<-ep.iris$design
+	gpca.iris.res <- epGPCA.inference.battery(data,DESIGN=design,make_design_nominal=FALSE)
 }
 \keyword{ multivariate }
 \keyword{ permutation }

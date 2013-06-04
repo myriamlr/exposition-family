@@ -7,7 +7,8 @@ epPCA: Principal Component Analysis (PCA) via ExPosition.
 Principal Component Analysis (PCA) via ExPosition.
 }
 \usage{
-epPCA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, graphs = TRUE, k = 0)
+epPCA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, 
+	graphs = TRUE, k = 0)
 }
 \arguments{
   \item{DATA}{original data to perform a PCA on.}
