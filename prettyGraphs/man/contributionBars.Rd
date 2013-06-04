@@ -8,8 +8,9 @@ contributionBars
 Produces bar charts for multivariate analyses. Plots the contribution to the variance from each data point for upwards of two axes (components).
 }
 \usage{
-contributionBars(factor_scores, contributions, x_axis = 1, y_axis = 2, col = NULL, main = NULL,
-	upper = 'steelblue4', lower = 'firebrick2', threshold = 0, sortContributions = TRUE, pretty = FALSE, show.bg.bars = FALSE)
+contributionBars(factor_scores, contributions, x_axis = 1, y_axis = 2, col = NULL, 
+main = NULL, upper = 'steelblue4', lower = 'firebrick2', threshold = 0, 
+sortContributions = TRUE, pretty = FALSE, show.bg.bars = FALSE)
 }
 \arguments{
   \item{factor_scores}{
