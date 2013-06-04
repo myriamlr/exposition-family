@@ -7,8 +7,9 @@ prettyBars
 prettyBars creates simple, crisp, publication-style quality bar graphs. 
 }
 \usage{
-prettyBars(data, axis = 1, cex.names = 0.5, fg.col = NULL, axis.lims = NULL, show.bg.bars = FALSE, threshold.line = FALSE, main = "",
-	bg.border = "white", bg.col = NULL, bg.lims = NULL, sort.data = TRUE, horiz = TRUE, dev.new = TRUE)
+prettyBars(data, axis = 1, cex.names = 0.5, fg.col = NULL, axis.lims = NULL,
+show.bg.bars = FALSE, threshold.line = FALSE, main = "", bg.border = "white", 
+bg.col = NULL, bg.lims = NULL, sort.data = TRUE, horiz = TRUE, dev.new = TRUE)
 }
 \arguments{
   \item{data}{A set of data you would like to plot with bars for 1 dimension. Can be original data or factor scores or anything with at least 1 column.}
