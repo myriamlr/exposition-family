@@ -43,7 +43,8 @@ permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
 	eigs.perm.matrix <- eigs.perm.matrix[,1:ncomps]
 	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$ExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
 	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
-	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix)
+	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix, eigs=fixed.res$ExPosition.Data$eigs)
+	class(components.data) <- c("inpoComponents","list")
 	
 	Inference.Data <- list(components=components.data,fj.boots=fj.boot.data)
 	class(Inference.Data) <- c("epPCA.inference.battery","list")

@@ -4,7 +4,7 @@
 epMDS: Multidimensional Scaling (MDS) via ExPosition. 
 }
 \description{
-Multidimensional Scaling (MDS) via ExPosition. 
+Multidimensional Scaling (MDS) via ExPosition.
 }
 \usage{
 epMDS(DATA, DATA_is_dist = TRUE, method="euclidean", DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, graphs = TRUE, k = 0)
@@ -18,6 +18,11 @@ epMDS(DATA, DATA_is_dist = TRUE, method="euclidean", DESIGN = NULL, make_design_
   \item{masses}{a diagonal matrix (or vector) that contains the masses (for the row items).}
   \item{graphs}{a boolean. If TRUE (default), graphs and plots are provided (via \code{\link{epGraphs}})}
   \item{k}{number of components to return.}
+}
+\note{
+	With respect to input of \code{DATA}, \code{epMDS} differs slightly from other versions of multi-dimensional scaling. \cr
+	If you provide a rectangular matrix (e.g., observations x measures), \code{epMDS} will compute a distance matrix and square it. \cr
+	If you provide a distance (dissimilarity) matrix, \code{epMDS} does not square it.
 }
 \details{
 	\code{epMDS} performs metric multi-dimensional scaling. Essentially, a PCA for a symmetric distance matrix. 
@@ -41,7 +46,12 @@ Derek Beaton
 	data(jocn.2005.fmri)
 	#by default, components 1 and 2 will be plotted.
 	mds.res.images <- epMDS(jocn.2005.fmri$images$data)
-	#now a look at components 2 and 3.
-	#mds.res.images$Plotting.Data <- epGraphs(mds.res.images$ExPosition.Data,epPlotInfo=mds.res.images$Plotting.Data,x_axis=2,y_axis=3)
+
+	##iris example
+	data(ep.iris)
+	iris.rectangular <- epMDS(ep.iris$data,DATA_is_dist=FALSE)
+	iris.euc.dist <- dist(ep.iris$data,upper=TRUE,diag=TRUE)
+	iris.sq.euc.dist <- as.matrix(iris.euc.dist^2)
+	iris.sq <- epMDS(iris.sq.euc.dist)
 }
 \keyword{ multivariate }
