@@ -13,15 +13,15 @@ InPosition provides multiple forms of inference tests for the \code{\link{ExPosi
 \tabular{ll}{
 Package: \tab InPosition\cr
 Type: \tab Package\cr
-Version: \tab 0.9.2\cr
-Date: \tab 2013-05-21\cr
+Version: \tab 0.10.2\cr
+Date: \tab 2013-06-03\cr
 Depends: \tab R (>=2.15.0), prettyGraphs\cr
 License: \tab GPL-2\cr
 URL: \tab http://www.utdallas.edu/~derekbeaton/software/ExPosition\cr
 }
 }
 \author{
-Questions, comments, compliments, and complaints go to Derek Beaton \email{exposition.software@gmail.com}. Also see the bug-tracking and live update website for ExPosition: http://code.google.com/p/exposition-family/\cr\cr 
+Questions, comments, compliments, and complaints go to Derek Beaton \email{exposition.software@gmail.com}. Also see the bug-tracking and live update website for ExPosition: \link{http://code.google.com/p/exposition-family}/\cr\cr 
 Primary authors and contributors are: Derek Beaton, Joseph Dunlop, and Hervé Abdi
 }
 \references{
