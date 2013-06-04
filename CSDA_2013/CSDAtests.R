@@ -29,8 +29,7 @@ data(beer.tasting.notes)
 these.rows <- which(rowSums(beer.tasting.notes$region.design[,-5])==1) 
 BEER <- beer.tasting.notes$data[these.rows,] 
 STYLES<-beer.tasting.notes$style.design[these.rows,] 
-beer.taste.res.style <-
-epPCA.inference.battery(DATA = BEER, scale = FALSE, DESIGN = STYLES, make_design_nominal = FALSE, test.iters = 1000)
+beer.taste.res.style <- epPCA.inference.battery(DATA = BEER, scale = FALSE, DESIGN = STYLES, make_design_nominal = FALSE, test.iters = 1000)
 
 ##
 these.rows <- which(rowSums(beer.tasting.notes$region.design[,-5])==1) 
