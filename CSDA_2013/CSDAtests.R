@@ -46,11 +46,11 @@ hellinger.res <- epMCA(DATA = BEER.recode, make_data_nominal = TRUE, DESIGN = ST
 
 ##
 BEER.DIST <- as.matrix(dist(BEER,upper=TRUE,diag=TRUE))
-flav<-epMDS(DATA=BEER.DIST, DESIGN=STYLES, make_design_nominal =FALSE) 
+flav<-epMDS(DATA=BEER.DIST^2, DESIGN=STYLES, make_design_nominal =FALSE) 
 phys.dist <- beer.tasting.notes$physical.distances 
-phys<-epMDS(DATA=phys.dist, DESIGN= STYLES,make_design_nominal =FALSE)
+phys<-epMDS(DATA=phys.dist^2, DESIGN= STYLES,make_design_nominal =FALSE)
 
 
 ##
 table <- c(rep("flavors",ncol(BEER.DIST)),rep("meters",ncol(phys.dist))) 
-demo.distatis <- mpDISTATIS(cbind(BEER.DIST,phys.dist), DESIGN=STYLES, sorting='No', normalization='MFA',table=table)
+demo.distatis <- mpDISTATIS(cbind(BEER.DIST,phys.dist), DESIGN=STYLES, sorting='No', normalization='MFA',table=table, make.design.nominal=FALSE)

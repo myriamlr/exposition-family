@@ -8,4 +8,4 @@ Maintainer: Cherise R. Chin Fatt <cherise.chinfatt@utdallas.edu>
 Description: MExPosition is for descriptive (i.e., fixed-effects) multi-table multivariate analysis the singular value decomposition.
 License: GPL-2
 Depends: prettyGraphs, ExPosition
-Packaged: 2013-05-22; dbeaton
+Packaged: 2013-06-03; dbeaton
