@@ -39,16 +39,19 @@ Derek Beaton
 See the functions \code{\link{supplementaryCols}} and \code{link{boot.samples}}
 }
 \examples{
-	##the following code generates 100 bootstrap resampled projections of the measures from the Iris data set.
+	##the following code generates 100 bootstrap resampled 
+	##projections of the measures from the Iris data set.
 	data(ep.iris)
-	iris.pca <- epGPCA(ep.iris$data,scale="SS1",center=TRUE,DESIGN=ep.iris$design,make_design_nominal=FALSE)
+	data <- ep.iris$data
+	design <- ep.iris$design
+	iris.pca <- epGPCA(data,scale="SS1",DESIGN=design,make_design_nominal=FALSE)
 	boot.fjs.unconstrained <- array(0,dim=c(dim(iris.pca$ExPosition.Data$fj),100))
 	boot.fjs.constrained <- array(0,dim=c(dim(iris.pca$ExPosition.Data$fj),100))
 	for(i in 1:100){
 		#unconstrained means we resample any of the 150 flowers
 		boot.fjs.unconstrained[,,i] <- boot.compute.fj(ep.iris$data,iris.pca)
-		#constrained means we resample from within each of the 3 groups (50 flowers each)
-		boot.fjs.constrained[,,i] <- boot.compute.fj(ep.iris$data,iris.pca,DESIGN=ep.iris$design,constrained=TRUE)		
+		#constrained resamples within each of the 3 groups
+		boot.fjs.constrained[,,i] <- boot.compute.fj(data,iris.pca,design,TRUE)		
 	}
 }
 \keyword{ multivariate }

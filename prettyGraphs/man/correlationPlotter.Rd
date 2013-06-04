@@ -9,7 +9,7 @@ Computes and plots a correlation circle (used in multivariate analyses). Correla
 }
 \usage{
 correlationPlotter(data_matrix, factor_scores, x_axis = 1, y_axis = 2, col = NULL, 
-pch = NULL, xlab = NULL, ylab = NULL, main = "", asp = 1, dev.new = TRUE)
+	pch = NULL, xlab = NULL, ylab = NULL, main = "", asp = 1, dev.new = TRUE)
 }
 \arguments{
   \item{data_matrix}{

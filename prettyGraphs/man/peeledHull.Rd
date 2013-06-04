@@ -9,7 +9,7 @@ Computes and plots a peeled hull around a set of points onto a current graphics 
 }
 \usage{
 peeledHull(data_matrix, x_axis = 1, y_axis = 2, percentage = 1, 
-col = "black", lwd = 3, lty = 1)
+	col = "black", lwd = 3, lty = 1)
 }
 \arguments{
   \item{data_matrix}{

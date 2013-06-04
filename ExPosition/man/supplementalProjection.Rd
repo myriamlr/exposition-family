@@ -7,7 +7,8 @@ Supplemental projections.
 Performs a supplementary projection across ExPosition (and related) techniques.
 }
 \usage{
-supplementalProjection(sup.transform = NULL, f.scores = NULL, Dv = NULL, scale.factor = NULL, symmetric = TRUE)
+supplementalProjection(sup.transform = NULL, f.scores = NULL, Dv = NULL, 
+scale.factor = NULL, symmetric = TRUE)
 }
 \arguments{
   \item{sup.transform}{Data already transformed for supplementary projection. That is, the output from: \code{\link{caSupplementalElementsPreProcessing}}, \code{\link{mdsSupplementalElementsPreProcessing}}, \code{\link{pcaSupplementaryColsPreProcessing}}, or \code{\link{pcaSupplementaryRowsPreProcessing}}.}

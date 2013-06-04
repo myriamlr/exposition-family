@@ -7,7 +7,8 @@ epMDS: Multidimensional Scaling (MDS) via ExPosition.
 Multidimensional Scaling (MDS) via ExPosition.
 }
 \usage{
-epMDS(DATA, DATA_is_dist = TRUE, method="euclidean", DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, graphs = TRUE, k = 0)
+epMDS(DATA, DATA_is_dist = TRUE, method="euclidean", DESIGN = NULL, 
+	make_design_nominal = TRUE, masses = NULL, graphs = TRUE, k = 0)
 }
 \arguments{
   \item{DATA}{original data to perform a MDS on.}

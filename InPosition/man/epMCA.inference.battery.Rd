@@ -8,8 +8,10 @@ epMCA.inference.battery: Inference tests for Multiple Correspondence Analysis (C
 Multiple Correspondence Analysis (CA) and a battery of inference tests via InPosition. The battery includes permutation and bootstrap tests.
 }
 \usage{
-epMCA.inference.battery(DATA, make_data_nominal = TRUE, DESIGN = NULL, make_design_nominal = TRUE, masses = NULL, weights = NULL,
-	hellinger = FALSE, symmetric = TRUE, correction = c("b"), graphs = TRUE, k = 0,
+epMCA.inference.battery(DATA, make_data_nominal = TRUE, DESIGN = NULL, 
+	make_design_nominal = TRUE, masses = NULL, weights = NULL, 
+	hellinger = FALSE, symmetric = TRUE, correction = c("b"), 
+	graphs = TRUE, k = 0, 
 	test.iters = 100, constrained = FALSE, critical.value = 2)
 }
 \arguments{

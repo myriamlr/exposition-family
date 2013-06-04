@@ -14,8 +14,8 @@ The core of ExPosition is the singular value decomposition (SVD; see: \code{\lin
 \tabular{ll}{
 Package: \tab ExPosition\cr
 Type: \tab Package\cr
-Version: \tab 2.1.1\cr
-Date: \tab 2013-05-21\cr
+Version: \tab 2.1.3\cr
+Date: \tab 2013-06-04\cr
 Depends: \tab R (>=2.15.0), prettyGraphs\cr
 License: \tab GPL-2\cr
 URL: \tab http://www.utdallas.edu/~derekbeaton/software/exposition\cr

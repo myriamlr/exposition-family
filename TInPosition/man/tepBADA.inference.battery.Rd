@@ -8,8 +8,11 @@
 Barycentric Discriminant Analysis (BADA) Inference Battery via TInPosition.
 }
 \usage{
-tepBADA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = TRUE, 
-	group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2)
+tepBADA.inference.battery(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, 
+	make_design_nominal = TRUE, 
+	group.masses = NULL, ind.masses = NULL, weights = NULL, 
+	graphs = TRUE, k = 0, 
+	test.iters = 100, critical.value = 2)
 }
 \arguments{
     \item{DATA}{original data to perform a BADA on.}
@@ -44,7 +47,11 @@ $Inference.Data returns:
 Derek Beaton, Jenny Rieck, Hervé Abdi
 }
 \examples{
-data(bada.wine)
-bada.res <- tepBADA.inference.battery(bada.wine$data,scale=FALSE,DESIGN=bada.wine$design,make_design_nominal=FALSE)
+	data(bada.wine)
+	data<-bada.wine$data
+	design <- bada.wine$design
+	bada.res <- 
+		tepBADA.inference.battery(data,scale=FALSE,DESIGN=design,
+			make_design_nominal=FALSE,test.iters=50)
 }
 \keyword{ multivariate }
