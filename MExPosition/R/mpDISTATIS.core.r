@@ -176,17 +176,15 @@ mpDISTATIS.core <- function(data, table, sorting = 'No', normalization = 'None',
    table.alphaWeights <- alphaWeights
 
 # weights and masses
-   M = diag(1/(dim(D.mat)[1]),dim(D.mat)[1],dim(D.mat)[1])
-   	
+    M = rep(1/(dim(data)[1]),dim(data)[1])
+    
    w = c()
    for(i in 1:length(rowSums(table)))
    { w = c(w, rep(alphaWeights[i],rowSums(table)[i]))
    }
-
-	W = diag(w)
 	
 #general PDQ
-	pdq.general = corePCA(D.mat,M=M,W=W)
+	pdq.general = corePCA(D.mat,M=M,W=w)
 	general.pdq = pdq.general$pdq
 
 # contribution

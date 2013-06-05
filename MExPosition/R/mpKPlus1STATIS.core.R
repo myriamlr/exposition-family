@@ -126,17 +126,15 @@ mpKPlus1STATIS.core <- function(data, plus1data, num.obs, column.design, num.gro
    table.alphaWeights <- alphaWeights.star
 
 # weights and masses
-   M = diag(1/(dim(data)[1]),dim(data)[1],dim(data)[1])
+   M = rep(1/(dim(data)[1]),dim(data)[1])
 	
    w = c()
    for(i in 1:length(rowSums(column.design)))
    { w = c(w, rep(alphaWeights.star[i],rowSums(column.design)[i]))
    }
-    
-   W =diag(w)  
 
 #general PDQ
-	pdq.general = corePCA(data,M=M,W=W)
+	pdq.general = corePCA(data,M=M,W=w)
 	general.pdq = pdq.general$pdq
 
 # contribution

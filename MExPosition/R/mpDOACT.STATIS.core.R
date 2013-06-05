@@ -130,8 +130,8 @@ mpDOACT.STATIS.core <- function(dataset1, column.design.1, dataset2, column.desi
    table.2.betaWeights <- alphaWeights
 
 # weights and masses
-   M.1 = diag(1/(dim(dataset1)[1]),dim(dataset1)[1],dim(dataset1)[1])
-   M.2 = diag(1/(dim(dataset2)[1]),dim(dataset2)[1],dim(dataset2)[1])
+   M.1 = rep(1/(dim(dataset1)[1]),dim(dataset1)[1])
+   M.2 = rep(1/(dim(dataset2)[1]),dim(dataset2)[1]) 
 
    w.1 = c()
    for(i in 1:length(rowSums(column.design.1)))
@@ -143,14 +143,11 @@ mpDOACT.STATIS.core <- function(dataset1, column.design.1, dataset2, column.desi
    { w.2 = c(w.2, rep(betaWeights[i],rowSums(column.design.2)[i]))
    }
 
-Weight1 = diag(w.1)
-Weight2 = diag(w.2)
-
 #general PDQ
-	pdq.general.1 = corePCA(dataset1,M=M.1,W=Weight1)
+	pdq.general.1 = corePCA(dataset1,M=M.1,W=w.1)
 	general.pdq.1 = pdq.general.1$pdq
 	
-	pdq.general.2 = corePCA(dataset2,M=M.2,W=Weight2)
+	pdq.general.2 = corePCA(dataset2,M=M.2,W=w.2)
 	general.pdq.2 = pdq.general.2$pdq
 
 

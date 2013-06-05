@@ -51,4 +51,5 @@ print.mpSTATIS,
 mpTableCheck, 
 print.statis.innerproduct, 
 print.statis.overview, 
-print.statis.table)
+print.statis.table,
+print.statis.compromise)
