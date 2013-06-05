@@ -12,7 +12,7 @@ print.statis.compromise <- function(x,...){
 	res[4,] <- c("$compromise.eigs.vector","Eigen Vectors of Compromise")
 	res[5,] <- c("$compromise.eigs","Eigen Values of Compromise")
 	res[6,] <- c("$compromise.fi","Factor Scores of Compromise")
-	res[7,] <- c("$compromise.tau","% Variance Explained of Compromise")
+	res[7,] <- c("$compromise.t","% Variance Explained of Compromise")
 
 	print(res)
 }

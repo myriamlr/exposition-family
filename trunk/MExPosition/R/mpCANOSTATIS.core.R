@@ -129,11 +129,11 @@ mpCANOSTATIS.core <- function (data, num.obs = num.obs, column.design, row.desig
 # alpha weights
    table.alphaWeights <- alphaWeights
 
-# weights and masses
-   M = diag(1/(dim(D.mat)[1]),dim(D.mat)[1],dim(D.mat)[1])  	
+# weights and masses 	
+     M = diag(1/(dim(D.mat)[1]),dim(D.mat)[1],dim(D.mat)[1])    
    w = rep(alphaWeights,dim(row.design)[2])
    W = diag(w)
-	
+
 #general PDQ
 	pdq.general = corePCA(D.mat,M=M,W=W)
 	general.pdq = pdq.general$pdq

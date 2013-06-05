@@ -164,17 +164,15 @@ mpCOVSTATIS.core <- function(data, normalization = 'None', masses = NULL, table 
    table.alphaWeights <- alphaWeights
 
 # weights and masses
-   M = diag(1/(dim(rawData.mat)[1]),dim(rawData.mat)[1],dim(rawData.mat)[1])
+   M =  rep(1/(dim(data)[1]),dim(data)[1])
    	
    w = c()
    for(i in 1:length(rowSums(table)))
    { w = c(w, rep(alphaWeights[i],rowSums(table)[i]))
    }
 
-	W = diag(w)
-	
 #general PDQ
-	pdq.general = corePCA(rawData.mat,M=M,W=W)
+	pdq.general = corePCA(rawData.mat,M=M,W=w)
 	general.pdq = pdq.general$pdq
 
 # contribution

@@ -124,8 +124,6 @@ compromise.tau <- compromise.PCA$Dv/sum(compromise.PCA$Dv) * 100
   for(i in 1:length(rowSums(column.design)))
   { w = c(w, rep(alphaWeights[i],rowSums(column.design)[i]))
   }
-    
-  W =diag(w)  
 
 #general PDQ
 	pdq.general = corePCA(data,M=M,W=w)
