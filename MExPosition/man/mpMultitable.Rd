@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \title{mpMFA: Multitable Analysis via MExPosition}
 \description{Multitable Analysis via MExPosition}
-\usage{mpMultitable(data, column.design, make.columndesign.nominal = TRUE, DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpMultitable(data, column.design, make.columndesign.nominal = TRUE, 
+  DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
 \arguments{
   \item{data}{Matrix of raw data}
   \item{column.design}{Matrix which identifies the different tables.}

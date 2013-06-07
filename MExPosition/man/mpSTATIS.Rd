@@ -2,7 +2,10 @@
 \alias{mpSTATIS}
 \title{mpSTATIS: STATIS via MExPosition}
 \description{All STATIS steps are combined in this function. It enables preprocessing, processing, optimization and supplementary projections which is computed using the STATIS method of analysis.}
-\usage{mpSTATIS(data, column.design, make.columndesign.nominal = TRUE, row.design = NULL, make.rowdesign.nominal = FALSE, statis.prepro.option = 'Plain_STATIS', DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpSTATIS(data, column.design, make.columndesign.nominal = TRUE, 
+  row.design = NULL, make.rowdesign.nominal = FALSE, 
+  statis.prepro.option = 'Plain_STATIS', DESIGN = NULL, 
+  make.design.nominal = TRUE, graphs = TRUE)}
 \arguments{
   \item{data}{Matrix of raw data}
   \item{column.design}{Matrix which identifies the different tables.}
@@ -73,6 +76,7 @@ Abdi, H., & Valentin, D. (2007). STATIS. In N.J. Salkind (Ed.): \emph{Encycloped
 \examples{
 data('wines2012')
 design=c('NZ','NZ','NZ','NZ','FR','FR','FR','FR','CA','CA','CA','CA')
-demo.statis.2012 <- mpSTATIS(wines2012$data, column.design = wines2012$table, statis.prepro.option = 'Plain_STATIS', DESIGN = design, graphs = TRUE )
+demo.statis.2012 <- mpSTATIS(wines2012$data, column.design = wines2012$table, 
+statis.prepro.option = 'Plain_STATIS', DESIGN = design, graphs = TRUE )
 }
 \keyword{ multivariate }

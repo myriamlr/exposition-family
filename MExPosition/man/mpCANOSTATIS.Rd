@@ -3,7 +3,10 @@
 \encoding{UTF-8}
 \title{mpCANOSTATIS: Canonical STATIS (CANOSTATIS) via MExPosition}
 \description{All CANOSTATIS steps are combined in this function. It enables preparation of the data, processing and graphing.}
-\usage{mpCANOSTATIS(data, column.design, row.design, normalization = 'MFA', row.preprocess = 'None', column.preprocess = 'Center_1Norm', table.preprocess ='Sum_PCA', make.columndesign.nominal = TRUE, make.rowdesign.nominal = TRUE, DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpCANOSTATIS(data, column.design, row.design, normalization = 'MFA', 
+row.preprocess = 'None', column.preprocess = 'Center_1Norm', table.preprocess ='Sum_PCA', 
+make.columndesign.nominal = TRUE, make.rowdesign.nominal = TRUE, DESIGN = NULL, 
+make.design.nominal = TRUE, graphs = TRUE)}
 \arguments{
   \item{data}{Matrix of data}
   \item{column.design}{Column Design- used to identifty the tables of the data matrix}
@@ -84,6 +87,7 @@ Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and D
   data('wines2012')
   row.design = c('NZ','NZ','NZ','NZ','FR','FR','FR','FR','CA','CA','CA','CA')
 	column.design = wines2012$table
-	demo.canostatis.2012 <- mpCANOSTATIS(wines2012$data,column.design, row.design, DESIGN = row.design)
+	demo.canostatis.2012 <- mpCANOSTATIS(wines2012$data,column.design, row.design, 
+  DESIGN = row.design)
 }
 \keyword{ multivariate }

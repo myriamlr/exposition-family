@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \title{mpDISTATIS.core}
 \description{mpDISTATIS.core performs the core functions of DISTATIS.}
-\usage{mpDISTATIS.core(data, table, sorting = 'No', normalization = 'None', masses = NULL, make.table.nominal=TRUE)}
+\usage{mpDISTATIS.core(data, table, sorting = 'No', normalization = 'None', 
+masses = NULL, make.table.nominal=TRUE)}
 \arguments{
   \item{data}{Matrix of preprocessed data}
   \item{table}{Table which identifies the different tables.}

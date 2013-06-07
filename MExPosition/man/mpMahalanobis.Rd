@@ -29,7 +29,8 @@ Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and D
    #Mahalanobis Example
    data('wines2012')
    data <- as.matrix(wines2012$data[,1:6])
-   design <- makeNominalData(as.matrix(c('NZ','NZ','NZ','NZ','FR','FR','FR','FR','CA','CA','CA','CA')))
+   design <- makeNominalData(as.matrix(c('NZ','NZ','NZ','NZ',
+    'FR','FR','FR','FR','CA','CA','CA','CA')))
    demo <- mpMahalanobis(data,design)
 }
 \keyword{ multivariate}

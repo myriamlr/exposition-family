@@ -3,7 +3,9 @@
 \alias{mpSTATIS.preprocess}
 \title{mpSTATIS.preprocess: Preprocessing for STATIS}
 \description{Combines all preprocessing choices, and prepares the data for STAITS processing.}
-\usage{mpSTATIS.preprocess(data, column.design = NULL, row.design = NULL, row.preprocess = 'None', column.preprocess = 'None', table.preprocess = 'None', make.columndesign.nominal = TRUE, make.rowdesign.nominal = TRUE)}
+\usage{mpSTATIS.preprocess(data, column.design = NULL, row.design = NULL, 
+  row.preprocess = 'None', column.preprocess = 'None', table.preprocess = 'None', 
+  make.columndesign.nominal = TRUE, make.rowdesign.nominal = TRUE)}
 \arguments{
   \item{data}{Data Matrix}
   \item{column.design}{Matrix which identifies the tables.}
@@ -42,6 +44,7 @@ Y<- as.matrix(c('g1','g1','g1','g2','g2'))
 row.preprocess='Center'
 column.preprocess='Center'
 table.preprocess='Sum_PCA'
-preproc <-mpSTATIS.preprocess(X, column.design = t(Y), row.preprocess = row.preprocess, column.preprocess = column.preprocess, table.preprocess = table.preprocess)
+preproc <-mpSTATIS.preprocess(X, column.design = t(Y), row.preprocess = row.preprocess,
+ column.preprocess = column.preprocess, table.preprocess = table.preprocess)
 }
 \keyword{ multivariate }

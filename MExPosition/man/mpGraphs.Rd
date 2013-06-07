@@ -3,7 +3,9 @@
 \title{mpGraphs: MExPosition plotting function}
 \description{MExPosition plotting function which is an interface to \code{\link{prettyGraphs}}.
 }
-\usage{mpGraphs(res, table, DESIGN = NULL, x_axis = 1, y_axis = 2, fi.col = NULL, fj.col = NULL, table.col = NULL, col.offset = NULL, constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, graphs = TRUE)
+\usage{mpGraphs(res, table, DESIGN = NULL, x_axis = 1, y_axis = 2, 
+  fi.col = NULL, fj.col = NULL, table.col = NULL, col.offset = NULL, 
+  constraints = NULL, xlab = NULL, ylab = NULL, main = NULL, graphs = TRUE)
 }
 
 \arguments{

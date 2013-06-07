@@ -3,7 +3,9 @@
 \encoding{UTF-8}
 \title{mpKPlus1STATIS: Function for (K+1) STATIS via MExPosition}
 \description{All (K+1) STATIS steps are combined in this function. It enables preparation of the data, processing and graphing.}
-\usage{mpKPlus1STATIS(data, plus1data, column.design, make.columndesign.nominal = TRUE, row.preprocess = 'None', column.preprocess = 'Center', table.preprocess = 'Sum_PCA', optimization.option = 'STATIS', DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpKPlus1STATIS(data, plus1data, column.design, make.columndesign.nominal = TRUE, 
+  row.preprocess = 'None', column.preprocess = 'Center', table.preprocess = 'Sum_PCA', 
+  optimization.option = 'STATIS', DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
 \arguments{
   \item{data}{Data Matrix}
   \item{plus1data}{External table}

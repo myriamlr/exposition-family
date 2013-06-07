@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \title{mpKPlus1STATIS.core: Core Function for (K+1) STATIS via MExPosition}
 \description{Performs the core of (K+1) STATIS}
-\usage{mpKPlus1STATIS.core(data, plus1data, num.obs, column.design, num.groups, optimization.option = 'STATIS')}
+\usage{mpKPlus1STATIS.core(data, plus1data, num.obs, column.design, num.groups, 
+  optimization.option = 'STATIS')}
 \arguments{
   \item{data}{Matrix of preprocessed data}
   \item{plus1data}{Matrix of preprocessed external table}
