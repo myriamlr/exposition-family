@@ -3,7 +3,12 @@
 \encoding{UTF-8}
 \title{mpDOACT.STATIS: Function for Dual STATIS (DO-ACT) via MExPosition}
 \description{All DO-ACT steps are combined in this function. It enables preparation of the data, processing and graphing.}
-\usage{mpDOACT.STATIS(data1, column.design.1, make.columndesign.1.nominal = TRUE, data2, column.design.2, make.columndesign.2.nominal = TRUE, row.preprocess.data1 = 'None', column.preprocess.data1 = 'Center', table.preprocess.data1 = 'Sum_PCA', row.preprocess.data2 = 'None', column.preprocess.data2 = 'Center', table.preprocess.data2 = 'Sum_PCA', DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpDOACT.STATIS(data1, column.design.1, make.columndesign.1.nominal = TRUE, 
+  data2, column.design.2, make.columndesign.2.nominal = TRUE, row.preprocess.data1 = 'None', 
+  column.preprocess.data1 = 'Center', table.preprocess.data1 = 'Sum_PCA', 
+  row.preprocess.data2 = 'None', column.preprocess.data2 = 'Center', 
+  table.preprocess.data2 = 'Sum_PCA', DESIGN = NULL, make.design.nominal = TRUE, 
+  graphs = TRUE)}
 \arguments{
   \item{data1}{Matrix of dataset 1}
   \item{column.design.1}{Column Design for dataset 1 - used to identifty the tables of the data matrix}
@@ -112,6 +117,7 @@ Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and D
    design.1 <- wines2012$table
    design.2 <- wines2012$table
 
-   demo.double <- mpDOACT.STATIS(data1=data1,column.design.1=design.1, data2=data2, column.design.2=design.2, DESIGN=design)   
+   demo.double <- mpDOACT.STATIS(data1=data1,column.design.1=design.1, data2=data2, 
+   column.design.2=design.2, DESIGN=design)   
 }
 \keyword{ multivariate}

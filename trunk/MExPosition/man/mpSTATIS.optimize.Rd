@@ -2,7 +2,8 @@
 \alias{mpSTATIS.optimize}
 \title{mpSTATIS.optimize: STATIS Optimization Options}
 \description{Provides various optimization options for STATIS.}
-\usage{mpSTATIS.optimize(data, num.obs, column.design = NULL, num.groups, optimization.option = 'STATIS')}
+\usage{mpSTATIS.optimize(data, num.obs, column.design = NULL, 
+	num.groups, optimization.option = 'STATIS')}
 \arguments{
   \item{data}{Data Matrix}
   \item{num.obs}{Number of Observation}

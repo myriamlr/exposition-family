@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \title{mpSumPCA: Sum PCA via MExPosition}
 \description{Sum PCA via MExPosition}
-\usage{mpSumPCA(data, column.design, make.columndesign.nominal = TRUE, DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpSumPCA(data, column.design, make.columndesign.nominal = TRUE, 
+  DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
 \arguments{
   \item{data}{Matrix of raw data}
   \item{column.design}{Matrix which identifies the different tables.}

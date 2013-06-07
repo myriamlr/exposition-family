@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \title{mpCANOSTATIS.core: Core Function for Canonical STATIS (CANOSTATIS) via MExPosition}
 \description{Performs the core of CANOSTATIS on the given dataset}
-\usage{mpCANOSTATIS.core(data, num.obs = num.obs, column.design, row.design, num.groups = num.groups, normalization = 'MFA', masses = NULL)}
+\usage{mpCANOSTATIS.core(data, num.obs = num.obs, column.design, row.design,
+num.groups = num.groups, normalization = 'MFA', masses = NULL)}
 \arguments{
   \item{data}{Matrix of preprocessed data}
   \item{num.obs}{Number of observations}

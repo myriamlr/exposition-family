@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \title{mpANISOSTATIS.core: Core Function for ANISOSTATIS via MExPosition}
 \description{Performs the core of ANISOSTATIS on the data}
-\usage{mpANISOSTATIS.core(data, num.obs, column.design, num.groups, optimization.option='ANISOSTATIS_Type1')}
+\usage{mpANISOSTATIS.core(data, num.obs, column.design, num.groups, 
+  optimization.option='ANISOSTATIS_Type1')}
 \arguments{
   \item{data}{Matrix of preprocessed data}
   \item{num.obs}{Number of observations}

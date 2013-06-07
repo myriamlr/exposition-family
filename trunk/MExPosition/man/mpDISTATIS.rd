@@ -2,7 +2,9 @@
 \alias{mpDISTATIS}
 \title{mpDISTATIS: DISTATIS via MExPosition}
 \description{All DISTATIS steps are combined in this function. It enables preparation of the data, processing and graphing.}
-\usage{mpDISTATIS(data, sorting = 'No', normalization = 'None', masses = 'NULL', table=NULL, make.table.nominal = TRUE, DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpDISTATIS(data, sorting = 'No', normalization = 'None', masses = 'NULL', 
+table=NULL, make.table.nominal = TRUE, DESIGN = NULL, make.design.nominal = TRUE,
+ graphs = TRUE)}
 \arguments{
   \item{data}{Data Matrix}
   \item{sorting}{a boolean. If YES, DISTATIS will by processed as a sorting task. Default is NO}
@@ -71,7 +73,10 @@ Abdi, H., & Valentin, D. (2005). DISTATIS: the analysis of multiple distance mat
 }
 \examples{
 data('faces2005')
-table = c('pixel','pixel','pixel','pixel','pixel','pixel', 'distance','distance','distance','distance','distance','distance', 'ratings','ratings','ratings','ratings','ratings','ratings', 'similarity','similarity','similarity','similarity','similarity','similarity')
+table = c('pixel','pixel','pixel','pixel','pixel','pixel', 
+'distance','distance','distance','distance','distance','distance', 
+'ratings','ratings','ratings','ratings','ratings','ratings', 
+'similarity','similarity','similarity','similarity','similarity','similarity')
 demo.distatis.2005 <- mpDISTATIS(faces2005$data, sorting = 'No', normalization = 'MFA', table = table)
 }
 \keyword{ multivariate }

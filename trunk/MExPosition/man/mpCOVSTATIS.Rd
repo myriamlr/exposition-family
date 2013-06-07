@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \title{mpCOVSTATIS: Core Function for COVSTATIS via MExPosition}
 \description{All COVSTATIS steps are combined in this function. It enables preparation of the data, processing and graphing.}
-\usage{mpCOVSTATIS(data, normalization = 'None', masses = NULL, table = NULL, make.table.nominal = TRUE, DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpCOVSTATIS(data, normalization = 'None', masses = NULL, table = NULL, 
+make.table.nominal = TRUE, DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
 \arguments{
   \item{data}{Matrix of preprocessed data}
   \item{normalization}{String option of either 'None', 'MFA' (DEFAULT), \emph{or} 'Sum_PCA'}
@@ -72,7 +73,10 @@ Abdi, H., Williams, L.J., Valentin, D., & Bennani-Dosse, M. (2012). STATIS and D
 \examples{
   #COVSTATIS
    data('faces2005')
-   table = c('pixel','pixel','pixel','pixel','pixel','pixel', 'distance','distance','distance','distance','distance','distance', 'ratings','ratings','ratings','ratings','ratings','ratings','similarity','similarity','similarity','similarity','similarity','similarity')
+   table = c('pixel','pixel','pixel','pixel','pixel','pixel', 
+   'distance','distance','distance','distance','distance','distance', 
+   'ratings','ratings','ratings','ratings','ratings','ratings',
+   'similarity','similarity','similarity','similarity','similarity','similarity')
    demo.covstatis.2005 <- mpCOVSTATIS(faces2005$data, table = table)
 }
 \keyword{ multivariate}

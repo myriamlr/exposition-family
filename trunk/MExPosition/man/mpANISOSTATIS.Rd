@@ -2,7 +2,8 @@
 \alias{mpANISOSTATIS}
 \title{mpANISOSTATIS.core: ANISOSTATIS via MExPositio}
 \description{All ANISOSTATIS steps are combined in this function. It enables preparation of the data, processing and graphing.}
-\usage{mpANISOSTATIS(data, anisostatis.option = 'ANISOSTATIS_Type1', column.design, make.columndesign.nominal = TRUE, DESIGN =NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpANISOSTATIS(data, anisostatis.option = 'ANISOSTATIS_Type1', column.design, 
+make.columndesign.nominal = TRUE, DESIGN =NULL, make.design.nominal = TRUE, graphs = TRUE)}
 \arguments{
   \item{data}{Data Matrix}
   \item{anisostatis.option}{ANISOSTATIS string ptions: 'ANISOSTATIS_Type1' \emph{or} 'ANISOSTATIS_Type2'}
@@ -77,13 +78,15 @@ Abdi, H., & Valentin, D. (2005). DISTATIS: the analysis of multiple distance mat
 	data = wines2012$data
 	column.design = wines2012$table
 	row.design= c('NZ','NZ','NZ','NZ','FR','FR','FR','FR','CA','CA','CA','CA')
-	demo.anisostatis1 <- mpANISOSTATIS(data,anisostatis.option='ANISOSTATIS_Type1',column.design = column.design)
+	demo.anisostatis1 <- mpANISOSTATIS(data,anisostatis.option='ANISOSTATIS_Type1',
+  column.design = column.design)
 
 # ANISOSTATISType 2
   data('wines2012')
 	data = wines2012$data
 	column.design = wines2012$table
 	row.design = c('NZ','NZ','NZ','NZ','FR','FR','FR','FR','CA','CA','CA','CA')
-	demo.anisostatis2 <- mpANISOSTATIS(data,anisostatis.option='ANISOSTATIS_Type2',column.design = column.design)
+	demo.anisostatis2 <- mpANISOSTATIS(data,anisostatis.option='ANISOSTATIS_Type2',
+  column.design = column.design)
 }
 \keyword{ multivariate }

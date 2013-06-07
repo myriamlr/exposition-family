@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \title{mpCOVSTATIS.core: Core Function for COVSTATIS via MExPosition}
 \description{Performs the core of CANOSTATIS on the given dataset}
-\usage{mpCOVSTATIS.core(data, normalization = 'None', masses = NULL, table = NULL, make.table.nominal = TRUE)}
+\usage{mpCOVSTATIS.core(data, normalization = 'None', masses = NULL, 
+table = NULL, make.table.nominal = TRUE)}
 \arguments{
   \item{data}{Matrix of preprocessed data}
   \item{normalization}{String option of either 'None', 'MFA' (DEFAULT), \emph{or} 'Sum_PCA'}

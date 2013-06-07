@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \title{mpPTA: Core Function for Partial Triadic Analysis (PTA) via MExPosition}
 \description{All PTA steps are combined in this function. It enables preparation of the data, processing and graphing.}
-\usage{mpPTA(data, column.design, make.columndesign.nominal = TRUE, DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
+\usage{mpPTA(data, column.design, make.columndesign.nominal = TRUE, 
+  DESIGN = NULL, make.design.nominal = TRUE, graphs = TRUE)}
 \arguments{
   \item{data}{Matrix of raw data}
   \item{column.design}{Matrix which identifies the different tables.}
