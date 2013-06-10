@@ -77,6 +77,7 @@ table = c('pixel','pixel','pixel','pixel','pixel','pixel',
 'distance','distance','distance','distance','distance','distance', 
 'ratings','ratings','ratings','ratings','ratings','ratings', 
 'similarity','similarity','similarity','similarity','similarity','similarity')
-demo.distatis.2005 <- mpDISTATIS(faces2005$data, sorting = 'No', normalization = 'MFA', table = table)
+face.data <- faces2005$data
+demo.distatis <- mpDISTATIS(face.data, sorting = 'No', normalization = 'MFA', table = table)
 }
 \keyword{ multivariate }

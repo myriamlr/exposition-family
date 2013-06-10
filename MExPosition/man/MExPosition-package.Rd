@@ -11,8 +11,8 @@ MExPosition is multi-table \code{\link{ExPosition}} and includes the family of S
 \tabular{ll}{
 Package: \tab MExPosition\cr
 Type: \tab Package\cr
-Version: \tab 2.0.2\cr
-Date: \tab 2013-06-07\cr
+Version: \tab 2.0.3\cr
+Date: \tab 2013-06-10\cr
 Depends: \tab R (>=2.15.0), prettyGraphs, ExPosition\cr
 License: \tab GPL-2\cr
 }
