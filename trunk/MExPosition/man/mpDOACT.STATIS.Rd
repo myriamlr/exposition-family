@@ -4,10 +4,12 @@
 \title{mpDOACT.STATIS: Function for Dual STATIS (DO-ACT) via MExPosition}
 \description{All DO-ACT steps are combined in this function. It enables preparation of the data, processing and graphing.}
 \usage{mpDOACT.STATIS(data1, column.design.1, make.columndesign.1.nominal = TRUE, 
-  data2, column.design.2, make.columndesign.2.nominal = TRUE, row.preprocess.data1 = 'None', 
-  column.preprocess.data1 = 'Center', table.preprocess.data1 = 'Sum_PCA', 
+  data2, column.design.2, make.columndesign.2.nominal = TRUE, 
+  row.preprocess.data1 = 'None', column.preprocess.data1 = 'Center', 
+  table.preprocess.data1 = 'Sum_PCA', 
   row.preprocess.data2 = 'None', column.preprocess.data2 = 'Center', 
-  table.preprocess.data2 = 'Sum_PCA', DESIGN = NULL, make.design.nominal = TRUE, 
+  table.preprocess.data2 = 'Sum_PCA', 
+  DESIGN = NULL, make.design.nominal = TRUE, 
   graphs = TRUE)}
 \arguments{
   \item{data1}{Matrix of dataset 1}
