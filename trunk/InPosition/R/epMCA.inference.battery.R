@@ -63,7 +63,7 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 	eigs.perm.matrix <- eigs.perm.matrix[,1:ncomps]
 	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$ExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
 	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
-	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix, fixed.res$ExPosition.Data$eigs)
+	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix, eigs=fixed.res$ExPosition.Data$eigs)
 	class(components.data) <- c("inpoComponents","list")	
 	
  	Inference.Data <- list(components=components.data,fj.boots=fj.boot.data,omni=omni.data)
