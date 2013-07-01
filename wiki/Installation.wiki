@@ -8,9 +8,11 @@ Be sure to have R. We recommend version 2.15, but an earlier version should work
   * install.packages('ExPosition')
   * install.packages('TExPosition')
   * install.packages('MExPosition')
+  * install.packages('InPosition')
+  * install.packages('TInPosition')
 
 
 But you can use this shortcut:
 
-  * install.packages('TExPosition',dependencies=TRUE)
+  * install.packages('TInPosition',dependencies=TRUE)
   * install.packages('MExPosition')
