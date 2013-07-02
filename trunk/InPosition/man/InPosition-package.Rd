@@ -15,7 +15,7 @@ Package: \tab InPosition\cr
 Type: \tab Package\cr
 Version: \tab 0.10.4\cr
 Date: \tab 2013-06-09\cr
-Depends: \tab R (>=2.15.0), prettyGraphs\cr
+Depends: \tab R (>=2.15.0), prettyGraphs (>= 2.0.0), ExPosition  (>= 2.0.0)\cr
 License: \tab GPL-2\cr
 URL: \tab http://www.utdallas.edu/~derekbeaton/software/ExPosition\cr
 }
