@@ -7,5 +7,5 @@ Author: Derek Beaton, Jenny Rieck, Cherise R. Chin Fatt, Herve Abdi
 Maintainer: Derek Beaton <exposition.software@gmail.com>
 Description: TExPosition is an extension of ExPosition for two table analyses, specifically, discriminant analyses.
 License: GPL-2
-Depends: prettyGraphs, ExPosition
-Packaged: 2013-06-04; dbeaton
+Depends: prettyGraphs (>= 2.0.0), ExPosition (>= 2.0.0)
+Packaged: 2013-06-13; dbeaton

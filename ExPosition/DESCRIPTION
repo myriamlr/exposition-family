@@ -7,5 +7,5 @@ Author: Derek Beaton, Cherise R. Chin Fatt, Herve Abdi
 Maintainer: Derek Beaton <exposition.software@gmail.com>
 Description: ExPosition is for descriptive (i.e., fixed-effects) multivariate analysis with the singular value decomposition. 
 License: GPL-2
-Depends: prettyGraphs
-Packaged: 2013-06-04; dbeaton
+Depends: prettyGraphs (>= 2.0.0)
+Packaged: 2013-06-13; dbeaton
