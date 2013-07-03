@@ -10,7 +10,8 @@ analysis. \code{GraphDistatis} gives a map of the factor scores for the observat
 (see the \code{nude=TRUE} option).
 }
 \usage{
-GraphDistatisCompromise(FS, axis1 = 1, axis2 = 2, constraints = NULL, item.colors = NULL, ZeTitle = "Distatis-Compromise", nude = FALSE, Ctr = NULL)
+GraphDistatisCompromise(FS, axis1 = 1, axis2 = 2, constraints = NULL, item.colors = NULL, 
+	ZeTitle = "Distatis-Compromise", nude = FALSE, Ctr = NULL)
 }
 \arguments{
   \item{FS}{The factor scores of the observations (\code{$res4Splus$F}from \code{distatis}).}
@@ -58,7 +59,8 @@ data(DistAlgo)
 DistatisAlgo <- distatis(DistAlgo)
 # 3. Plot the compromise map with the labels for the first 2 dimensions
 # DistatisAlgo$res4Splus$F are the factors scores for the 6 observations (i.e., faces)
-# DistatisAlgo$res4Splus$PartialF are the partial factors scores (i.e., one set of factor scores per algorithm)
+# DistatisAlgo$res4Splus$PartialF are the partial factors scores 
+	##(i.e., one set of factor scores per algorithm)
  GraphDistatisCompromise(DistatisAlgo$res4Splus$F)
 }
 \keyword{DistatisR}

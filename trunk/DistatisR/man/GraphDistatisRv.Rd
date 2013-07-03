@@ -13,7 +13,8 @@ There are used to derive the \eqn{\alpha}{alpha} weights for
 \acronym{DISTATIS}.
 }
 \usage{
-GraphDistatisRv(RvFS, axis1 = 1, axis2 = 2, ZeTitle = "Distatis-Rv Map", participant.colors = NULL, nude = FALSE, RvCtr = NULL)
+GraphDistatisRv(RvFS, axis1 = 1, axis2 = 2, ZeTitle = "Distatis-Rv Map", 
+	participant.colors = NULL, nude = FALSE, RvCtr = NULL)
 }
 \arguments{
   \item{RvFS}{The factor scores of the distance matrices (\code{$res4Cmat$G} from \code{distatis}).}

@@ -17,8 +17,9 @@ Analyses sets of distance (or covariance) matrices collected on the same set of 
 Package: \tab DistatisR\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
-Date: \tab 2012-11-07\cr
+Date: \tab 2013-07-03\cr
 License: \tab GPL-2\cr
+Depends: \tab prettyGraphs (>= 2.0.0), car
 }
 The example shown here comes from Abdi \emph{et al.} (2007),
 \code{distatis} paper on the sorting task.
@@ -177,7 +178,8 @@ BootF <- BootFactorScores(testDistatis$res4Splus$PartialF)
 # 5.2 a compromise plot
  compromise.graph.out <- GraphDistatisCompromise(testDistatis$res4Splus$F) 
 # 5.3 a partial factor score plot
- partial.scores.graph.out <- GraphDistatisPartial(testDistatis$res4Splus$F,testDistatis$res4Splus$PartialF)
+ partial.scores.graph.out <- 
+ 	GraphDistatisPartial(testDistatis$res4Splus$F,testDistatis$res4Splus$PartialF)
 # 5.4 a bootstrap confidence interval plot 
  #5.4.1 with ellipses
  boot.graph.out.ell <- GraphDistatisBoot(testDistatis$res4Splus$F,BootF)  
@@ -188,7 +190,9 @@ BootF <- BootFactorScores(testDistatis$res4Splus$PartialF)
  #or 
  # boot.graph.out <- GraphDistatisBoot(testDistatis$res4Splus$F,F_fullBoot,ellipses=FALSE)
 #5.5 all the plots at once
-all.plots.out <- GraphDistatisAll(testDistatis$res4Splus$F,testDistatis$res4Splus$PartialF,BootF,testDistatis$res4Cmat$G)  
+all.plots.out <- 
+	GraphDistatisAll(testDistatis$res4Splus$F,testDistatis$res4Splus$PartialF,
+		BootF,testDistatis$res4Cmat$G)  
  
 
 }
