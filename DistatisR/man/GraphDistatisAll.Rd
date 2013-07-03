@@ -7,7 +7,10 @@ This function combines the functionality of \code{\link{GraphDistatisCompromise}
 This function produces 4 plots: (1) a compromise plot, (2) a partial factor scores plot, (3) a bootstrap confidence intervals plot, and (4) a Rv map.
 }
 \usage{
-GraphDistatisAll(FS, PartialFS, FBoot, RvFS, axis1 = 1, axis2 = 2, constraints = NULL, item.colors = NULL, participant.colors = NULL, ZeTitleBase = NULL, nude = FALSE, Ctr = NULL, RvCtr=NULL, color.by.observations = TRUE, lines = TRUE, lwd = 3.5, ellipses = TRUE, fill = TRUE, fill.alpha = 0.27, percentage = 0.95)
+GraphDistatisAll(FS, PartialFS, FBoot, RvFS, axis1 = 1, axis2 = 2, constraints = NULL, 
+	item.colors = NULL, participant.colors = NULL, ZeTitleBase = NULL, nude = FALSE, 
+	Ctr = NULL, RvCtr=NULL, color.by.observations = TRUE, lines = TRUE, 
+	lwd = 3.5, ellipses = TRUE, fill = TRUE, fill.alpha = 0.27, percentage = 0.95)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -71,7 +74,8 @@ BootF <- BootFactorScores(testDistatis$res4Splus$PartialF)
 #-----------------------------------------------------------------------------
 # 5. Create the Graphics with GraphDistatisAll
 #
-GraphDistatisAll(testDistatis$res4Splus$F,testDistatis$res4Splus$PartialF,BootF,testDistatis$res4Cmat$G)
+GraphDistatisAll(testDistatis$res4Splus$F,testDistatis$res4Splus$PartialF,
+	BootF,testDistatis$res4Cmat$G)
 }
 \keyword{ distatis }
 \keyword{ mds }

@@ -9,7 +9,9 @@ Plot maps of the factor scores and partial factor scores of the observations for
 	from a \code{\link{distatis}} analysis. \code{GraphDistatisPartial} gives a map of the factors scores of the observations plus partial factor scores, as "seen" by each of the matrices.
 }
 \usage{
-GraphDistatisPartial(FS, PartialFS, axis1 = 1, axis2 = 2, constraints = NULL, item.colors = NULL, participant.colors = NULL, ZeTitle = "Distatis-Partial", Ctr=NULL, color.by.observations = TRUE, nude = FALSE, lines = TRUE)
+GraphDistatisPartial(FS, PartialFS, axis1 = 1, axis2 = 2, constraints = NULL, 
+	item.colors = NULL, participant.colors = NULL, ZeTitle = "Distatis-Partial", 
+	Ctr=NULL, color.by.observations = TRUE, nude = FALSE, lines = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -64,7 +66,8 @@ data(DistAlgo)
 DistatisAlgo <- distatis(DistAlgo)
 # 3. Plot the compromise map with the labels for the first 2 dimensions
 # DistatisAlgo$res4Splus$F are the factors scores for the 6 observations (i.e., faces)
-# DistatisAlgo$res4Splus$PartialF are the partial factors scores (i.e., one set of factor scores per algorithm)
+# DistatisAlgo$res4Splus$PartialF are the partial factors scores 
+	##(i.e., one set of factor scores per algorithm)
  GraphDistatisPartial(DistatisAlgo$res4Splus$F,DistatisAlgo$res4Splus$PartialF)
 }
 \keyword{DistatisR}
