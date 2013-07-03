@@ -24,9 +24,9 @@ Depends: \tab prettyGraphs (>= 2.0.0), car
 The example shown here comes from Abdi \emph{et al.} (2007),
 \code{distatis} paper on the sorting task.
 }
-\author{Herve Abdi, Derek Beaton, & Cherise Chin Fatt
+\author{Derek Beaton [aut, com, ctb], Cherise Chin Fatt [ctb], & Herve Abdi [aut, cre]
 	
-Maintainer: <herve@utdallas.edu>
+Maintainer: Derek Beaton <derekbeaton@utdallas.edu>
 }
 \references{%
 Note: these papers are available from \url{www.utdallas.edu/~herve}

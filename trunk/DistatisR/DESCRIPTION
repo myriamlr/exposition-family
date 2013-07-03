@@ -3,8 +3,8 @@ Type: Package
 Title: Distatis Three Way Metric Multidimensional Scaling
 Version:  1.0
 Date: 2013-07-03
-Author: Herve Abdi, Derek Beaton, Cherise Chin Fatt
-Maintainer:  <herve@utdallas.edu>
+Author: Derek Beaton [aut, com, ctb], Cherise Chin Fatt [ctb], Herve Abdi [aut, cre]
+Maintainer:  <derekbeaton@utdallas.edu>
 Description: Implement Distatis and Covstatis (three-way multidimensional scaling). For the  analysis of  multiple distance/covariance matrices collected on the same set of observations
 License: GPL-2
 Depends: prettyGraphs (>= 2.0.0), car
