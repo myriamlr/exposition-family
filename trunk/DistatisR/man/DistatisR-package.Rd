@@ -26,7 +26,7 @@ The example shown here comes from Abdi \emph{et al.} (2007),
 }
 \author{Derek Beaton [aut, com, ctb], Cherise Chin Fatt [ctb], & Herve Abdi [aut, cre]
 	
-Maintainer: Derek Beaton <derekbeaton@utdallas.edu>
+Maintainer: Derek Beaton <exposition.software@gmail.com>
 }
 \references{%
 Note: these papers are available from \url{www.utdallas.edu/~herve}
