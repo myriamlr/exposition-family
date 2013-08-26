@@ -45,11 +45,14 @@ hellinger.res <- epMCA(DATA = BEER.recode, make_data_nominal = TRUE, DESIGN = ST
 
 ##
 BEER.DIST <- as.matrix(dist(BEER,upper=TRUE,diag=TRUE))
-flav<-epMDS(DATA=BEER.DIST^2, DESIGN=STYLES, make_design_nominal =FALSE) 
+flav<-epMDS(DATA=BEER.DIST^2, DESIGN=STYLES, make_design_nominal =FALSE,graphs=FALSE) 
 phys.dist <- beer.tasting.notes$physical.distances 
-phys<-epMDS(DATA=phys.dist^2, DESIGN= STYLES,make_design_nominal =FALSE)
+phys<-epMDS(DATA=phys.dist^2, DESIGN= STYLES,make_design_nominal =FALSE,graphs=FALSE)
+epGraphs(flav,contributionPlots=FALSE,correlationPlot=FALSE,main="Taste Profile Distance")
+epGraphs(phys,contributionPlots=FALSE,correlationPlot=FALSE,main="Physical Distance")
 
 
 ##
 table <- c(rep("flavors",ncol(BEER.DIST)),rep("meters",ncol(phys.dist))) 
-demo.distatis <- mpDISTATIS(cbind(BEER.DIST,phys.dist), DESIGN=STYLES, sorting='No', normalization='MFA',table=table, make.design.nominal=FALSE)
+flavor.phys.dist <- cbind(BEER.DIST,phys.dist)
+demo.distatis <- mpDISTATIS(flavor.phys.dist, DESIGN=STYLES, sorting='No', normalization='MFA',table=table, make.design.nominal=FALSE)

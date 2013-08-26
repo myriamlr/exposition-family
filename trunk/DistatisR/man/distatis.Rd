@@ -1,5 +1,8 @@
 \name{distatis}
 \alias{distatis}
+\alias{DiSTATIS}
+\alias{CovSTATIS}
+\alias{covstatis}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{\code{distatis} 3-Way MDS based on the \acronym{STATIS} optimization 
 	procedure

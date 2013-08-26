@@ -57,13 +57,13 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 	eigs.perm.matrix <- round(eigs.perm.matrix,digits=15)
 	inertia.perm <- rowSums(eigs.perm.matrix)
 	omni.p <- max(1-(sum(inertia.perm < sum(round(fixed.res$ExPosition.Data$eigs,digits=15)))/test.iters),1/test.iters)
-	omni.data <- list(p.val=omni.p,inertia.perm=inertia.perm, inertia=sum(round(fixed.res$ExPosition.Data$eigs,digits=15)))
+	omni.data <- list(p.val=round(omni.p,digits=4),inertia.perm=inertia.perm, inertia=sum(round(fixed.res$ExPosition.Data$eigs,digits=15)))
 	class(omni.data) <- c("inpoOmni","list")
 	
 	eigs.perm.matrix <- eigs.perm.matrix[,1:ncomps]
 	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$ExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
 	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
-	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix, eigs=fixed.res$ExPosition.Data$eigs)
+	components.data <- list(p.vals=round(component.p.vals,digits=4), eigs.perm=eigs.perm.matrix, eigs=fixed.res$ExPosition.Data$eigs)
 	class(components.data) <- c("inpoComponents","list")	
 	
  	Inference.Data <- list(components=components.data,fj.boots=fj.boot.data,omni=omni.data)

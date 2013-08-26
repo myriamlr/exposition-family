@@ -1,6 +1,7 @@
 \name{DistatisR-package}
 \alias{DistatisR-package}
 \alias{DistatisR}
+\alias{DiSTATISR}
 \docType{package}
 \title{\code{DistatisR:}
 DISTATIS Three Way Metric Multidimensional Scaling

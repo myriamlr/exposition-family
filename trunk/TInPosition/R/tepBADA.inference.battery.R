@@ -90,15 +90,15 @@ tepBADA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN 
 	eigs.perm.matrix <- round(eigs.perm.matrix,digits=15)	
 	component.p.vals <- 1-(colSums(eigs.perm.matrix < matrix(fixed.res$TExPosition.Data$eigs,test.iters, ncomps,byrow=TRUE))/test.iters)
 	component.p.vals[which(component.p.vals==0)] <- 1/test.iters
-	components.data <- list(p.vals=component.p.vals, eigs.perm=eigs.perm.matrix, eigs=fixed.res$TExPosition.Data$eigs)
+	components.data <- list(p.vals=round(component.p.vals,digits=4), eigs.perm=eigs.perm.matrix, eigs=fixed.res$TExPosition.Data$eigs)
 	class(components.data) <- c("tinpoComponents","list")
 		
 	omni.p <- max(1-(sum(inertia.perm < sum(fixed.res$TExPosition.Data$eigs))/test.iters),1/test.iters)
-	omni.data <- list(p.val=omni.p,inertia.perm=inertia.perm,inertia=sum(fixed.res$TExPosition.Data$eigs))
+	omni.data <- list(p.val=round(omni.p,digits=4),inertia.perm=inertia.perm,inertia=sum(fixed.res$TExPosition.Data$eigs))
 	class(omni.data) <- c("tinpoOmni","list")	
 		
 	r2.p <- max(1-(sum(r2.perm < sum(fixed.res$TExPosition.Data$assign$r2))/test.iters),1/test.iters)
-	r2.data <- list(p.val=r2.p,r2.perm=r2.perm,r2=fixed.res$TExPosition.Data$assign$r2)
+	r2.data <- list(p.val=round(r2.p,digits=4),r2.perm=r2.perm,r2=fixed.res$TExPosition.Data$assign$r2)
 	class(r2.data) <- c("tinpoR2","list")		
 		
 	loo.confuse <- t(loo.assign) %*% DESIGN	

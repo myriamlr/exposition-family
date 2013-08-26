@@ -22,7 +22,7 @@ prettyGraphsColorSelection <- function(n.colors=1,offset=NULL,starting.color=163
 	offset<-getPrime(offset)
 	the.colors <- prettyGraphsColors()
 	if(round(starting.color) < 0 || round(starting.color) > length(the.colors)){
-		starting.color <- 184
+		starting.color <- 163
 	}	
 	#the.seq <- round(seq(starting.color,length(the.colors)*n.colors,offset) %% length(the.colors))
 	return(as.matrix(the.colors[(seq(1,n.colors*offset,offset) + (starting.color-1)) %% length(the.colors)]))
