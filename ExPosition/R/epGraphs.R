@@ -38,19 +38,23 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fi.pch=NULL,fj.col=NULL,f
 					print('Dimension mismatch. epPlotInfo will be reset.')
 					
 					epPlotInfo$fi.col <- NULL
+					epPlotInfo$fi.pch <- NULL
 					epPlotInfo$fj.col <- NULL
+					epPlotInfo$fj.pch <- NULL					
 					epPlotInfo$constraints <- NULL
 				}
 			}else{
 				if(!(nrow(res$fi)==nrow(epPlotInfo$fi.col)) || !(nrow(res$fj)==nrow(epPlotInfo$fj.col))){
 					print('Dimension mismatch. epPlotInfo will be reset.')
 					epPlotInfo$fi.col <- NULL
+					epPlotInfo$fi.pch <- NULL					
 					epPlotInfo$fj.col <- NULL
+					epPlotInfo$fj.pch <- NULL					
 					epPlotInfo$constraints <- NULL
 				}
 			}
 		}else{
-			epPlotInfo <- list(fi.col=NULL,fj.col=NULL,constraints=NULL)	
+			epPlotInfo <- list(fi.col=NULL,fi.pch=NULL,fj.col=NULL,fj.pch=NULL,constraints=NULL)	
 		}
 		
 		#fi.col, fj.col, and constraints take precedence over epPlotInfo. This is because epPlotInfo only exists via expoOutput.			
@@ -99,7 +103,7 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fi.pch=NULL,fj.col=NULL,f
 			#this is needed because if we switch axes, it could be different constraints.
 			constraints <- calculateConstraints(results=res,x_axis=x_axis,y_axis=y_axis,constraints=constraints)			
 		}
-		#by the time I get here, I should be guaranteed to have a fi.col, fj.col, and constraints.
+		#by the time I get here, I should be guaranteed to have a fi.col/pch, fj.col/pch, and constraints.
 			
 		if(graphs){
 			fi.plot.info <- prettyPlot(res$fi,x_axis=x_axis,y_axis=y_axis,col=fi.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,pch=fi.pch,contributionCircles=TRUE,contributions=res$ci,dev.new=TRUE)

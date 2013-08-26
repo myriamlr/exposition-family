@@ -2,9 +2,10 @@ tepBADA <-
 function(DATA,scale=TRUE,center=TRUE,DESIGN=NULL,make_design_nominal=TRUE,group.masses=NULL,ind.masses=NULL,weights=NULL,graphs=TRUE,k=0){
 		
 	
-	DESIGN <- texpoDesignCheck(DATA,DESIGN,make_design_nominal)
+	DESIGN <- texpoDesignCheck(DATA,DESIGN,make_design_nominal,force_bary=TRUE)
 	colDESIGN <- colnames(DESIGN)
-	massedDESIGN<-t(t(DESIGN) * (1/(colSums(DESIGN))))
+	#massedDESIGN<-t(t(DESIGN) * (1/(colSums(DESIGN))))
+	massedDESIGN <- t(apply(DESIGN,1,'/',colSums(DESIGN)))
 	colnames(massedDESIGN) <- colDESIGN	
 	
 	main <- deparse(substitute(DATA))		
@@ -31,6 +32,9 @@ function(DATA,scale=TRUE,center=TRUE,DESIGN=NULL,make_design_nominal=TRUE,group.
 	res$fii <- supplementaryRes$fii
 	res$dii <- supplementaryRes$dii
 	res$rii <- supplementaryRes$rii
+	
+	res$lx <- res$fii
+	res$ly <- supplementaryCols(t(massedDESIGN),res,center=FALSE,scale=FALSE)$fjj
 
 	assignments <- fii2fi(DESIGN,res$fii,res$fi)
 	assignments$r2 <- R2(RMW$M,res$di,XMW$M,res$dii)
@@ -39,6 +43,6 @@ function(DATA,scale=TRUE,center=TRUE,DESIGN=NULL,make_design_nominal=TRUE,group.
 
 	#new res here
 	class(res) <- c("tepBADA","list")		
-	tepPlotInfo <- tepGraphs(res=res,DESIGN=DESIGN,main=main,graphs=graphs)
+	tepPlotInfo <- tepGraphs(res=res,DESIGN=DESIGN,main=main,graphs=graphs,lvPlots=FALSE)
 	return(tepOutputHandler(res=res,tepPlotInfo=tepPlotInfo))
 }
