@@ -23,11 +23,15 @@ function(DATA1,DATA2,make_data1_nominal=FALSE,make_data2_nominal=FALSE,DESIGN=NU
 	res <- coreCA(R,masses=weights1,weights=weights2,hellinger=FALSE,symmetric=symmetric,k=k)
 	#res <- epCA(R, masses = weights1, weights = weights2, hellinger = FALSE, symmetric = symmetric, graphs = FALSE, k=k)
 	#res <- res$ExPosition.Data
-	
+	res$W1 <- res$M
+	res$W2 <- res$W
+	res$M <- res$W <- NULL
 	res$lx <- supplementalProjection(makeRowProfiles(DATA1)$rowProfiles,res$fi,Dv=res$pdq$Dv)$f.out / sqrt(nrow(DATA1))
-	res$ly <- supplementalProjection(makeRowProfiles(DATA2)$rowProfiles,res$fj,Dv=res$pdq$Dv)$f.out / sqrt(nrow(DATA2))
-	#res$Li <- res$supi$f.out / sqrt(nrow(DATA1))
-	#res$Lj <- res$supj$f.out / sqrt(nrow(DATA2))
+	if(symmetric){
+		res$ly <- supplementalProjection(makeRowProfiles(DATA2)$rowProfiles,res$fj,Dv=res$pdq$Dv)$f.out / sqrt(nrow(DATA2))
+	}else{
+		res$ly <- (supplementalProjection(makeRowProfiles(DATA2)$rowProfiles,res$fj,Dv=rep(1,length(res$pdq$Dv)))$f.out / sqrt(nrow(DATA2)))
+	}
 	
 	class(res) <- c("tepPLSCA","list")
 	tepPlotInfo <- tepGraphs(res=res,DESIGN=DESIGN,main=main,graphs=graphs)	

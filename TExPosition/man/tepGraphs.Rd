@@ -10,9 +10,10 @@ tepGraphs: TExPosition plotting function
 \usage{
 tepGraphs(res, DESIGN = NULL, x_axis = 1, y_axis = 2, 
 	fi.col = NULL, fi.pch = NULL, fii.col = NULL, fii.pch = NULL, 
-	fj.col = NULL, fj.pch = NULL, 
-	col.offset = NULL, constraints = NULL, 
+	fj.col = NULL, fj.pch = NULL, col.offset = NULL, 
+	constraints = NULL, lv.constraints = NULL,
 	xlab = NULL, ylab = NULL, main = NULL, 
+	lvPlots = TRUE, lvAgainst = TRUE,
 	contributionPlots = TRUE, correlationPlotter = TRUE, 
 	showHulls = 1, biplots = FALSE, graphs = TRUE)
 }
@@ -30,9 +31,12 @@ tepGraphs(res, DESIGN = NULL, x_axis = 1, y_axis = 2,
   \item{fj.pch}{A matrix of pch values for the column items. If NULL, pch values are all 21.}
   \item{col.offset}{A numeric offset value. Is passed to \code{\link{createColorVectorsByDesign}}.}
   \item{constraints}{Plot constraints as returned from \code{\link{prettyPlot}}. If NULL, constraints are selected.}        
+  \item{lv.constraints}{Plot constraints for latent variables. If NULL, constraints are selected.}          
   \item{xlab}{x axis label}
   \item{ylab}{y axis label}
   \item{main}{main label for the graph window}
+  \item{lvPlots}{a boolean. If TRUE, latent variables (X, Y) are plotted. If FALSE, latent variables are not plotted.}
+  \item{lvAgainst}{a boolean. If TRUE, latent variables (X, Y) are plotted against each other. If FALSE, latent variables are plotted like factor scores.}
   \item{contributionPlots}{a boolean. If TRUE (default), contribution bar plots will be created.}
   \item{correlationPlotter}{a boolean. If TRUE (default), a correlation circle plot will be created. Applies to PCA family of methods (CA is excluded for now).}
   \item{showHulls}{a value between 0 and 1 to make a peeled hull at that percentage. All values outside of 0-1 will not plot any hulls.}  

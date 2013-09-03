@@ -34,6 +34,7 @@ function(DATA,M=NULL,W=NULL,decomp.approach='svd',k=0){
 	ri <- repmat((1/di),1,pdq_results$ng) * (fi^2)
 	ri <- replace(ri,is.nan(ri),0)
 	ci <- matrix(M,nrow(pdq_results$p),ncol(pdq_results$p),byrow=FALSE) * (fi^2)/repmat(t(pdq_results$Dv^2),DATA_dims[1],1)
+	ci <- replace(ci,is.nan(ci),0)	
 	di <- as.matrix(di)		
 
 	#columns
@@ -44,6 +45,7 @@ function(DATA,M=NULL,W=NULL,decomp.approach='svd',k=0){
 	rj <- repmat((1/dj),1,pdq_results$ng) * (fj^2)
 	rj <- replace(rj,is.nan(rj),0)
 	cj <- matrix(W,nrow(pdq_results$q),ncol(pdq_results$q),byrow=FALSE) * (fj^2)/repmat(t(pdq_results$Dv^2),DATA_dims[2],1)
+	cj <- replace(cj,is.nan(cj),0)	
 	dj <- as.matrix(dj)	
 
 	#I can append the masses & weights if necessary in the appropriate functions

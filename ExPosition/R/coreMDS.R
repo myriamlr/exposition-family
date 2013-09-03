@@ -19,6 +19,7 @@ function(DATA,masses=NULL,decomp.approach='svd',k=0){
 	ri <- repmat((1/di),1,pdq_results$ng) * (fi^2)
 	ri <- replace(ri,is.nan(ri),0)	
 	ci <- repmat(masses,1,pdq_results$ng) * (fi^2)/repmat(t(pdq_results$Dv),DATA_dims[1],1)
+	ci <- replace(ci,is.nan(ci),0)	
 	di <- as.matrix(di)		
 
 	#I can append the masses & weights if necessary in the appropriate functions

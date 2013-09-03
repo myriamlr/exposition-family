@@ -5,7 +5,7 @@ function(data_matrix,x_axis=1,y_axis=2,percentage=1,col="black",lwd=3,lty=1){
 	repeat{
 		hpts <- chull(data_matrix[,c(x_axis,y_axis)])
 		#if data_matrix[-hpts,] is only 1 row, npts is NULL.
-		npts <- nrow(data_matrix[-hpts,c(x_axis,y_axis)])	
+		npts <- nrow(data_matrix[-hpts,c(x_axis,y_axis)])
 		if((npts/nsim < percentage) || is.null(npts)){ 
 			break 
 		}
