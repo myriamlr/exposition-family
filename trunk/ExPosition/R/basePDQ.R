@@ -1,6 +1,13 @@
 basePDQ <-
 function(datain,genFlag=FALSE,vectorflag=FALSE,M=NULL,W=NULL,is.mds=FALSE,decomp.approach='svd',k=0){
 
+	na.check <- is.na(datain)
+	nan.check <- is.nan(datain)
+	inf.check <- is.infinite(datain)
+	if(sum( na.check | nan.check | inf.check )>0){
+		stop("ExPosition must stop. There are NA, NaN, or Infinte values.")
+	}
+
 	#check if M & W are OK
 	if(is.null(M) || is.null(W)){
 		genFlag <- FALSE
@@ -28,7 +35,17 @@ function(datain,genFlag=FALSE,vectorflag=FALSE,M=NULL,W=NULL,is.mds=FALSE,decomp
 	D <- diag(d)
 	Q <- svdOUT$v
 	tau <- svdOUT$tau
+	rank <- length(d)
 	
+	if(is.null(dim(P)) && is.null(dim(Q))){
+		P <- cbind(P,0)
+		Q <- cbind(Q,0)
+		d <- c(d,0)
+		D <- diag(d)
+		tau <- c(tau,0)
+		warning('Solution has only 1 singular value/vector. Zeros are appended for plotting purposes.')
+	}
+
 	#if GSVD, correct data.
 	if(genFlag){
 		if(vectorflag){
@@ -40,7 +57,7 @@ function(datain,genFlag=FALSE,vectorflag=FALSE,M=NULL,W=NULL,is.mds=FALSE,decomp
 		}
 	}
 	
-	res <- list(p=P,q=Q,Dv=d,Dd=D,ng=length(d),tau=tau)
+	res <- list(p=P,q=Q,Dv=d,Dd=D,ng=length(d),rank=rank,tau=tau)
 	class(res) <- c("epSVD","list")	
 	return(res)
 }

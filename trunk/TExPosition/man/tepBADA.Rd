@@ -11,7 +11,7 @@ tepBADA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = 
 	group.masses = NULL, ind.masses = NULL, weights = NULL, graphs = TRUE, k = 0)
 }
 \arguments{
-    \item{DATA}{original data to perform a BADA on.}
+  \item{DATA}{original data to perform a BADA on.}
   \item{scale}{a boolean, vector, or string. See \code{\link{expo.scale}} for details.}
   \item{center}{a boolean, vector, or string. See \code{\link{expo.scale}} for details.}
   \item{DESIGN}{a design matrix to indicate if rows belong to groups. Required for BADA.}
@@ -19,7 +19,7 @@ tepBADA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = 
   \item{group.masses}{a diagonal matrix or column-vector of masses for the groups.}
   \item{ind.masses}{a diagonal matrix or column-vector of masses for the individuals (rows).}
   \item{weights}{a diagonal matrix or column-vector of weights for the column items.}
-  \item{graphs}{a boolean. If TRUE (default), graphs and plots are provided (via \code{\link{epGraphs}})}
+  \item{graphs}{a boolean. If TRUE (default), graphs and plots are provided (via \code{\link{tepGraphs}})}
   \item{k}{number of components to return.}
 }
 \value{
@@ -27,14 +27,21 @@ tepBADA(DATA, scale = TRUE, center = TRUE, DESIGN = NULL, make_design_nominal = 
 	\item{fii}{factor scores computed for supplemental observations}
 	\item{dii}{squared distances for supplemental observations}
 	\item{rii}{cosines for supplemental observations}
-	\item{assign}{a list of assignment data. See \code{\link{fii2fi}} and \code{\link{R2}}}}
+	\item{assign}{a list of assignment data. See \code{\link{fii2fi}} and \code{\link{R2}}}
+	\item{lx}{latent variables from DATA1 computed for observations}
+	\item{ly}{latent variables from DATA2 computed for observations}
+}
+\details{
+		Note: BADA is a special case of PLS (\code{\link{tepPLS}},\code{\link{tepGPLS}}) wherein DATA1 are data and DATA2 are a group-coded disjunctive matrix. This is also called mean-centered PLS (Krishnan et al., 2011).
+}
 \references{
 Abdi, H., and Williams, L.J. (2010). Principal component analysis. \emph{Wiley Interdisciplinary Reviews: Computational Statistics}, 2, 433-459.\cr
 Abdi, H. and Williams, L.J. (2010). Correspondence analysis. In N.J. Salkind, D.M., Dougherty, & B. Frey (Eds.): \emph{Encyclopedia of Research Design}. Thousand Oaks (CA): Sage. pp. 267-278.\cr
 Abdi, H. (2007). Singular Value Decomposition (SVD) and Generalized Singular Value Decomposition (GSVD). In N.J. Salkind (Ed.): \emph{Encyclopedia of Measurement and Statistics}.Thousand Oaks (CA): Sage. pp. 907-912.\cr
 Abdi, H. & Williams, L.J. (2010). Barycentric discriminant analysis (BADIA). In N.J. Salkind, D.M., Dougherty, & B. Frey (Eds.): \emph{Encyclopedia of Research Design}. Thousand Oaks (CA): Sage. pp. 64-75. \cr
 Abdi, H., Williams, L.J., Beaton, D., Posamentier, M., Harris, T.S., Krishnan, A., & Devous, M.D. (in press, 2012). Analysis of regional cerebral blood flow data to discriminate among Alzheimer's disease, fronto-temporal dementia, and elderly controls: A multi-block barycentric discriminant analysis (MUBADA) methodology. \emph{Journal of Alzheimer Disease}, , -.
-Abdi, H., Williams, L.J., Connolly, A.C., Gobbini, M.I., Dunlop, J.P., & Haxby, J.V. (2012). Multiple Subject Barycentric Discriminant Analysis (MUSUBADA): How to assign scans to categories without using spatial normalization. \emph{Computational and Mathematical Methods in Medicine}, 2012, 1-15. doi:10.1155/2012/634165.
+Abdi, H., Williams, L.J., Connolly, A.C., Gobbini, M.I., Dunlop, J.P., & Haxby, J.V. (2012). Multiple Subject Barycentric Discriminant Analysis (MUSUBADA): How to assign scans to categories without using spatial normalization. \emph{Computational and Mathematical Methods in Medicine}, 2012, 1-15. doi:10.1155/2012/634165.\cr
+	Krishnan, A., Williams, L. J., McIntosh, A. R., & Abdi, H. (2011). Partial Least Squares (PLS) methods for neuroimaging: A tutorial and review. \emph{NeuroImage}, \emph{56}(\bold{2}), 455 -- 475.\cr
 }
 \author{
 Derek Beaton

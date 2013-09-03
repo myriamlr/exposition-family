@@ -2,6 +2,7 @@
 
 
 prettyGraphsHSVColorSelection <- function(n.colors=1,offset=NULL,h=13,s=0.75,v=0.75){
+
 	if(is.null(offset)){
 		offset <- abs((1-sqrt(5))/2)
 	}

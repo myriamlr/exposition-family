@@ -5,9 +5,9 @@ library(MExPosition)
 #for ade4 
 library(ade4)
 data(deug)
-deug.dudi <- dudi.pca(deug$tab, center = deug$cent, scale = FALSE, scan = FALSE)
-contrib <- deug.dudi$li^2/ matrix(deug.dudi$eig[1:ncol(deug.dudi$li)], nrow(deug.dudi$li), ncol(deug.dudi$li),byrow=TRUE)
-prettyPlot(deug.dudi$li, contributionCircles=TRUE, contributions=contrib)
+deug.dudi <- dudi.pca(deug$tab, center = deug$cent,scale = FALSE, scan = FALSE)
+inertia <- inertia.dudi(deug.dudi,row.inertia = T)$row.abs
+prettyPlot(deug.dudi$li,contributionCircles=TRUE,contributions=inertia)
 detach(package:ade4)
 
 # for FactoMineR 

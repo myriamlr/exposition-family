@@ -47,7 +47,7 @@ permute.components.ca <- function(DATA,hellinger=FALSE,symmetric=TRUE,masses=NUL
 	eigs.perm.matrix <- round(eigs.perm.matrix,digits=15)	
 	inertia.perm <- rowSums(eigs.perm.matrix)
 	omni.p <- max(1-(sum(inertia.perm < sum(fixed.res$ExPosition.Data$eigs))/test.iters),1/test.iters)
-	omni.data <- list(p.val=round(omni.p,digits-4),inertia.perm=inertia.perm, inertia=sum(fixed.res$ExPosition.Data$eigs))
+	omni.data <- list(p.val=round(omni.p,digits=4),inertia.perm=inertia.perm, inertia=sum(fixed.res$ExPosition.Data$eigs))
 	class(omni.data) <- c("inpoOmni","list")
 		
 	eigs.perm.matrix <- eigs.perm.matrix[,1:ncomps]

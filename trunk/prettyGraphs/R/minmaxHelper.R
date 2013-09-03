@@ -1,6 +1,6 @@
 minmaxHelper <-
 function(mat1,mat2=NULL,axis1=1,axis2=2,findBounds=TRUE){
-
+	
 	if(!is.matrix(mat1) && !is.data.frame(mat1)){
 		warning(paste("mat1 was not a matrix or a data frame. mat1 class is: ",class(mat1),sep=""))
 		return(0)
@@ -15,6 +15,7 @@ function(mat1,mat2=NULL,axis1=1,axis2=2,findBounds=TRUE){
 		maxx<-original_min_max_list$maxx * 1.15	
 		miny<-original_min_max_list$miny * 1.15	
 		maxy<-original_min_max_list$maxy * 1.15
+		
 		if(minx == 0){
 			minx = -abs(maxx * 0.1)
 		}

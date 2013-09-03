@@ -7,7 +7,7 @@ rowNorms <- function(X,type=NULL,center=FALSE,scale=FALSE){
 	}else if(type == 'ca'){
 		return(X/matrix(rowSums(X),nrow(X),ncol(X)))
 	}else if (type == 'z'){
-		return(t(expo.scale(t(X,center=TRUE,scale=TRUE))))
+		return(t(expo.scale(t(X),center=TRUE,scale=TRUE)))
 	}else if(type == 'other'){
 		return(t(expo.scale(t(X),center=center,scale=scale)))
 	}else{

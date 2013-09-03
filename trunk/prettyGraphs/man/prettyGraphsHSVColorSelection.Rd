@@ -14,7 +14,7 @@ prettyGraphsHSVColorSelection(n.colors = 1, offset = NULL, h = 13, s = 0.75, v =
 number of colors needed
 }
   \item{offset}{
-numeric. This number decides the distance between indices for color selection. If NULL, the golden ratio is selected.
+numeric (decimal/percentage). This number decides the distance between indices for color selection. If NULL, the golden ratio is selected.
 }
   \item{h}{
 numeric. The initial hue (see \code{\link{hsv}}).

@@ -1,7 +1,7 @@
 tepGraphs <-
-function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NULL, fii.pch = NULL, fj.col=NULL, fj.pch = NULL,col.offset=NULL,constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,lvPlots=TRUE,lvAgainst=TRUE,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=1,biplots=FALSE,graphs=TRUE){
+function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NULL, fii.pch = NULL, fj.col=NULL, fj.pch = NULL,col.offset=NULL,constraints=NULL,lv.constraints=NULL,xlab=NULL,ylab=NULL,main=NULL,lvPlots=TRUE,lvAgainst=TRUE,contributionPlots=TRUE,correlationPlotter=TRUE,showHulls=1,biplots=FALSE,graphs=TRUE){
 
-	pca.types <- c('tepBADA','tepPLS')
+	pca.types <- c('tepBADA','tepPLS','tepGPLS')
 	ca.types <- c('tepDICA','tepPLSCA')
 	bary.types <- c('tepBADA','tepDICA')
 	
@@ -44,17 +44,25 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NUL
 				tepPlotInfo$fj.col <- NULL
 				tepPlotInfo$fj.pch <- NULL				
 				tepPlotInfo$constraints <- NULL
+				tepPlotInfo$lv.constraints <- NULL				
 			}		
 		}else{
-			tepPlotInfo <- list(fii.col=NULL,fii.pch=NULL,fi.col=NULL,fi.pch=NULL,fj.col=NULL,fj.pch=NULL,constraints=NULL)
+			tepPlotInfo <- list(fii.col=NULL,fii.pch=NULL,fi.col=NULL,fi.pch=NULL,fj.col=NULL,fj.pch=NULL,constraints=NULL,lv.constraints=NULL)
 		}
 		
 		#fii.col, fi.col, fj.col, and constraints take precedence over tepPlotInfo. This is because epPlotInfo only exists via expoOutput.	
+
+		##this enforces proper coloring for BADA and DICA but allows user to do whatever for PLS.
+		if(!class(res)[1]%in%bary.types && length(fi.col)==1){
+			fi.col <- as.matrix(rep(fi.col,nrow(res$fi)))
+		}#else{ fi.col <- NULL }
+
+		if(!class(res)[1]%in%bary.types && length(fii.col)==1){
+			fii.col <- as.matrix(rep(fii.col,nrow(res$lx)))			
+		}#else{ fii.col <- NULL }
+		
 		if(is.null(fii.col) || is.null(fi.col) || nrow(fi.col)!=nrow(res$fi) || nrow(fii.col)!=nrow(res$lx) || nrow(fii.col)!=nrow(res$ly)){
 			if(is.null(tepPlotInfo$fii.col) || is.null(tepPlotInfo$fi.col)){
-#				print('here')
-#				print(class(res))
-#				pause()
 				if(class(res)[1]%in%bary.types){ ##means it is a barycentric method and we want to force the obs colors to match the groups.							
 					if(is.null(DESIGN)){
 						stop("fii.col and DESIGN are NULL. You must provide one or the other.")
@@ -84,16 +92,21 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NUL
 				fi.col <- tepPlotInfo$fi.col
 			}
 		}
-		
-		if(is.null(fj.col) || nrow(fj.col)!=nrow(res$fj)){
+
+							
+		if(length(fj.col)==1){
+			fj.col <- as.matrix(rep(fj.col,nrow(res$fj)))
+		}else if(is.null(fj.col) || nrow(fj.col)!=nrow(res$fj)){
 			if(is.null(tepPlotInfo$fj.col)){
 				fj.col <- createColorVectorsByDesign(matrix(1,nrow(res$fj),1),hsv=FALSE,offset=col.offset)$oc
 			}else{
 				fj.col <- tepPlotInfo$fj.col	
 			}
-		}
-
-		if(is.null(fi.pch) || nrow(fi.pch)!=nrow(res$fi)){
+		}		
+	
+		if(length(fi.pch)==1){
+			fi.pch <- as.matrix(rep(fi.pch,nrow(res$fi)))
+		}else if(is.null(fi.pch) || nrow(fi.pch)!=nrow(res$fi)){
 			if(is.null(tepPlotInfo$fi.pch)){
 				fi.pch <- as.matrix(rep(21,nrow(res$fi)))
 			}else{
@@ -101,7 +114,9 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NUL
 			}
 		}
 		
-		if(is.null(fii.pch) || nrow(fii.pch)!=nrow(res$lx) || nrow(fii.pch)!=nrow(res$ly)){
+		if(length(fii.pch)==1){
+			fii.pch <- as.matrix(rep(fii.pch,nrow(res$lx)))
+		}else if(is.null(fii.pch) || nrow(fii.pch)!=nrow(res$lx) || nrow(fii.pch)!=nrow(res$ly)){
 			if(is.null(tepPlotInfo$fii.pch)){
 				fii.pch <- as.matrix(rep(21,nrow(res$lx)))
 			}else{
@@ -109,7 +124,10 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NUL
 			}
 		}
 				
-		if(is.null(fj.pch) || nrow(fj.pch)!=nrow(res$fj)){
+		
+		if(length(fj.pch)==1){
+			fj.pch <- as.matrix(rep(fj.pch,nrow(res$fj)))
+		}else if(is.null(fj.pch) || nrow(fj.pch)!=nrow(res$fj)){
 			if(is.null(tepPlotInfo$fj.pch)){
 				fj.pch <- as.matrix(rep(21,nrow(res$fj)))
 			}else{
@@ -124,12 +142,18 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NUL
 			#this is needed because if we switch axes, it could be different constraints.
 			constraints <- calculateConstraints(results=res,x_axis=x_axis,y_axis=y_axis,constraints=constraints)			
 		}	
-			
-			
+		
+		if(is.null(lv.constraints)){
+			if(!is.null(tepPlotInfo$lv.constraints)){
+				lv.constraints <- tepPlotInfo$lv.constraints
+			}
+			#this is needed because if we switch axes, it could be different constraints.
+			lv.constraints <- calculateLVConstraints(results=res,x_axis=x_axis,y_axis=y_axis,constraints=lv.constraints)			
+		}			
+
 		#by the time I get here, I should be guaranteed to have a fii.col/pch, fi.col/pch, fj.col/pch, and constraints.		
 		####BEGIN BARYCENTRIC METHOD PLOTTING
 		if(graphs){
-			
 			if(class(res)[1]%in%bary.types){
 				#ONLY FOR BARYCENTRIC
 				fii.plot.info <- prettyPlot(res$fii,x_axis=x_axis,y_axis=y_axis,col=fii.col,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,pch=fii.pch,contributionCircles=FALSE,dev.new=TRUE)
@@ -161,11 +185,11 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NUL
 					lyxlab <- paste("LY ",x_axis,sep="")
 					lxylab <- paste("LX ",y_axis,sep="")
 					lyylab <- paste("LY ",y_axis,sep="")				
-					prettyPlot(cbind(res$lx[,x_axis],res$ly[,x_axis]),x_axis=1,y_axis=2,col=fii.col,pch=fii.pch,xlab=lxxlab,ylab=lyxlab,main=paste(lxxlab," vs. ",lyxlab,sep=""))
-					prettyPlot(cbind(res$lx[,y_axis],res$ly[,y_axis]),x_axis=1,y_axis=2,col=fii.col,pch=fii.pch,xlab=lxylab,ylab=lxylab,main=paste(lxylab," vs. ",lyylab,sep=""))
+					prettyPlot(cbind(res$lx[,x_axis],res$ly[,x_axis]),x_axis=1,y_axis=2,col=fii.col,pch=fii.pch,xlab=lxxlab,ylab=lyxlab,main=paste(lxxlab," vs. ",lyxlab,sep=""),constraints=lv.constraints)
+					prettyPlot(cbind(res$lx[,y_axis],res$ly[,y_axis]),x_axis=1,y_axis=2,col=fii.col,pch=fii.pch,xlab=lxylab,ylab=lxylab,main=paste(lxylab," vs. ",lyylab,sep=""),constraints=lv.constraints)
 				}else{
-					prettyPlot(res$lx,x_axis=x_axis,y_axis=y_axis,col=fii.col,pch=fii.pch,xlab=xlab,ylab=ylab,main=main)
-					prettyPlot(res$ly,x_axis=x_axis,y_axis=y_axis,col=fii.col,pch=fii.pch,xlab=xlab,ylab=ylab,main=main)					
+					prettyPlot(res$lx,x_axis=x_axis,y_axis=y_axis,col=fii.col,pch=fii.pch,xlab=xlab,ylab=ylab,main=main,constraints=lv.constraints)
+					prettyPlot(res$ly,x_axis=x_axis,y_axis=y_axis,col=fii.col,pch=fii.pch,xlab=xlab,ylab=ylab,main=main,constraints=lv.constraints)					
 				}
 			}
 			
@@ -183,7 +207,7 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL, fi.pch=NULL, fii.col=NUL
 		
 	}
 	
-	tepPlotInfo <- list(fii.col=fii.col, fii.pch=fii.pch,fi.col=fi.col, fi.pch=fi.pch,fj.col=fj.col,fj.pch=fj.pch,constraints=constraints)
+	tepPlotInfo <- list(fii.col=fii.col, fii.pch=fii.pch,fi.col=fi.col, fi.pch=fi.pch,fj.col=fj.col,fj.pch=fj.pch,constraints=constraints,lv.constraints=lv.constraints)
 	class(tepPlotInfo) <- c("tepGraphs", "list")
 	return(tepPlotInfo)	
 }

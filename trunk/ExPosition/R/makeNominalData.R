@@ -1,6 +1,10 @@
 makeNominalData <-
 function(datain){
 
+	num.nas <- sum(is.na(datain))
+	if(num.nas > 0){
+		print(paste("You have ",num.nas," NAs in your data. makeNominalData automatically imputes NA with the mean of the columns.",sep=""))
+	}
 	data_dims <- dim(datain)
 	var_names <- colnames(datain)
 	ind_names <- rownames(datain)

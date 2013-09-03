@@ -58,7 +58,9 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fi.pch=NULL,fj.col=NULL,f
 		}
 		
 		#fi.col, fj.col, and constraints take precedence over epPlotInfo. This is because epPlotInfo only exists via expoOutput.			
-		if(is.null(fi.col) || nrow(fi.col)!=nrow(res$fi)){
+		if(length(fi.col)==1){
+			fi.col <- as.matrix(rep(fi.col,nrow(res$fi)))
+		}else if(is.null(fi.col) || nrow(fi.col)!=nrow(res$fi)){
 			if(is.null(epPlotInfo$fi.col)){
 				if(is.null(DESIGN)){
 					fi.col <- createColorVectorsByDesign(matrix(1,nrow(res$fi),1),offset=col.offset)$oc
@@ -70,16 +72,20 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fi.pch=NULL,fj.col=NULL,f
 			}
 		}
 		
-		if(is.null(fi.pch) || nrow(fi.pch)!=nrow(res$fi)){
+		if(length(fi.pch)==1){
+			fi.pch <- as.matrix(rep(fi.pch,nrow(res$fi)))
+		}else if(is.null(fi.pch) || nrow(fi.pch)!=nrow(res$fi)){
 			if(is.null(epPlotInfo$fi.pch)){
-				fi.pch <- fi.pch <- as.matrix(rep(21,nrow(res$fi)))
+				fi.pch <- as.matrix(rep(21,nrow(res$fi)))
 			}else{
 				fi.pch <- epPlotInfo$fi.pch
 			}
 		}
 			
 		if(class(res)[1]!='epMDS'){
-			if(is.null(fj.col) || nrow(fj.col)!=nrow(res$fj)){
+			if(length(fj.col)==1){
+				fj.col <- as.matrix(rep(fj.col,nrow(res$fj)))
+			}else if(is.null(fj.col) || nrow(fj.col)!=nrow(res$fj)){
 				if(is.null(epPlotInfo$fj.col)){
 					fj.col <- createColorVectorsByDesign(matrix(1,nrow(res$fj),1),hsv=FALSE,offset=col.offset)$oc
 				}else{
@@ -87,9 +93,11 @@ function(res,DESIGN=NULL,x_axis=1,y_axis=2,fi.col=NULL,fi.pch=NULL,fj.col=NULL,f
 				}
 			}
 			
-			if(is.null(fj.pch) || nrow(fj.pch)!=nrow(res$fj)){
+			if(length(fj.pch)==1){
+				fj.pch <- as.matrix(rep(fj.pch,nrow(res$fj)))
+			}else if(is.null(fj.pch) || nrow(fj.pch)!=nrow(res$fj)){
 				if(is.null(epPlotInfo$fi.pch)){
-					fj.pch <- fj.pch <- as.matrix(rep(21,nrow(res$fj)))
+					fj.pch <- as.matrix(rep(21,nrow(res$fj)))
 				}else{
 					fj.pch <- epPlotInfo$fj.pch
 				}

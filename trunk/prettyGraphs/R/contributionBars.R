@@ -9,7 +9,12 @@ function(factor_scores,contributions,x_axis=1,y_axis=2,col=NULL,main=NULL,upper=
 	}
 	#multiply the sign of the data by the contributions
 		#stupid rounding somewhere...
-	if(!(sum(colSums(contributions)>0.999)==ncol(contributions))){
+#	print(!(sum(colSums(contributions)>0.999)==ncol(contributions)))
+#	print(colSums(contributions)>0.999 | colSums(contributions)==0)
+#	print(sum(colSums(contributions)>0.999 | colSums(contributions)==0)!=ncol(contributions))
+#	pause()
+#	if(!(sum(colSums(contributions)>0.999)==ncol(contributions))){
+	if(sum(colSums(contributions)>0.999 | colSums(contributions)==0)!=ncol(contributions)){
 		stop(paste("Contributions do not sum to 1",which( (colSums(contributions)==1)==FALSE),sep=" "))
 	}
 	contributions_with_signs <- sign(factor_scores) * contributions
