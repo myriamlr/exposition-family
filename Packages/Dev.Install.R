@@ -1,6 +1,3 @@
-#download.file("http://exposition-family.googlecode.com/svn/Packages/Development/prettyGraphs_2.1.4.tar.gz")
-#install.packages(file.path(tempdir(), 'DEV_prettyGraphs_2.1.4.tar.gz'),repos=NULL, type='source')
-
 file.names <- c('prettyGraphs_2.1.4.tar.gz','ExPosition_2.4.9.tar.gz','InPosition_0.10.5.tar.gz','TExPosition_2.6.7.tar.gz','TInPosition_0.10.5.tar.gz')
 web.loc <- c('http://exposition-family.googlecode.com/svn/Packages/Development/')
 temp.dir <- tempdir()
