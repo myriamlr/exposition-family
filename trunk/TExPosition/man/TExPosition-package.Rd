@@ -13,8 +13,8 @@ TExPosition is two-table \code{\link{ExPosition}} and includes discriminant meth
 \tabular{ll}{
 Package: \tab TExPosition\cr
 Type: \tab Package\cr
-Version: \tab 2.0.2\cr
-Date: \tab 2013-06-04\cr
+Version: \tab 2.6.7\cr
+Date: \tab 2013-10-08\cr
 Depends: \tab R (>=2.15.0), prettyGraphs (>= 2.0.0), ExPosition (>= 2.0.0)\cr
 License: \tab GPL-2\cr
 URL: \tab http://www.utdallas.edu/~derekbeaton/software/ExPosition\cr
@@ -24,7 +24,7 @@ URL: \tab http://www.utdallas.edu/~derekbeaton/software/ExPosition\cr
 Questions, comments, compliments, and complaints go to Derek Beaton \email{exposition.software@gmail.com}.\cr\cr
 
 The following people are authors or contributors to TExPosition code, data, or examples:\cr
-Derek Beaton, Jenny Rieck, Cherise Chin-Fatt and Hervé Abdi.
+Derek Beaton, Jenny Rieck, Cherise Chin-Fatt, Francesca Filbey, and Hervé Abdi.
 }
 \references{
 Abdi, H., and Williams, L.J. (2010). Principal component analysis. \emph{Wiley Interdisciplinary Reviews: Computational Statistics}, 2, 433-459.\cr
