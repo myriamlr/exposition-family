@@ -1,9 +1,8 @@
-# runM.SD <- function(){
-	
-	
-# }
+library(InPosition)
+data(words)
+pca.words.res <- epPCA.inference.battery(words$data,scale=FALSE,graphs=FALSE)
 
-##############THIS CHUNK IS NEEDED.
+
 n <- 0
 mean.run <- matrix(0,nrow(pca.words.res$Inference.Data$fj.boots$boots),ncol(pca.words.res$Inference.Data$fj.boots$boots))
 M2 <- mean.run #not really, but just initialize to zero because I'm lazy.
