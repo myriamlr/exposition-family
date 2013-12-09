@@ -8,7 +8,8 @@ Hellinger version of CA preprocessing
 Performs all steps required for Hellinger form of CA processing (row profile approach).
 }
 \usage{
-hellingerNorm(X, X_dimensions, colTotal, rowTotal, grandTotal, weights = NULL, masses = NULL)
+hellingerNorm(X, X_dimensions, colTotal, rowTotal, grandTotal, 
+	weights = NULL, masses = NULL)
 }
 \arguments{
   \item{X}{Data matrix}

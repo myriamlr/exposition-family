@@ -7,6 +7,7 @@ function(){
 	full.list <- array("", c(num.people, 1), list(1:num.people, c("Person")))
 	#rbind(
 		i<-1
+		full.list[i,] <- c("Francesca Filbey: Data"); 	i<-i+1
 		full.list[i,] <- c("Michael Meyners: Feedback and suggestions for prettyGraphs"); 	i<-i+1
 		full.list[i,] <- c("Brad Buchsbaum: Feedback, testing, and suggestions"); 	i<-i+1		
 		full.list[i,] <- c("Anjali Krishnan: Testing and feedback"); 	i<-i+1
