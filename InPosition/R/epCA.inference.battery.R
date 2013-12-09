@@ -26,7 +26,7 @@ permute.components.ca <- function(DATA,hellinger=FALSE,symmetric=TRUE,masses=NUL
 		
 		if(i==1){
 			cycle.time <- (proc.time() - start.time) #this is in seconds...
-			if(!continueResampling(cycle.time,test.iters)){
+			if(!continueResampling(cycle.time[1] * test.iters)){
 				##exit strategy.
 				return(fixed.res)
 			}

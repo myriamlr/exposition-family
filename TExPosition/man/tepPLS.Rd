@@ -54,6 +54,6 @@ Derek Beaton
 data(beer.tasting.notes)
 data1<-beer.tasting.notes$data[,1:8]
 data2<-beer.tasting.notes$data[,9:16]
-gpls.res <- tepPLS(data1,data2)
+pls.res <- tepPLS(data1,data2)
 }
 \keyword{ multivariate }

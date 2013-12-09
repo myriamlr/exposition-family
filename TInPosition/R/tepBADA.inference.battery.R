@@ -32,46 +32,59 @@ tepBADA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN 
 	
 	fixed.res <- tepBADA(DATA = DATA, scale = scale, center = center, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, graphs = FALSE, k = k)
 	
+	n.rows <- nrow(DATA)
+	resamp.iters <- max(n.rows,test.iters)
+	
+	##inf stuff
 	ncomps <- fixed.res$TExPosition.Data$pdq$ng
 	FBY <- array(0,dim=c(nrow(fixed.res$TExPosition.Data$X),ncomps,test.iters))
 	FBX <- array(0,dim=c(ncol(fixed.res$TExPosition.Data$X),ncomps,test.iters))
 	eigs.perm.matrix <- matrix(0,test.iters,ncomps)
 	r2.perm <- inertia.perm <- matrix(0,test.iters,1)
 	
+	##loo stuff
+	loo.assign <- matrix(0,n.rows,ncol(DESIGN))
+	loo.fii <- matrix(0,nrow(DESIGN),ncomps)	
+	
+		
 	#boot & perm test next
 	pb <- txtProgressBar(1,test.iters,1,style=1)
-	for(i in 1:test.iters){
-		if(i==1){
-			start.time <- proc.time()
+	for(i in 1:resamp.iters){
+		if(i==1){ ##begin the inference clock.
+			inf.start.time <- proc.time()
 		}
-				
-		boot.res <- boot.compute.fi.fj(DATA,DESIGN,fixed.res)
-		FBX[,,i] <- boot.res$FBX
-		FBY[,,i] <- boot.res$FBY
-		permute.res <- permute.tests(DATA = DATA, scale = scale, center = center, DESIGN = DESIGN, group.masses = group.masses, weights = weights, k = k)
-		eigs.perm.matrix[i,] <- permute.res$perm.eigs
-		r2.perm[i,] <- permute.res$perm.r2
-		inertia.perm[i,] <- permute.res$perm.inertia
 		
-		if(i==1){
-			cycle.time <- (proc.time() - start.time) #this is in seconds...
-			if(!continueResampling(cycle.time,test.iters+nrow(DESIGN))){
+		if(i <= test.iters){
+			boot.res <- boot.compute.fi.fj(DATA,DESIGN,fixed.res)
+			FBX[,,i] <- boot.res$FBX
+			FBY[,,i] <- boot.res$FBY
+			permute.res <- permute.tests(DATA = DATA, scale = scale, center = center, DESIGN = DESIGN, group.masses = group.masses, weights = weights, k = k)
+			eigs.perm.matrix[i,] <- permute.res$perm.eigs
+			r2.perm[i,] <- permute.res$perm.r2
+			inertia.perm[i,] <- permute.res$perm.inertia
+		}
+
+		if(i == 1){ ##end the inference clock; begin the loo clock.
+			transition.time <- proc.time()
+			inf.cycle.time <- transition.time - inf.start.time
+			loo.start.time <- transition.time
+		}
+
+		if(i <= n.rows){
+			loo.test.res <- loo.test(DATA=DATA,DESIGN=DESIGN,scale=scale,center=center,i=i,k=k,group.masses=group.masses,weights=weights)
+			loo.assign[i,] <- loo.test.res$assignSup$assignments
+			loo.fii[i,] <- loo.test.res$supX$fii
+		}
+		
+		if(i == 1){ ##end the loo clock and interact with user.
+			loo.cycle.time <- proc.time() - loo.start.time
+		
+			if(!continueResampling((inf.cycle.time [1] * test.iters) + (loo.cycle.time[1]*n.rows))){
 				##exit strategy.
 				return(fixed.res)
 			}
 		}
-		
 		setTxtProgressBar(pb,i)		
-	}
-	
-	loo.assign <- matrix(0,nrow(DESIGN),ncol(DESIGN))
-	loo.fii <- matrix(0,nrow(DESIGN),ncomps)
-	pb <- txtProgressBar(1,test.iters,1,style=1)
-	for(i in 1:nrow(DATA)){
-		loo.test.res <- loo.test(DATA=DATA,DESIGN=DESIGN,scale=scale,center=center,i=i,k=k,group.masses=group.masses,weights=weights)
-		loo.assign[i,] <- loo.test.res$assignSup$assignments
-		loo.fii[i,] <- loo.test.res$supX$fii
-		setTxtProgressBar(pb,i)			
 	}
 	
 	rownames(FBX) <- colnames(DATA)
@@ -108,7 +121,6 @@ tepBADA.inference.battery <- function(DATA, scale = TRUE, center = TRUE, DESIGN 
 	loo.acc <- sum(diag(loo.confuse))/sum(loo.confuse)
 	fixed.acc <- sum(diag(fixed.confuse))/sum(fixed.confuse)	
 	loo.data <- list(loo.assign=loo.assign, loo.fii=loo.fii, loo.confuse=loo.confuse, fixed.confuse=fixed.confuse, loo.acc=loo.acc, fixed.acc=fixed.acc)
-	#loo.data <- list(loo.assign=loo.assign, loo.fii=loo.fii, loo.confuse=t(DESIGN) %*% loo.assign)
 	class(loo.data) <- c("tinpoLOO","list")
 	
  	Inference.Data <- list(omni=omni.data,r2=r2.data,components=components.data,boot.data=boot.data,loo.data=loo.data)

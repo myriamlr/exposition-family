@@ -1,5 +1,9 @@
-tepDICA <-
-function(DATA,make_data_nominal=FALSE,DESIGN=NULL,make_design_nominal=TRUE,group.masses=NULL,ind.masses=NULL,weights=NULL,hellinger=FALSE,symmetric=TRUE,graphs=TRUE,k=0){
+#tepDICA <- function(DATA,make_data_nominal=FALSE,DESIGN=NULL,make_design_nominal=TRUE,group.masses=NULL,ind.masses=NULL,weights=NULL,hellinger=FALSE,symmetric=TRUE,graphs=TRUE,k=0){
+#tepDICA <- function(DATA,make_data_nominal=FALSE,DESIGN=NULL,make_design_nominal=TRUE,group.masses=NULL,ind.masses=NULL,weights=NULL,symmetric=TRUE,graphs=TRUE,k=0){
+	
+tepDICA <- function(DATA,make_data_nominal=FALSE,DESIGN=NULL,make_design_nominal=TRUE,group.masses=NULL,weights=NULL,symmetric=TRUE,graphs=TRUE,k=0){
+	
+		
 	DESIGN <- texpoDesignCheck(DATA,DESIGN,make_design_nominal,force_bary=TRUE)	
 	main <- deparse(substitute(DATA))	
 	DATA <- as.matrix(DATA)
@@ -16,7 +20,8 @@ function(DATA,make_data_nominal=FALSE,DESIGN=NULL,make_design_nominal=TRUE,group
 
 	#The results from the group x variable matrix
 	#res <- coreCA(R,masses=group.masses,weights=weights,hellinger=hellinger,symmetric=symmetric,k=k)
-	res <- epCA(R, DESIGN=Rdesign, make_design_nominal=FALSE, masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, graphs = FALSE,k=k)
+	#res <- epCA(R, DESIGN=Rdesign, make_design_nominal=FALSE, masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, graphs = FALSE,k=k)
+	res <- epCA(R, DESIGN=Rdesign, make_design_nominal=FALSE, masses = group.masses, weights = weights, hellinger = FALSE, symmetric = symmetric, graphs = FALSE,k=k)	
 	res <- res$ExPosition.Data
 
 	supplementaryRes <- supplementaryRows(DATA,res)
