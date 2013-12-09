@@ -9,3 +9,4 @@ Description: ExPosition is for descriptive (i.e., fixed-effects) multivariate an
 License: GPL-2
 Depends: prettyGraphs (>= 2.1.4)
 Packaged: 2013-12-09; dbeaton
+BugReports: http://code.google.com/p/exposition-family/issues/list

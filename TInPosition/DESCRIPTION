@@ -1,7 +1,7 @@
 Package: TInPosition
 Type: Package
 Title: Inference tests for TExPosition
-Version: 0.11.6
+Version: 0.12.6
 Date: 2013-12-09
 Author: Derek Beaton, Jenny Rieck, Herve Abdi
 Maintainer: Derek Beaton <exposition.software@gmail.com>
@@ -9,3 +9,4 @@ Description: Non-parametric resampling-based inference tests for TExPosition.
 License: GPL-2
 Depends: prettyGraphs (>= 2.1.4), TExPosition (>= 2.0.0), ExPosition (>= 2.0.0), InPosition
 Packaged: 2013-12-09; dbeaton
+BugReports: http://code.google.com/p/exposition-family/issues/list
