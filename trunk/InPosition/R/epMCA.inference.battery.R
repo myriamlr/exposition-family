@@ -36,7 +36,7 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 		eigs.perm.matrix[i,1:length(perm.eigs)] <- perm.eigs
 		if(i==1){
 			cycle.time <- (proc.time() - start.time) #this is in seconds...
-			if(!continueResampling(cycle.time,test.iters)){
+			if(!continueResampling(cycle.time[1] * test.iters)){
 				##exit strategy.
 				return(fixed.res)
 			}
@@ -54,10 +54,11 @@ permute.components.mca <- function(DATA,make_data_nominal=TRUE,hellinger=FALSE,s
 	class(fj.boot.data) <- c("inpoBoot", "list")	
 	
 	##do I still need this rounding?
-	eigs.perm.matrix <- round(eigs.perm.matrix,digits=15)
-	inertia.perm <- rowSums(eigs.perm.matrix)
-	omni.p <- max(1-(sum(inertia.perm < sum(round(fixed.res$ExPosition.Data$eigs,digits=15)))/test.iters),1/test.iters)
-	omni.data <- list(p.val=round(omni.p,digits=4),inertia.perm=inertia.perm, inertia=sum(round(fixed.res$ExPosition.Data$eigs,digits=15)))
+	eigs.perm.matrix <- eigs.perm.matrix
+	inertia.perm <- rowSums(round(eigs.perm.matrix,digits=15))
+	fixed.inertia <- sum(round(fixed.res$ExPosition.Data$eigs,digits=15))
+	omni.p <- max(1-(sum(inertia.perm < fixed.inertia)/test.iters),1/test.iters)
+	omni.data <- list(p.val=round(omni.p,digits=4),inertia.perm=inertia.perm, inertia=fixed.inertia)
 	class(omni.data) <- c("inpoOmni","list")
 	
 	eigs.perm.matrix <- eigs.perm.matrix[,1:ncomps]

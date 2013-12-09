@@ -51,7 +51,7 @@ Derek Beaton, Hervé Abdi
 \code{\link{coreCA}}, \code{\link{epCA}}, \code{\link{epMCA}}, \code{\link{tepDICA}} \cr
 }
 \examples{
-	#development version does not have an example.
-	#example to be determined for release.
+	data(snps.druguse)
+	plsca.res <- tepPLSCA(snps.druguse$DATA1,snps.druguse$DATA2,make_data1_nominal=TRUE,make_data2_nominal=TRUE)
 }
 \keyword{ multivariate }

@@ -1,5 +1,5 @@
-tepBADA <-
-function(DATA,scale=TRUE,center=TRUE,DESIGN=NULL,make_design_nominal=TRUE,group.masses=NULL,ind.masses=NULL,weights=NULL,graphs=TRUE,k=0){
+#tepBADA <- function(DATA,scale=TRUE,center=TRUE,DESIGN=NULL,make_design_nominal=TRUE,group.masses=NULL,ind.masses=NULL,weights=NULL,graphs=TRUE,k=0){
+tepBADA <- function(DATA,scale=TRUE,center=TRUE,DESIGN=NULL,make_design_nominal=TRUE,group.masses=NULL,weights=NULL,graphs=TRUE,k=0){	
 		
 	
 	DESIGN <- texpoDesignCheck(DATA,DESIGN,make_design_nominal,force_bary=TRUE)
@@ -10,7 +10,8 @@ function(DATA,scale=TRUE,center=TRUE,DESIGN=NULL,make_design_nominal=TRUE,group.
 	
 	main <- deparse(substitute(DATA))		
 	DATA <- as.matrix(DATA)
-	XMW <- computeMW(DATA,masses=ind.masses,weights=weights)
+
+	#XMW <- computeMW(DATA,masses=ind.masses,weights=weights)
 
 	R <- expo.scale(t(massedDESIGN) %*% DATA,scale=scale,center=center)
 	this.center <- attributes(R)$`scaled:center`
@@ -37,7 +38,8 @@ function(DATA,scale=TRUE,center=TRUE,DESIGN=NULL,make_design_nominal=TRUE,group.
 	res$ly <- supplementaryCols(t(massedDESIGN),res,center=FALSE,scale=FALSE)$fjj
 
 	assignments <- fii2fi(DESIGN,res$fii,res$fi)
-	assignments$r2 <- R2(RMW$M,res$di,XMW$M,res$dii)
+	#assignments$r2 <- R2(RMW$M,res$di,XMW$M,res$dii)
+	assignments$r2 <- R2(RMW$M,res$di,ind.masses=NULL,res$dii)
 	class(assignments) <- c("tepAssign","list")
 	res$assign <- assignments
 

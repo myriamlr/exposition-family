@@ -1,5 +1,6 @@
-tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2){
-	
+#tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2){
+
+tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = NULL, make_design_nominal = TRUE, group.masses = NULL, ind.masses = NULL, weights = NULL, symmetric = TRUE, graphs = TRUE, k = 0, test.iters = 100, critical.value = 2){	
 	############################	
 	###private functions for now
 	loo.test <- function(DATA, DESIGN, group.masses = NULL, weights = NULL, hellinger = FALSE, symmetric = TRUE,k = k, i){
@@ -33,57 +34,66 @@ tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = 
 		DESIGN <- makeNominalData(DESIGN)
 	}
 	
-	fixed.res <- tepDICA(DATA=DATA, make_data_nominal = FALSE, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, graphs = FALSE, k = k)
+	#fixed.res <- tepDICA(DATA=DATA, make_data_nominal = FALSE, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, graphs = FALSE, k = k)
+	fixed.res <- tepDICA(DATA=DATA, make_data_nominal = FALSE, DESIGN = DESIGN, make_design_nominal = FALSE, group.masses = group.masses, ind.masses = ind.masses, weights = weights, hellinger = FALSE, symmetric = symmetric, graphs = FALSE, k = k)
 
+	n.rows <- nrow(DATA)
+	resamp.iters <- max(n.rows,test.iters)
+	
+	##inf stuff
 	ncomps <- fixed.res$TExPosition.Data$pdq$ng
-	FBY <- array(0,dim=c(nrow(fixed.res$TExPosition.Data$X), ncomps,test.iters))
-	FBX <- array(0,dim=c(ncol(fixed.res$TExPosition.Data$X), ncomps,test.iters))
-	eigs.perm.matrix <- matrix(0,test.iters, ncomps)
+	FBY <- array(0,dim=c(nrow(fixed.res$TExPosition.Data$X),ncomps,test.iters))
+	FBX <- array(0,dim=c(ncol(fixed.res$TExPosition.Data$X),ncomps,test.iters))
+	eigs.perm.matrix <- matrix(0,test.iters,ncomps)
 	r2.perm <- inertia.perm <- matrix(0,test.iters,1)
 	
+	##loo stuff
+	loo.assign <- matrix(0,n.rows,ncol(DESIGN))
+	loo.fii <- matrix(0,nrow(DESIGN),ncomps)	
+	
+		
 	#boot & perm test next
 	pb <- txtProgressBar(1,test.iters,1,style=1)
-	for(i in 1:test.iters){
-		if(i==1){
-			start.time <- proc.time()
+	for(i in 1:resamp.iters){
+		if(i==1){ ##begin the inference clock.
+			inf.start.time <- proc.time()
 		}
-				
-		boot.res <- boot.compute.fi.fj(DATA,DESIGN,fixed.res)
-		FBX[,,i] <- boot.res$FBX
-		FBY[,,i] <- boot.res$FBY
-		permute.res <- permute.tests(DATA=DATA, DESIGN = DESIGN, group.masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric,k = k)
-		eigs.perm.matrix[i,] <- permute.res$perm.eigs
-		r2.perm[i,] <- permute.res$perm.r2
-		inertia.perm[i,] <- permute.res$perm.inertia
 		
-		if(i==1){
-			cycle.time <- (proc.time() - start.time) #this is in seconds...
-			if(!continueResampling(cycle.time,test.iters+nrow(DESIGN))){
+		if(i <= test.iters){
+			boot.res <- boot.compute.fi.fj(DATA,DESIGN,fixed.res)
+			FBX[,,i] <- boot.res$FBX
+			FBY[,,i] <- boot.res$FBY
+			#permute.res <- permute.tests(DATA=DATA, DESIGN = DESIGN, group.masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, k = k)
+			permute.res <- permute.tests(DATA=DATA, DESIGN = DESIGN, group.masses = group.masses, weights = weights, hellinger = FALSE, symmetric = symmetric, k = k)
+			eigs.perm.matrix[i,] <- permute.res$perm.eigs
+			r2.perm[i,] <- permute.res$perm.r2
+			inertia.perm[i,] <- permute.res$perm.inertia
+		}
+
+		if(i == 1){ ##end the inference clock; begin the loo clock.
+			transition.time <- proc.time()
+			inf.cycle.time <- transition.time - inf.start.time
+			loo.start.time <- transition.time
+		}
+
+		if(i <= n.rows){
+			#loo.test.res <- loo.test(DATA=DATA, DESIGN = DESIGN, group.masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, k = k, i)
+			loo.test.res <- loo.test(DATA=DATA, DESIGN = DESIGN, group.masses = group.masses, weights = weights, hellinger = FALSE, symmetric = symmetric, k = k, i)
+			loo.assign[i,] <- loo.test.res$assignSup$assignments
+			loo.fii[i,] <- loo.test.res$supX$fii
+		}
+		
+		if(i == 1){ ##end the loo clock and interact with user.
+			loo.cycle.time <- proc.time() - loo.start.time
+		
+			if(!continueResampling((inf.cycle.time [1] * test.iters) + (loo.cycle.time[1]*n.rows))){
 				##exit strategy.
 				return(fixed.res)
 			}
 		}
-		
 		setTxtProgressBar(pb,i)		
 	}
-	
-	loo.assign <- matrix(0,nrow(DESIGN),ncol(DESIGN))
-	loo.fii <- matrix(0,nrow(DESIGN),ncomps)
-	##loo test first
-	pb <- txtProgressBar(1,test.iters,1,style=1)
-	for(i in 1:nrow(DATA)){
-		loo.test.res <- loo.test(DATA=DATA, DESIGN = DESIGN, group.masses = group.masses, weights = weights, hellinger = hellinger, symmetric = symmetric, k = k, i)
-		loo.assign[i,] <- loo.test.res$assignSup$assignments
-		loo.fii[i,] <- loo.test.res$supX$fii
-		setTxtProgressBar(pb,i)			
-	}
 		
-#	rownames(FBX) <- colnames(DATA)
-#	rownames(FBY) <- colnames(DESIGN)		
-#	fj.boot.data <- list(fj.tests=boot.ratio.test(FBX,critical.value),fj.boots=FBX)
-#	fi.boot.data <- list(fi.tests=boot.ratio.test(FBY,critical.value),fi.boots=FBY)
-#	boot.data <- list(fj.boot.data=fj.boot.data,fi.boot.data=fi.boot.data)
-	
 	rownames(FBX) <- colnames(DATA)
 	rownames(FBY) <- colnames(DESIGN)
 	x.boot.tests <- boot.ratio.test(FBX,critical.value)
@@ -111,13 +121,6 @@ tepDICA.inference.battery <- function(DATA, make_data_nominal = FALSE, DESIGN = 
 	r2.data <- list(p.val=round(r2.p,digits=4),r2.perm=r2.perm,r2=fixed.res$TExPosition.Data$assign$r2)
 	class(r2.data) <- c("tinpoR2","list")		
 	
-#	loo.confuse <- t(loo.assign) %*% DESIGN
-#	rownames(loo.confuse) <- paste(colnames(DESIGN),"predicted",sep=".") 
-#	colnames(loo.confuse) <- paste(colnames(DESIGN),"actual",sep=".")
-#	fixed.confuse <- fixed.res$TExPosition.Data$assign$confusion
-#	loo.acc <- sum(diag(loo.confuse))/sum(loo.confuse)
-#	fixed.acc <- sum(diag(fixed.confuse))/sum(fixed.confuse)	
-#	loo.data <- list(loo.assign=loo.assign, loo.fii=loo.fii, loo.confuse=loo.confuse, fixed.confuse=fixed.confuse, loo.acc=loo.acc, fixed.acc=fixed.acc)
 	loo.confuse <- t(loo.assign) %*% DESIGN	
 	rownames(loo.confuse) <- paste(colnames(DESIGN),"predicted",sep=".") 
 	colnames(loo.confuse) <- paste(colnames(DESIGN),"actual",sep=".")

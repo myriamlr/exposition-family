@@ -25,7 +25,7 @@ permute.components.pca <- function(DATA,scale=TRUE,center=TRUE,k=0){
 		
 		if(i==1){
 			cycle.time <- (proc.time() - start.time) #this is in seconds...
-			if(!continueResampling(cycle.time,test.iters)){
+			if(!continueResampling(cycle.time[1] * test.iters)){
 				##exit strategy.
 				return(fixed.res)
 			}

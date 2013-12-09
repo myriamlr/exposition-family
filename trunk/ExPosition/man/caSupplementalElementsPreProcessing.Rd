@@ -21,7 +21,7 @@ Derek Beaton
 }
 
 \seealso{
-	\code{\link{mdsSupplementalElementsPreProcessing}}, \code{\link{pcaSupplementaryColsPreProcessing}}, \code{\link{pcaSupplementaryRowsPreProcessing}}, \code{link{supplementaryCols}}, \code{\link{supplementaryRows}}, \code{\link{supplementalProjection}}
+	\code{\link{mdsSupplementalElementsPreProcessing}}, \code{\link{pcaSupplementaryColsPreProcessing}}, \code{\link{pcaSupplementaryRowsPreProcessing}}, \code{\link{supplementaryCols}}, \code{\link{supplementaryRows}}, \code{\link{supplementalProjection}}
 }
 \keyword{ misc }
 \keyword{ multivariate }
