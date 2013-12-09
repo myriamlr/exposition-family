@@ -38,6 +38,9 @@ Peres-Neto, P. R., Jackson, D. A., & Somers, K. M. (2005). How many principal co
 \author{
 Derek Beaton
 }
+\note{
+	A private function (\code{add.alpha}) was copied from http://lamages.blogspot.com/2013/04/how-to-change-alpha-value-of-colours-in.html
+}
 \examples{
 	prcomp.res <- prcomp(USArrests, scale = TRUE)
 	prettyScree(prcomp.res$sdev^2)

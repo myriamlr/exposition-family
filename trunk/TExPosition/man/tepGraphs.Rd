@@ -8,7 +8,8 @@ tepGraphs: TExPosition plotting function
 }
 
 \usage{
-tepGraphs(res, DESIGN = NULL, x_axis = 1, y_axis = 2, 
+tepGraphs(res, x_axis = 1, y_axis = 2, 
+	tepPlotInfo = NULL, DESIGN = NULL, 
 	fi.col = NULL, fi.pch = NULL, fii.col = NULL, fii.pch = NULL, 
 	fj.col = NULL, fj.pch = NULL, col.offset = NULL, 
 	constraints = NULL, lv.constraints = NULL,
@@ -20,9 +21,10 @@ tepGraphs(res, DESIGN = NULL, x_axis = 1, y_axis = 2,
 
 \arguments{
   \item{res}{results from TExPosition}
-  \item{DESIGN}{A design matrix to apply colors (by pallete selection) to row items}
   \item{x_axis}{which component should be on the x axis?}
   \item{y_axis}{which component should be on the y axis?}
+  \item{tepPlotInfo}{A list (\code{$Plotting.Data}) from \code{tepGraphs} or \code{TExPosition}.}      
+  \item{DESIGN}{A design matrix to apply colors (by pallete selection) to row items}
   \item{fi.col}{A matrix of colors for the group items. If NULL, colors will be selected.}
   \item{fi.pch}{A matrix of pch values for the group items. If NULL, pch values are all 21.}    
   \item{fii.col}{A matrix of colors for the row items (observations). If NULL, colors will be selected.}
