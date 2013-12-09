@@ -8,3 +8,4 @@ Maintainer: Derek Beaton <exposition.software@gmail.com>
 Description: prettyGraphs contains simple, crisp graphics. Graphics produced by prettyGraphs are publication-quality.
 License: GPL-2
 Packaged: 2013-12-09; dbeaton
+BugReports: http://code.google.com/p/exposition-family/issues/list

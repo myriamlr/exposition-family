@@ -9,3 +9,4 @@ Description: TExPosition is an extension of ExPosition for two table analyses, s
 License: GPL-2
 Depends: prettyGraphs (>= 2.1.4), ExPosition (>= 2.0.0)
 Packaged: 2013-12-09; dbeaton
+BugReports: http://code.google.com/p/exposition-family/issues/list
