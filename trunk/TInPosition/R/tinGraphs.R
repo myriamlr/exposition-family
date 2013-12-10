@@ -209,7 +209,7 @@ if(is.null(xlab)){
 			}
 		}
 		if(biplots){
-			fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,pch=fj.pch,axes=FALSE,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fj.boot.data$tests$boot.ratios),dev.new=FALSE)
+			fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,pch=fj.pch,axes=FALSE,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fj.boot.data$tests$boot.ratios),dev.new=FALSE,new.plot=FALSE)
 		}else{
 			fj.plot.info <- prettyPlot(res$fj,x_axis=x_axis,y_axis=y_axis,col=fj.col,pch=fj.pch,axes=TRUE,xlab=xlab,ylab=ylab,main=main,constraints=constraints,contributionCircles=TRUE,contributions=abs(inference.info$boot.data$fj.boot.data$tests$boot.ratios),dev.new=TRUE)	
 		}
