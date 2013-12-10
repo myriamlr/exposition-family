@@ -1,7 +1,7 @@
 Package: TInPosition
 Type: Package
 Title: Inference tests for TExPosition
-Version: 0.12.6
+Version: 0.13.6
 Date: 2013-12-09
 Author: Derek Beaton, Jenny Rieck, Herve Abdi
 Maintainer: Derek Beaton <exposition.software@gmail.com>
