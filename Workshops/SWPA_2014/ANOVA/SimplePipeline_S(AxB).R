@@ -15,7 +15,8 @@
 rm(list=ls())
 
 library(foreign) ##this package allows us to get data from other formats
-two.btw.from.spss <- read.spss('S(AxB).sav') ##in this case, from SPSS.
+#two.btw.from.spss <- read.spss('S(AxB).sav')
+two.btw.from.spss <- read.spss('http://exposition-family.googlecode.com/svn/Workshops/SWPA_2014/ANOVA/S(AxB).sav') ##in this case, from SPSS.
 
 names(two.btw.from.spss) ##let's take a look at the names of the data columns.
 
