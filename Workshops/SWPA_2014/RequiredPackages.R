@@ -21,6 +21,7 @@
 install.packages('car',dependencies=TRUE)
 install.packages('ez',dependencies=TRUE)
 install.packages('gplot',dependencies=TRUE)
+install.packages('foreign',dependencies=TRUE)
 
 
 

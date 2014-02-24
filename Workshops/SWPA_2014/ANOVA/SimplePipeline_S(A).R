@@ -38,6 +38,16 @@ one.f.long.format$S <- paste("Subj",1:nrow(one.f.long.format),sep=".")
 ##Time to ANOVA!
 aov.res <- aov(y~A,data= one.f.long.format)
 aov.table <- summary(aov.res)
+	#####alternatives:
+	## 1:
+	## lm.res <- lm(y~A,data=one.f.long.format)
+	## aov.res <- aov(lm.res)
+	## aov.table <- summary(aov.res)
+	#####
+	## 2:
+	## lm.res <- lm(y~A,data=one.f.long.format)
+	## aov.table <- anova(lm.res)
+		
 
 ##save our results!
 #there are two ways we recommend. First, let's save just the findings:
