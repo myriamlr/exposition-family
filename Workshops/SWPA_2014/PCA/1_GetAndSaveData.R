@@ -1,3 +1,18 @@
+### This file will be updated periodically between now (whenever you are seeing this)
+### and April 2nd (the day before the workshop!)
+#####
+### If you download this file now, please be sure to check back for updates
+### as the conference approaches.
+
+
+### TO NOTE: Anything preceded by at # is a 'comment'
+#   that means it is something ignored by R
+#   which means comments are usually something like this --
+#   informative statements used for later reference, such as
+#   reminding yourself what you did and why!
+
+
+
 ##Step 1: Let's get the data in and save it in R's format.
 ##This is good practice for analysis pipelines.
 
@@ -21,7 +36,7 @@ rm(list=ls()) #this gets rid of _everything_.
 #ps.sim.design <- read.csv('ps.sim.design.csv',header=TRUE,row.names=1)
 
 ps.sim.data <- read.csv("http://exposition-family.googlecode.com/svn/Workshops/SWPA_2014/PCA/ps.sim.data.csv",header=TRUE,row.names=1)
-ps.sim.design <- read.csv("http://exposition-family.googlecode.com/svn/Workshops/SWPA_2014/PCA/ps.sim.data.csv",header=TRUE,row.names=1)
+ps.sim.design <- read.csv("http://exposition-family.googlecode.com/svn/Workshops/SWPA_2014/PCA/ps.sim.design.csv",header=TRUE,row.names=1)
 
 ##it's often good practice to save the data in a natural R format
 ##Typically, after you've cleaned the data and it's ready to go!
