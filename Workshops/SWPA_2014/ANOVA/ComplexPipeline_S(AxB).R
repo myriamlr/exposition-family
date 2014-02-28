@@ -17,7 +17,9 @@ rm(list=ls())
 
 library(ez)
 library(car)
-load('/Volumes/JOHNNYFIVE/Professional/UT Dallas/S14/Conferences/SWPA/ANOVAWorkshop/unbalanced.sim.ps.rda')
+con <- url("http://exposition-family.googlecode.com/svn/Workshops/SWPA_2014/ANOVA/unbalanced.sim.ps.rda")
+load(con)
+rm(con)
 
 ##what if we just did aov?
 
