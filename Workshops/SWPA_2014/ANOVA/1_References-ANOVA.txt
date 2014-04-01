@@ -1,0 +1,10 @@
+(Some) References:
+
+Abdi, H., Edelman, B., Valentin, D., & Dowling, W.J. (2009). Experimental Design and Analysis for Psychology. Oxford: Oxford University Press.
+
+
+Websites:
+# http://ww2.coastal.edu/kingw/statistics/R-tutorials/formulae.html
+# http://www.cookbook-r.com/Statistical_analysis/ANOVA/#mixed-design-anova
+# http://personality-project.org/r/r.anova.html
+# http://conjugateprior.org/2013/01/formulae-in-r-anova/
