@@ -31,3 +31,29 @@ contrast.2 <- c(rep(-1,5),rep(0,5),rep(1,5),rep(0,5))
 lin.model.2 <- lm(scores ~ contrast.2)
 summary(lin.model.2)
 
+
+
+
+
+
+##psi 2 pg x
+##psi 3 pg x
+grp.means <- colMeans(one.f.wide.format)
+contraz <- c(-1,0,1,0)
+
+sum.grp.contraz <- sum(grp.means * contraz)
+sum.contraz2 <- sum(contraz^2)
+
+SS.constrast <- (5 * (sum.grp.contraz^2))/sum.contraz2
+SSe <- 88.55
+MSe <- 2.35
+
+
+
+
+scp.2 <- sum((scores - mean(scores)) * contrast.2)^2
+ss.scores <- sum((scores - mean(scores))^2)
+ss.contrast.2 <- sum(contrast.2^2)
+
+
+r2 <- scp.2/(ss.scores*ss.contrast.2)
