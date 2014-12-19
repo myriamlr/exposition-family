@@ -9,8 +9,5 @@ pcaSupplementaryColsPreProcessing <- function(SUP.DATA=NULL,center=TRUE,scale=TR
 		stop('Length of M does not match row dim of SUP.DATA')
 	}
 	
-	
-	#return(t(expo.scale(SUP.DATA,center=center,scale=scale)) * t(repmat(M,1,ncol(SUP.DATA))))
-	#return(t(expo.scale(SUP.DATA,center=center,scale=scale) * repmat(M,1,ncol(SUP.DATA))))
 	return( t( expo.scale(SUP.DATA,center=center,scale=scale) * matrix(M,length(M),ncol(SUP.DATA)) ) )
 }
