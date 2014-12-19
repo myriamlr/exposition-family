@@ -29,7 +29,6 @@ function(datain){
         if(length(which(rowSums(mini.mat) == 0)) > 0){
 	        barycenter <- colSums(mini.mat)/sum(colSums(mini.mat))
         
-    	    #fill_in.orig <- repmat(t(as.matrix(barycenter)), length(which(rowSums(mini.mat) == 0)), 1)
         	fill_in <- matrix(barycenter,
         					length(which(rowSums(mini.mat) == 0)),
             				length(barycenter),
