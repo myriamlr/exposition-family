@@ -36,5 +36,5 @@ function(DATA,masses=NULL,weights=NULL,hellinger=FALSE,symmetric=TRUE,decomp.app
 	rj <- replace(rj,is.nan(rj),0)
 	dj <- as.matrix(dj)			
 	
-	return(list(fi=fi,di=di,ci=ci,ri=ri,fj=fj,cj=cj,rj=rj,dj=dj,t=pdq_results$tau,eigs=pdq_results$Dv^2,M=mRP$masses,W=mRP$weights,c= mRP$rowCenter,pdq=pdq_results,X=mRP$deviations,hellinger=hellinger,symmetric=symmetric))
+	return(list(fi=fi,di=di,ci=ci,ri=ri,fj=fj,cj=cj,rj=rj,dj=dj,t=pdq_results$tau,eigs=pdq_results$eigs,M=mRP$masses,W=mRP$weights,c= mRP$rowCenter,pdq=pdq_results,X=mRP$deviations,hellinger=hellinger,symmetric=symmetric))
 }
