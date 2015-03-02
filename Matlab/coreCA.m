@@ -1,21 +1,22 @@
-function [] = coreCA(X)
+function [s,d,t,Fi,Fj,P,Q] = coreCA(X)
 
+    %%a simple version of (stochastic) CA.
     colSums = sum(X);
     rowSums = sum(X,2);
     grandSum = sum(colSums);
-    Or = X/grandSum;
+    Ox = X/grandSum;
     m = rowSums/grandSum;
-    w = (colSums/grandSum)’;
+    w = (colSums/grandSum);
     
-    Ex = wx'*wy;
+    Ex = m*w;
     Zx = Ox - Ex;
 
-    M = 1./wx;
-    W = 1./wy;    
+    M = (1./m)';
+    W = 1./w;
 
-    [s,d,t,Fi,Fj,U,V] = gensvd(Zx,M,W);
+    [s,d,t,P,Q] = gensvd(Zx,M,W);
     
-    Fi = repmat(M,length(keepem),1)' .* U .* repmat(s',size(U,1),1);
-    Fj = repmat(W,length(keepem),1)' .* V .* repmat(s',size(V,1),1);
+    Fi = repmat(M,length(s),1)' .* P .* repmat(s',size(P,1),1);
+    Fj = repmat(W,length(s),1)' .* Q .* repmat(s',size(Q,1),1);
     
 end
